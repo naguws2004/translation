@@ -1,0 +1,719 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head
+        th:with="vehicleText=${customer.selectedGarageItem != null ? #oap.createBaseGarageVehicleName(customer.selectedGarageItem) : ''}"
+    >
+        <!--/* Add the bv.js loader file to your HTML in the <head> tag of the page */-->
+        <th:block th:include="layout/partials/bazaarvoice" th:with="parent='product'"></th:block>
+        <!-- prettier-ignore -->
+        <th:block
+            th:with="prodDescriptions=${product.epcProduct.productDescriptions}, ecommDescriptions=${product.epcProduct.ecommerceDescriptions}">
+            <script type="application/ld+json" th:inline="text">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Product",
+                    "@id": "[[${seoCanonicalHref}]]",
+                    "description": "[[${not #lists.isEmpty(prodDescriptions) and prodDescriptions.get(0).description != null} ? ${#Product.removeHtmlTagsFromString(prodDescriptions.get(0).description)} : '']]",
+                    "name": "[[${productName}]]",
+                    "brand": {
+                        "@type": "Brand",
+                        "name": "[[${product.epcProduct.brand.brandName}]]"
+                    },
+                    "mpn": "[[${product.epcProduct.partNumberDisplay}]]",
+                    "sku": "[[${itemMaster.barcode}]]",
+                    "manufacturer": "[[${product.epcProduct.manufacturer.mfgName}]]"
+                }
+            </script>
+        </th:block>
+        <!-- prettier-ignore -->
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var requiredBase = /*[[${requiredBase}]]*/ false;
+            var requiredEngine = /*[[${requiredEngine}]]*/ false;
+            var uriDescriptorDTO = JSON.parse(/*[[${uriDescriptorDTO}]]*/ '{}');
+            window._ost.primaryImage = /*[[${#media.getProductDtoPrimaryImageUrl('extralarge', product.epcProduct)}]]*/ '';
+            window._ost.altImages = /*[[${#media.getProductDtoAltImageUrls('extralarge', product.epcProduct)}]]*/[];
+            window._ost.isRepresentativeImage = /*[[${#media.productDtoImageIsRepresentativeImage(product.epcProduct)}]]*/ false;
+            window._ost.isProductUniversal = /*[[${universal}]]*/ false;
+            window._ost.applicationFitDetailsRemade = /*[[*{applicationFitDetailsRemade}]]*/[];
+            window._ost.productDocumentMediaRemade = /*[[${product.epcProduct.documents}]]*/[];
+            window._ost.brandInformation = /*[[${product.epcProduct.manufacturer.mfgFeatures}]]*/[];
+            window._ost.description = /*[[${productFeatures}]]*/[];
+            /*]]>*/
+        </script>
+        <th:block th:if="${#oap.isFBTrackingEnabled()}">
+            <!-- prettier-ignore -->
+            <script th:inline="javascript">
+                window._ost.facebookTrackingEnabled = true;
+            </script>
+        </th:block>
+        <link
+            rel="preload"
+            as="image"
+            th:href="${#media.getProductDtoPrimaryImageUrl('extralarge', product.epcProduct)}"
+        />
+    </head>
+    <div
+        layout:fragment="content"
+        th:object="${product}"
+        th:with="altImages=${#media.getProductDtoAltImageUrls('large', product.epcProduct)},
+                primaryImageUrl=${#media.getProductDtoPrimaryImageUrl('large', product.epcProduct)},
+                isRepImg=${#media.productDtoImageIsRepresentativeImage(product.epcProduct)},
+                lcin=*{epcProduct.lineCodeItemNumber.lineCode + '-' + epcProduct.lineCodeItemNumber.itemNumber}
+        "
+    >
+        <th:block th:if="${#brc.sandbox}" th:include="preview/attribute-view-modal" />
+        <div class="row pdp-wrap">
+            <div>
+                <!-- prettier-ignore -->
+                <script th:inline="javascript">
+                    const broadleafProductId = /*[[${product.broadleafProduct.id}]]*/ '';
+                    window._ost.threeSixtyImages = /*[[${#media.getEpcProductThreeSixtyImages(product.epcProduct.images)}]]*/ {};
+                    window._ost.name = /*[[${productName}]]*/ '';
+                    window._ost.lineCodeItemNumber = /*[[${product.epcProduct.lineCodeItemNumber}]]*/ {};
+                    window._ost.orwItemPoints = /*[[${oRewardsItemPoints}]]*/[];
+                    window._ost.rebates = /*[[${rebates}]]*/[];
+                    window._ost.productId = broadleafProductId;
+                    window._ost.partTypeId = /*[[${partType?.partTypeId}]]*/ '';
+                    window._ost.epcAttributes = /*[[${product.epcProduct.attributes}]]*/[];
+                    window._ost.pricing = /*[[${pricing}]]*/ {};
+                    window._ost.recentProductPricing = {};
+                    // availability data
+                    window[`_${broadleafProductId}_availPickup`] = /*[[${availPickupMap.get(product.broadleafProduct.id).getAvailPickup()}]]*/ false;
+                    window[`_${broadleafProductId}_availShip`] = /*[[${availShipMap.get(product.broadleafProduct.id)}]]*/ false;
+                    window[`_${broadleafProductId}_flightRestricted`] = /*[[${itemMaster?.flightRestricted}]]*/ false;
+                    window[`_${broadleafProductId}_blockShipToHome`] = /*[[${itemMaster?.blockShipToHome}]]*/ false;
+                    window[`_${broadleafProductId}_blockStorePickup`] = /*[[${itemMaster?.blockStorePickup}]]*/ false;
+                    window[`_${broadleafProductId}_twoDayAvailability`] = /*[[${twoDayAvailabilityMap.get(product.broadleafProduct.id)}]]*/ false;
+                    window[`_${broadleafProductId}_threeDayAvailability`] = /*[[${threeDayAvailabilityMap.get(product.broadleafProduct.id)}]]*/ false;
+                    window[`_${broadleafProductId}_storeRestricted`] = /*[[${storeRestrictionsMap.get(product.broadleafProduct.id)}]]*/ false;
+                    window[`_${broadleafProductId}_inStoreNow`] = /*[[${availPickupMap?.get(product.broadleafProduct.id)?.getInStoreNow()}]]*/ false;
+                    window[`_${broadleafProductId}_pickupTime`] = /*[[${availPickupMap?.get(product.broadleafProduct.id)?.getPickupTime()}]]*/ '';
+                    window[`_${broadleafProductId}_specialOrder`] = /*[[${specialOrderMap.get(product.broadleafProduct.id)}]]*/ false;
+                    window[`_${broadleafProductId}_refrigerantMessage`] = /*[[${refrigerantMessage}]]*/ '';
+                    window[`_${broadleafProductId}_qualifiedForFreeShipping`] = /*[[${#Product.isQualifiedForFreeShippingMinusPrice(product.epcProduct, itemMaster)}]]*/ false;
+                    window._ost.itemInCart = /*[[${cart.containsSku(product.broadleafProduct.defaultSku)}]]*/ false;
+                </script>
+                <div class="main-primary col-md-12">
+                    <div
+                        class="content-wrap pdp-content js-product"
+                        th:classappend="${'js-product-shippable-'} + ${product.broadleafProduct.id}"
+                    >
+                        <div class="site-breadcrumb js-site-breadcrumb">
+                            <div
+                                class="site-breadcrumb_wrapper site-breadcrumb_wrapper-product js-site-breadcrumb_wrapper"
+                            >
+                                <div th:if="${breadcrumbs}" style="display: block"></div>
+                                <div
+                                    class="site-breadcrumb_slider js-site-breadcrumb_slider"
+                                    th:include="catalog/partials/breadcrumbs"
+                                ></div>
+                            </div>
+                        </div>
+                        <div class="pdp-upper-container">
+                            <div class="pdp-hero">
+                                <div class="hero-wrap">
+                                    <div
+                                        id="hero-image"
+                                        class="hero-image-skeleton"
+                                        th:include="utility/loading-animation"
+                                    ></div>
+                                </div>
+                                <blc:content-zone
+                                    name="Product Banner Content Zone 1"
+                                ></blc:content-zone>
+                            </div>
+                            <div class="pdp-price-avail">
+                                <shipping-estimate-data-loader></shipping-estimate-data-loader>
+                                <checkfit-data-loader></checkfit-data-loader>
+                                <div
+                                    class="pdp-header product-name-wrap"
+                                    th:with="multipleBrandsForManufacturer=${#lists.size(product.broadleafProduct.brand.manufacturer.brands) > 1}"
+                                >
+                                    <img
+                                        th:if="*{epcProduct.brand.brandLogo}"
+                                        th:src="@{${#media.getBrandImageUrl(product.epcProduct.brand.brandLogo)}}"
+                                        th:alt="*{epcProduct.brand.brandName}"
+                                        class="pdp-brand"
+                                    />
+                                    <h1
+                                        class="page-title condensed js-product-name js-ga-product-name"
+                                        th:attr="data-id=${product.broadleafProduct.id},data-line=${product.epcProduct.lineCodeItemNumber.lineCode},data-item=${product.epcProduct.lineCodeItemNumber.itemNumber}"
+                                        th:text="${productName} + ' - ' + ${product.epcProduct.lineCodeItemNumber.itemNumber}"
+                                    ></h1>
+                                    <dl
+                                        class="product_part-info"
+                                        th:object="${product.epcProduct.lineCodeItemNumber}"
+                                    >
+                                        <dt th:text="#{product.partNumberHeader}"></dt>
+                                        <dd
+                                            class="lineNumber js-ga-product-line-number"
+                                            th:text="*{itemNumber}"
+                                        ></dd>
+                                        <dt th:inline="text">[[#{product.line}]]:</dt>
+                                        <dd
+                                            class="lineCode js-ga-product-line-code"
+                                            th:text="*{lineCode}"
+                                        >
+                                            WIX
+                                        </dd>
+                                    </dl>
+                                    <span
+                                        class="js-ga-product-category"
+                                        style="display: none"
+                                        th:inline="text"
+                                    >
+                                        [[${product.broadleafProduct.category.description}]]
+                                    </span>
+                                </div>
+                                <!-- Rating summary -->
+                                <th:block th:if="${#oap.getRatingsAndReviewsDisplay()}">
+                                    <div class="inline-rating_wrap">
+                                        <div
+                                            class="inline-rating"
+                                            data-bv-show="rating_summary"
+                                            th:object="${product.epcProduct.brandCodePartNumber}"
+                                            th:attr="data-bv-product-id=*{brandCode + '-' + partNumber}"
+                                        >
+                                            <div class="pre-stars">
+                                                <div class="pre-stars_bar"></div>
+                                            </div>
+                                            <div class="init-star_animate"></div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <div
+                                    class="checkfit-banner-skeleton"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                                <checkfit-banner></checkfit-banner>
+                                <div
+                                    class="product-pricing-skeleton"
+                                    th:id="${'product-pricing-skeleton_' + lcin}"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                                <div
+                                    class="product-pricing-klarna-skeleton"
+                                    th:id="${'product-pricing-klarna-skeleton_' + lcin}"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                                <div
+                                    th:if="${rebates}"
+                                    class="product-rebates-skeleton"
+                                    id="product-rebates-skeleton"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                                <product-pricing
+                                    th:attr="data-unit-of-measure=${itemMaster?.unitOfMeasure}"
+                                ></product-pricing>
+                                <div
+                                    class="product-add-to-cart-skeleton"
+                                    th:id="${'product-add-to-cart-skeleton_' + lcin}"
+                                >
+                                    <div
+                                        class="product-add-to-cart-skeleton__shipping-badges"
+                                        th:include="utility/loading-animation"
+                                    ></div>
+                                    <div
+                                        class="product-add-to-cart-skeleton__availability"
+                                        th:include="utility/loading-animation"
+                                    ></div>
+                                    <div class="product-add-to-cart-skeleton__buttons">
+                                        <div
+                                            class="product-add-to-cart-skeleton__quantity"
+                                            th:include="utility/loading-animation"
+                                        ></div>
+                                        <div
+                                            class="product-add-to-cart-skeleton__add-to-cart-button"
+                                            th:include="utility/loading-animation"
+                                        ></div>
+                                    </div>
+                                    <div
+                                        class="product-add-to-cart-skeleton__shopping-list"
+                                        th:include="utility/loading-animation"
+                                    ></div>
+                                </div>
+                                <product-add-to-cart></product-add-to-cart>
+                            </div>
+                        </div>
+                        <div
+                            th:if="${oenEnabled}"
+                            th:with="itemMasterWarranty=${itemMaster?.warranty} ? 'true'"
+                        >
+                            <product-details
+                                th:attr='data-warranty-data=|{"itemMasterWarranty": ${itemMasterWarranty}, "warrantyRestricted": ${itemMaster?.warrantyRestricted}, "restricted": ${warranty?.warrantyRestricted}, "restrictedText": "#{product.details.warranty.restrictionText}", "warranty": "${itemMaster?.warranty.shortDescription}" }|,
+                                data-upc-data=|{"upc":"${itemMaster?.barcode}" }|,
+                                data-unit-of-measurement-data=|{"unitOfMeasure":"${itemMaster?.unitOfMeasure}" }|,
+                                data-oe-numbers-data=|{"oeNumbers": "${oeNumbers}"}|,
+                                data-brand-description-data=|{"brandDescriptionData": "${brandCategoryLongDescription}"}|'
+                                class="product-details-container"
+                            ></product-details>
+                        </div>
+                        <div th:unless="${oenEnabled}" class="pdp-info-section">
+                            <button
+                                class="js-plp-list-dropdown js-pdp-info_init pdp-title-accordion"
+                                aria-expanded="true"
+                            >
+                                <h2>Details</h2>
+                                <svg class="pdp_arrow js-pdp-arrow open" width="14" height="14">
+                                    <use href="#shape-down-arrow"></use>
+                                </svg>
+                            </button>
+                            <div class="pdp-section_wrap plp-section-open js-pdp-section_wrap">
+                                <div class="pdp-info_wrapper">
+                                    <h3 class="pdp-info_title" th:text="#{product.information}">
+                                        Product Information
+                                    </h3>
+                                    <th:block th:with="warranty=${itemMaster?.warranty}">
+                                        <div class="row" th:object="${product.broadleafProduct}">
+                                            <ul
+                                                class="list-unstyled product-list-details"
+                                                th:if="${itemMaster}"
+                                                th:inline="text"
+                                            >
+                                                <li
+                                                    th:if="${warranty != null or itemMaster.warrantyRestricted}"
+                                                    class=" col-md-6"
+                                                >
+                                                    <span>Warranty:&nbsp;</span>
+                                                    <strong
+                                                        th:if="${warranty != null and !itemMaster.warrantyRestricted}"
+                                                    >
+                                                        <a
+                                                            th:href="${'/warranty'}"
+                                                            target="_blank"
+                                                            th:text="${warranty.shortDescription}"
+                                                            th:attr="aria-label=#{aria.product.warranty}"
+                                                        >
+                                                            warranty description
+                                                        </a>
+                                                    </strong>
+                                                    <strong
+                                                        th:if="${itemMaster.warrantyRestricted}"
+                                                    >
+                                                        <a
+                                                            th:href="${'/warranty'}"
+                                                            target="_blank"
+                                                            th:text="#{product.details.warranty.restrictionText}"
+                                                            th:attr="aria-label=#{aria.product.warranty}"
+                                                        ></a>
+                                                    </strong>
+                                                </li>
+                                                <li
+                                                    th:if="${itemMaster.unitOfMeasure}"
+                                                    class="col-md-6"
+                                                >
+                                                    <span>Unit of Measure:&nbsp;</span>
+                                                    <th:block th:if="${itemMaster.unitOfMeasure}">
+                                                        <strong>
+                                                            [[${#strings.capitalize(itemMaster.unitOfMeasure)}]]
+                                                        </strong>
+                                                    </th:block>
+                                                    <th:block
+                                                        th:unless="${itemMaster.unitOfMeasure}"
+                                                    >
+                                                        <strong
+                                                            th:text="#{product.attribute.unavailable}"
+                                                        >
+                                                            Unavailable
+                                                        </strong>
+                                                    </th:block>
+                                                </li>
+                                                <li class="col-md-6">
+                                                    <span>UPC:&nbsp;</span>
+                                                    <th:block th:if="${itemMaster.barcode}">
+                                                        <strong>
+                                                            #
+                                                            <span>
+                                                                [[${itemMaster.barcode}]]
+                                                            </span>
+                                                        </strong>
+                                                    </th:block>
+                                                    <th:block th:unless="${itemMaster.barcode}">
+                                                        <strong
+                                                            th:text="#{product.attribute.unavailable}"
+                                                        >
+                                                            Unavailable
+                                                        </strong>
+                                                    </th:block>
+                                                </li>
+                                                <!-- Add more item master list items here if needed -->
+
+                                                <!-- After this point is product attributes and these are hidden -->
+                                                <th:block
+                                                    th:if="${not #lists.isEmpty(product.epcProduct.attributes)}"
+                                                >
+                                                    <li
+                                                        th:each="attr,iterStat : ${product.epcProduct.attributes}"
+                                                        class="col-md-6"
+                                                    >
+                                                        <span>
+                                                            [[${attr.attributeKey.description}]]:
+                                                        </span>
+                                                        <strong>
+                                                            [[${attr.attributeValue.description}]]
+                                                        </strong>
+                                                    </li>
+                                                </th:block>
+                                            </ul>
+                                            <span
+                                                th:if="${itemMaster == null and #lists.isEmpty(attributeXrefs)}"
+                                                th:text="#{product.noAdditionalInfo}"
+                                            >
+                                                No additional information
+                                            </span>
+                                        </div>
+                                    </th:block>
+                                </div>
+                                <div
+                                    id="applications"
+                                    class="pdp-info_wrapper"
+                                    th:with="isFullVehicle=${customer.currentEpcGarageVehicle?.isFullVehicle()}"
+                                >
+                                    <h3
+                                        class="pdp-info_title"
+                                        th:if="${customer.currentEpcGarageVehicle != null and applicationFitDetails != null}"
+                                        th:text="${#plurality.appendPluralityIfRequired('product.vehicleApplications.singular', 'product.vehicleApplications.plural', #lists.size(applicationFitDetails))}"
+                                    ></h3>
+                                    <h3
+                                        class="pdp-info_title"
+                                        th:if="${customer.currentEpcGarageVehicle != null and applicationFitDetails == null}"
+                                        th:text="#{product.vehicleApplications.plural}"
+                                    ></h3>
+                                    <h3
+                                        class="pdp-info_title"
+                                        th:unless="${customer.currentEpcGarageVehicle}"
+                                        th:text="#{product.applications}"
+                                    >
+                                        Applications for this Product
+                                    </h3>
+                                    <div
+                                        th:if="not ${universal} and not ${isFullVehicle} and ${customer.currentEpcGarageVehicle != null}"
+                                    >
+                                        <div class="cf-applications">
+                                            <checkfit-banner-applications></checkfit-banner-applications>
+                                            <span>
+                                                to specify a submodel and engine for application
+                                                information.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <ul
+                                        th:if="${universal} or ${isFullVehicle} or ${customer.currentEpcGarageVehicle == null}"
+                                        class="list-unstyled pdp-info_list-applications"
+                                    >
+                                        <li th:if="${universal}">
+                                            <span th:text="#{product.universalProduct}">
+                                                This product is universal and applies to all
+                                                vehicles.
+                                            </span>
+                                        </li>
+                                        <th:block th:unless="${universal}">
+                                            <li
+                                                th:if="${not #lists.isEmpty(applicationFitDetails)}"
+                                                th:each="applicationFitDetail, iterStat : ${applicationFitDetails}"
+                                                th:class="${iterStat.odd} ? 'pdp-info_list-applications_item odd' : 'pdp-info_list-applications_item even'"
+                                                th:classappend="${iterStat.count gt 5} ? 'hidden' : ''"
+                                            >
+                                                <div
+                                                    th:object="${#oap.getFitApplicationTuple(applicationFitDetail.footnote != null ? applicationFitDetail.footnote.value : null)}"
+                                                >
+                                                    <div>
+                                                        <span th:inline="text">
+                                                            [[*{getFirst()}]]:
+                                                        </span>
+                                                        <strong th:text="*{getSecond()}"></strong>
+                                                    </div>
+                                                    <div>
+                                                        <span
+                                                            th:text="#{product.quantityPerVehicle}"
+                                                        >
+                                                            Quantity Per Vehicle:
+                                                        </span>
+                                                        <strong
+                                                            th:text="${applicationFitDetail.application.perCarQuantity}"
+                                                        ></strong>
+                                                    </div>
+                                                </div>
+                                                <th:block>
+                                                    <div
+                                                        class="application_related-docs"
+                                                        th:if="${#lists.size(applicationFitDetail.applicationDocuments) gt 0}"
+                                                    >
+                                                        <ul class="application_related-docs_list">
+                                                            <li
+                                                                class="product-application-documents"
+                                                                th:each="document : ${applicationFitDetail.applicationDocuments}"
+                                                            >
+                                                                <span class="font-italic">
+                                                                    Related Documents:
+                                                                </span>
+                                                                <a
+                                                                    class="js-fancybox-docs product-application-document"
+                                                                    th:href="${#media.getDocumentUrl(document.fileName)}"
+                                                                    th:title="${document.description}"
+                                                                    th:text="${document.description}"
+                                                                />
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </th:block>
+                                            </li>
+                                            <div
+                                                th:if="${applicationFitDetails != null and #lists.size(applicationFitDetails) gt 5}"
+                                                class="js-expand-applications-toggle applications-toggle toggle-expand"
+                                                th:inline="text"
+                                            >
+                                                <span class="text-more">
+                                                    Show All Applications
+                                                    <svg width="9" height="6">
+                                                        <use href="#shape-down-arrow" />
+                                                    </svg>
+                                                </span>
+                                                <span class="text-less">
+                                                    Show Less Applications
+                                                    <svg width="9" height="6">
+                                                        <use href="#shape-up-arrow" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <li
+                                                th:if="${customer.currentEpcGarageVehicle != null and #lists.isEmpty(applicationFitDetails)}"
+                                            >
+                                                <span th:text="#{product.vehicleApplications.none}">
+                                                    No applications for your vehicle.
+                                                </span>
+                                            </li>
+                                            <li th:if="${customer.currentEpcGarageVehicle == null}">
+                                                <span
+                                                    th:text="#{product.selectVehicleForApplications}"
+                                                >
+                                                    Select a vehicle to see vehicle applications.
+                                                </span>
+                                            </li>
+                                        </th:block>
+                                    </ul>
+                                </div>
+                                <div class="js-mobile-hidden pdp-mobile-hidden">
+                                    <div class="pdp-info-descriptions_wrapper product-list-details">
+                                        <div th:if="${productFeatures}" class="pdp-info_wrapper">
+                                            <h3 class="pdp-info_title">Detailed Description</h3>
+                                            <div th:utext="${productFeatures}">
+                                                [[${productFeatures}]]
+                                            </div>
+                                            <th:block th:if="${brandCategoryLongDescription}">
+                                                <div
+                                                    th:utext="${brandCategoryLongDescription}"
+                                                    class="pdp-info_style mt-10"
+                                                ></div>
+                                            </th:block>
+                                        </div>
+                                        <div
+                                            th:if="${product.epcProduct.manufacturer.mfgFeatures}"
+                                            class="pdp-info_wrapper"
+                                        >
+                                            <h3 class="pdp-info_title">Brand Information</h3>
+                                            <div
+                                                th:utext="${product.epcProduct.manufacturer.mfgFeatures}"
+                                                class="pdp-info_style"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <!-- prettier-ignore -->
+                                    <script th:inline="javascript">
+                                        window._ost.productDocumentMedia = /*[[*{epcProduct.documents}]]*/[];
+                                    </script>
+                                    <product-documents></product-documents>
+                                </div>
+                                <div
+                                    class="js-expand-details-toggle details-toggle toggle-expand"
+                                    th:inline="text"
+                                >
+                                    <span class="text-more">
+                                        Show All Details
+                                        <svg width="9" height="6">
+                                            <use href="#shape-down-arrow" />
+                                        </svg>
+                                    </span>
+                                    <span class="text-less">
+                                        Show Less Details
+                                        <svg width="9" height="6">
+                                            <use href="#shape-up-arrow" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pdp-info-section">
+                            <button
+                                class="pdp-title-accordion js-plp-list-dropdown js-compatibility"
+                                aria-expanded="false"
+                                th:attr="data-product-line-code=*{epcProduct.lineCodeItemNumber.lineCode},data-product-item-number=*{epcProduct.lineCodeItemNumber.itemNumber}"
+                            >
+                                <h2>Compatibility</h2>
+                                <svg class="pdp_arrow js-pdp-arrow" width="14" height="14">
+                                    <use href="#shape-down-arrow"></use>
+                                </svg>
+                            </button>
+                            <compatibility></compatibility>
+                        </div>
+                        <th:block th:if="${#oap.getRatingsAndReviewsDisplay()}">
+                            <div class="pdp-info-section">
+                                <button
+                                    class="pdp-title-accordion js-plp-list-dropdown"
+                                    aria-expanded="false"
+                                    id="rr"
+                                >
+                                    <h2>Ratings &amp; Reviews</h2>
+                                    <svg class="pdp_arrow js-pdp-arrow" width="14" height="14">
+                                        <use href="#shape-down-arrow"></use>
+                                    </svg>
+                                </button>
+
+                                <div
+                                    id="reviews"
+                                    class="pdp-section_wrap plp-section-closed js-pdp-section_wrap"
+                                >
+                                    <div
+                                        data-bv-show="reviews"
+                                        th:attr="data-bv-product-id=*{epcProduct.brandCodePartNumber.brandCode + '-' + epcProduct.brandCodePartNumber.partNumber}"
+                                    ></div>
+                                </div>
+                            </div>
+                            <th:block th:if="${#oap.getQuestionsAnswersDisplay()}">
+                                <div class="pdp-info-section">
+                                    <button
+                                        class="pdp-title-accordion js-plp-list-dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <h2>Questions &amp; Answers</h2>
+                                        <svg class="pdp_arrow js-pdp-arrow" width="14" height="14">
+                                            <use href="#shape-down-arrow"></use>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        id="questions"
+                                        class="pdp-section_wrap plp-section-closed js-pdp-section_wrap"
+                                    >
+                                        <div
+                                            data-bv-show="questions"
+                                            th:attr="data-bv-product-id=*{epcProduct.brandCodePartNumber.brandCode + '-' + epcProduct.brandCodePartNumber.partNumber}"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        <div
+                            class="pdp-info-section"
+                            th:if="${not #lists.isEmpty(relatedPartTypes)}"
+                        >
+                            <button
+                                class="pdp-title-accordion js-plp-list-dropdown"
+                                aria-expanded="true"
+                            >
+                                <h2 th:inline="text">[[#{product.related.categories}]]</h2>
+                                <svg class="pdp_arrow js-pdp-arrow open" width="14" height="14">
+                                    <use href="#shape-down-arrow"></use>
+                                </svg>
+                            </button>
+                            <div class="pdp-section_wrap plp-section-open js-pdp-section_wrap">
+                                <ul class="pdp-related_list">
+                                    <li th:each="relatedPartType : ${relatedPartTypes}">
+                                        <a
+                                            th:href="@{${relatedPartTypesUrlMap.get(relatedPartType.partTypeId)}}"
+                                            th:text="${relatedPartType.name}"
+                                        ></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div
+                            th:if="${not #lists.isEmpty(EPCRVP)}"
+                            th:with="recentProductPricingMap=${#price.getPricingForEpcProducts(EPCRVP)}"
+                            class="pdp-info-section"
+                        >
+                            <button
+                                class="pdp-title-accordion js-plp-list-dropdown"
+                                aria-expanded="true"
+                            >
+                                <h2 th:inline="text">[[#{product.recent.viewed}]]</h2>
+                                <svg class="pdp_arrow js-pdp-arrow open" width="14" height="14">
+                                    <use href="#shape-down-arrow"></use>
+                                </svg>
+                            </button>
+                            <div
+                                class="pdp-section_wrap pdp-section_slider js-pdp-section_wrap plp-section-open"
+                            >
+                                <div class="row pdp-recent_list">
+                                    <div class="swiper-wrapper">
+                                        <article
+                                            class="pdp-recent_item swiper-slide"
+                                            th:each="recentProduct: ${EPCRVP}"
+                                            th:with="
+                                                recentProductLcin=${recentProduct.lineCodeItemNumber.lineCode + '-' + recentProduct.lineCodeItemNumber.itemNumber},
+                                                recentProductPricing=${recentProductPricingMap != null ? recentProductPricingMap.get(recentProduct.lineCodeItemNumber) : null}
+                                            "
+                                        >
+                                            <a
+                                                class="pdp-recent_item_link"
+                                                th:href="@{${recentlyViewedProductsUrlMap.get(recentProduct)}}"
+                                                th:with="recentProductName=${not #lists.isEmpty(recentProduct.ecommerceDescriptions) ? recentProduct.ecommerceDescriptions.get(0).description : recentProduct.shortDescription}"
+                                            >
+                                                <figure
+                                                    class="pdp-recent_item_img"
+                                                    th:with="recentProductImageUrl=${#media.getProductDtoPrimaryImageUrl('small', recentProduct)}"
+                                                >
+                                                    <img
+                                                        loading="lazy"
+                                                        th:src="${recentProductImageUrl}"
+                                                        th:attr="data-original=@{${recentProductImageUrl}}"
+                                                        th:alt="${recentProductName}"
+                                                    />
+                                                </figure>
+                                                <div class="pdp-recent_item_info" th:inline="text">
+                                                    <div>
+                                                        <strong class="product_title">
+                                                            [[${recentProductName}]]
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- prettier-ignore -->
+                                            <script th:inline="javascript">
+                                                var recentProductLcin = /*[[${recentProductLcin}]]*/ '';
+                                                window._ost.recentProductPricing[recentProductLcin] = /*[[${recentProductPricing}]]*/ {};
+                                            </script>
+                                            <div
+                                                class="recent-product-pricing-skeleton"
+                                                th:id="${'recent-product-pricing-skeleton_' + recentProductLcin}"
+                                            >
+                                                <div
+                                                    class="recent-product-pricing-skeleton__animation"
+                                                    th:include="utility/loading-animation"
+                                                ></div>
+                                            </div>
+                                            <recent-product-pricing
+                                                th:attr="data-line-code=${recentProduct.lineCodeItemNumber.lineCode},data-item-number=${recentProduct.lineCodeItemNumber.itemNumber}"
+                                            ></recent-product-pricing>
+                                        </article>
+                                    </div>
+                                    <div class="recent-prev js-recent-prev">
+                                        <svg class="pdp-recent_arrow" width="24" height="24">
+                                            <use href="#shape-left-arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="recent-next js-recent-next">
+                                        <svg class="pdp-recent_arrow" width="24" height="24">
+                                            <use href="#shape-right-arrow"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="js-recent-pagination"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

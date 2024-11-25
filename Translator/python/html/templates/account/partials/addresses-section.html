@@ -1,0 +1,47 @@
+<div class="show-hide-all js-hide-for-add-edit" th:if="${alternateCustomerAddresses != null and #lists.size(alternateCustomerAddresses) gt 3}">
+<a class="js-show-all show-addresses" href="#" th:text="#{account.profile.showAll}"></a>
+<a class="js-hide hide-addresses" href="#" th:text="#{account.profile.hide}"></a>
+</div>
+<div class="addresses-row js-addresses-row" th:with="defaultAddress=${defaultCustomerAddress != null and defaultCustomerAddress.address != null}">
+<strong class="address-default--heading" th:if="${defaultAddress}">
+        Default Address
+    </strong>
+<div class="row alternate-addresses" th:if="${alternateCustomerAddresses}">
+<div class="col-sm-6 address address--default js-default-address-section js-customer-address" th:attr="data-customerAddressId=${defaultCustomerAddress.id}" th:if="${defaultAddress}">
+<div class="address-wrap js-hide-for-add-edit">
+<th:block th:include="account/partials/profile-address" th:object="${defaultCustomerAddress.address}"></th:block>
+<div class="address-controls">
+<a class="button buttons--small button--align-l edit-link js-edit-address" href="#" th:attr="aria-label=#{aria.profile.editDefaultAddress(${defaultCustomerAddress.address.addressLine1})}" th:text="#{account.profile.edit}"></a>
+                    |
+                    <a class="button buttons--small remove-link js-remove-address" href="#" th:text="#{account.profile.removeAddress}"></a>
+</div>
+</div>
+<th:block th:include="account/partials/update-address-form" th:with="customerAddress=${defaultCustomerAddress},suffix='default'"></th:block>
+</div>
+<th:block th:each="altCustomerAddress,iterStat : ${alternateCustomerAddresses}" th:with="addressCount=${iterStat.count}">
+<div class="col-sm-6 address js-customer-address" th:attr="data-customerAddressId=${altCustomerAddress.id}" th:classappend="${addressCount gt 3} ? 'address--extra js-extra-customer-address' : '' ">
+<div class="address-wrap js-hide-for-add-edit">
+<th:block th:include="account/partials/profile-address" th:object="${altCustomerAddress.address}"></th:block>
+<div class="address-controls">
+<a class="button buttons--small button--align-l edit-link js-edit-alternate-address" href="#" th:attr="aria-label=#{aria.profile.editAlternateAddress(${altCustomerAddress.address.addressLine1})}" th:text="#{account.profile.edit}"></a>
+                        |
+                        <a class="button buttons--small edit-link js-make-default" href="#" th:text="#{account.profile.makeDefault}"></a>
+                        |
+                        <a class="button buttons--small remove-link js-remove-address" href="#" th:text="#{account.profile.removeAddress}"></a>
+</div>
+</div>
+<th:block th:include="account/partials/update-address-form" th:with="customerAddress=${altCustomerAddress},suffix=('alt-' + ${iterStat.index})"></th:block>
+</div>
+</th:block>
+</div>
+</div>
+<div class="row add-address-section js-customer-address">
+<div class="js-hide-for-add-edit">
+<div class="add-address-btn-row">
+<div class="col-md-4">
+<button class="button button--white add-shipping-address js-add-shipping-address" th:text="#{account.profile.addAddress}"></button>
+</div>
+</div>
+</div>
+<th:block th:include="account/partials/update-address-form" th:with="suffix='add-edit'"></th:block>
+</div>

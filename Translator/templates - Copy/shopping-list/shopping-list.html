@@ -1,0 +1,36 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <title th:text="#{shoppingLists.title}"></title>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div id="list-id" style="display: none" th:attr="data-shopping-list-id=${listId}"></div>
+        <div class="site-content o-container">
+            <div id="shopping-list" class="col-xs-12 shopping-list--main">
+                <h1 class="sl-title">
+                    Shopping List
+                </h1>
+                <div class="sl-loading">
+                    <div
+                        class="overlay-spinner overlay-spinner__on-page"
+                        role="alert"
+                        aria-label="Loading"
+                    ></div>
+                </div>
+            </div>
+            <div class="container hp-featured-container js-hp-featured-container">
+                <div class="hp-featured-prods js-hp-featured" style="display: block;">
+                    <div class="product-list product-list--horizontal slider">
+                        <h2
+                            class="product-list_title-featured"
+                            th:utext="#{home.featuredProducts}"
+                        ></h2>
+                        <blc:content-zone
+                            name="Homepage Featured Products Zone"
+                            deepLinks="deepLinks"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

@@ -1,0 +1,10 @@
+<th:block th:fragment="ajax" th:inline="text">
+    <th:block th:if=" *{facetValue !=null}" th:with="name=*{facetValue}">
+        [[${#oap.getFacetName(name)}]]
+    </th:block>
+    <th:block th:unless="*{facetValue != null}">
+        <span blc:price="*{minValue}"></span>
+        <span th:text="*{maxValue == null ? ' __#{facet.orMore}__ ' : ' - '}"></span>
+        <span th:if="*{maxValue != null}" blc:price="*{maxValue}"></span>
+    </th:block>
+</th:block>

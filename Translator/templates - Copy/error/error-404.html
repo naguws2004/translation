@@ -1,0 +1,33 @@
+<th:block layout:decorator="layout/full-page-layout" layout:fragment="content">
+<head>
+    <title th:text="#{404.pageNotFound}"></title>
+</head>
+    <div class="row error-head col-sm-offset-2 col-sm-8">
+        <div class="number-404 col-sm-6" th:text="#{404.404}">404</div>
+        <div class="page-not-found-section col-sm-6">
+            <h1 class="sr-only">404 - Page Not Found</h1>
+            <strong class="page-not-found-text" th:text="#{404.pageNotFound}">Page Not Found</strong>
+            <div class="page-could-not-be-opened" th:text="#{404.pageNotOpened}">The page you requested could not be opened or has moved</div>
+        </div>
+    </div>
+    <h2 class="sr-only">Options</h2>
+    <div class="row error-description col-sm-offset-2 col-sm-8">
+        <div class="we-apologize col-md-6">
+            <p th:text="#{404.weApologizeInconvenience}">We apologize for any inconvenience. Either your session has timed out or the page does not exist.</p>
+            <div class="back-to-homepage">
+                <a th:href="@{/}">
+                    <button th:text="#{404.backToHome}">Back to Homepage</button>
+                </a>
+            </div>
+        </div>
+        <div class="in-process col-md-6">
+            <p th:text="#{404.ifInProcess}">If you were in the process of checking out, your order was not submitted. You will need to start the checkout process over again.</p>
+            <div class="go-to-cart">
+                <a th:href="@{/cart}">
+                    <button th:text="#{404.goToCart}">Go to my shopping cart</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</th:block>

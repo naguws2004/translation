@@ -1,0 +1,41 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head layout:fragment="head">
+        <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" th:text="#{checkout.title}">
+            Checkout | O'Reilly Auto Parts
+        </title>
+        <th:block th:replace="/layout/partials/head"></th:block>
+        <th:block th:include="/analytics/partials/data-layer" />
+        <th:block
+            th:unless="${#strings.isEmpty(viewName)}"
+            th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: styles"
+        />
+        <th:block
+            th:unless="${#strings.isEmpty(viewName)}"
+            th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: preload-scripts"
+        />
+    </head>
+    <body
+        layout:fragment="body"
+        th:class="${'locale-' + session.blLocale.localeCode + ' page-' + #oap.classifyViewName(viewName)}"
+        th:attr="data-page_status=${#oap.classifyViewName(viewName)}"
+    >
+        <th:block th:replace="layout/partials/shapes"></th:block>
+        <th:block th:include="/analytics/partials/google-tag-manager" />
+        <div id="notification_bar"></div>
+        <div>
+            <div id="checkout_content" class="checkout_content_wrap width_setter group" role="main">
+                <div layout:fragment="content" />
+            </div>
+            <blc:form id="justUsedForCsrf" role="form"></blc:form>
+        </div>
+        <th:block
+            th:unless="${#strings.isEmpty(viewName)}"
+            th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: scripts"
+        />
+        <th:block th:include="/layout/partials/forter-js"></th:block>
+        <th:block
+            th:if="${#oap.isEnabled('LIVEPERSON')}"
+            th:include="/layout/partials/liveperson"
+        ></th:block>
+    </body>
+</th:block>

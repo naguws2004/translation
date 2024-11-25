@@ -1,0 +1,103 @@
+<th:block
+    th:if="${sc !=null}"
+    th:with="
+    ytvId=${sc.values[youtubeVideoId]},
+    ytvName=${sc.values[youtubeVideoName]},
+    ytvDescription=${sc.values[youtubeVideoDescription]},
+    ytvThumbnailUrl=${sc.values[youtubeVideoThumbnailUrl]},
+    ytvEmbed=@{https://www.youtube.com/embed/{youtubeVideoId}?rel=0&amp;showinfo=0(youtubeVideoId=${ytvId})},
+    ytvDurationHours=${
+       sc.values[youtubeVideoDurationHours] != null ? sc.values[youtubeVideoDurationHours] : 0
+    },
+    ytvDurationMinutes=${
+       sc.values[youtubeVideoDurationMinutes] != null ? sc.values[youtubeVideoDurationMinutes] : 0
+    },
+    ytvDurationSeconds=${
+       sc.values[youtubeVideoDurationSeconds] != null ? sc.values[youtubeVideoDurationSeconds] : 0
+    },
+    ytvTrans=${sc.values[youTubeTranscript]},
+    ytvPage=${#oap.getVideoPageSEOMetaByRequestURI(#httpServletRequest.requestURI)}
+  "
+>
+    <div class="col-xs-12">
+        <div
+            class="youtube-video-content-container"
+            itemscope="itemscope"
+            itemprop="VideoObject"
+            itemtype="https://schema.org/VideoObject"
+        >
+            <div class="youtube-video col-sm-6">
+                <div class="video-container">
+                    <iframe
+                        th:if="${ytvId ne null and (ytvThumbnailUrl eq null or ytvId eq ytvThumbnailUrl)}"
+                        width="560"
+                        height="315"
+                        class="video-player"
+                        th:src="${ytvEmbed}"
+                        frameborder="0"
+                        allowfullscreen="1"
+                    ></iframe>
+                    <a
+                        class="js-oap-cms-video-custom-thumbnail"
+                        th:if="${ytvId ne null and ytvThumbnailUrl ne null and ytvId ne ytvThumbnailUrl}"
+                        href="#"
+                        th:attr="data-video-id=${ytvId}"
+                    >
+                        <img width="560" height="315" th:src="${ytvThumbnailUrl}" />
+                    </a>
+                </div>
+                <div th:if="${ytvId == null}">
+                    No video content available.
+                </div>
+            </div>
+            <div class="youtube-video-description col-sm-6">
+                <meta
+                    th:if="${ytvId} != null"
+                    itemprop="contentUrl"
+                    th:content="|https://youtube.com/watch?v=${ytvId}|"
+                />
+                <meta th:if="${ytvId} != null" itemprop="embedUrl" th:content="${ytvEmbed}" />
+                <meta
+                    th:if="${ytvThumbnailUrl} != null"
+                    itemprop="thumbnailUrl"
+                    th:content="|https://i.ytimg.com/vi/${ytvId}/maxresdefault.jpg|"
+                />
+                <meta
+                    itemprop="duration"
+                    th:content="|PT${ytvDurationHours}H${ytvDurationMinutes}M${ytvDurationSeconds}S|"
+                />
+                <meta th:if="${ytvName} != null" itemprop="name" th:content="${ytvName}" />
+                <span
+                    th:if="${ytvDescription} != null"
+                    class="ytv-widget-desc"
+                    itemprop="description"
+                    th:utext="${ytvDescription}"
+                ></span>
+                <div
+                    th:if="${ytvPage.pageViews} != null"
+                    itemscope="itemscope"
+                    itemprop="interactionStatistic"
+                    itemtype="https://schema.org/InteractionCounter"
+                >
+                    <meta itemprop="userInteractionCount" th:content="${ytvPage.pageViews}" />
+                    <meta itemprop="interactionType" itemtype="https://schema.org/WatchAction" />
+                </div>
+                <meta th:if="${ytvTrans} != null" itemprop="transcript" th:content="${ytvTrans}" />
+                <meta
+                    th:if="${ytvPage.uploadDate} != null"
+                    itemprop="uploadDate"
+                    th:content="${ytvPage.uploadDate}"
+                />
+                <th:block th:if="${sc.values[showYouTubeSubscribeButton]}">
+                    <script src="https://apis.google.com/js/platform.js"></script>
+                    <div
+                        class="g-ytsubscribe"
+                        th:attr="data-channel=${sc.values[youtubeChannelId]}"
+                        data-layout="default"
+                        data-count="default"
+                    ></div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>

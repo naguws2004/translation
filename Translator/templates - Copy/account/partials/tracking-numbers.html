@@ -1,0 +1,56 @@
+<th:block th:with="info=${info}, type=${type}">
+    <div
+        class="group-status-carrier-container"
+        th:each="shippingCarrier : ${info.shippingTrackingNumbers}"
+    >
+        <strong
+            th:if="${#strings.contains(#strings.toLowerCase(shippingCarrier.key), 'fedex')}"
+            th:text="#{account.orderHistory.purchaseHistory.shippedViaFedex}"
+        ></strong>
+        <strong
+            th:if="${#strings.contains(#strings.toLowerCase(shippingCarrier.key), 'ups')}"
+            th:text="#{account.orderHistory.purchaseHistory.shippedViaUps}"
+        ></strong>
+        <strong
+            th:if="${#strings.contains(#strings.toLowerCase(shippingCarrier.key), 'usps')}"
+            th:text="#{account.orderHistory.purchaseHistory.shippedViaUsps}"
+        ></strong>
+        <strong
+            th:if="${info.thirdPartyDeliveryService != null} and ${#strings.contains(#strings.toLowerCase(info.thirdPartyDeliveryService), 'doordash')}"
+            th:text="#{account.orderHistory.purchaseHistory.shippedViaDoordash}"
+        ></strong>
+        <div
+            class="group-status-tracking-number"
+            th:each="trackingNumber : ${shippingCarrier.value}"
+        >
+            <a
+                th:if="${#strings.contains(#strings.toLowerCase(shippingCarrier.key), 'fedex')}"
+                th:href="@{https://www.fedex.com/apps/fedextrack/(action='track',cntry_code='us',locale='en_US',tracknumbers=${trackingNumber})}"
+                th:utext="${trackingNumber}"
+            >
+                FedEx
+            </a>
+            <a
+                th:if="${#strings.contains(#strings.toLowerCase(shippingCarrier.key), 'ups')}"
+                th:href="@{https://www.ups.com/track?(tracknum=${trackingNumber})}"
+                th:utext="${trackingNumber}"
+            >
+                UPS
+            </a>
+            <a
+                th:if="${#strings.contains(#strings.toLowerCase(shippingCarrier.key), 'usps')}"
+                th:href="@{https://tools.usps.com/go/TrackConfirmAction(tLabels=${trackingNumber})}"
+                th:utext="${trackingNumber}"
+            >
+                USPS
+            </a>
+            <a
+                th:if="${info.thirdPartyDeliveryService != null} and ${#strings.contains(#strings.toLowerCase(info.thirdPartyDeliveryService), 'doordash')}"
+                th:href="@{${info.thirdPartyDeliveryTrackingUrl}}"
+                th:text="#{account.purchaseHistory.orderDetails.tracking}"
+            >
+                DoorDash
+            </a>
+        </div>
+    </div>
+</th:block>

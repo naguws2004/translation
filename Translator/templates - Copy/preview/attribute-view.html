@@ -1,0 +1,100 @@
+<div th:if="${#brc.sandbox}" class="product-attribute-view" th:inline="text">
+    <div class="product-info">
+        <table>
+            <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Category ID</th>
+                <th>Category Name</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>[[${product.id}]]</td>
+                    <td>[[${product.name}]]</td>
+                    <td>[[${category.id}]]</td>
+                    <td>[[${category.name}]]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(productAttributeValues)}" class="product-attribute-info">
+        <h4>Product Attributes</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Required</th>
+                    <th>Priority</th>
+                    <th>Retainable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="attributeValue : ${productAttributeValues}"
+                          th:with="
+                          attribute=${attributeValue.automotiveAttribute},
+                          value=${attributeValue.name},
+                          name=${attribute.name},
+                          categoryAttribute=${categoryAttributeMap.get(attribute)},
+                          required=${categoryAttribute.required},
+                          priority=${categoryAttribute.priority},
+                          retainable=${attribute.retainable}">
+                    <td>[[${name}]]</td>
+                    <td>[[${value}]]</td>
+                    <td>[[${required}]]</td>
+                    <td>[[${priority}]]</td>
+                    <td>[[${retainable}]]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="error" th:if="${#lists.isEmpty(productAttributeValues)}">
+        <p>
+            No product attributes found for this product and category.
+            Either this product lacks product attributes for this category, or you are not on a leaf node category (a "leaf node category" has no child categories).
+        </p>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(fitAttributeValues)}" class="fit-attribute-info">
+        <h4>Fit Attributes</h4>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Required</th>
+                <th>Priority</th>
+                <th>Retainable</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="attributeValue : ${fitAttributeValues}"
+                th:with="
+                          attribute=${attributeValue.automotiveAttribute},
+                          value=${attributeValue.name},
+                          name=${attribute.name},
+                          categoryAttribute=${categoryAttributeMap.get(attribute)},
+                          required=${categoryAttribute.required},
+                          priority=${categoryAttribute.priority},
+                          retainable=${attribute.retainable}">
+                <td>[[${name}]]</td>
+                <td>[[${value}]]</td>
+                <td>[[${required}]]</td>
+                <td>[[${priority}]]</td>
+                <td>[[${retainable}]]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="error" th:if="${#lists.isEmpty(fitAttributeValues)}">
+        <p>
+            No fit attributes found for this product and category.
+            Either this product lacks fit attributes for this category, or you are not on a leaf node category (a "leaf node category" has no child categories).
+        </p>
+    </div>
+</div>

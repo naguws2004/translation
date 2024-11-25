@@ -1,0 +1,239 @@
+<div
+    th:unless="*{#lists.isEmpty(products)}"
+    class="row js-product-list"
+    xmlns="http://www.w3.org/1999/html"
+>
+    <!-- Required Facets are stored here if they exist -->
+    <!-- prettier-ignore -->
+    <script th:inline="javascript" th:if="*{products}">
+        /*<![CDATA[*/
+        var requiredBase = /*[[${requiredBase}]]*/ false;
+        var requiredEngine = /*[[${requiredEngine}]]*/ false;
+        var uriDescriptorDTO = JSON.parse(/*[[${uriDescriptorDTO}]]*/ '{}');
+        window._ost.interchangeSearch = /*[[${interchangeSearch}]]*/ false;
+        window._ost.totalPages = /*[[${result.totalPages}]]*/ 1;
+        window._ost.searchUuid = /*[[${result.searchUuid}]]*/ '';
+        /*]]>*/
+    </script>
+    <th:block th:if="${#oap.isFBTrackingEnabled()}">
+        <script th:inline="javascript">
+            window._ost.facebookTrackingEnabled = true;
+        </script>
+    </th:block>
+    <div class="mobile-facets col-md-3 print-hide">
+        <button class="facet_close js-facet_close" aria-label="Close">
+            <svg class="btn-icon" aria-hidden="true" width="14" height="14">
+                <use href="#shape-remove"></use>
+            </svg>
+        </button>
+        <h1 class="sr-only">Search Results</h1>
+        <div class="plp-refinements">
+            <div class="mobile-scroll_wrap">
+                <th:block th:if="${originalQuery}">
+                    <div id="js-search-for" class="search-for">
+                        <div class="search-for_header" th:include="utility/loading-animation"></div>
+                        <div class="search-for_text" th:include="utility/loading-animation"></div>
+                        <div class="search-for_text" th:include="utility/loading-animation"></div>
+                        <div class="search-for_text" th:include="utility/loading-animation"></div>
+                        <div class="search-for_text" th:include="utility/loading-animation"></div>
+                        <div class="search-for_text" th:include="utility/loading-animation"></div>
+                        <div class="search-for_text" th:include="utility/loading-animation"></div>
+                    </div>
+                    <typeahead-facets></typeahead-facets>
+                </th:block>
+                <div class="facet_wrap">
+                    <h2 class="sidebar_header hidden">
+                        Filter By
+                    </h2>
+                    <div th:include="/catalog/partials/filters/other-facet-filters"></div>
+                    <th:block
+                        th:if="${not #lists.isEmpty(interchangeReplacePartTypes)}"
+                        th:with="manufacturersReplace=false"
+                        th:include="/catalog/partials/filters/interchange-replace-filter"
+                    />
+                    <th:block
+                        th:if="${not #maps.isEmpty(interchangeManufacturerReplacementMap)}"
+                        th:with="manufacturersReplace=true"
+                        th:include="/catalog/partials/filters/interchange-replace-filter"
+                    />
+                    <div
+                        th:if="${not #lists.isEmpty(relatedPartTypes)}"
+                        th:include="/catalog/partials/filters/related-categories"
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-primary col-md-9">
+        <div class="content-wrap plp-content">
+            <div class="plp-container">
+                <th:block th:include="catalog/partials/did-you-mean" />
+                <div class="plp-header">
+                    <div
+                        class="interchange-banner"
+                        th:unless="${interchangeSearch eq true or interchangeSearchUrl == null}"
+                    >
+                        <th:block th:include="/catalog/partials/banner-interchange-search" />
+                    </div>
+                    <div class="interchange-banner" th:if="${interchangeSearch eq true}">
+                        <th:block
+                            th:include="/catalog/partials/banner-interchange-search-results"
+                        />
+                    </div>
+                    <blc:content-zone name="Product Banner Content Zone 1"></blc:content-zone>
+                    <blc:content-zone name="Product Banner Content Zone 2"></blc:content-zone>
+                    <div class="clearfix"></div>
+                    <div class="plp_subheader-wrap compare">
+                        <div class="wrap_left">
+                            <div class="plp-results-count" th:inline="text">
+                                <strong class="js-mobile_page-replace">
+                                    [[${result.startResult}]] - [[${result.endResult}]]
+                                </strong>
+                                <span>[[#{search.of}]]</span>
+                                <strong>[[${result.totalResults}]]</strong>
+                                <span>[[#{category.resultsFor}]]</span>
+                                <strong th:if="${not #strings.isEmpty(partTypeName)}">
+                                    [[${partTypeName}]]
+                                </strong>
+                                <th:block th:unless="${not #strings.isEmpty(partTypeName)}">
+                                    <strong th:if="${manufacturer == null and brand != null}">
+                                        [[${brand.brandName}]]
+                                    </strong>
+                                    <strong th:if="${manufacturer != null and brand == null}">
+                                        [[${manufacturer.mfgName}]]
+                                    </strong>
+                                    <th:block th:if="${manufacturer == null and brand == null}">
+                                        <th:block th:if="${interchangeSearch eq true}">
+                                            <strong>[[${param.partNumber[0]}]]</strong>
+                                        </th:block>
+                                        <th:block th:unless="${interchangeSearch eq true}">
+                                            <strong th:if="${originalQuery == null}">
+                                                [[${customProductList?.name}]]
+                                            </strong>
+                                            <strong th:unless="${originalQuery == null}">
+                                                [[${originalQuery}]]
+                                            </strong>
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="wrap_right" th:if="${result.totalResults > 1}">
+                            <div class="plp-compare hidden-xs hidden-sm">
+                                <div class="button-group">
+                                    <button
+                                        aria-label="Compare Selected Products"
+                                        class="button button--white button--small js-btn-compare is-disabled"
+                                        disabled="disabled"
+                                        th:inline="text"
+                                    >
+                                        <svg
+                                            class="button__icon"
+                                            aria-hidden="true"
+                                            width="12"
+                                            height="12"
+                                        >
+                                            <title th:text="#{shapes.compare}"></title>
+                                            <use href="#shape-compare" />
+                                        </svg>
+                                        [[#{product.compare}]]
+                                    </button>
+                                    <ul aria-label="Products selected to compare.">
+                                        <span class="js-compare-products-btns"></span>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plp-filter-refine visible-xs visible-sm">
+                        <a
+                            href="#"
+                            class="btn-ctrl btn--md plp-refine_btn js-plp-refine_btn"
+                            th:text="#{product.refine}"
+                        >
+                            Refine
+                        </a>
+                    </div>
+                    <div th:substituteby="catalog/partials/product-sort-options"></div>
+                </div>
+                <div class="product-container js-product-container">
+                    <th:block th:if="${products}">
+                        <!-- prettier-ignore -->
+                        <script th:inline="javascript" id="orewardsVariables">
+                            window._ost.orwPlpItemPointsMap = /*[[${oRewardsItemPointsMap}]]*/[];
+                            window._ost.rebatesMap = /*[[${rebatesMap}]]*/[];
+                        </script>
+                        <shipping-estimate-data-loader></shipping-estimate-data-loader>
+                        <checkfit-data-loader></checkfit-data-loader>
+                        <div
+                            class="product-row"
+                            th:each="blockIndex: ${#numbers.sequence(0, #lists.size(products) - 1, 3)}"
+                        >
+                            <div class="product-row_wrap">
+                                <th:block
+                                    th:each="index: ${#numbers.sequence(blockIndex, blockIndex + 2)}"
+                                    th:with="listItem=${index lt #lists.size(products) ? products.get(index) : null}"
+                                >
+                                    <article
+                                        th:if="*{listItem}"
+                                        class="product product--plp product--interchange js-product"
+                                        th:id="${'isLazyLoaded_' + index}"
+                                        th:object="${listItem}"
+                                        th:attr="data-index=${index},
+                                                data-category=${productNameMap.get(listItem.epcProduct)},
+                                                data-fit=${result?.fitCompatibility?.get(listItem.epcProduct.lineCodeItemNumber)},
+                                                data-is-article-lazy-loaded=false"
+                                        th:include="catalog/partials/product-list-item"
+                                        role="article"
+                                    ></article>
+                                </th:block>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    var productContainer = document.getElementsByClassName('product-container')[0]
+                    var productRows = document.getElementsByClassName('product-row')
+                    var lazyProductRows = Array.from(productRows).slice(2)
+
+                    lazyProductRows.forEach(function(productRow) {
+                        productRow.parentNode.removeChild(productRow)
+                    })
+                    /*]]>*/
+                </script>
+                <div id="load-more-items"></div>
+                <div
+                    id="load-mobile-pagination"
+                    class="load-mobile-pagination"
+                    th:attr="data-total-pages=${#Math.min(20, result.totalPages)}"
+                >
+                    <div th:if="${result.totalPages > 1}" th:remove="tag">
+                        <button class="btn-green-lg btn--lg btn_load-more js-btn_load-more">
+                            Load More
+                        </button>
+                    </div>
+                </div>
+                <div class="plp-footer">
+                    <div
+                        th:if="${result.page == 20}"
+                        class="plp-end-of-results"
+                        th:text="#{product.endOfResults}"
+                    >
+                        Refine your search for more focused results.
+                    </div>
+                    <div th:if="${result.totalPages gt 1}" class="pagination-container">
+                        <pagination-buttons></pagination-buttons>
+                    </div>
+                </div>
+                <product-type-long-description></product-type-long-description>
+            </div>
+        </div>
+    </div>
+    <th:block th:if="${#brc.sandbox}" th:include="preview/attribute-view-modal" />
+    <div class="mobile_scroll-top">
+        <svg class="btn-icon" width="14" height="14">
+            <use href="#shape-up-arrow" />
+        </svg>
+    </div>
+</div>

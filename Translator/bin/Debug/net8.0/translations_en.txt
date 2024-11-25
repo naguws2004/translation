@@ -1,0 +1,5 @@
+/* C:\Users\yerkala_n\source\repos\Translator\Translator\jsfiles\test.js */
+tls_key_hello_world=Hello, World!
+tls_key_alice=Alice
+tls_key_roses_are_red_violets_ar=Roses are red, Violets are blue, JavaScript is awesome, And so are you!
+tls_key_she_said_javascript_is_f=She said, "JavaScript is fun! 

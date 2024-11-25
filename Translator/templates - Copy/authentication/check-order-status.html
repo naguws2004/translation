@@ -1,0 +1,246 @@
+<th:block layout:decorator="layout/full-page-layout" th:with="replaceTitle=true">
+    <head>
+        <th:block
+            th:include="/layout/partials/head-override"
+            th:with="titleName=#{checkOrderStatus.title}"
+        ></th:block>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="container">
+            <div
+                class="check-order-status-wrap js-email-sent"
+                th:classappend="${order != null and info != null} ? 'check-order-status_email-link' : ''"
+            >
+                <section class="col-sm-6 col-md-5 auth-wrap auth-wrap-left auth-wrap--sep">
+                    <h2 class="section-title" th:text="#{signIn.signIn}">Login</h2>
+                    <p class="section-subtitle">
+                        Don't have an account?
+                        <a href="/create-account">Create one now</a>
+                    </p>
+                    <div class="section-body">
+                        <p>
+                            To view full order history, please sign in by entering the same email
+                            and password you signed up with.
+                        </p>
+                        <blc:form
+                            id="loginForm"
+                            th:action="@{/login_post.htm}"
+                            role="login"
+                            method="post"
+                            class="login-form js-login-form"
+                        >
+                            <input
+                                type="hidden"
+                                name="successUrl"
+                                th:if="${successUrl}"
+                                th:value="${successUrl}"
+                            />
+                            <div class="form-group">
+                                <label for="signInEmailAddress">
+                                    <span th:text="#{signIn.emailAddress}">Email</span>
+                                </label>
+                                <div th:class="${param.error} ? 'fieldError' : ''">
+                                    <input
+                                        type="email"
+                                        id="signInEmailAddress"
+                                        name="j_username"
+                                        class="form-control"
+                                        th:attr="placeholder=#{signIn.enterEmail}"
+                                        aria-required="true"
+                                        aria-labelledby="signInEmailAddress"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="signInPassword">
+                                    <span th:text="#{signIn.password}">Password</span>
+                                </label>
+                                <div th:class="${param.error} ? 'fieldError' : ''">
+                                    <input
+                                        type="password"
+                                        id="signInPassword"
+                                        name="j_password"
+                                        class="form-control"
+                                        th:attr="placeholder=#{signIn.password}"
+                                        aria-required="true"
+                                        autocomplete="off"
+                                        aria-labelledby="signInPassword"
+                                    />
+                                </div>
+                            </div>
+                            <button
+                                type="submit"
+                                class="btn-green-lg btn--lg col-xs-12 login-btn js-login-btn"
+                                th:text="#{signIn.signIn}"
+                            ></button>
+                            <div class="clearfix"></div>
+                            <div class="checkbox">
+                                <label th:inline="text">
+                                    <input type="checkbox" />
+                                    [[#{signIn.rememberMe}]]
+                                </label>
+                                <span>
+                                    <a
+                                        class="forgot-pw-link account js-forgot-pw-link"
+                                        th:href="@{/signin/forgotPassword}"
+                                    >
+                                        <span th:text="#{signIn.forgotPasswordPrompt}"></span>
+                                    </a>
+                                </span>
+                            </div>
+                        </blc:form>
+                        <div class="login-help">
+                            <div class="forgot-pw">
+                                <svg class="btn-icon close" width="14" height="14">
+                                    <title th:text="#{shapes.remove}"></title>
+                                    <use href="#shape-remove" />
+                                </svg>
+                                <div class="forgot-pw-wrap">
+                                    <blc:form
+                                        id="forgotPasswordForm"
+                                        th:action="@{/signin/forgotPassword}"
+                                        method="post"
+                                        class="clearfix js-forgot-pw"
+                                    >
+                                        <h4 th:text="#{signIn.resetPassword}"></h4>
+                                        <span th:text="#{signIn.forgotPw.enterEmail}"></span>
+                                        <div class="form-group">
+                                            <label for="emailAddress"></label>
+                                            <input
+                                                type="email"
+                                                name="emailAddress"
+                                                th:attr="placeholder=#{signIn.emailAddress}"
+                                                class="form-control js-reset-email"
+                                                aria-required="true"
+                                            />
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            class="btn-green-lg btn--lg js-reset_password_btn pull-right"
+                                            th:text="#{signIn.reset}"
+                                        ></button>
+                                        <div class="clearfix"></div>
+                                    </blc:form>
+                                    <div class="forgot-pw-success js-forgot-pw-success">
+                                        <h4>Check Your Email</h4>
+                                        <p class="clearfix">
+                                            We've emailed a link to you to let you update your
+                                            password. If you don't see the email, be sure to check
+                                            your spam and junk mail folders.
+                                        </p>
+                                        <button
+                                            type="submit"
+                                            class="btn-green-lg btn--lg js-reset_ok_btn pull-right col-sm-4"
+                                        >
+                                            Ok
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <blc:form
+                                id="createPasswordForm"
+                                th:action="@{/create-account/createPasswordRequest}"
+                                method="post"
+                                role="create-pw"
+                                class="clearfix js-create-pw"
+                            >
+                                <div class="create-pw">
+                                    <header>
+                                        <span th:text="#{signIn.createPassword}">
+                                            Create Password
+                                        </span>
+                                        <span class="close btn-clear-lg">
+                                            <svg class="btn-icon">
+                                                <title th:text="#{shapes.remove}"></title>
+                                                <use href="#shape-remove" />
+                                            </svg>
+                                        </span>
+                                    </header>
+                                    <section>
+                                        <div class="form-group">
+                                            <label
+                                                for="emailAddress"
+                                                th:text="#{signIn.emailAddress}"
+                                            >
+                                                Email Address
+                                            </label>
+                                            <input
+                                                type="email"
+                                                name="emailAddress"
+                                                th:attr="placeholder=#{signIn.example}"
+                                                class="form-control"
+                                                aria-required="true"
+                                            />
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            class="reset_password_button btn-action btn--lg"
+                                            th:text="#{signIn.sendEmail}"
+                                        >
+                                            Send Email
+                                        </button>
+                                    </section>
+                                </div>
+                            </blc:form>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-sm-6 col-md-7 auth-wrap auth-wrap-right">
+                    <div class="order-details-form_wrapper">
+                        <h1 class="section-title" th:text="#{checkOrderStatus.checkOrderStatus}">
+                            Check Order Status
+                        </h1>
+                        <p>
+                            Don't have an account? Complete this form to find a prior purchase.
+                            Certain transactions can then be added to your purchase history when you
+                            make an account.
+                        </p>
+                        <div class="section-body">
+                            <blc:form id="orderStatusForm" class="clearfix">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="emailAddress">
+                                            <span th:text="#{checkOrderStatus.emailAddress}"></span>
+                                            <em class="req">*</em>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="emailAddress"
+                                            aria-required="true"
+                                            autocomplete="off"
+                                        />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="orderNumber">
+                                            <span th:text="#{checkOrderStatus.orderNumber}"></span>
+                                            <em class="req">*</em>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="orderNumber"
+                                            aria-required="true"
+                                            autocomplete="off"
+                                        />
+                                    </div>
+                                </div>
+                                <button
+                                    type="submit"
+                                    id="cos-btn"
+                                    class="btn-green-lg btn--lg"
+                                    th:text="#{checkOrderStatus.findPurchase}"
+                                ></button>
+                            </blc:form>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-sm-6 col-md-7 order-details_wrapper">
+                    <div class="order-details">
+                        <th:block th:include="authentication/partials/check-order-status-details" />
+                    </div>
+                </section>
+            </div>
+        </div>
+    </fragment>
+</th:block>

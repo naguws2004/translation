@@ -1,0 +1,23 @@
+#404=
+404.404=404
+404.pageNotFound=Página no encontrada
+404.pageNotOpened=La página solicitada no se pudo abrir o se ha movido.
+404.weApologizeInconvenience=Le pedimos disculpas por cualquier inconveniente. O bien su sesión ha expirado o la página no existe.
+404.ifInProcess=Si estabas en el proceso de pago, tu pedido no se envió. Deberás comenzar el proceso de pago nuevamente.
+404.backToHome=Volver a la página de inicio
+404.goToCart=Ir a mi carrito de compras
+=
+#500=
+500.500=500
+500.internalServerError=Error Interno del Servidor
+500.currentlyUnavailable=La página no está disponible actualmente.
+500.notifiedTeam=Nuestro equipo ha sido notificado del error y está investigando el problema. Mientras tanto, intenta actualizar la página o visitar una de nuestras tiendas en todo el país.
+=
+#Account=
+account.email=Dirección de correo electrónico:
+account.firstName=Nombre de pila:
+account.lastName=Apellido:
+account.locked.errorMessage.part1=Su cuenta está bloqueada temporalmente después de demasiados intentos de iniciar sesión. Por favor
+account.locked.errorMessage.part3=Servicio de atención al cliente en=&quot;no-break&quot;&gt;1-888-327-7153 para obtener ayuda.
+account.options=Opciones de cuenta
+account.order.totalDiscounts=DESCUENTOS TOTALES

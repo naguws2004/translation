@@ -1,0 +1,35 @@
+<th:block th:fragment="ajax">
+    <div th:if="${result.categoryFacets} and ${result.categoryFacets.size() gt 1}"
+        class="plp-refine js-facet_container">
+        <h3 class="plp-refine-heading1 js-facet_mobile" th:inline="text">
+            [[#{facet.categories.header}]]
+            <svg class="facet_arrow" width="13" height="13">
+                <use href="#shape-down-arrow"></use>
+            </svg>
+        </h3>
+        <ul th:class="${#lists.size(result.categoryFacets) gt 8} ? 'plp-refine_list js-expand-list' : 'plp-refine_list'"
+            th:classappend="js-facet_list" th:attr="aria-label='Filter by ' + #{facet.categories.header}">
+            <li th:each="categoryFacet : ${result.categoryFacets}"
+                th:classappend="${categoryFacetStat.index ge 8 ? 'hidden' : ''}" th:inline="text">
+                <a th:href="${categoryFacet.url}" th:attr="aria-label=${categoryFacet.name} + 'filter'">
+                    [[${categoryFacet.name}]]
+                </a>
+            </li>
+        </ul>
+        <button th:if="${result.categoryFacets.size() gt 8}" class="js-expand-list-toggle toggle-expand is-see-more"
+            aria-expanded="false" th:inline="text">
+            <span th:attr="aria-label=#{category.related.more} + ' ' + #{facet.categories.header}" class="text-more">
+                [[#{category.related.more}]]
+                <svg width="9" height="6">
+                    <use href="#shape-down-arrow" />
+                </svg>
+            </span>
+            <span th:attr="aria-label=#{category.related.less} + ' ' + #{facet.categories.header}" class="text-less">
+                [[#{category.related.less}]]
+                <svg width="9" height="6">
+                    <use href="#shape-up-arrow" />
+                </svg>
+            </span>
+        </button>
+    </div>
+</th:block>

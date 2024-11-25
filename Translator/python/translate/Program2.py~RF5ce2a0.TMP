@@ -1,0 +1,16 @@
+﻿import deepl
+
+# Replace 'YOUR_AUTH_KEY' with your actual DeepL API key
+auth_key = 'd825783b-cab2-4713-bf05-dbb1f3dc74b9:fx'
+
+def test_connection():
+    try:
+        translator = deepl.Translator(auth_key)
+        result = translator.translate_text("Hello, world!", target_lang="DE")
+        print(result.text)
+        print("Connection successful!")
+    except Exception as e:
+        print(f"Connection failed: {str(e)}")
+
+if __name__ == "__main__":
+    test_connection()

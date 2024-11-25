@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="python\**" />
+    <EmbeddedResource Remove="python\**" />
+    <None Remove="python\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Common.py" />
+    <None Remove="HtmlTextExtractor.py" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="python\html\templates\account\account-dashboard.html" />
+    <None Include="python\html\templates\account\partials\addresses-section.html" />
+    <None Include="python\html\templates\account\partials\addresses-section.html~RF106cf387.TMP" />
+    <None Include="python\html\translation\translations_en.txt" />
+    <None Include="python\html\translation\translations_en_original.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="python\html\translation\translations_es.txt" />
+    <None Include="python\html\translation\translations_es_original.json" />
+    <None Include="python\javascript\jsfiles\test.js" />
+    <None Include="python\javascript\jsfiles\test_original.js1" />
+    <None Include="python\javascript\translation\translations_en.txt" />
+    <None Include="python\javascript\translation\translations_en_original.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="python\javascript\translation\translations_es.txt" />
+    <None Include="python\javascript\translation\translations_es_original.json" />
+    <None Include="python\translate\messages.properties" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DeepL.net" Version="1.10.0" />
+    <PackageReference Include="Esprima" Version="3.0.5" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.71" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="translation\translations_en_original.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

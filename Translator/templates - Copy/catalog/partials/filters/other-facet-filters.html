@@ -1,0 +1,11 @@
+<th:block th:fragment="ajax">
+    <div th:include="/catalog/partials/filters/active-facets-filter"></div>
+    <div th:include="/catalog/partials/filters/interchange-facets-filter"></div>
+    <div
+        th:if="${originalQuery == null}"
+        th:include="/catalog/partials/filters/category-facet-filter"
+    ></div>
+    <div th:include="/catalog/partials/filters/avail-facet-filter"></div>
+    <div th:include="/catalog/partials/filters/brand-facet-filter"></div>
+    <div th:include="/catalog/partials/filters/additional-facets-filter"></div>
+</th:block>

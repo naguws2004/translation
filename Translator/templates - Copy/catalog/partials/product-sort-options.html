@@ -1,0 +1,48 @@
+<th:block th:remove="tag" th:fragment="ajax">
+    <div class="plp-filter-sort js-plp-filter-sort pull-right">
+        <label for="plp-filter-sort" class="plp-sort-callout pull-left">Sort By:</label>
+        <div class="o-select_wrap">
+            <select
+                id="plp-filter-sort"
+                class="o-select js-plp-filter-sort-select plp-filter-sort_select"
+            >
+                <option
+                    th:value="${#sorts.getSortLink('score desc')}"
+                    th:title="#{product.sort.relevance}"
+                    th:attr="selected=${(sort eq 'score desc') ? true : false}"
+                    th:text="#{product.sort.relevance}"
+                >
+                    Most Popular
+                </option>
+                <option
+                    th:value="${#sorts.getSortLink('price desc')}"
+                    th:unless="${interchangeSearchh}"
+                    th:title="#{product.sort.priceHighToLow}"
+                    th:attr="selected=${(sort eq 'price desc') ? true : false}"
+                    th:text="#{product.sort.priceHighToLow}"
+                >
+                    Price: High to Low
+                </option>
+                <option
+                    th:value="${#sorts.getSortLink('price asc')}"
+                    th:unless="${interchangeSearchh}"
+                    th:title="#{product.sort.priceLowToHigh}"
+                    th:attr="selected=${(sort eq 'price asc') ? true : false}"
+                    th:text="#{product.sort.priceLowToHigh}"
+                >
+                    Price: Low to High
+                </option>
+                <option
+                    th:value="${#sorts.getSortLink('brand asc')}"
+                    th:unless="${interchangeSearchh}"
+                    th:title="#{product.sort.brand}"
+                    th:attr="selected=${(sort eq 'brand asc') ? true : false}"
+                    th:text="#{product.sort.brand}"
+                >
+                    Brand
+                </option>
+            </select>
+            <b class="dropdown" role="presentation"></b>
+        </div>
+    </div>
+</th:block>

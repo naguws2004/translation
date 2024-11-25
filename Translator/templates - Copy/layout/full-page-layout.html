@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="no-js no-flexbox" lang="en">
+    <head layout:fragment="head">
+        <th:block th:replace="/layout/partials/head"></th:block>
+        <th:block th:include="/analytics/partials/data-layer" />
+        <th:block th:include="/layout/partials/schema-header" />
+        <th:block
+            th:unless="${#strings.isEmpty(viewName)}"
+            th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: styles"
+        />
+        <th:block
+            th:unless="${#strings.isEmpty(viewName)}"
+            th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: preload-scripts"
+        />
+    </head>
+    <body
+        id="js-full-page-body"
+        layout:fragment="body"
+        th:attr="data-page_status=${#oap.classifyViewName(viewName)}"
+        th:class="${'locale-' + session.blLocale.localeCode + ' page-' + #oap.classifyViewName(viewName) + ' orly-page-' + #oap.classifyViewName(viewName)}"
+        th:classappend="${selectedStore == null} ? '' : 'store-selected'"
+    >
+        <th:block th:replace="layout/partials/shapes"></th:block>
+        <th:block th:include="/layout/partials/banner-ie-unsupported"></th:block>
+        <th:block th:include="/analytics/partials/google-tag-manager" />
+        <div id="js-full-page-overlay" class="overlay js-overlay"></div>
+        <div class="skip-nav js-skip-nav">
+            <a href="#" class="js-skip-nav-link skip-nav-link" data-type="content">
+                Skip to content
+            </a>
+        </div>
+        <header th:substituteby="layout/partials/header" />
+        <div class="site-container js-site-container">
+            <th:block layout:fragment="feature" />
+            <div class="site-content o-container" role="main">
+                <th:block layout:fragment="content" />
+            </div>
+            <th:block layout:fragment="post-content" />
+            <footer th:substituteby="layout/partials/footer" />
+        </div>
+        <foot th:substituteby="layout/partials/foot" />
+        <th:block
+            th:unless="${#strings.isEmpty(viewName)}"
+            th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: scripts"
+        />
+        <th:block th:include="/layout/partials/forter-js"></th:block>
+        <th:block
+            th:if="${#oap.isEnabled('LIVEPERSON')}"
+            th:include="/layout/partials/liveperson"
+        ></th:block>
+    </body>
+</html>

@@ -1,0 +1,124 @@
+<th:block>
+    <th:block th:fragment="detailed" th:with="type=${type}">
+        <div
+            xmlns:th="http://www.w3.org/1999/xhtml"
+            th:with="items=${info.orderItems},
+			numItems=${#lists.size(items)}"
+        >
+            <div class="row" th:each="item : ${items}" th:inline="text">
+                <div
+                    th:with="fulfillmentGroup=${item.getFulfillmentGroup().getType().getType()},
+							itemMaster=${itemMasterMap.get(item.orderItem)}"
+                >
+                    <div th:if="${fulfillmentGroup eq type}" class="group-item-container">
+                        <div class="group-item-col detail-img-margins">
+                            <th:block th:if="${fulfillmentGroup != 'GIFT_CARD'}">
+                                <th:block
+                                    th:with="imageUrl=${#media.getProductPrimaryImageUrl('small', item.orderItem.product)}"
+                                >
+                                    <img
+                                        th:src="${imageUrl}"
+                                        class="group-item-img"
+                                        onerror="if (this.src != '/img/image-coming-soon.png') this.src = '/img/image-coming-soon.png';"
+                                        th:alt="${item.orderItem.name}"
+                                    />
+                                </th:block>
+                            </th:block>
+                            <th:block th:unless="${fulfillmentGroup != 'GIFT_CARD'}">
+                                <img
+                                    th:src="@{/img/gift-card.png}"
+                                    class="group-item-img"
+                                    th:alt="${item.orderItem.name}"
+                                />
+                            </th:block>
+                        </div>
+                        <div class="group-item-detail" th:inline="text">
+                            <th:block th:if="${fulfillmentGroup != 'GIFT_CARD'}">
+                                <div>
+                                    <b>
+                                        [[${item.orderItem.product.name + " - " +
+                                        item.orderItem.product.partNumber}]]
+                                    </b>
+                                </div>
+                                <div>
+                                    Line: [[${item.orderItem.product.lineCode}]] | Part #
+                                    [[${item.orderItem.product.partNumber}]]
+                                </div>
+                                <div>
+                                    <span blc:price="${item.orderItem.getPrice()}"></span>
+                                    each
+                                    <div class="feeList">
+                                        <th:block
+                                            th:if="${!#strings.equals(item.orderItem.getCorePrice().toString(), '0.00')}"
+                                        >
+                                            + Core:
+                                            <span
+                                                class="feeItem"
+                                                blc:price="${item.orderItem.getCorePrice()}"
+                                            ></span>
+                                        </th:block>
+                                        <th:block
+                                            th:if="${item.orderItem.getOilDeposit() != null and not item.orderItem.getOilDeposit().isZero()}"
+                                        >
+                                            + Oil Deposit
+                                            <span
+                                                class="feeItem"
+                                                blc:price="${item.orderItem.getOilDeposit()}"
+                                            ></span>
+                                        </th:block>
+                                        <th:block
+                                            th:if="${item.orderItem.getOilFee() != null and not item.orderItem.getOilFee().isZero()}"
+                                        >
+                                            + Import Fee
+                                            <span
+                                                class="feeItem"
+                                                blc:price="${item.orderItem.getOilFee()}"
+                                            ></span>
+                                        </th:block>
+                                    </div>
+                                </div>
+                                <div>Qty: [[${item.quantity}]]</div>
+                                <div
+                                    th:if="${item.orderItem.orderItemAttributes.get('VEHICLE_FRIENDLY')}"
+                                >
+                                    Vehicle:
+                                    [[${item.orderItem.orderItemAttributes.get('VEHICLE_FRIENDLY').value}]]
+                                </div>
+                                <div th:if="${itemMaster?.warranty != null}">
+                                    [[${itemMaster.warranty.shortDescription}]]
+                                </div>
+                            </th:block>
+                            <th:block th:unless="${fulfillmentGroup != 'GIFT_CARD'}">
+                                <div class="mc_cart-product_info">
+                                    <span class="mc_product_name" itemprop="name" th:inline="text">
+                                        <strong>[[${item.orderItem.name}]]</strong>
+                                    </span>
+                                    <div>
+                                        <div
+                                            th:if="${item.orderItem.orderItemAttributes.containsKey('MESSAGE')}"
+                                            th:with="message=${item.orderItem.orderItemAttributes.get('MESSAGE').value}"
+                                        >
+                                            <strong th:text="#{cart.giftcard.message.preface}">
+                                                Message:
+                                            </strong>
+                                            &nbsp;
+                                            <span
+                                                th:unless="${#strings.isEmpty(message)}"
+                                                th:text="${message}"
+                                            ></span>
+                                            <span
+                                                th:if="${#strings.isEmpty(message)}"
+                                                th:text="#{cart.giftcard.no.message}"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                    <div>Qty: [[${item.quantity}]]</div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>

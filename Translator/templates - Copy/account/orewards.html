@@ -1,0 +1,522 @@
+<th:block
+    layout:decorator="layout/account-layout"
+    th:with="currentPageTitle=#{account.oRewards.title}"
+>
+    <th:block
+        layout:fragment="account-content"
+        th:fragment="ajax"
+        th:with="orewardsCreating=${session.rewardsCreated}"
+    >
+        <!-- prettier-ignore -->
+        <script th:inline="javascript">
+            window._ost.customerPhone = /*[[${phoneNumber}]]*/ '';
+            window._ost.countryCode = /*[[${countryCode}]]*/ '';
+        </script>
+        <th:block th:if="${successfulLinkModal}">
+            <div id="successful-rewards-join"></div>
+        </th:block>
+        <th:block th:if="${successfulORewardsJoinModal}">
+            <div id="successful-orewards-join"></div>
+        </th:block>
+        <h1 class="sr-only">O'Rewards</h1>
+        <div class="row" th:with="checkOrewards=${rewardsCustomer}">
+            <div
+                class="js-check-error"
+                th:if="${linkError}"
+                style="display: none"
+                th:attr="data-link-error=${linkError}"
+            ></div>
+            <div
+                class="js-check-error"
+                th:if="${orewardsCreationError}"
+                style="display: none"
+                th:attr="data-create-error=${orewardsCreationError}"
+            ></div>
+            <th:block th:if="${isRewardsCustomer}" th:inline="text">
+                <th:block th:if="${isVerifiedORewardsEmail}">
+                    <div class="orewards-header">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img
+                                    class="oreward-logo_small"
+                                    src="/img/orewards-logo.png"
+                                    alt="orewards logo"
+                                />
+                                <div class="clearfix"></div>
+                                <div class="rewards-header_info">
+                                    <th:block th:if="${orewardsCreating}">
+                                        <p class="orewards-creating font-italic">
+                                            Account Information Temporarily Unavailable. Please
+                                            check back later.
+                                        </p>
+                                    </th:block>
+                                    <th:block th:unless="${orewardsCreating}">
+                                        <th:block th:if="${checkOrewards != null}">
+                                            <p>
+                                                Member Number:
+                                                <strong>
+                                                    [[${rewardsCustomer.cardNumber}]]
+                                                </strong>
+                                            </p>
+                                            <p>
+                                                Member Since:
+                                                <strong>
+                                                    [[${#dates.format(rewardsCustomer.formattedCreateDate,
+                                                    'MM/yyyy')}]]
+                                                </strong>
+                                            </p>
+                                            <p class="rewards-birth-month">
+                                                Birth Month:
+                                                <strong
+                                                    class="js-pre-birth-month"
+                                                    style="display: none"
+                                                ></strong>
+                                                <span
+                                                    th:if="${rewardsCustomer.birthday == null}"
+                                                    class="js-birth-remove"
+                                                >
+                                                    <a
+                                                        href="#"
+                                                        class="js-update-birthday update-birthday normal-link"
+                                                    >
+                                                        Add My Birth Month
+                                                    </a>
+                                                    <div
+                                                        class="rewards-birthday-select js-birthday-select"
+                                                        style="display: none"
+                                                    >
+                                                        <div
+                                                            class="o-select_wrap birth-wrap js-birth-wrap"
+                                                        >
+                                                            <select
+                                                                class="o-select js-join-birthMonth"
+                                                            >
+                                                                <option value="">Select</option>
+                                                                <option value="01">January</option>
+                                                                <option value="02">February</option>
+                                                                <option value="03">March</option>
+                                                                <option value="04">April</option>
+                                                                <option value="05">May</option>
+                                                                <option value="06">June</option>
+                                                                <option value="07">July</option>
+                                                                <option value="08">August</option>
+                                                                <option value="09">
+                                                                    September
+                                                                </option>
+                                                                <option value="10">October</option>
+                                                                <option value="11">November</option>
+                                                                <option value="12">December</option>
+                                                            </select>
+                                                            <b
+                                                                class="dropdown"
+                                                                role="presentation"
+                                                            ></b>
+                                                        </div>
+                                                        <p
+                                                            class="birth-message success js-birth-message"
+                                                            style="display: none"
+                                                        >
+                                                            You have added your birth month.
+                                                        </p>
+                                                        <p
+                                                            class="birth-message error js-birth-failure"
+                                                            style="display: none"
+                                                        >
+                                                            There was an error adding your birth
+                                                            month.
+                                                        </p>
+                                                        <div class="rewards-birth-controls">
+                                                            <a
+                                                                href="#"
+                                                                class="rewards-birthday-accept js-birthday-accept green-link"
+                                                            >
+                                                                Save
+                                                            </a>
+                                                            <a
+                                                                href="#"
+                                                                class="rewards-birthday-close js-birthday-close"
+                                                            >
+                                                                Cancel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                                <strong
+                                                    th:unless="${rewardsCustomer.birthday == null}"
+                                                    th:text="${#dates.format(rewardsCustomer.birthday, 'MMMM')}"
+                                                ></strong>
+                                            </p>
+                                        </th:block>
+                                        <th:block th:unless="${checkOrewards != null}">
+                                            <em class="text-gray-dark">
+                                                Account Information Temporarily Unavailable. Please
+                                                check back later.
+                                            </em>
+                                        </th:block>
+                                    </th:block>
+                                </div>
+                            </div>
+                            <div class="rewards-head_div-left"></div>
+                            <div class="col-sm-4 reward-points_container">
+                                <h2 class="h4">[[#{oRewards.pointsBalance}]]</h2>
+                                <div class="clearfix"></div>
+                                <div class="oreward-points js-oreward-points">
+                                    <th:block th:if="${orewardsCreating}">
+                                        <p class="orewards-creating">
+                                            --
+                                        </p>
+                                    </th:block>
+                                    <th:block th:unless="${orewardsCreating}">
+                                        <th:block th:if="${checkOrewards != null}">
+                                            [[${rewardsPoints}]]
+                                        </th:block>
+                                        <th:block th:unless="${checkOrewards != null}">
+                                            <span class="text-gray-dark">
+                                                [[#{oRewards.points.error}]]
+                                            </span>
+                                        </th:block>
+                                    </th:block>
+                                </div>
+                                <div class="points_info" th:text="#{oRewards.pointsInfo}">
+                                    Allow 24-48 hours for your points balance to reflect your recent
+                                    qualifying purchases.
+                                </div>
+                                <div class="clearfix"></div>
+                                <th:block th:if="${checkOrewards != null}">
+                                    <div th:if="${pointsAwayFromReward} ge 0">
+                                        You are
+                                        <strong>[[${pointsAwayFromReward}]]</strong>
+                                        points away from earning your next reward.
+                                    </div>
+                                    <div th:if="${pointsAwayFromReward} lt 0">
+                                        Your $5 reward has been issued
+                                    </div>
+                                </th:block>
+                            </div>
+                            <div class="rewards-head_div-right"></div>
+                            <!-- prettier-ignore -->
+                            <script th:inline="javascript">
+                                window._ost.activeRewards = /*[[${activeRewards}]]*/ [];
+                            </script>
+                            <active-rewards></active-rewards>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 point-history_container">
+                        <h2 class="point-history_header h3">
+                            Points History
+                        </h2>
+                        <th:block th:if="${orewardsCreating}">
+                            <div class="orewards-creating__container">
+                                <p class="font-italic orewards-creating">
+                                    Account information temporarily unavailable. Please check back
+                                    later or if the issue persists contact Customer Service by phone
+                                    or chat.
+                                </p>
+                            </div>
+                        </th:block>
+                        <th:block th:unless="${orewardsCreating}">
+                            <th:block th:if="${checkOrewards != null}">
+                                <th:block th:if="${#lists.size(rewardsDisplayObjects) != 0}">
+                                    <div class="rewards-select_container">
+                                        <div class="select2--lg">
+                                            <select class="js-rewards-select-date">
+                                                <option value="DEFAULT">Recent History</option>
+                                                <option
+                                                    th:each="option : ${timeFilter.options}"
+                                                    th:value="${option.value}"
+                                                    th:attr="selected=${option.selected}"
+                                                    th:text="${option.label}"
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </th:block>
+                            <th:block th:if="${checkOrewards != null}">
+                                <th:block th:if="${#lists.size(rewardsDisplayObjects) != 0}">
+                                    <div class="row">
+                                        <div class="reward-history_table js-get-table">
+                                            <div class="header">
+                                                <div class="col-sm-2">
+                                                    Date
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    Action
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    Description
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    Points
+                                                </div>
+                                            </div>
+                                            <div class="body">
+                                                <div
+                                                    class="body-row"
+                                                    th:each="rewardsDisplayObject, iterStat : ${rewardsDisplayObjects}"
+                                                    th:classappend="${iterStat.odd}? 'odd' : 'even'"
+                                                >
+                                                    <div class="col-xs-4 col-sm-2">
+                                                        <span
+                                                            th:text="${#dates.format(rewardsDisplayObject.date, 'MM/dd/YYYY')}"
+                                                        ></span>
+                                                    </div>
+                                                    <div
+                                                        class="col-xs-5 col-sm-3 rewards-points_description"
+                                                    >
+                                                        [[${rewardsDisplayObject.action}]]
+                                                    </div>
+                                                    <div
+                                                        class="col-xs-3 hidden-sm hidden-md hidden-lg"
+                                                    >
+                                                        [[${rewardsDisplayObject.points}]]
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-5">
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-7">
+                                                                <div
+                                                                    class="rewards-points_description"
+                                                                >
+                                                                    [[${rewardsDisplayObject.description}]]
+                                                                </div>
+                                                                <th:block
+                                                                    th:if="${rewardsDisplayObject.class.name == 'com.oreilly.core.cx.dto.CxORewardsTransaction'}"
+                                                                >
+                                                                    <a
+                                                                        href="#"
+                                                                        class="js-invoice-details-link invoice-details-link small-screen-invoice-details-link green-link"
+                                                                        aria-haspopup="true"
+                                                                        th:attr="data-store=${rewardsDisplayObject.storeNumber},
+																	data-date=${rewardsDisplayObject.invoiceDate},
+																	data-invoice=${rewardsDisplayObject.invoiceNumber}"
+                                                                    >
+                                                                        [[${#strings.contains(rewardsDisplayObject?.description,
+                                                                        'Online Order')} ? 'See
+                                                                        Order Details' : 'View
+                                                                        Invoice']]
+                                                                    </a>
+                                                                </th:block>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <th:block
+                                                                    th:if="${rewardsDisplayObject.class.name == 'com.oreilly.core.cx.dto.CxORewardsTransaction'}"
+                                                                >
+                                                                    <a
+                                                                        href="#"
+                                                                        class="js-invoice-details-link invoice-details-link large-screen-invoice-details-link green-link"
+                                                                        aria-haspopup="true"
+                                                                        th:attr="data-store=${rewardsDisplayObject.storeNumber},
+																	data-date=${rewardsDisplayObject.invoiceDate},
+																	data-invoice=${rewardsDisplayObject.invoiceNumber}"
+                                                                    >
+                                                                        [[${#strings.contains(rewardsDisplayObject?.description,
+                                                                        'Online Order')} ? 'See
+                                                                        Order Details' : 'View
+                                                                        Invoice']]
+                                                                    </a>
+                                                                </th:block>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2 hidden-xs">
+                                                        [[${rewardsDisplayObject.points}]]
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:unless="${#lists.size(rewardsDisplayObjects) != 0}">
+                                    <div class="row">
+                                        <div class="reward-history_table js-get-table">
+                                            <p class="o-rewards_no-history">
+                                                <th:block th:if="${timeParam == null}">
+                                                    You currently do not have any rewards or points
+                                                    history.
+                                                </th:block>
+                                                <th:block th:unless="${timeParam == null}">
+                                                    You currently do not have any rewards or points
+                                                    history for the filter you have chosen.
+                                                </th:block>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </th:block>
+                            <th:block th:unless="${checkOrewards != null}">
+                                <div class="row">
+                                    <div class="reward-history_table">
+                                        <p class="o-rewards_no-history">
+                                            <em class="text-gray-dark">
+                                                Account information temporarily unavailable. Please
+                                                check back later or if the issue persists contact
+                                                Customer Service by phone or chat.
+                                            </em>
+                                        </p>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </th:block>
+                    </div>
+                    <div class="col-xs-12 rewards-link_container">
+                        <a
+                            href="/orewards-faq#how-does-the-program-work"
+                            class="green-link"
+                            target="_blank"
+                        >
+                            How does the program work?
+                        </a>
+                        <a
+                            href="/orewards-faq#purchase-with-rewards"
+                            class="green-link"
+                            target="_blank"
+                        >
+                            What can I purchase with my earned rewards?
+                        </a>
+                        <a
+                            href="/orewards-faq#when-receive-rewards"
+                            class="green-link"
+                            target="_blank"
+                        >
+                            When will I receive the rewards I have earned?
+                        </a>
+                    </div>
+                    <div class="o-rewards-offer_section">
+                        <div class="col-xs-12">
+                            <h2 class="rewards-offer_section-header h3">EXCLUSIVE OFFERS</h2>
+                            <blc:content-zone name="ORewards Offers Content Zone" />
+                        </div>
+                    </div>
+                    <div class="o-rewards-faq_section">
+                        <div class="col-xs-12">
+                            <h2 class="rewards-offer_section-header h3">
+                                HAVE QUESTIONS ABOUT O'REWARDS?
+                            </h2>
+                            <blc:content-zone name="ORewards FAQ Content Zone" />
+                        </div>
+                    </div>
+                    <div class="invoice-detail-modal js-modal account-modal" style="display: none">
+                        <svg
+                            class="btn-icon close"
+                            role="img"
+                            aria-labelledby="account-modal-remove-title"
+                            width="14"
+                            height="14"
+                        >
+                            <title
+                                th:text="#{shapes.remove}"
+                                id="account-modal-remove-title"
+                            ></title>
+                            <use href="#shape-remove" />
+                        </svg>
+                        <th:block th:include="layout/partials/invoice-detail-form"></th:block>
+                    </div>
+                </th:block>
+            </th:block>
+            <th:block th:if="${isRewardsCustomer}">
+                <th:block th:if="${pendingVerification}">
+                    <th:block th:unless="${verificationExpired}">
+                        <div class="rewards_email-verify_first">
+                            <div
+                                class="rewards_email-verify js-rewards-verify-first"
+                                th:if="${firstSessionAfterLink}"
+                            >
+                                <img
+                                    src="/img/orewards-logo.png"
+                                    alt="O'Rewards Logo"
+                                    class="rewards_email-img"
+                                />
+                                <h3 th:text="#{account.oRewards.verifyEmail.headerFirst}">
+                                    Please Verify Your Email
+                                </h3>
+                                <p th:text="#{account.oRewards.verifyEmail.messageFirst.rowOne}">
+                                    Your O'Rewards account set up is almost complete.
+                                </p>
+                                <p th:utext="#{account.oRewards.verifyEmail.messageFirst.rowTwo}">
+                                    Click on the link included in the email to complete your sign
+                                    up.
+                                    <em>Links will expire after 48 hours.</em>
+                                </p>
+                            </div>
+                            <div
+                                class="rewards_email-verify js-rewards-verify-second"
+                                th:unless="${firstSessionAfterLink}"
+                            >
+                                <h3 th:text="#{account.oRewards.verifyEmail.headerSecond}">
+                                    Looks like that email address is pending verification
+                                </h3>
+                                <p th:text="#{account.oRewards.verifyEmail.messageSecond.rowOne}">
+                                    The email address you entered is already linked to an account
+                                    that is pending verification.
+                                </p>
+                                <p th:text="#{account.oRewards.verifyEmail.messageSecond.rowTwo}">
+                                    To complete your account sign up with this email address, please
+                                    check your email and click on the link included.
+                                </p>
+                            </div>
+                            <div class="validation-resend_wrap" th:inline="text">
+                                <div
+                                    class="js-resend-message resend-email_message"
+                                    th:text="#{oRewards.verifyEmail.resend.message}"
+                                >
+                                    O'Rewards validation email successfully sent.
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="js-resend-validation button button--green"
+                                    th:attr="data-rid=${rid}"
+                                >
+                                    [[#{oRewards.verifyEmail.resend}]]
+                                </button>
+                            </div>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${verificationExpired}">
+                        <div class="rewards_email-verify">
+                            <h3 th:text="#{oRewards.verifyEmail.expiredHeader}">
+                                Link Has Expired
+                            </h3>
+                            <p th:text="#{oRewards.verifyEmail.expiredMessage}">
+                                We are sorry, it looks like the link expired. Account verification
+                                links expire within 48 hours. Resend a new validation email and
+                                follow the link to finish set up of your account.
+                            </p>
+                            <div class="validation-resend_wrap expired" th:inline="text">
+                                <div
+                                    class="js-resend-message resend-email_message"
+                                    th:text="#{oRewards.verifyEmail.resend.message}"
+                                >
+                                    O'Rewards validation email successfully sent.
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="js-resend-validation button button--green"
+                                    th:attr="data-rid=${rid}"
+                                >
+                                    [[#{oRewards.verifyEmail.resend}]]
+                                </button>
+                            </div>
+                        </div>
+                    </th:block>
+                </th:block>
+            </th:block>
+            <th:block th:unless="${isRewardsCustomer}">
+                <th:block th:unless="${pendingVerification == true}">
+                    <th:block th:if="${isVerifiedORewardsEmail == 'false'}">
+                        <!-- prettier-ignore -->
+                        <script th:inline="javascript">
+                            window._ost.ccpaEnabled = /*[[${#oap.getCcpaEnabled()}]]*/ false;
+                        </script>
+                        <div id="orewards-join"></div>
+                    </th:block>
+                </th:block>
+                <div
+                    class="js-error-modal js-modal account-modal modal-small pre-flyin"
+                    style="display: none"
+                >
+                    <th:block th:include="account/partials/rewards-error-modal"></th:block>
+                </div>
+            </th:block>
+        </div>
+    </th:block>
+</th:block>

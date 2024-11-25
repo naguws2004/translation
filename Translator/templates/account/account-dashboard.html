@@ -1,0 +1,236 @@
+<th:block layout:decorator="layout/account-layout" th:with="currentPageTitle=#{account.title}">
+    <th:block layout:fragment="account-content" th:fragment="ajax" th:with="orewardsCreating=${session.rewardsCreated}">
+        <h1 class="sr-only">{{account_dashboard}}</h1>
+        <h2 class="welcome-title" th:inline="text">
+            [[#{account.accountDashboard.welcome}]],
+            <th:block th:text="${customer.firstName}"></th:block>
+        </h2>
+        <div class="account-dashboard-row row">
+            <div class="account-dashboard-container account-dashboard-left col-xs-12 col-sm-4">
+                <strong class="account-row-title">
+                    <span th:if="${itemQuantityOnOrder != null and itemQuantityOnOrder == 1}" th:text="#{account.accountDashboard.itemQuantityOnOrder.item(${itemQuantityOnOrder})}">@@tls_key_on_order_1_item</span>
+                    <span th:if="${itemQuantityOnOrder != null and itemQuantityOnOrder != 1}" th:text="#{account.accountDashboard.itemQuantityOnOrder.items(${itemQuantityOnOrder})}">@@tls_key_on_order_2_items</span>
+                    <span th:if="${itemQuantityOnOrder == null}" th:text="#{account.accountDashboard.itemQuantityOnOrder.null}">@@tls_key_purchase_history</span>
+                </strong>
+                <p class="account-row-text" th:text="#{account.accountDashboard.checkStatus}">@@tls_key_check_your_order_status_</p>
+                <p>
+                    <a class="account-link" th:href="@{/account/purchase-history}">
+                        <strong th:text="#{account.accountDashboard.recentOrders}">@@tls_key_see_your_recent_orders</strong>
+                    </a>
+                </p>
+            </div>
+            <div class="account-dashboard-container account-dashboard-middle col-xs-12 col-sm-4">
+                <strong class="account-row-title" th:text="#{account.accountDashboard.mySelectedStore}">@@tls_key_my_selected_store</strong>
+                <th:block class="account-row-text">
+                    <th:block th:if="${selectedStore}">
+                        <p class="account-row-text">
+                            <th:block th:text="${selectedStore?.address?.addressLine1}"></th:block>
+                            <br>
+                            <th:block th:if="${selectedStore.address.addressLine2 != null}" th:text="${selectedStore?.address?.addressLine2}"></th:block>
+                            <th:block th:if="${selectedStore.address.addressLine3 != null}" th:text="${selectedStore?.address?.addressLine3}"></th:block>
+                            <th:block th:text="${selectedStore?.address?.city + ', ' + selectedStore?.address?.stateProvinceRegion + ' ' + selectedStore?.address?.postalCode}"></th:block>
+                        </p>
+                        <p>
+                            <a href="#" class="me-link js-me-link">
+                                <strong th:text="#{account.accountDashboard.changeMyStore}">@@tls_key_change_my_store</strong>
+                            </a>
+                        </p>
+                    </th:block>
+                    <th:block th:unless="${selectedStore}">
+                        <p class="account-row-text" th:text="#{account.accountDashboard.findProductAvailability}">@@tls_key_find_product_availabilit</p>
+                        <a href="#" class="me-link js-me-link">
+                            <strong th:text="#{account.accountDashboard.selectStore}">@@tls_key_select_a_store</strong>
+                        </a>
+                    </th:block>
+                </th:block>
+            </div>
+            <div class="account-dashboard-container account-dashboard-right col-xs-12 col-sm-4">
+                <strong class="account-row-title" th:text="#{account.accountDashboard.saveVehicles}">@@tls_key_save_multiple_vehicles</strong>
+                <p class="account-row-text" th:text="#{account.accountDashboard.manageVehicles}">@@tls_key_manage_and_find_the_righ</p>
+                <a class="account-link" th:href="@{/account/garage}">
+                    <strong th:text="#{account.accountDashboard.addNewManage}">@@tls_key_add_new_or_manage_existi</strong>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="account-dashboard-container col-xs-12 col-sm-6">
+                <h3 class="account-dashboard-title" th:text="#{account.accountDashboard.settings}">@@tls_key_account_settings</h3>
+                <p th:inline="text">
+                    [[#{account.accountDashboard.name}]]
+                    <span>
+                        <strong th:text="${customer.firstName + ' ' + customer.lastName}"></strong>
+                    </span>
+                </p>
+                <p class="account-dashboard-limit" th:inline="text">
+                    [[#{account.accountDashboard.email}]]
+                    <span>
+                        <strong class="js-email-change" th:text="${customer.emailAddress}"></strong>
+                    </span>
+                </p>
+                <p th:inline="text">
+                    [[#{account.accountDashboard.password}]]
+                    <span>
+                        <strong class="account-password-blocked">************</strong>
+                    </span>
+                </p>
+                <p th:inline="text">
+                    [[#{account.accountDashboard.phone}]]
+                    <span>
+                        <th:block th:if="${phoneNumber}">
+                            <strong>
+                                <th:block th:with="countryCode=${countryCode}" th:include="account/partials/translate-country-codes"></th:block>
+                                <span th:text="${#oap.maskPhone(phoneNumber)}"></span>
+                            </strong>
+                        </th:block>
+                        <th:block th:unless="${phoneNumber}">
+                            <strong th:text="#{account.accountDashboard.na}">@@tls_key_na</strong>
+                        </th:block>
+                    </span>
+                </p>
+                <p>
+                    <a th:href="@{${'/account/profile'}}" class="account-link">
+                        <strong th:text="#{account.accountDashboard.updateSettings}">@@tls_key_update_account_settings</strong>
+                    </a>
+                </p>
+            </div>
+            <div class="account-dashboard-container col-xs-12 col-sm-6">
+                <h3 class="account-dashboard-title" th:text="#{account.accountDashboard.defaultShipping}">@@tls_key_default_shipping_address</h3>
+                <th:block th:if="${defaultAddress}">
+                    <div class="default-address__container">
+                        <p th:text="${defaultAddress?.address?.firstName + ' ' + defaultAddress?.address?.lastName}"></p>
+                        <p th:text="${defaultAddress?.address?.addressLine1}"></p>
+                        <p th:if="${defaultAddress?.address?.addressLine2 != null} and ${defaultAddress?.address?.addressLine2 != ''}" th:text="${defaultAddress?.address?.addressLine2}"></p>
+                        <p>
+                            <span th:text="${defaultAddress?.address?.city}"></span>
+                            <span class="separator">,</span>
+                            <span th:text="${defaultAddress?.address?.stateProvinceRegion}"></span>
+                            <span th:text="${defaultAddress?.address?.postalCode}"></span>
+                        </p>
+                    </div>
+                </th:block>
+                <th:block th:unless="${defaultAddress}">
+                    <p>
+                        <strong th:text="#{account.accountDashboard.noDefault}">@@tls_key_no_default_address</strong>
+                    </p>
+                </th:block>
+                <p>
+                    <a th:href="@{${'/account/profile'}}" class="account-link">
+                        <strong th:text="#{account.accountDashboard.managedAddresses}">@@tls_key_manage_addresses</strong>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="account-dashboard-container col-xs-12 col-sm-6">
+                <h3 class="account-dashboard-title" th:text="#{account.accountDashboard.emailPreferences}">@@tls_key_email_preferences</h3>
+                <th:block th:if="${customer.receiveEmail}">
+                    <p th:inline="text">
+                        [[#{account.accountDashboard.you}]]
+                        <strong>[[#{account.accountDashboard.areSubscribed}]]</strong>
+                        [[#{account.accountDashboard.toReceiveEmails}]].
+                    </p>
+                </th:block>
+                <th:block th:unless="${customer.receiveEmail}">
+                    <p th:inline="text">
+                        [[#{account.accountDashboard.you}]]
+                        <strong>[[#{account.accountDashboard.areNotSubscribed}]]</strong>
+                        [[#{account.accountDashboard.toReceiveEmails}]].
+                    </p>
+                </th:block>
+                <p th:text="#{account.accountDashboard.getLatest}">@@tls_key_get_the_latest_sales_and</p>
+                <a href="#" class="account-link" th:href="@{${'/account/profile'}}">
+                    <strong th:text="#{account.accountDashboard.changeEmailSettings}">@@tls_key_change_email_settings</strong>
+                </a>
+            </div>
+            <div class="account-dashboard-container col-xs-12 col-sm-5" th:inline="text">
+                <div class="orewards-title_container">
+                    <h3 class="account-dashboard-title pull-left" th:text="#{account.accountDashboard.oRewards}">@@tls_key_o8217rewards</h3>
+                    <div class="rewards-tm pull-left">@@tls_key_tm</div>
+                    <img class="orewards-card" src="/img/OReward_card.png" alt="O Rewards Card">
+                </div>
+                <div class="clearfix"></div>
+                <th:block th:if="${isRewardsCustomer} eq 'false'">
+                    <p th:inline="text">
+                        [[#{oRewards.incentive}]]
+                    </p>
+                    <span>
+                        <a th:href="@{${'/account/orewards#join'}}" aria-haspopup="true" class="green-link inline" th:attr="data-phone=${phoneNumber},
+                                data-zip=${zipCode}">
+                            <strong th:text="#{account.accountDashboard.oRewards.joinNow}">@@tls_key_join_now</strong>
+                        </a>
+                        <span class="reward-link-div">|</span>
+                        <a th:href="@{${'/account/orewards#find'}}" class="green-link inline" aria-haspopup="true" th:attr="data-email=${customer.emailAddress},
+                                data-phone=${phoneNumber},
+                                data-zip=${zipCode}">
+                            <strong th:text="#{account.accountDashboard.oRewards.findAccount}">@@tls_key_find_my_orewards_account</strong>
+                        </a>
+                    </span>
+                    <span>
+                        <p>
+                            <a th:href="@{${'/orewards-loyalty-program'}}" class="green-link" target="_blank">
+                                <strong th:text="#{account.accountDashboard.oRewards.programBenefits}">@@tls_key_program_benefits</strong>
+                            </a>
+                        </p>
+                    </span>
+                </th:block>
+                <th:block th:if="${isRewardsCustomer == 'true'}">
+                    <th:block th:if="${isVerifiedORewardsEmail}">
+                        <th:block th:if="${orewardsCreating}">
+                            <p class="orewards-creating font-italic">@@tls_key_this_feature_is_temporar</p>
+                        </th:block>
+                        <th:block th:unless="${orewardsCreating}">
+                            <h3 class="orewards_current-points">
+                                [[#{oRewards.pointsBalance}]]
+                                <th:block th:if="${rewardsPoints == null}">
+                                    <span class="rewards-red">
+                                        [[#{oRewards.points.error}]]
+                                    </span>
+                                </th:block>
+                                <th:block th:unless="${rewardsPoints == null}">
+                                    [[${rewardsPoints}]]
+                                </th:block>
+                            </h3>
+                            <p class="orewards_remaing-points">
+                                <th:block th:if="${rewardsPoints == null}">
+                                    <span class="rewards-red">@@tls_key_service_is_currently_una</span>
+                                </th:block>
+                                <th:block th:unless="${rewardsPoints == null}">@@tls_key_points_away_from_your_ne</th:block>
+                            </p>
+                            <p>
+                                [[#{oRewards.accountNumber}]]
+                                <strong>
+                                    <th:block th:if="${rewardsPoints == null}">@@tls_key_unavailable</th:block>
+                                    <th:block th:unless="${rewardsPoints == null}">
+                                        [[${rewardsCustomer.cardNumber}]]
+                                    </th:block>
+                                </strong>
+                            </p>
+                            <p>
+                                [[#{oRewards.memberSince}]]
+                                <strong>
+                                    <th:block th:if="${rewardsPoints == null}">@@tls_key_unavailable</th:block>
+                                    <th:block th:unless="${rewardsPoints == null}">
+                                        [[${#dates.format(rewardsCustomer.formattedCreateDate,
+                                        'MM/yyyy')}]]
+                                    </th:block>
+                                </strong>
+                            </p>
+                            <a class="account-link" th:href="@{${'/account/orewards'}}">
+                                <strong th:text="#{account.accountDashboard.oRewards.recentActivity}"></strong>
+                            </a>
+                        </th:block>
+                    </th:block>
+                    <th:block th:if="${isVerifiedORewardsEmail == false}" th:inline="text">
+                        <div class="account_rewards-verify">
+                            <h4>@@tls_key_pending_email_verificati</h4>
+                            <p>@@tls_key_your_account_setup_is_al</p>
+                            <a th:href="@{${'/account/orewards'}}" class="account-link">
+                                <strong>@@tls_key_go_to_my_orewards</strong>
+                            </a>
+                        </div>
+                    </th:block>
+                </th:block>
+            </div>
+        </div>
+    </th:block>
+</th:block>

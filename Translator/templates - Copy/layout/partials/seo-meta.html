@@ -1,0 +1,31 @@
+<!--/* SEO Title */-->
+<th:block th:if="${seoTitle != null}">
+    <title th:text="${seoTitle}"></title>
+    <meta name="title" th:attr="content=${seoTitle}"/>
+</th:block>
+<th:block th:if="${seoTitle == null}">
+    <title>O&#8217;Reilly Auto Parts</title>
+    <meta name="title" content="O&#8217;Reilly Auto Parts"/>
+</th:block>
+
+<!--/* SEO Description */-->
+<th:block th:if="${seoDescription != null}">
+    <meta name="description" th:attr="content=${seoDescription}"/>
+</th:block>
+<th:block th:if="${seoDescription == null}">
+    <meta name="description" content="O&#8217;Reilly Auto Parts"/>
+</th:block>
+
+<!--/* SEO Canonical (some page canonicals might not work properly without query params - these pages should
+       be added to the robots.txt file to disable crawling) */-->
+<th:block th:if="${seoCanonicalHref != null}">
+    <link rel="canonical" th:attr="href=${seoCanonicalHref}"/>
+</th:block>
+<th:block th:if="${seoCanonicalHref == null}">
+    <link rel="canonical" th:attr="href=${#httpServletRequest.getRequestURL()}"/>
+</th:block>
+
+<!--/* SEO No Index - This meta tag blocks search engines like Google from indexing the page */-->
+<th:block th:if="${seoNoIndex}">
+    <meta name="robots" content="noindex"/>
+</th:block>

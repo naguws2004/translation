@@ -1,0 +1,273 @@
+<th:block th:if="${message == 'core-charge'}">
+    <p>
+        Some products have a core charge associated with them. A core is some portion of a part that
+        can be recycled or reused by the manufacturer. Doing this saves the manufacturer money and
+        helps our environment. For this reason a product with a core has an additional charge
+        associated with it. If the old part is returned in reusable condition, the core charge will
+        be credited back to the card used to purchase the part. Please note: It is the customer's
+        responsibility to pay any shipping cost associated with shipping a core back to
+        OReillyAuto.com.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'why-taxes'}">
+    <p>
+        O&#8217;Reilly Auto Parts uses numerous supplier locations across the country for better
+        service and lower cost. The presence of these shipping locations in numerous states requires
+        us to collect taxes. This also requires us to calculate and collect all applicable state and
+        local taxes based on your ship to location.
+    </p>
+    <p>
+        Due to our numerous shipping points we are usually able to get your parts to you faster and
+        cheaper than our competitors.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'shipping-estimates'}">
+    <p>
+        Estimated delivery dates and order fulfillment time(s) are based off of company averages,
+        and while we do our absolute best to get your items to you as quickly as possible, the
+        actual delivery times may vary due to weather conditions, warehouse availability, etc. These
+        times should be used as a reference and not a guarantee.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'battery-fees'}">
+    <p>
+        Some states require all retailers selling new or remanufactured lead-acid type batteries to
+        collect a fee, varying by state. This fee applies to retailers of such products within the
+        respective participating state, and assists the state in recycling the waste generated from
+        these products. Examples of batteries subject to the fee include batteries for automobiles,
+        pickups and small trucks, truck tractors, busses, motorcycles and motorized tri-cycles,
+        construction equipment, recreational vehicles, and boats and boat/vessels.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'international-restrictions'}">
+    <p>
+        <b>Orders &amp; Payment:</b>
+        O&#8217;Reilly Auto Parts only accepts orders placed online at OReillyAuto.com.&nbsp;
+        Ordering by phone is not available. &nbsp;We accept American Express, Discover Card,
+        MasterCard, VISA credit cards for purchases. We do not accept other forms of payment or
+        PayPal at this time. Credit cards originating from outside the United States are not
+        accepted.
+    </p>
+    <p>Please contact Online Customer Service for help or questions on orders or shipping.</p>
+    <p><b>Shipping Options</b></p>
+    <p>
+        <b>Ground Shipping:</b>
+        OReillyAuto.com processes and ships your order within 48 hours&nbsp;of the order
+        confirmation. Your order will be shipped by standard ground UPS. Delivery is usually within
+        2 to 7 business days of the date of shipment for small and medium sized packages (holidays
+        and weekends excluded).
+    </p>
+    <p>
+        Large orders may ship from more than one location and come in multiple packages. Oversize
+        product will incur additional shipping charges by UPS. Orders to Alaska and Hawaii will
+        increase the shipping charges and&nbsp;delivery times will be longer.
+    </p>
+    <p>
+        <b>Next day and 2-Day shipping:</b>
+        You also have the option to choose 2nd Day Air, or Next Day Air for most small and medium
+        sized packages for additional charges. Your order must be&nbsp;placed before 2:00 PM Eastern
+        Time (11:00 AM Pacific Time) Mondays through Thursdays.
+    </p>
+    <p>
+        2nd Day Air and Next Day Air orders placed on Fridays&nbsp;will be&nbsp;delivered
+        the&nbsp;following Monday or Tuesday. Deliveries are not made on Saturdays, Sundays or
+        holidays. UPS may delay some residential deliveries up to 24 hours, this is not within our
+        control and no shipping refunds will be issued.
+    </p>
+    <p>
+        <b>Ship to Addresses:</b>
+        You may designate a
+        <i>ship to address</i>
+        other than your billing address within any of the 50 United States during the&nbsp;check out
+        process. &nbsp;P.O. Boxes and international addresses can not be used as a
+        <i>ship to address.</i>
+    </p>
+    <p>
+        <b>P.O. Boxes:</b>
+        OReillyAuto.com does not accept orders for delivery to P.O. Boxes. UPS requires a physical
+        street address for delivery.
+    </p>
+    <p>
+        <b>Shipment Tracking:</b>
+        You will be provided a UPS tracking number along with your OReillyAuto.com invoice number in
+        the confirmation email sent when&nbsp;your order ships.
+    </p>
+    <p>
+        <b>APO, FPO and US Territories:</b>
+        OReillyAuto.com does not currently accept orders from or ship to APO, FPO or US Territory
+        addresses.
+    </p>
+    <p>
+        <b>International Shipping:</b>
+        At this time OReillyAuto.com does not accept orders for international shipping
+        or&nbsp;credit cards originating from outside the United States.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'cid'}">
+    <p>
+        In our ongoing effort to provide a secure shopping experience, we require your CID from your
+        credit card each time you order from us. We do not store this security number.
+    </p>
+    <p><b>The CID for Visa, MasterCard, and Discover cards:</b></p>
+    <p style="CLEAR: left">
+        <img
+            width="189"
+            height="120"
+            border="0"
+            align="top"
+            src="https://oreillyauto.custhelp.com/euf/assets/themes/standard/images/cidVisaCloseUp.gif"
+            th:alt="#{checkout.billing.cid}"
+            style="MARGIN: 0px 10px 10px 0px; FLOAT: left; CLEAR: right"
+        />
+        A 3-digit number located on the back of the card, printed on the signature panel immediately
+        following your account number.
+    </p>
+    <p style="CLEAR: left;">
+        <strong>For American Express cards:</strong>
+    </p>
+    <p style="CLEAR: left">
+        <img
+            border="0"
+            align="top"
+            src="https://oreillyauto.custhelp.com/euf/assets/themes/standard/images/cidAmexCloseUp.gif"
+            th:alt="#{checkout.billing.amex.cid}"
+            style="MARGIN: 0px 10px 10px 0px; FLOAT: left; CLEAR: right"
+        />
+        A 4-digit number located on the front of the card, printed just above your account number.
+    </p>
+    <p style="CLEAR: left">&nbsp;</p>
+</th:block>
+
+<th:block th:if="${message == 'privacy-policy'}">
+    <p>
+        O&#8217;Reilly Auto Parts requests and collects personal information from our customers at
+        various site locations and instances, including, but not limited to, when you create an
+        OReillyAuto.com account, make a purchase, contact our customer care team, or participate in
+        contests and promotions. We require a valid email address and accurate personal details so
+        that we may communicate important account information and confirm your activities on
+        OReillyAuto.com. To protect your privacy, your information is protected with both server
+        authentication and data encryption, ensuring that your data is safe, secure, and available
+        only to O&#8217;Reilly Auto Parts. Your information will only be used by O&#8217;Reilly Auto
+        Parts in regards to promotions and special offers if you indicated you would like to receive
+        announcements. You may change this selection at any time by logging into your account and
+        editing your preferences.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'universal-product'}">
+    <p>
+        Universal products are items that may or may not work for a specific vehicle or application.
+        The manufacturer makes no claims its product will fit or work for a specific vehicle
+        therefore a vehicle application list is not provided. Please review all descriptions and
+        attributes for Universal Products before considering a purchase. If you have questions about
+        Universal Products, please visit our
+        <a href="http://oreillyauto.custhelp.com/app/ask" target="_blank">Contact Us</a>
+        page.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'old-orders'}">
+    <div class="old-orders">
+        <p>
+            We are sorry you can't find your old order, we moved over to our new, improved ordering
+            system on October 16, 2013. If you made orders prior to this date &amp; need to return,
+            warranty or get details about your order, please contact our
+            <a href="http://oreillyauto.custhelp.com/app/ask" target="_blank">
+                customer service team
+            </a>
+            .
+        </p>
+        <p>
+            Call Us at
+            <span>855-649-7278</span>
+            or
+            <a target="_blank" href="http://oreillyauto.custhelp.com/app/ask">Email Us</a>
+        </p>
+    </div>
+</th:block>
+
+<th:block th:if="${message == 'compare-overlimit'}">
+    <p>Too many compared, please remove one.</p>
+</th:block>
+
+<th:block th:if="${message == 'system-error'}">
+    <p>
+        There is an error within our system for this item. Please
+        <a href="http://oreillyauto.custhelp.com/app/ask" target="_blank">
+            contact customer service
+        </a>
+        to find out about purchasing this item.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'session-timeout'}">
+    <p>Your session expired due to inactivity.</p>
+</th:block>
+
+<th:block th:if="${message == 'how-information-is-used'}">
+    <strong>What is collected</strong>
+
+    <p>
+        On some O&#8217;Reilly Auto Parts web pages, you can order products or services, make
+        requests, and register to receive materials. The types of personal information collected at
+        these pages are name, contact and billing information, transaction, and credit card
+        information. In order to tailor our Web site to continuously improve our products and
+        services, we may also ask you to voluntarily provide us with information regarding your
+        personal or professional interests, demographics, experience with our products, and contact
+        preferences; once again, O&#8217;Reilly Auto Parts reiterates that providing such
+        information is completely at your discretion.
+    </p>
+
+    <strong>How is it used</strong>
+
+    <p>
+        O&#8217;Reilly Auto Parts uses your information to better understand your needs and provide
+        you with better service. Specifically, we use your information to help you complete a
+        transaction, to communicate back to you, to update you on service and benefits, and to
+        personalize our Web site for you. Credit card numbers are used only for payment processing
+        and are not retained for other purposes. Data collected online may also be combined with
+        information you provide when you register your ownership of O&#8217;Reilly products.
+    </p>
+
+    <strong>Who we share it with</strong>
+
+    <p>
+        O&#8217;Reilly Auto Parts will not sell, rent, or lease your personal information to any
+        others. Unless we have your direct permission or are required by law, we will only share the
+        personal data you provide online with other O&#8217;Reilly Auto Parts entities and/or
+        business partners who are acting on our behalf for the uses described above. Such
+        O&#8217;Reilly entities and/or business partners, including those in the United States
+        and/or any other countries, are governed by our privacy policies with respect to the use of
+        this data and are bound by the appropriate confidentiality agreements.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'signup-phone'}">
+    <p>
+        We use this number in the event we need to contact you about an order and look up your
+        O'Rewards account when you shop in O'Reily Auto Parts stores.
+    </p>
+</th:block>
+
+<th:block th:if="${message == 'additional-pickup-person'}">
+    <p class="additional-pickup-person-help">
+        You may specify an additional person to pick up your order from your selected store once it
+        is ready. In order to pick up the order from the selected store, this additional pickup
+        person will need a valid photo ID. Neither the information you provide about any person for
+        the purpose of picking up your purchase(s) nor the identification of the person who is
+        picking up your purchase(s) will be used for any other purpose. Please see our
+        <a
+            href="/legal-policies#privacy-policy"
+            class="additional-pickup-person-help__link"
+            th:attr="aria-label=#{aria.checkout.additionalPickupPerson.helpLink}"
+        >
+            Privacy Policy
+        </a>
+        for more information.
+    </p>
+</th:block>

@@ -1,0 +1,134 @@
+<article class="product cart-product js-cart-item" th:object="${item}" th:attr="data-itemid=*{id}">
+    <div class="js-quantity-error cart-banner cart-banner--error"></div>
+    <div class="cart-product_wrap">
+        <div class="cart-product_img">
+            <figure class="product_img">
+                <a th:href="@{/gift-card}" tabindex="-1">
+                    <img th:src="@{/img/gift-card.png}" th:alt="*{name}" />
+                </a>
+            </figure>
+        </div>
+        <div class="cart-product_info">
+            <h1 class="product_title">
+                <a class="product_link js-product-link" href="/gift-card" tabindex="-1">
+                    <span itemprop="name" th:inline="text">
+                        [[${productName}]]
+                    </span>
+                </a>
+            </h1>
+            <div
+                th:if="*{orderItemAttributes.containsKey('MESSAGE')}"
+                th:with="message=*{orderItemAttributes.get('MESSAGE').value}"
+                class="cart-product__giftcard-message"
+            >
+                <strong th:text="#{cart.giftcard.message.preface}">Message:</strong>
+                &nbsp;
+                <th:block th:unless="${#strings.isEmpty(message)}" th:text="${message}"></th:block>
+                <th:block
+                    th:if="${#strings.isEmpty(message)}"
+                    th:text="#{cart.giftcard.no.message}"
+                ></th:block>
+            </div>
+        </div>
+        <div class="cart-product_price">
+            <div class="pricing" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                <strong
+                    class="pricing_price js-cart-item-price"
+                    blc:price="*{getTotalPriceBeforeAdjustments(true)}"
+                ></strong>
+                <div
+                    th:unless="${item.quantity == 1}"
+                    class="item-each-price font-italic font-size-12"
+                >
+                    (<!--
+                 --><span class="js-cart-item-each-price"><!--
+                     --><th:block blc:price="*{getPriceBeforeAdjustments(true)}"></th:block>
+                    </span>
+                    <span th:inline="text" class="ca js-pu">[[#{product.price.each}]])</span>
+                </div>
+                <th:block th:if="*{getAdjustmentValue()?.toString() > '0.00'}">
+                    <span th:inline="text" class="price-label">[[#{cart.discounts}]]:</span>
+                    <span class="totals-price" blc:price="*{getAdjustmentValue()}"></span>
+                </th:block>
+            </div>
+        </div>
+        <div class="cart-product_availability">
+            <div class="avail_quantity">
+                <blc:form
+                    name="updateForm"
+                    method="POST"
+                    th:action="@{/cart/updateQuantity}"
+                    class="js-product-qty cart-qty-form"
+                >
+                    <div class="cart-qty-input-wrap">
+                        <input type="hidden" name="orderItemId" th:value="*{id}" />
+
+                        <input
+                            type="hidden"
+                            class="js-atc_productId"
+                            name="productId"
+                            th:value="*{id}"
+                        />
+                        <button
+                            class="button button--white qty-change__btn js-qty-decrease"
+                            disabled="disabled"
+                        >
+                            -
+                        </button>
+                        <label th:for="*{id + 'Quantity'}" class="sr-only">Item Quantity</label>
+                        <input
+                            th:id="*{id + 'Quantity'}"
+                            type="text"
+                            pattern="[0-9]*"
+                            class="qty-input js-qty js-cart-item-qty quantityUpdate"
+                            th:value="*{quantity}"
+                            maxlength="3"
+                            name="quantity"
+                            autocomplete="off"
+                            autocorrect="off"
+                            disabled="disabled"
+                        />
+                        <button
+                            class="button button--white qty-change__btn js-qty-increase"
+                            disabled="disabled"
+                        >
+                            +
+                        </button>
+                        <input type="hidden" name="preUpdateQuantity" th:value="*{quantity}" />
+                    </div>
+                    <div class="cart-qty-actions">
+                        <button
+                            class="button button--small js-cart-item-update js-single-item js-qty-submit"
+                            th:inline="text"
+                            style="display: none;"
+                            disabled="disabled"
+                        >
+                            [[#{cart.update}]]
+                        </button>
+                        <button
+                            class="button button--small js-remove-item"
+                            tabindex="-1"
+                            disabled="disabled"
+                        >
+                            Remove
+                        </button>
+                    </div>
+                </blc:form>
+            </div>
+            <div class="availability--cart-non-discrete">
+                <input
+                    type="hidden"
+                    class="js-atc_giftCardType"
+                    name="giftCardType"
+                    th:value="${T(org.broadleafcommerce.core.order.service.type.FulfillmentType).GIFT_CARD.type}"
+                />
+                <availability-giftcard></availability-giftcard>
+            </div>
+        </div>
+        <div
+            th:if="${item.getAdjustmentValue().toString() != '0.00'}"
+            class="cart-item__promo-tag"
+            th:text="#{cart.item.promoApplied}"
+        ></div>
+    </div>
+</article>

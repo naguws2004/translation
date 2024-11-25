@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{f23ec368-3893-4dd6-a88a-802006d974ed}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>GenericTranslator1.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>Global|PythonCore|3.13</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="GenericTranslator1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GenericTranslator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="google_translator.py" />
+    <Compile Include="Program4.py" />
+    <Compile Include="Program5.py" />
+    <Compile Include="Program3.py" />
+    <Compile Include="Program2.py" />
+    <Compile Include="Program1.py" />
+    <Compile Include="deepl_translator.py" />
+    <Compile Include="PropertiesTranslator2.py" />
+    <Compile Include="GoogleTranslator.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.13" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="translations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="translations\messages.properties" />
+    <Content Include="translations\messages.properties.translated" />
+    <Content Include="translations\messages.properties_es" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

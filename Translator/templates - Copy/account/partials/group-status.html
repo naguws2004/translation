@@ -1,0 +1,157 @@
+<th:block th:fragment="order-details-pre-delivery">
+    <div class="group-status-wrap" th:with="status=${info.orderStatus}, type=${type}" th:inline="text">
+        <th:block
+            th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_PICKUP.type}">
+            <th:block th:if="${info.pickupGroupsStatus eq 'OPEN'}">
+                <strong class="order-status">Open</strong>
+            </th:block>
+            <th:block th:if="${info.pickupGroupsStatus eq 'CANCELLED'}">
+                <strong class="order-status">Cancelled</strong>
+            </th:block>
+            <th:block th:if="${info.pickupGroupsStatus eq 'SCANNED'}">
+                <strong class="order-status">Ready for Pickup</strong>
+            </th:block>
+            <th:block th:if="${info.pickupGroupsStatus eq 'FULFILLED'}">
+                <strong class="order-status">Picked Up</strong>
+            </th:block>
+            <th:block th:if="${info.storeAddress.id != null}">
+                <div class="get-directions_wrap">
+                    <a th:href="${#oap.buildStoreMapsUrl('https://google.com/maps/dir//OReilly+Auto+Parts+', info.storeAddress.id)}"
+                        target="_blank" class="btn-green-md">
+                        Get Directions
+                    </a>
+                </div>
+            </th:block>
+            <div class="pickup-faq">
+                <a href="/online-orders#shipping-delivery" target="_blank" aria-label="Pick up in store FAQ's">Pick Up
+                    in Store FAQs</a>
+            </div>
+        </th:block>
+        <th:block
+            th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}">
+            <th:block th:if="${info.shipGroupsStatus eq 'OPEN'} or ${info.shipGroupsStatus eq 'SCANNED'}">
+                <strong class="order-status">Open</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq 'FULFILLED'}">
+                <strong class="order-status">Shipped</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq 'BOXED_AND_READY'}">
+                <strong class="order-status">Waiting for Delivery</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq 'DELIVERED'}">
+                <strong class="order-status">Delivered</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq 'CANCELLED'}">
+                <strong class="order-status">CANCELLED</strong>
+            </th:block>
+            <th:block
+                th:if="${info.shippingTrackingNumbers != null and info.shipGroupsStatus ne 'SCANNED' and type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}"
+                th:include="account/partials/tracking-numbers" th:object="${type}" />
+        </th:block>
+        <th:block th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).GIFT_CARD.type}">
+            <th:block th:if="${info.giftCardGroupsStatus eq 'OPEN'}">
+                <strong class="order-status">Open</strong>
+            </th:block>
+            <th:block th:if="${info.giftCardGroupsStatus eq 'FULFILLED'}">
+                <strong class="order-status">Shipped</strong>
+            </th:block>
+        </th:block>
+    </div>
+</th:block>
+<th:block th:fragment="order-details-post-delivery">
+    <div class="group-status-wrap" th:with="type=${type}" th:inline="text">
+        <th:block
+            th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_PICKUP.type}">
+            <strong class="order-status">PICKED UP</strong>
+        </th:block>
+        <th:block
+            th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}">
+            <strong class="order-status">SHIPPED</strong>
+            <th:block
+                th:if="${info.shippingTrackingNumbers != null and type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}"
+                th:include="account/partials/tracking-numbers" th:object="${type}" />
+        </th:block>
+        <th:block th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).GIFT_CARD.type}">
+            <strong class="order-status">SHIPPED</strong>
+        </th:block>
+    </div>
+</th:block>
+<th:block th:fragment="purchase-history-status-pre-delivery" th:with="status=${info.orderStatus}, type=${type}, pickUpGroupTypeStatus=${info.pickupGroupsStatus},
+            shipGroupTypeStatus=${info.shipGroupsStatus}, giftCardTypeStatus=${info.giftCardGroupsStatus}">
+    <span th:inline="text">
+        <th:block th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}"
+            th:inline="text">
+            <th:block th:if="${info.shipGroupsStatus eq 'OPEN'} or ${info.shipGroupsStatus eq 'SCANNED'}">
+                <strong class="order-status">OPEN</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq 'FULFILLED'}">
+                <strong class="order-status">Shipped</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq 'BOXED_AND_READY'}">
+                <strong class="order-status">Waiting for Delivery</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq 'CANCELLED'}">
+                <strong class="order-status">CANCELLED</strong>
+            </th:block>
+            <th:block th:if="${info.shipGroupsStatus eq null}">
+                <strong class="order-status"></strong>
+            </th:block>
+            <th:block
+                th:if="${info.hasReturnableItems} and ${type eq 'PHYSICAL_SHIP'} and ${info.shipGroupsStatus eq 'FULFILLED'}">
+                <th:block th:include="account/partials/tracking-numbers"></th:block>
+            </th:block>
+        </th:block>
+        <th:block
+            th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_PICKUP.type}"
+            th:inline="text">
+            <th:block th:if="${info.pickupGroupsStatus eq 'OPEN'}">
+                <strong class="order-status">Open</strong>
+            </th:block>
+            <th:block th:if="${info.pickupGroupsStatus eq 'SCANNED'}">
+                <strong class="order-status">Ready for Pickup</strong>
+            </th:block>
+            <th:block th:if="${info.pickupGroupsStatus eq 'FULFILLED'}">
+                <strong class="order-status">Picked Up</strong>
+            </th:block>
+            <th:block th:if="${info.pickupGroupsStatus eq 'CANCELLED'}">
+                <strong class="order-status">CANCELLED</strong>
+            </th:block>
+            <th:block th:if="${info.pickupGroupsStatus eq null}">
+                <strong class="order-status"></strong>
+            </th:block>
+        </th:block>
+        <th:block th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).GIFT_CARD.type}"
+            th:inline="text">
+            <th:block th:if="${info.giftCardGroupsStatus eq 'OPEN'}">
+                <strong class="order-status">Open</strong>
+            </th:block>
+            <th:block th:if="${info.giftCardGroupsStatus eq 'FULFILLED'}">
+                <strong class="order-status">Shipped</strong>
+            </th:block>
+            <th:block th:if="${info.giftCardGroupsStatus eq 'CANCELLED'}">
+                <strong class="order-status">CANCELLED</strong>
+            </th:block>
+            <th:block th:if="${info.giftCardGroupsStatus eq null}">
+                <strong class="order-status"></strong>
+            </th:block>
+        </th:block>
+    </span>
+</th:block>
+<th:block th:fragment="purchase-history-status-post-delivery" th:with="info=${info}, type=${type}">
+    <div class="group-status-wrap" th:inline="text">
+        <th:block
+            th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_PICKUP.type}"
+            th:inline="text">
+            <strong class="order-status">PICKED UP</strong>
+        </th:block>
+        <th:block
+            th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).GIFT_CARD.type or type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}">
+            <strong class="order-status">SHIPPED</strong>
+        </th:block>
+        <th:block
+            th:if="${info.shippingTrackingNumbers != null and type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}"
+            th:object="${type}">
+            <th:block th:include="account/partials/tracking-numbers" th:object="${type}"></th:block>
+        </th:block>
+    </div>
+</th:block>

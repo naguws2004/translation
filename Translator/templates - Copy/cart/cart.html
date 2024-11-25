@@ -1,0 +1,148 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <title th:text="#{cart.cart}"></title>
+        <!-- prettier-ignore-->
+        <script th:inline="javascript" th:if="${#Cart.getItemCount()}">
+            /*<![CDATA[*/
+            var requiredBase = /*[[${requiredBase}]]*/ false;
+            var requiredEngine = /*[[${requiredEngine}]]*/ false;
+            var uriDescriptorDTO = JSON.parse(/*[[${uriDescriptorDTO}]]*/ '{}');
+            window._ost.showNearbyStoresMap = /*[[${#oap.getCheckNearbyStoresMapValue()}]]*/ false;
+            /*]]>*/
+        </script>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="row cart-wrap">
+            <th:block th:if="${#oap.isFBTrackingEnabled()}">
+                <script th:inline="javascript">
+                    window._ost.facebookTrackingEnabled = true;
+                </script>
+            </th:block>
+            <th:block th:if="${removedCoupons != null}" th:each="removedCoupon : ${removedCoupons}">
+                <div th:unless="${removedCoupon.barcode == null}" class="system-error">
+                    <span th:text="#{product.removedCoupon(${removedCoupon.barcode})}">
+                        Coupon code XXXXXX is not valid.
+                    </span>
+                </div>
+            </th:block>
+            <div class="o-container cart-error-container js-cart-error-container">
+                <div class="system-error js-system-error">
+                    <div class="js-cart-error-message"></div>
+                </div>
+            </div>
+            <div class="main-primary">
+                <blc:content-zone name="Cart Banner Content Zone" deepLinks="deepLinks" />
+                <div class="card-help text-center js-same-day-banner" style="display: none">
+                    <div>
+                        <span>
+                            <svg class="same-day-icon" aria-hidden="true">
+                                <use href="#same-day-icon" />
+                            </svg>
+                        </span>
+                        <span class="text-eligible-blue">
+                            <strong>Same Day</strong>
+                            <span class="font-italic">Eligible</span>
+                        </span>
+                        <span aria-hidden="true">|</span>
+                        <span>
+                            <strong>
+                                Congratulations! Your order qualifies for local Same Day Delivery*.
+                                Order now to get your order today.
+                            </strong>
+                        </span>
+                    </div>
+                    <div class="same-day-banner__disclaimer">
+                        <strong>*</strong>
+                        <small>
+                            As long as your delivery location entered during checkout is within our
+                            Same Day Delivery area.
+                        </small>
+                    </div>
+                </div>
+                <div class="cart-container js-cart-container">
+                    <a
+                        href="#"
+                        class="js-check-fit-product"
+                        style="display: none;"
+                        th:text="#{product.checkfit}"
+                        th:attr="aria-label=#{aria.checkfit}"
+                        aria-haspopup="true"
+                    >
+                        Checkfit
+                    </a>
+                    <div class="cart-header js-cart-header">
+                        <h1 class="my-cart js-cart-item-count">
+                            <th:block th:replace="cart/partials/cart-item-count" />
+                        </h1>
+                        <div class="cart-actions js-cart-actions" th:if="${#Cart.getItemCount()}">
+                            <a
+                                href="#"
+                                class="cart-print js-print"
+                                th:text="#{cart.print}"
+                                aria-label="Print Shopping Cart"
+                            >
+                                Print
+                            </a>
+                        </div>
+                    </div>
+                    <div
+                        class="empty-cart js-empty-cart"
+                        th:style="${#Cart.getItemCount() == 0 ? 'display: block' : ''}"
+                    >
+                        <strong
+                            th:text="#{cart.currentlyEmpty}"
+                            class="empty-cart_heading"
+                            role="alert"
+                            aria-live="polite"
+                        >
+                            Your Shopping Cart Is Empty
+                        </strong>
+                        <p class="empty-cart_signin" th:if="${customer.anonymous}">
+                            Have an account?
+                            <!-- prettier-ignore-->
+                            <a
+                                th:href="@{/signin?successUrl=__${#httpServletRequest.requestURI +
+                        (#httpServletRequest.queryString != null ? '?' + #httpServletRequest.queryString : '')}__}"
+                            >Sign in</a>
+                            to see items in your cart.
+                        </p>
+                        <span class="empty-cart_button_wrap">
+                            <clover-button></clover-button>
+                        </span>
+                    </div>
+                    <div
+                        class="cart-main js-cart-main"
+                        th:style="${#Cart.getItemCount() > 0 ? 'display: block' : 'display: none'}"
+                    >
+                        <div class="cart-banner cart-banner--error js-qty-warning">
+                            <p class="title" th:text="#{cart.doubleCheck}">
+                                Please double check your product quantities before placing your
+                                order.
+                            </p>
+                        </div>
+                        <div class="cart-banner cart-banner--error" th:text="#{cart.error}">
+                            There was an error.
+                        </div>
+                        <div class="cart-main-products js-cart-main-products">
+                            <th:block th:replace="cart/partials/cart-main-products" />
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div id="sl-suggestions" class="sl-suggestions">
+                    <!-- Add something to show loading  -->
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <input
+                type="hidden"
+                class="js-cart-totals"
+                th:attr="data-zip=${selectedStore?.address?.postalCode}"
+            />
+            <div class="cart-secondary">
+                <!-- All new cart-specific content should be placed in cart.vue. -->
+                <cart />
+            </div>
+        </div>
+    </fragment>
+</th:block>

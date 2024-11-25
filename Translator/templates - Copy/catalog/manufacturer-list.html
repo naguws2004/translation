@@ -1,0 +1,99 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="site-content o-container">
+            <div class="site-breadcrumb js-site-breadcrumb">
+                <div
+                    class="site-breadcrumb_wrapper site-breadcrumb_wrapper-rebate js-site-breadcrumb_wrapper"
+                >
+                    <div th:if="${breadcrumbs}" style="display: block"></div>
+                    <div
+                        class="site-breadcrumb_slider js-site-breadcrumb_slider"
+                        th:include="catalog/partials/breadcrumbs"
+                    ></div>
+                </div>
+            </div>
+            <div class="row manufacturer-list-wrap">
+                <div class="main-primary col-md-12">
+                    <div class="col-xs-12">
+                        <div class="page-title-wrap">
+                            <h1 class="page-title condensed">Featured Brands</h1>
+                        </div>
+                        <div class="featured__wrap">
+                            <blc:content-zone
+                                name="Featured Brand Content Zone"
+                                deepLinks="deepLinks"
+                            />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="brand-divider__wrap">
+                        <div class="brand-divider"></div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="page-title-wrap">
+                            <h2 class="page-title condensed" th:text="#{manufacturer.allBrands}">
+                                All Brands
+                            </h2>
+                            <div class="brands-list-filter-container">
+                                <label for="brands-list-filter" th:text="#{manufacturer.search}">
+                                    Search All Brands
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control brands-list-filter"
+                                    id="brands-list-filter"
+                                    th:attr="placeholder=#{manufacturer.filterResults}"
+                                />
+                                <div class="brands-announcement sr-only" aria-live="polite"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="no-matches hide"
+                            th:text="#{manufacturer.noBrand}"
+                            aria-live="polite"
+                        >
+                            No brand contains this text.
+                        </div>
+                        <div class="brand-characters-wrap">
+                            <div
+                                th:each="key : ${manufacturerMap.keySet()}"
+                                th:class="${'row brand-letter-wrap ' + key + '-wrap'}"
+                            >
+                                <h3
+                                    th:text="${key}"
+                                    class="brand-letter-title h4"
+                                    th:classappend="${#lists.size(manufacturerMap.get(key)) &lt; 5 ? 'brand-letter-title--one-row' : ''}"
+                                ></h3>
+                                <div class="brand-links__wrap col-sm-12">
+                                    <div class="row">
+                                        <th:block
+                                            th:with="manList=${manufacturerMap.get(key)}, height=${(T(Math).ceil(#lists.size(manList)))}"
+                                        >
+                                            <div
+                                                th:each="row : ${#numbers.sequence(0, 3)}"
+                                                class="brand-link-cols"
+                                            >
+                                                <div
+                                                    th:each="i : ${#numbers.sequence(height*row, height*row + height - 1)}"
+                                                >
+                                                    <div>
+                                                        <a
+                                                            class="brand-link"
+                                                            th:if="${i lt #lists.size(manList)}"
+                                                            th:href="@{${manufacturerUrlMap.get(manList.get(i))}}"
+                                                            th:text="${manList.get(i).mfgName}"
+                                                        ></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

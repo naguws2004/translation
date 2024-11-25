@@ -1,0 +1,32 @@
+<th:block th:remove="tag" th:fragment="ajax">
+    <div th:if="${not #lists.isEmpty(activeFacets)}" class="plp-youve-selected">
+        <h4 class="plp-ys-heading" th:text="#{facet.youSelected}">You've Selected</h4>
+        <div class="plp-refine_wrapper">
+            <ul class="plp-refine_list--removable">
+                <th:block th:each="activeFacet : ${activeFacets}" th:remove="tag">
+                    <li
+                        th:each="facetValue : ${activeFacet.facetValues}"
+                        th:if="${facetValue.active}"
+                        th:inline="text"
+                    >
+                        <a
+                            blc:removefacetvalueslink="${facetValue}"
+                            class="plp-refine_remove"
+                            th:attr="aria-label=#{aria.facet.remove}"
+                        >
+                            <svg>
+                                <use href="#shape-remove" />
+                            </svg>
+                        </a>
+                        <strong>[[${activeFacet.facetName}]]</strong>
+                        -
+                        <th:block
+                            th:include="/catalog/partials/filters/facet-value-display"
+                            th:object="${facetValue}"
+                        />
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+</th:block>

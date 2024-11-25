@@ -1,0 +1,297 @@
+<article class="product cart-product js-cart-item" th:object="${item}" th:with="
+         fulfillment=*{orderItemAttributes?.get('FULFILLMENT_TYPE')},
+         isPickupChosen=${fulfillment?.value eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_PICKUP?.type ? true : false},
+         oapSku=${oapSkuMap?.get(item?.product?.id)},
+         itemRepriceType=${repricedItems != null ? repricedItems?.get(item?.sku) : ''},
+         vehicleType=${key?.get(0)},
+         vehicle=${key?.get(1)}" th:attr="data-itemid=*{id}" th:attrappend="
+         data-name=${item?.name},
+         data-itemLineCode=${item?.product?.lineCode},
+         data-itemNumber=${item?.product?.itemNumber},
+         data-itemCategory=${item?.category?.description},
+         data-id=${item?.product?.id}"
+    th:classappend="(${item?.getAverageAdjustmentValueWithoutCoupons().toString() != '0.00'} ? 'cart-product--promo-applied js-product-shippable-' + *{product?.id} : 'js-product-shippable-' + *{product?.id}) + (${isPickupChosen} ? ' is-pickup' : ' is-ship')">
+    <div class="js-quantity-error cart-banner cart-banner--error"></div>
+    <div class="cart-product_wrap">
+        <!-- prettier-ignore -->
+        <script th:inline="javascript">
+            window._ost.orwCartItemPointsMap = /*[[${oRewardsItemPointsMap}]]*/[];
+        </script>
+        <div class="cart-product_img">
+            <figure class="product_img js-product-img"
+                th:with="productImageUrl=${#media.getProductPrimaryImageUrl('medium', item?.product)}">
+                <img th:src="@{${productImageUrl ne null ? productImageUrl : '/img/image-coming-soon.png'}}"
+                    onerror="if (this.src != '/img/image-coming-soon.png') this.src = '/img/image-coming-soon.png';"
+                    alt="" />
+                <orewards-points-image-badge></orewards-points-image-badge>
+            </figure>
+        </div>
+        <div class="cart-product_info">
+            <h3 class="product_title">
+                <a class="product_link js-product-link" th:href="@{${orderItemUrlMap.get(item)}}">
+                    <span itemprop="name" th:inline="text"
+                        th:text="${productName} + ' - ' + *{product.itemNumber}"></span>
+                </a>
+            </h3>
+            <dl class="product_part-info">
+                <dt th:text="#{product.partNumberHeader}">Part #:</dt>
+                <dd class="js-part-number" th:text="*{product.itemNumber}"></dd>
+                <dt th:text="#{product.lineCodeHeader}">Line #:</dt>
+                <dd class="js-line-code" th:text="*{product.lineCode}"></dd>
+            </dl>
+            <th:block th:unless="${null eq oapSku?.salePriceMaxQuantity}">
+                <div class="cart_sale-clearance_item product_part-info" th:inline="text">
+                    <span th:text="#{product.limit}">Limit of</span>
+                    <span>[[${oapSku?.salePriceMaxQuantity}]]</span>
+                </div>
+            </th:block>
+            <th:block th:with="fitState=${itemIdFitMap?.get(item?.getId())}">
+                <th:block th:if="${vehicle} != 'Unspecified Vehicle' and ${vehicle} != 'Non Vehicle Specific'">
+                    <div th:if="${fitState == 'FIT'}" class="cart-checkfit cart-checkfit--fit">
+                        <svg class="cart-checkfit__icon">
+                            <use th:attr="'href'=${#media.getVehicleIcon(vehicleType)}" />
+                        </svg>
+                        <span class="cart-checkfit__text" th:text="#{checkfit.product.fits(${vehicle})}"></span>
+                    </div>
+                    <div th:unless="${fitState == 'FIT'}" class="cart-checkfit cart-checkfit--no-fit">
+                        <svg class="cart-checkfit__icon">
+                            <use th:attr="'href'=${#media.getVehicleIcon(vehicleType)}" />
+                        </svg>
+                        <span class="cart-checkfit__text" th:text="#{checkfit.product.doesNotFit(${vehicle})}"></span>
+                    </div>
+                </th:block>
+                <th:block th:unless="${vehicle} != 'Unspecified Vehicle'">
+                    <div class="checkfit--button-wrap">
+                        <div th:if="${fitState == 'NO_FIT'}" class="cart-checkfit cart-checkfit--no-fit">
+                            <svg class="cart-checkfit__icon">
+                                <use th:attr="'href'=${#media.getVehicleIcon(vehicleType)}" />
+                            </svg>
+                            <span class="cart-checkfit__text"
+                                th:text="#{checkfit.product.doesNotFit(${vehicle})}"></span>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
+        </div>
+        <div class="cart-product_price">
+            <div class="pricing pricing--cart">
+                <th:block th:if="*{sku?.price != null} and ${!#Cart.showSalePrice(item)}">
+                    <strong class="pricing_price pricing_price--cart js-cart-item-price"
+                        blc:price="*{getTotalPriceBeforeAdjustments(true)}"></strong>
+                </th:block>
+                <th:block th:if="*{sku?.salePrice != null and sku?.isSaleItem()} and ${#Cart.showSalePrice(item)}">
+                    <strong class="pricing_price js-cart-item-price sale_item"
+                        blc:price="*{getTotalPriceBeforeAdjustments(true)}"></strong>
+                </th:block>
+                <div th:unless="${item?.quantity == 1}" class="item-each-price font-italic font-size-12">
+                    (
+                    <!--
+                 -->
+                    <span class="js-cart-item-each-price">
+                        <!--
+                     -->
+                        <th:block blc:price="*{getPriceBeforeAdjustments(true)}"></th:block>
+                    </span>
+                    <span th:inline="text" class="ca js-pu">[[#{product.price.each}]])</span>
+                </div>
+                <th:block th:if="*{sku?.isSaleItem() or sku?.isClearanceItem()} and ${#Cart.showSalePrice(item)}">
+                    <div class="pricing_price-was-cart font-italic">
+                        Reg.
+                        <span blc:price="*{getPriceBeforeAdjustments(false)}"></span>
+                    </div>
+                </th:block>
+                <th:block th:if="*{getAverageAdjustmentValueWithoutCoupons()?.toString() > '0.00'}">
+                    <div class="cart-discounts">
+                        <span th:inline="text" class="price-label">[[#{cart.discounts}]]:</span>
+                        <span class="totals-price" blc:price="*{getAverageAdjustmentValueWithoutCoupons()}"></span>
+                    </div>
+                </th:block>
+                <product-charges th:attr='data-core-charge-data=|{"coreCharge":*{getCorePrice()?.amount}}|,
+                    data-oil-deposit-data=|{"oilDeposit":*{getOilDeposit()?.amount}, "oilDepositRate":${#Cart?.getOilDepositRate()}}|,
+                    data-import-fee-data=|{"importFee":*{getOilFee()?.amount}, "standardRate":${#Cart?.getOilFeeRate()}, "largeRate":${#Cart?.getOilFeeLargeRate()}}|,
+                    data-battery-fee-data=|{"batteryFee":*{getBatteryFee()?.amount}}|'></product-charges>
+                <span class="cart-promotion-text">
+                    <orewards-product-promotions-cart></orewards-product-promotions-cart>
+                </span>
+            </div>
+        </div>
+        <div class="cart-product_availability">
+            <!-- prettier-ignore -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                /*[+
+                window._[[*{product.id}]]_availShip = [[${availShip}]];
+                window._[[*{product.id}]]_flightRestricted = [[${flightRestricted}]];
+                window._[[*{product.id}]]_blockShipToHome = [[${blockShipToHome}]];
+                window._[[*{product.id}]]_storeRestricted = [[${storeRestricted}]];
+                window._[[*{product.id}]]_blockStorePickup = [[${itemMaster?.blockStorePickup}]];
+                window._[[*{product.id}]]_availPickup = [[${availPickup}]];
+                window._[[*{product.id}]]_refrigerantMessage = [[${refrigerantMessage}]];
+                window._[[*{product.id}]]_pickupTime = [[${pickupTime}]];
+                window._[[*{product.id}]]_inStoreNow = [[${inStoreNow}]];
+                window._[[*{product.id}]]_specialOrder = [[${specialOrder}]];
+                window._[[*{product.id}]]_twoDayAvailability = [[${twoDayAvailability}]];
+                window._[[*{product.id}]]_threeDayAvailability = [[${threeDayAvailability}]];
+                window._[[*{product.id}]]_isNowDuringStoreHoursBeforeCutoff = [[${#oap.isNowDuringStoreHoursBeforeCutoff(selectedStore)}]];
+                window._[[*{product.id}]]_getStoreOpeningPickupTime = [[${#oap.getStoreOpeningPickupTime(selectedStore)}]];
+                window._[[*{product.id}]]_isNowBeforeTodayStoreBufferedCutoffTime = [[${#oap.isNowBeforeTodayStoreBufferedCutoffTime(selectedStore)}]];
+                window._[[*{product.id}]]_productName = [[*{product.name}]];
+                window._[[*{product.id}]]_phoneNumber = [[${#oap.unMaskPhone(selectedStore.address.phonePrimary.phoneNumber)}]];
+                +]*/
+                /*]]>*/
+            </script>
+            <fieldset class="avail_quantity">
+                <blc:form name="updateForm" method="POST" th:action="@{/cart/updateQuantity}"
+                    class="js-product-qty cart-qty-form update-form">
+                    <div class="cart-qty-input-wrap">
+                        <input type="hidden" name="productId" th:value="*{product?.id}" />
+                        <input type="hidden" name="skuId" th:value="*{sku?.id}" />
+                        <input type="hidden" name="orderItemId" th:value="*{id}" />
+                        <input type="hidden" name="preUpdateQuantity" th:value="*{quantity}" />
+
+                        <input type="hidden" class="js-atc_productId" name="productId" th:value="*{id}" />
+                        <input type="hidden" class="js-atc_shipType" name="shipType"
+                            th:value="${T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP?.type}" />
+                        <input type="hidden" class="js-atc_pickUpType" name="pickUpType"
+                            th:value="${T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_PICKUP?.type}" />
+                        <input type="hidden" class="js-atc_isPickupChosen" name="isPickupChosen"
+                            th:value="${isPickupChosen and not storeRestricted}" />
+                        <button class="button button--white qty-change__btn js-qty-decrease" disabled="disabled"
+                            th:attr="aria-label=*{sku?.name != null} ? 'Decrease One Quantity of ' + *{sku?.name} : 'Decrease One Quantity'">
+                            -
+                        </button>
+                        <label th:for="*{id + 'Quantity'}" class="sr-only">Item Quantity</label>
+                        <input th:id="*{id + 'Quantity'}" type="text" pattern="[0-9]*"
+                            class="qty-input js-qty js-cart-item-qty quantityUpdate" th:value="*{quantity}"
+                            maxlength="3" name="quantity" autocomplete="off" autocorrect="off" disabled="disabled" />
+                        <button class="button button--white qty-change__btn js-qty-increase" disabled="disabled"
+                            th:attr="aria-label=*{sku?.name != null} ? 'Add One Quantity of ' + *{sku?.name} : 'Add One Quantity'">
+                            +
+                        </button>
+                        <div class="js-quantity-updated sr-only" aria-live="polite"></div>
+                    </div>
+                    <div class="cart-qty-actions">
+                        <div class="js-update-notification sr-only" role="alert" aria-live="assertive"></div>
+                        <div class="js-remove-notification sr-only" role="alert" aria-live="assertive"></div>
+                        <button
+                            class="button button--small js-cart-item-update cart-item-update js-single-item js-qty-submit"
+                            th:inline="text" style="display: none;" disabled="disabled">
+                            [[#{cart.update}]]
+                        </button>
+                        <button class="button button--small js-remove-item remove-item" disabled="disabled"
+                            th:attr="aria-label=*{sku?.name != null} ? 'Remove ' + *{sku?.name} + ' from Cart' : 'Remove from Cart'">
+                            Remove
+                        </button>
+                    </div>
+                </blc:form>
+            </fieldset>
+            <fieldset class="availability--cart">
+                <legend class="sr-only" th:text="#{aria.cart.group.availability(*{product?.itemNumber})}">
+                    Availability Controls for SKU
+                </legend>
+                <availability></availability>
+                <input type="hidden" name="skuId" th:value="*{sku?.id}" />
+            </fieldset>
+            <p class="cart-product-restriction"
+                th:if="${flightRestricted and not blockShipToHome and not storeRestricted}">
+                Note:
+                <a class="cart-product-restriction__link" href="/online-orders#shipping-restrictions" target="_blank"
+                    rel="noopener" th:attr="aria-label=#{aria.product.restrictedToGroundShipping}"
+                    th:text="#{product.restrictedToGroundShipping}">
+                    Item restricted to ship Ground only.
+                </a>
+            </p>
+            <p class="cart-product-restriction" th:if="${#Cart.isBlockedFreeShipping(item, itemMaster)}">
+                Note:
+                <a class="cart-product-restriction__link" href="/online-orders#shipping-restrictions" target="_blank"
+                    rel="noopener" th:attr="aria-label=#{aria.product.notEligibleForFreeShipping}"
+                    th:text="#{product.notEligibleForFreeShipping}">
+                    Not eligible for Free Shipping.
+                </a>
+            </p>
+        </div>
+        <product-errors class="cart-product-errors"
+            th:attr='data-error-data=|{"inventoryUnavailableErrorMessage":"${inventoryUnavailable?.errorMessage}" }|'></product-errors>
+        <div th:if="${storeRestricted}" class="js-cart-item-unavailable">
+            <div class="cart-item-danger">
+                <span class="cart-item-warning-message">
+                    Item no longer available due to state or local regulations and restrictions.
+                    Please remove this item from your shopping cart to continue.
+                </span>
+            </div>
+        </div>
+        <div class="voc-error" th:attr="data-voc-item=*{product?.itemNumber} + '-' + *{product?.lineCode}">
+            <div class="cart-item-danger">
+                <span class="cart-item-warning-message">
+                    Due to state or local regulations and restrictions, we cannot ship this item to
+                    the address you have specified. Please remove this item from your shopping cart
+                    or enter a different shipping address.
+                </span>
+            </div>
+        </div>
+        <div class="cart-item-danger js-cart-item-unavailable" th:if="${inventoryUnavailable}">
+            <span class="cart-item-warning-message" th:text="${inventoryUnavailable.errorMessage}">
+                Selected quantity is not available.
+            </span>
+        </div>
+        <div class="cart-item-danger"
+            th:if="${itemRestriction != null and itemRestriction?.restrictedSku?.id == item.sku.id}">
+            <span class="cart-item-warning-message"
+                th:if="${itemRestriction?.restrictionType == T(com.oreilly.controller.checkout.RestrictedItemType).PICKUP}">
+                Due to state or local regulations and restrictions this item cannot be picked up at
+                the store you've selected. To pick this item up from a store please select a
+                different store.
+            </span>
+            <span class="cart-item-warning-message"
+                th:if="${itemRestriction?.restrictionType == T(com.oreilly.controller.checkout.RestrictedItemType).SHIP_ADDRESS}">
+                Due to state or local regulations and restrictions, we cannot ship this item to the
+                address specified. Please remove this item from your shopping cart or enter a
+                different address to ship your order to.
+            </span>
+            <span class="cart-item-warning-message"
+                th:if="${itemRestriction?.restrictionType == T(com.oreilly.controller.checkout.RestrictedItemType).FLIGHT}">
+                This item has flight restrictions preventing it from being shipped any other way
+                except GROUND.
+            </span>
+        </div>
+        <div class="cart-item-warning" th:if="${not #strings.isEmpty(itemRepriceType)}">
+            <span class="cart-item-warning-message"
+                th:if="${itemRepriceType == T(com.oreilly.core.cart.service.workflow.RepricedItemType).SALE}">
+                This item is no longer on sale and has been repriced.
+            </span>
+        </div>
+        <th:block th:each="message : ${itemMaster.itemMasterMessages}" th:switch="${message?.messageId}">
+            <div class="cart-item-warning-prop-65"
+                th:case="${T(com.oreilly.core.catalog.domain.ItemMasterMessageType).PROP65_CANCER.getMessageId()}"
+                th:with="chemical = ${message?.additionalMessageText1 != null ? message?.additionalMessageText1.trim() : null}">
+                <img class="warning-triangle" src="/img/warning_triangle.png" th:alt="#{prop65.alt}" />
+                <span class="cart-item-warning-message"
+                    th:utext="${chemical == null ? '__#{prop65.cancer}__' : '__#{prop65.cancer.withChemical(${chemical})}__'}"></span>
+            </div>
+            <div class="cart-item-warning-prop-65"
+                th:case="${T(com.oreilly.core.catalog.domain.ItemMasterMessageType).PROP65_REPRODUCTIVE.getMessageId()}"
+                th:with="chemical = ${message?.additionalMessageText2 != null ? message?.additionalMessageText2.trim() : null}">
+                <img class="warning-triangle" src="/img/warning_triangle.png" th:alt="#{prop65.alt}" />
+                <span class="cart-item-warning-message"
+                    th:utext="${chemical == null ? '__#{prop65.reproductive}__' : '__#{prop65.reproductive.withChemical(${chemical})}__'}"></span>
+            </div>
+            <div class="cart-item-warning-prop-65"
+                th:case="${T(com.oreilly.core.catalog.domain.ItemMasterMessageType).PROP65_CANCER_AND_REPRODUCTIVE.getMessageId()}"
+                th:with="chemical1 = ${message?.additionalMessageText1 != null ? message?.additionalMessageText1.trim() : null},
+                          chemical2 = ${message?.additionalMessageText2 != null ? message?.additionalMessageText2.trim() : null}">
+                <img class="warning-triangle" src="/img/warning_triangle.png" th:alt="#{prop65.alt}" />
+                <span class="cart-item-warning-message" th:if="${chemical1 != null and chemical2 != null}"
+                    th:utext="#{prop65.cancerAndReproductive.withBothChemicals(${chemical1}, ${chemical2})}"></span>
+                <span class="cart-item-warning-message" th:if="${chemical1 != null and chemical2 == null}"
+                    th:utext="#{prop65.cancerAndReproductive.withCancerChemical(${chemical1})}"></span>
+                <span class="cart-item-warning-message" th:if="${chemical1 == null and chemical2 != null}"
+                    th:utext="#{prop65.cancerAndReproductive.withReproductiveChemical(${chemical2})}"></span>
+                <span class="cart-item-warning-message" th:if="${chemical1 == null and chemical2 == null}"
+                    th:utext="#{prop65.cancerAndReproductive}"></span>
+            </div>
+        </th:block>
+
+        <div th:if="${item?.getAverageAdjustmentValueWithoutCoupons().toString() != '0.00'}"
+            class="cart-item__promo-tag" th:text="#{cart.item.promoApplied}"></div>
+    </div>
+</article>

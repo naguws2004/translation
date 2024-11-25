@@ -1,0 +1,625 @@
+<footer class="site-footer" lang="en">
+    <h3 class="sr-only">Links</h3>
+    <global-modal></global-modal>
+    <div class="site-footer_top">
+        <div class="o-container">
+            <div class="row">
+                <div class="ppp-connect-mobile">
+                    <div class="connect--title-txt js-mf-email">
+                        <svg
+                            class="cwo_icon"
+                            role="img"
+                            aria-labelledby="footer-connect-title"
+                            width="45"
+                            height="45"
+                        >
+                            <title th:text="#{shapes.connect}" id="footer-connect-title"></title>
+                            <use href="#shape-connect" />
+                        </svg>
+                        <span class="join-n-connect--txt" th:text="#{footer.connect}">CONNECT</span>
+                        <span th:text="#{footer.connect.withOAP}">with O&#8217;Reilly</span>
+                    </div>
+                    <h4 class="ppp-text" th:utext="#{footer.ppp}">
+                        Professional Parts People
+                        <sup class="registered-trademark">&reg;</sup>
+                    </h4>
+                </div>
+                <div class="join-n-connect--wrap">
+                    <div class="col-sm-4">
+                        <div class="join-our-team">
+                            <svg
+                                role="img"
+                                class="jot_icon"
+                                aria-label="Work at the O"
+                                width="167"
+                                height="45"
+                            >
+                                <use href="#wato" />
+                            </svg>
+                            <div class="apply-now-btn_wrap">
+                                <a
+                                    href="https://careers.oreillyauto.com"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.exploreJobs}"
+                                    th:attr="aria-label=#{aria.footer.exploreJobs}"
+                                >
+                                    Explore Jobs
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 connect-with-oreilly--wrap">
+                        <div class="connect--title-txt">
+                            <svg class="cwo_icon" aria-hidden="true" width="24" height="20">
+                                <use href="#shape-connect" />
+                            </svg>
+                            <span class="join-n-connect--txt" th:text="#{footer.connect}"></span>
+                            <span th:text="#{footer.connect.withOAP}"></span>
+                        </div>
+                        <div class="connect--email-form-n-popunder-wrap">
+                            <blc:form
+                                class="form-inline connect--email-form js-connect--email-form"
+                                id="connectWOreilly_emailForm"
+                            >
+                                <div class="validation-wrap">
+                                    <label for="connect--email" class="connect--form-label">
+                                        Email:
+                                    </label>
+                                    <input
+                                        id="connect--email"
+                                        type="email"
+                                        class="form-control input--lg js-connect--email"
+                                        maxlength="60"
+                                        name="connect--email"
+                                        th:title="#{footer.mailList.signup.placeholder}"
+                                        th:attr="placeholder=#{footer.mailList.signup.placeholder},aria-label=#{aria.footer.signUp}"
+                                        aria-required="true"
+                                        autocomplete="email"
+                                    />
+                                </div>
+                                <button
+                                    type="button"
+                                    class="js-connect-email-btn connect--email-btn"
+                                    th:text="#{footer.maillist.button.signup}"
+                                ></button>
+                            </blc:form>
+                            <div class="connect--popunder js-connect--popunder">
+                                <div class="connect--zip-question js-connect--zip-question">
+                                    <div class="clearfix">
+                                        <blc:form class="form-inline js-connect--zip-form">
+                                            <div class="validation-wrap">
+                                                <label for="connectZip" class="connect--form-label">
+                                                    Zip:
+                                                </label>
+                                                <input
+                                                    id="connectZip"
+                                                    type="text"
+                                                    class="form-control input--lg js-connect--zip"
+                                                    name="connect--zip"
+                                                    th:attr="placeholder=#{footer.mailList.zip.placeholder}"
+                                                    maxlength="5"
+                                                    pattern="\d{5,5}(-\d{4,4})?"
+                                                />
+                                            </div>
+                                        </blc:form>
+                                        <span th:text="#{footer.mailList}"></span>
+                                    </div>
+                                    <privacy-links></privacy-links>
+                                </div>
+                                <table
+                                    class="connect--thanks-txt js-connect--thanks-txt"
+                                    role="presentation"
+                                >
+                                    <tbody>
+                                        <tr>
+                                            <td><h4 th:text="#{footer.mailList.thanks}"></h4></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-footer_call-check-wrap--mobile">
+                <div class="site-footer_call--mobile">
+                    <a
+                        th:if="${selectedStore != null}"
+                        th:attr="data-phone=${selectedStore?.address.phonePrimary.phoneNumber}"
+                        class="js-nav-footer_phone"
+                        href="#"
+                    >
+                        Call Your Local Store
+                    </a>
+                    <a th:if="${selectedStore == null}" class="js-nav-footer-fas" href="#">
+                        Find a Store
+                    </a>
+                </div>
+                <div class="site-footer_check--mobile">
+                    <a th:href="@{/check-order-status}">Check Your Order Status</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="site-footer_middle">
+        <div class="o-container">
+            <div class="lists-nav-row">
+                <div class="site-footer_container--small">
+                    <ul class="site-footer_nav-list js-site-footer-nav-list">
+                        <li>
+                            <h4
+                                class="site-footer_section--heading"
+                                th:utext="#{footer.nav.myOAP.contact}"
+                            ></h4>
+                            <p
+                                th:if="${selectedStore != null}"
+                                class="js-phone"
+                                th:attr="data-phone=${selectedStore?.address.phonePrimary.phoneNumber},
+                            data-unmasked-phone=${#oap.unMaskPhone(selectedStore?.address.phonePrimary.phoneNumber)}"
+                            >
+                                Call
+                                <span
+                                    th:text="${selectedStore?.address.phonePrimary.phoneNumber}"
+                                ></span>
+                            </p>
+                            <p th:if="${selectedStore == null}">
+                                Click here to find a
+                                <a
+                                    class="js-select-store site-footer_nav-link"
+                                    href="/"
+                                    aria-label="Contact your local store"
+                                    th:text="#{footer.nav.store}"
+                                >
+                                    store
+                                </a>
+                                <span class="site-footer_nav-period">.</span>
+                            </p>
+                        </li>
+                        <li>
+                            <h4
+                                class="site-footer_section--heading"
+                                th:text="#{footer.nav.myOAP.check}"
+                            ></h4>
+                            <p>
+                                Check the status of your
+                                <if th:if="${customer.anonymous}" th:remove="tag">
+                                    <a
+                                        class="site-footer_nav-link"
+                                        th:attr="aria-label=#{aria.footer.order.status}"
+                                        th:href="@{/check-order-status?successUrl=/account/purchase-history}"
+                                        th:text="#{footer.nav.myOAP.check.link}"
+                                    ></a>
+                                    <span class="site-footer_nav-period">.</span>
+                                </if>
+                                <unless th:unless="${customer.anonymous}" th:remove="tag">
+                                    <a
+                                        class="site-footer_nav-link"
+                                        th:href="@{/account/purchase-history}"
+                                        th:attr="aria-label=#{aria.footer.order.status}"
+                                        th:text="#{footer.nav.myOAP.check.link}"
+                                    ></a>
+                                    <span class="site-footer_nav-period">.</span>
+                                </unless>
+                            </p>
+                        </li>
+                        <li>
+                            <h4
+                                class="site-footer_section--heading"
+                                th:text="#{footer.nav.myOAP.rewards}"
+                            ></h4>
+                            <p>
+                                Learn more about our
+                                <a
+                                    class="site-footer_nav-link"
+                                    th:href="@{/orewards-loyalty-program}"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.loyalty.program}"
+                                    th:attr="aria-label=#{aria.footer.loyalty.program}"
+                                >
+                                    loyalty program
+                                </a>
+                                <span class="site-footer_nav-period">.</span>
+                            </p>
+                        </li>
+                        <li>
+                            <h4
+                                class="site-footer_section--heading"
+                                th:text="#{footer.nav.resources.repairShop}"
+                            >
+                                Find a Repair Shop
+                            </h4>
+                            <p>
+                                Find an Automotive Service Professional
+                                <a
+                                    href="http://findashop.oreillyauto.com/home"
+                                    class="site-footer_nav-link"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.near.you}"
+                                    th:attr="aria-label=#{aria.footer.near.you}"
+                                >
+                                    near you
+                                </a>
+                                <span class="site-footer_nav-period">.</span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="site-footer_container--large">
+                    <div class="site-footer_col js-site-footer-col">
+                        <h4
+                            class="site-footer_heading"
+                            th:text="#{footer.nav.about.title}"
+                            th:attr="aria-label=#{aria.footer.nav.about.title}"
+                        ></h4>
+                        <div class="site-footer_down-arrow js-site-footer-down-arrow">
+                            <svg width="18" height="8">
+                                <use href="#shape-down-arrow"></use>
+                            </svg>
+                        </div>
+                        <ul class="site-footer_nav-list js-site-footer-nav-list">
+                            <li>
+                                <a
+                                    href="https://careers.oreillyauto.com"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.about.careers}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.careers}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://corporate.oreillyauto.com/corporate-information-general-info"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.about.company}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.company}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://corporate.oreillyauto.com/investor-relations-general-info"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.about.investor}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.investor}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://corporate.oreillyauto.com/corporate-information-news-room"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.about.news}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.news}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/legal-policies}"
+                                    th:text="#{footer.nav.about.legal}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.legal}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/site-directory}"
+                                    th:text="#{footer.nav.about.directory}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.directory}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/sustainability}"
+                                    th:text="#{footer.nav.about.sustainability}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.sustainability}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/oreilly-foundation}"
+                                    th:text="#{footer.nav.about.community}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.community}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://www.oreillyauto.com.mx/"
+                                    th:text="#{footer.nav.about.oreillyautoMx}"
+                                    th:attr="aria-label=#{aria.footer.nav.about.oreillyautoMx}"
+                                ></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="site-footer_col js-site-footer-col">
+                        <h4
+                            class="site-footer_heading"
+                            th:text="#{footer.nav.resources.title}"
+                            th:attr="aria-label=#{aria.footer.nav.resources.title}"
+                        ></h4>
+                        <div class="site-footer_down-arrow js-site-footer-down-arrow">
+                            <svg width="18" height="8">
+                                <use href="#shape-down-arrow"></use>
+                            </svg>
+                        </div>
+                        <ul class="site-footer_nav-list js-site-footer-nav-list">
+                            <li>
+                                <a
+                                    id="fas_footer-nav"
+                                    href="https://locations.oreillyauto.com"
+                                    th:text="#{footer.nav.resources.fas}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.fas}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/currentad"
+                                    th:text="#{footer.nav.resources.currentAd}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.currentAd}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/store-services}"
+                                    th:text="#{footer.nav.resources.services}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.services}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/shop/AllBrands}"
+                                    th:text="#{footer.nav.resources.brands}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.brands}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/for-the-professional}"
+                                    th:text="#{footer.nav.resources.pro}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.pro}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/jobber-program}"
+                                    th:text="#{footer.nav.resources.jobber}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.jobber}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    href="http://findashop.oreillyauto.com/home"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.resources.repairShop}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.repairShop}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/coupons-and-promotions}"
+                                    th:text="#{footer.nav.resources.cap}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.cap}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/video}"
+                                    th:text="#{footer.nav.resources.videos}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.videos}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/how-to-hub}"
+                                    th:text="#{footer.nav.resources.howTo}"
+                                    th:attr="aria-label=#{aria.footer.nav.resources.howTo}"
+                                ></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="site-footer_col js-site-footer-col">
+                        <h4
+                            class="site-footer_heading"
+                            th:text="#{footer.nav.customerService.title}"
+                            th:attr="aria-label=#{aria.footer.nav.customerService.title}"
+                        ></h4>
+                        <div class="site-footer_down-arrow js-site-footer-down-arrow">
+                            <svg width="18" height="8">
+                                <use href="#shape-down-arrow"></use>
+                            </svg>
+                        </div>
+                        <ul class="site-footer_nav-list js-site-footer-nav-list">
+                            <li>
+                                <a
+                                    th:href="@{/contact-us}"
+                                    th:text="#{footer.nav.customerService.contact}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.contact}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/online-orders}"
+                                    th:text="#{footer.nav.customerService.faqs}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.faqs}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/account}"
+                                    th:text="#{footer.nav.customerService.account}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.account}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/gift-card}"
+                                    th:text="#{footer.nav.customerService.giftCard}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.giftCard}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/rebate}"
+                                    th:text="#{footer.nav.customerService.rebateCenter}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.rebateCenter}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/online-orders#returns-exchanges}"
+                                    th:text="#{footer.nav.customerService.returns}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.returns}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/online-orders#special-orders}"
+                                    th:text="#{footer.nav.customerService.so}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.so}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/online-orders#shipping-delivery}"
+                                    th:text="#{footer.nav.customerService.shipping}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.shipping}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/warranty}"
+                                    th:text="#{footer.nav.customerService.warranties}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.warranties}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    href="http://www.3eonline.com/EeeOnlinePortal/DesktopDefault.aspx?id=GFAirWx2BmohQvleYq99kSzCLhParjXcl%2b1aedzg6NTOC%2bBryI7a4gKGBZBru%2fbE"
+                                    target="_blank"
+                                    rel="noopener"
+                                    th:text="#{footer.nav.customerService.sds}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.sds}"
+                                ></a>
+                            </li>
+                            <li>
+                                <a
+                                    th:href="@{/professional-catalogs}"
+                                    th:text="#{footer.nav.customerService.profCats}"
+                                    th:attr="aria-label=#{aria.footer.nav.customerService.profCats}"
+                                ></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="site-footer_info col-sm-8">
+                    <h4 class="ppp-text" th:utext="#{footer.ppp}">
+                        Professional Parts People
+                        <sup class="registered-trademark">&reg;</sup>
+                    </h4>
+                </div>
+                <div class="site-footer_social col-sm-4">
+                    <ul class="social-icons">
+                        <li>
+                            <a
+                                href="https://www.facebook.com/OreillyAutoParts"
+                                target="_blank"
+                                rel="noopener"
+                                th:attr="aria-label=#{aria.footer.social.facebook}"
+                            >
+                                <img
+                                    loading="lazy"
+                                    src="/img/icn_facebook.png"
+                                    title="Like us on Facebook"
+                                    alt="facebook"
+                                    width="26"
+                                    height="26"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://twitter.com/OReillyAuto"
+                                target="_blank"
+                                rel="noopener"
+                                th:attr="aria-label=#{aria.footer.social.twitter}"
+                            >
+                                <img
+                                    loading="lazy"
+                                    src="/img/icn_twitter.png"
+                                    title="Tweet with us on Twitter"
+                                    alt="twitter"
+                                    width="26"
+                                    height="26"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="http://instagram.com/oreillyautoparts"
+                                target="_blank"
+                                rel="noopener"
+                                th:attr="aria-label=#{aria.footer.social.instagram}"
+                            >
+                                <img
+                                    loading="lazy"
+                                    src="/img/icn_instagram.png"
+                                    title="See and share pictures on Instagram"
+                                    alt="instagram"
+                                    width="26"
+                                    height="26"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.youtube.com/user/OReillyAutoParts"
+                                target="_blank"
+                                rel="noopener"
+                                th:attr="aria-label=#{aria.footer.social.youtube}"
+                            >
+                                <img
+                                    loading="lazy"
+                                    src="/img/icn_youtube.png"
+                                    title="Watch our channel on YouTube"
+                                    alt="youtube"
+                                    width="26"
+                                    height="26"
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.pinterest.com/oreillyautoparts/"
+                                target="_blank"
+                                rel="noopener"
+                                th:attr="aria-label=#{aria.footer.social.pinterest}"
+                            >
+                                <img
+                                    loading="lazy"
+                                    src="/img/icn_pinterest.png"
+                                    title="View our pins on Pinterest"
+                                    alt="pinterest"
+                                    width="26"
+                                    height="26"
+                                />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="o-container site-footer_links">
+        <footer-privacy-links></footer-privacy-links>
+        <p class="site-footer_copyright" th:inline="text">
+            Copyright &copy; 2008-[[${#dates.format(#dates.createNow(), 'yyyy')}]] O&#8217;Reilly
+            Auto Parts v [[${@oapVersionUtil.resolveVersion()}]]
+            <span class="js-poc-footer dtls-poc-footer"></span>
+        </p>
+    </div>
+</footer>

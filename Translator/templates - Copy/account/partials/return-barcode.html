@@ -1,0 +1,41 @@
+<div class="barcode">
+    <p class="barcode__instructions barcode__italic">
+        To return an item in this order, print this page or show this barcode in-store.
+    </p>
+    <div class="barcode__wrap">
+        <th:block th:if="${orderReturnBarcode}">
+            <img
+                class="barcode__image"
+                th:src="${orderReturnBarcode.barcode}"
+                th:alt="'Barcode image number ' + ${barcodeCode}"
+            />
+            <p
+                th:inline="text"
+                class="barcode__font"
+                th:with="barcodeCode=${#strings.replace(orderReturnBarcode.barcodeAltText, ' ', '')}"
+            >
+                [[${barcodeCode}]]
+            </p>
+        </th:block>
+        <th:block th:unless="${orderReturnBarcode}">
+            <p class="barcode__error">
+                Barcode failed to load. Please reload the page.
+            </p>
+        </th:block>
+    </div>
+    <small th:if="${print}" class="barcode__disclaimer">
+        For information on returns or exchanges, please visit our policy website at:
+        <a href="/returns">www.oreillyauto.com/returns</a>
+    </small>
+    <p class="barcode__instructions">
+        <span class="barcode__italic">O'Reilly Team Member:</span>
+        <span>
+            To return any items on this order, please scan the barcode on your Returns Screen, or
+            manually enter the store and invoice number on the Transaction Recall screen.
+        </span>
+    </p>
+    <div th:if="${storeNumber} and ${invoiceNumber}" class="barcode__store-invoice-number">
+        <span th:text="'Store: ' + ${storeNumber}"></span>
+        <span th:text="'Invoice #: ' + ${invoiceNumber}"></span>
+    </div>
+</div>

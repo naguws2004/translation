@@ -1,0 +1,46 @@
+<th:block layout:decorator="layout/full-page-layout" layout:fragment="content">
+    <head>
+        <title th:text="${BLC_PAGE.description}"></title>
+    </head>
+
+    <section id="left_column">
+        <div>
+            <h1 th:text="${BLC_PAGE.pageFields[title]}"></h1>
+        </div>
+        <div class="clearfix"></div>
+        <div th:text="${BLC_PAGE.pageFields[body]}" />
+    </section>
+
+    <section id="right_column">
+        <h2 th:text="#{search.featuredProducts}">Featured Products</h2>
+        <div id="options">
+            <div class="section">
+                <blc:related_products categoryId="2001" quantity="3" />
+                <ul
+                    th:unless="${@blSystemPropertiesService.resolveBooleanSystemProperty('solr.index.use.sku')}"
+                    id="featured_products"
+                    class="group"
+                >
+                    <li
+                        th:each="product : ${products}"
+                        th:object="${product}"
+                        th:include="catalog/partials/product-list-item"
+                        class="product_container"
+                    ></li>
+                </ul>
+                <ul
+                    th:if="${@blSystemPropertiesService.resolveBooleanSystemProperty('solr.index.use.sku')}"
+                    id="featured_products"
+                    class="group"
+                >
+                    <li
+                        th:each="relatedSku : ${relatedSkus}"
+                        th:object="${relatedSku}"
+                        th:include="catalog/partials/sku-list-item"
+                        class="product_container"
+                    ></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</th:block>

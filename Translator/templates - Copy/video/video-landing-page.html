@@ -1,0 +1,19 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <script>
+            window.___gcfg = {
+                lang: 'en-US',
+                parsetags: 'explicit'
+            };
+        </script>
+        <script src="https://apis.google.com/js/platform.js?publisherid=oreillyautoparts" defer="defer" async="async"></script>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="container">
+            <div class="video--page js-video-page">
+                <div class="video--showcase js-showcase" th:include="video/video-showcase"></div>
+                <div class="video--list js-video-list" th:include="video/video-list"></div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

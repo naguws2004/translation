@@ -1,0 +1,178 @@
+<blc:form class="update-address-form js-update-address-form">
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <label th:for="*{'first-name-' + suffix}">
+                First Name
+                <em class="req">*</em>
+            </label>
+            <input
+                th:id="*{'first-name-' + suffix}"
+                class="edit-field form-control js-form-control"
+                size="55"
+                type="text"
+                name="address.firstName"
+                th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.firstName : '' }"
+                aria-required="true"
+                maxlength="120"
+            />
+        </div>
+        <div class="col-sm-6 form-group">
+            <label th:for="*{'last-name-' + suffix}">
+                Last Name
+                <em class="req">*</em>
+            </label>
+            <input
+                th:id="*{'last-name-' + suffix}"
+                class="edit-field form-control js-form-control"
+                size="55"
+                type="text"
+                name="address.lastName"
+                th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.lastName : ''}"
+                aria-required="true"
+                maxlength="120"
+            />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <label th:for="*{'street-address1-' + suffix}">
+                Address
+                <em class="req">*</em>
+            </label>
+            <input
+                th:id="*{'street-address1-' + suffix}"
+                class="edit-field form-control js-form-control"
+                size="55"
+                type="text"
+                name="address.addressLine1"
+                th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.addressLine1 : ''}"
+                aria-required="true"
+                maxlength="35"
+            />
+        </div>
+        <div class="col-sm-6 form-group">
+            <label th:for="*{'street-address2-' + suffix}">Address Line 2 (optional)</label>
+            <input
+                th:id="*{'street-address2-' + suffix}"
+                class="edit-field form-control js-form-control"
+                size="55"
+                type="text"
+                name="address.addressLine2"
+                th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.addressLine2 : ''}"
+                aria-required="false"
+                maxlength="35"
+            />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <label th:for="*{'city-' + suffix}">
+                City
+                <em class="req">*</em>
+            </label>
+            <input
+                th:id="*{'city-' + suffix}"
+                class="edit-field form-control js-form-control"
+                size="55"
+                type="text"
+                name="address.city"
+                th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.city : ''}"
+                aria-required="true"
+                maxlength="30"
+            />
+        </div>
+        <div class="col-sm-3 form-group">
+            <label th:for="*{'state-' + suffix}">
+                State
+                <em class="req">*</em>
+            </label>
+            <div class="o-select_wrap">
+                <select
+                    th:id="*{'state-' + suffix}"
+                    class="o-select js-address-state js-form-control"
+                    th:attr="data-placeholder=#{checkout.shipping.address.state}"
+                    name="address.stateProvinceRegion"
+                    aria-required="true"
+                >
+                    <th:block th:with="addressState=*{customerAddress?.address?.stateProvinceRegion}">
+                        <option
+                            th:selected="*{customerAddress == null or customerAddress.address == null or addressState == null ? 'true' : 'false'}"
+                            value=""
+                            th:text="#{checkout.shipping.address.state}"
+                        >
+                            State
+                        </option>
+                        <option
+                            th:each="state : ${states}"
+                            th:value="${state.alternateAbbreviation}"
+                            th:text="${state.name}"
+                            th:selected="${addressState == state.alternateAbbreviation ? 'true' : 'false'}"
+                        ></option>
+                    </th:block>
+                </select>
+                <b class="dropdown" role="presentation"></b>
+            </div>
+        </div>
+        <div class="col-sm-3 form-group">
+            <label th:for="*{'zip-code-' + suffix}">
+                Zip Code
+                <em class="req">*</em>
+            </label>
+            <input
+                th:id="*{'zip-code-' + suffix}"
+                class="edit-field form-control js-form-control"
+                size="20"
+                type="text"
+                name="address.postalCode"
+                th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.postalCode : ''}"
+                aria-required="true"
+                maxlength="5"
+            />
+        </div>
+    </div>
+    <div class="row">
+        <input
+            class="js-zip-four"
+            type="hidden"
+            name="address.zipFour"
+            th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.zipFour : null}"
+        />
+        <input
+            class="js-verification-level"
+            type="hidden"
+            name="address.verificationLevel"
+            th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.verificationLevel : null}"
+        />
+        <input
+            class="js-business"
+            type="hidden"
+            name="address.business"
+            th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.business : false}"
+        />
+        <input
+            class="js-address-default"
+            type="hidden"
+            name="address.default"
+            th:value="*{customerAddress != null and customerAddress.address != null ? customerAddress.address.default : false}"
+        />
+        <input
+            class="js-customer-address-id"
+            type="hidden"
+            name="customerAddressId"
+            th:value="*{customerAddress?.id}"
+        />
+        <input
+            class="js-customer-address-name"
+            type="hidden"
+            name="customerAddressName"
+            th:value="*{customerAddress?.addressName}"
+        />
+        <p class="col-xs-12 text-red js-update-address-error hidden">
+            There was an error submitting the form. Please try again.
+        </p>
+        <div class="save-cncl-btn">
+            <button class="btn-green-lg js-address-submit" type="submit">Save</button>
+            <a href="javascript:;" class="js-cancel-form cancel-btn">Cancel</a>
+        </div>
+    </div>
+</blc:form>

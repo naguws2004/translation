@@ -1,0 +1,142 @@
+<!-- prettier-ignore -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var requiredBase = /*[[${requiredBase}]]*/ false;
+    var requiredEngine = /*[[${requiredEngine}]]*/ false;
+    var uriDescriptorDTO = JSON.parse(/*[[${uriDescriptorDTO}]]*/ '{}');
+    window._ost.isNoResultsPage = true;
+    /*]]>*/
+</script>
+<script>
+    var livePersonChecker = setInterval(() => {
+        if (typeof lpTag === 'undefined') {
+            return
+        } else {
+            clearInterval(livePersonChecker)
+            if (lpTag) {
+                lpTag.sdes = lpTag.sdes || []
+                lpTag.sdes.push({
+                    type: 'error', // MANDATORY
+                    error: {
+                        message: 'No search results' // THE ERROR MESSAGE
+                    }
+                })
+            }
+        }
+    }, 1e3)
+    setTimeout(() => {
+        clearInterval(livePersonChecker)
+    }, 40e3)
+</script>
+<div class="col-xs-12 plp-no-results-container">
+    <div th:if="${interchangeSearch}" class="interchange-banner interchange-banner--no-results">
+        <th:block th:include="/catalog/partials/banner-interchange-search-results" />
+    </div>
+    <div th:unless="${interchangeSearch}" class="interchange-banner interchange-banner--no-results">
+        <th:block th:include="/catalog/partials/banner-interchange-search" />
+    </div>
+    <div th:if="${#lists.isEmpty(childCategories)}" class="plp-container">
+        <div class="plp-no-results__banner">
+            <div class="plp-no-results__banner--container">
+                <blc:content-zone name="Product Banner Content Zone 1"></blc:content-zone>
+                <blc:content-zone name="Product Banner Content Zone 2"></blc:content-zone>
+            </div>
+        </div>
+        <th:block th:include="catalog/partials/did-you-mean" />
+        <div class="plp-footer plp-no-results" th:inline="text">
+            <div class="plp-no-results-header">
+                <strong>
+                    <th:block
+                        th:if="${customer.currentEpcGarageVehicle == null}"
+                        th:text="#{plp.noResultsHeader.noVehicle}"
+                    >
+                        We're sorry, no results were found
+                    </th:block>
+                    <th:block
+                        th:if="${customer.currentEpcGarageVehicle != null}"
+                        th:text="#{plp.noResultsHeader.vehicle}"
+                    >
+                        We're sorry, no results were found for your selected vehicle
+                    </th:block>
+                </strong>
+            </div>
+            <div th:text="#{plp.noResultsBody}">
+                Please try a different search term, check/clear your selected vehicle or check out
+                our suggestions below.
+            </div>
+            <no-results-typeahead></no-results-typeahead>
+            <no-results-categories></no-results-categories>
+            <div class="plp-no-results-min__header">
+                <strong th:text="#{plp.noResultsSuggestBody}">
+                    Contact one of our professional parts people to help locate the item.
+                </strong>
+            </div>
+            <div class="block-contact-us">
+                <th:block th:if="${selectedStore}" th:object="${selectedStore}">
+                    <a
+                        th:href="'tel:' + ${#oap.unMaskPhone(selectedStore.address?.phonePrimary.phoneNumber)}"
+                        class="block-contact-us__item block-contact-us__phone-call"
+                    >
+                        <svg
+                            aria-hidden="true"
+                            class="block-contact-us__item__icon"
+                            width="80"
+                            height="35"
+                        >
+                            <title>Phone</title>
+                            <use href="#shape-contact-phone" />
+                        </svg>
+                        <span class="text-green">Call</span>
+                    </a>
+                </th:block>
+                <th:block th:unless="${selectedStore}">
+                    <a
+                        href="tel:+18883277153"
+                        class="block-contact-us__item block-contact-us__phone-call"
+                    >
+                        <svg
+                            aria-hidden="true"
+                            class="block-contact-us__item__icon"
+                            width="80"
+                            height="35"
+                        >
+                            <title>Phone</title>
+                            <use href="#shape-contact-phone" />
+                        </svg>
+                        <span class="text-green">Call</span>
+                    </a>
+                </th:block>
+                <a href="/contact-us" class="block-contact-us__item block-contact-us__phone-link">
+                    <svg
+                        aria-hidden="true"
+                        class="block-contact-us__item__icon"
+                        width="80"
+                        height="35"
+                    >
+                        <title>Phone</title>
+                        <use href="#shape-contact-phone" />
+                    </svg>
+                    <span class="text-green">Call</span>
+                </a>
+                <a
+                    href="http://oreillyauto.custhelp.com/app/ask"
+                    class="block-contact-us__item text-green"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Email - New Window"
+                >
+                    <svg
+                        aria-hidden="true"
+                        class="block-contact-us__item__icon"
+                        width="80"
+                        height="35"
+                    >
+                        <title>Email</title>
+                        <use href="#shape-contact-email" />
+                    </svg>
+                    <span class="text-green">Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

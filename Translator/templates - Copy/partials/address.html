@@ -1,0 +1,74 @@
+<th:block th:fragment="address">
+    <label
+        th:if="${isLabel == true}"
+        th:for="${'candidateAddress' + addressStat.index}"
+        class="candidate-address-label"
+    >
+        <th:block th:replace="partials/address :: address-text"></th:block>
+    </label>
+    <th:block th:if="${isLabel == false}">
+        <th:block th:replace="partials/address :: address-text"></th:block>
+    </th:block>
+    <div class="js-address">
+        <input
+            type="hidden"
+            name="address.zipFour"
+            th:value="${address.zipFour != null ? address.zipFour : null}"
+        />
+        <input
+            type="hidden"
+            name="address.verificationLevel"
+            th:value="${address.verificationLevel != null ? address.verificationLevel : null}"
+        />
+        <input
+            type="hidden"
+            name="address.business"
+            th:value="${address.business != null ? address.business : false}"
+        />
+        <input
+            type="hidden"
+            name="address.id"
+            th:value="${address.id != null ? address.id : null}"
+        />
+        <input type="hidden" value="US" name="address.isoCountryAlpha2" />
+    </div>
+</th:block>
+
+<div
+    th:fragment="address-text"
+    class="address"
+    th:inline="text"
+    th:attr="data-address-id=${id}, data-state=${address.stateProvinceRegion}"
+>
+    <th:block th:if="${address.fullName}">
+        <strong><span class="full-name">[[${address.fullName}]]</span></strong>
+        <br />
+    </th:block>
+    <th:block th:if="${address.fullName == null} and ${address.firstName} and ${address.lastName}">
+        <strong>
+            <span class="first-last-name">[[${address.firstName}]] [[${address.lastName}]]</span>
+        </strong>
+        <br />
+    </th:block>
+    <th:block th:if="${companyName}">
+        <strong><span class="js-company-name">[[${address.companyName}]]</span></strong>
+        <br />
+    </th:block>
+    <span class="js-addr1">[[${address.addressLine1}]]</span>
+    <br />
+    <span class="js-addr2" th:if="${address.addressLine2} and ${address.addressLine2 != ''}">
+        [[${address.addressLine2}]]
+        <br />
+    </span>
+    <th:block
+        th:with="zipComplete=${address.zipFour != null and address.zipFour != '' ? address.postalCode + '-' + address.zipFour : address.postalCode}"
+    >
+        <span class="js-city-state-zip">
+            [[${address.city}]],&nbsp;[[${address.stateProvinceRegion}]]&nbsp;[[${zipComplete}]]
+        </span>
+    </th:block>
+    <th:block th:unless="${address.phonePrimary == null}">
+        <br />
+        <span>[[${#oap.maskPhone(address.phonePrimary.phoneNumber)}]]</span>
+    </th:block>
+</div>

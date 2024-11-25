@@ -1,0 +1,41 @@
+<th:block th:if="${ymmseListOrderItemMap}">
+    <cart-shipping-estimate-data-loader></cart-shipping-estimate-data-loader>
+    <th:block th:each="key : ${ymmseListOrderItemMap.keySet()}">
+        <div
+            class="product-container product-container--cart js-product-container"
+            th:attr="data-same-day-eligible=${isCartDoorDashEligible}"
+            th:with="needsCheckFitButton=${!#strings.equals(key.get(1), 'Non Vehicle Specific')}"
+        >
+            <h2 class="vehicle-heading js-vehicle-heading" th:inline="text">
+                [[${key.get(1)}]]
+            </h2>
+            <th:block
+                th:each="item : ${ymmseListOrderItemMap.get(key)}"
+                th:with="
+                    isDiscrete=${#Cart.isDiscrete(item)},
+                    productName=${productNumberNameMap.get(productLineCodeItemNumberMap.get(item.product))}"
+            >
+                <th:block
+                    th:if="${isDiscrete}"
+                    th:include="cart/partials/cart-product"
+                    th:with="
+                        itemMaster=${itemMastersMap.get(productLineCodeItemNumberMap.get(item.product))},
+                        availPickup=${availPickupMap != null ? availPickupMap.get(item.product.id).getAvailPickup() : true},
+                        inStoreNow=${availPickupMap != null ? availPickupMap.get(item.product.id).getInStoreNow() : true},
+                        pickupTime=${availPickupMap?.get(item.product.id)?.getPickupTime()},
+                        availShip=${availShipMap != null? availShipMap.get(item.product.id) : true},
+                        flightRestricted=${itemMaster?.flightRestricted},
+                        blockShipToHome=${itemMaster?.blockShipToHome},
+                        blockPickupInStores=${itemMaster?.blockStorePickup},
+                        twoDayAvailability=${twoDayAvailabilityMap != null ? twoDayAvailabilityMap.get(item.product.id) : false},
+                        threeDayAvailability=${threeDayAvailabilityMap != null ? threeDayAvailabilityMap.get(item.product.id) : false},
+                        storeRestricted=${pickupRestrictionMap.get(item.product.id)},
+                        inventoryUnavailable=${inventoryUnavailableMap.get(item.product.id)},
+                        id=${item.product.id},
+                        specialOrder=${specialOrderMap != null ? specialOrderMap.get(item.product.id) : false}"
+                />
+                <th:block th:unless="${isDiscrete}" th:include="cart/partials/cart-non-discrete" />
+            </th:block>
+        </div>
+    </th:block>
+</th:block>

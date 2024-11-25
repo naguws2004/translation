@@ -1,0 +1,50 @@
+<div class="row" th:if="${featuredVideo != null}">
+    <div class="featured-video__container">
+        <div class="col-md-6">
+            <div class="video-container" th:with="videoKey=${featuredVideo.link + '?rel=0'}">
+                <iframe
+                    th:if="${featuredVideo.link eq featuredVideo.thumbnail}"
+                    style="width: 560px; height: 315px; border: 0;"
+                    th:attr="data-video-id=${videoKey}"
+                    th:src="${'https://www.youtube.com/embed/' + videoKey}"
+                    allowfullscreen="true"
+                    class="js-video-showcase"
+                    allow="autoplay"
+                ></iframe>
+                <a
+                    class="js-showcase-video-custom-thumbnail"
+                    th:if="${featuredVideo.link ne featuredVideo.thumbnail}"
+                    href="#"
+                    th:attr="data-video-id=${videoKey}"
+                >
+                    <img
+                        width="560"
+                        height="315"
+                        th:src="${featuredVideo.thumbnail}"
+                    />
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="video-desc_container">
+                <div class="video-desc_text">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="video__title" th:text="${featuredVideo.title}"></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p th:text="${'Published on ' + #dates.format(featuredVideo.publishedDate, 'MMM dd, yyyy')}"></p>
+                            <p th:utext="${featuredVideo.description}"></p>
+                        </div>
+                    </div>
+                </div>
+                <!--/* This will be added back in Phase 2 */-->
+                <div class="video-social_container">
+                    <div id="jsYoutubeSubscribe"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

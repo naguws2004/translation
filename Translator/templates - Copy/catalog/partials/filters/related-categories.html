@@ -1,0 +1,39 @@
+<th:block th:remove="tag" th:fragment="ajax">
+    <div class="plp-refine js-facet_container">
+        <h3 class="plp-refine-heading1 js-facet_mobile" th:inline="text">
+            [[#{facet.categories.header.related}]]
+            <svg class="facet_arrow" width="13" height="13">
+                <use href="#shape-down-arrow"></use>
+            </svg>
+        </h3>
+        <div class="plp-refine_wrapper">
+            <ul th:class="${#lists.size(relatedPartTypes) gt 10} ? 'plp-refine_list js-expand-list' : 'plp-refine_list'"
+                th:classappend="js-facet_list" th:attr="aria-label='Filter by ' + #{facet.categories.header.related}">
+                <li th:each="relatedPartType : ${relatedPartTypes}"
+                    th:classappend="${relatedPartTypeStat.index gt 10 ? 'hidden' : ''}" th:inline="text">
+                    <a th:href="@{${relatedPartTypesUrlMap.get(relatedPartType.partTypeId)}}"
+                        th:attr="aria-label=${relatedPartType.name} + 'filter'">
+                        [[${relatedPartType.name}]]
+                    </a>
+                </li>
+            </ul>
+            <button th:if="${#lists.size(relatedPartTypes) gt 10}"
+                class="js-expand-list-toggle toggle-expand is-see-more" aria-expanded="false" th:inline="text">
+                <span th:attr="aria-label=#{category.related.more} + ' ' + #{facet.categories.header.related}"
+                    class="text-more">
+                    [[#{category.related.more}]]
+                    <svg width="9" height="6">
+                        <use href="#shape-down-arrow" />
+                    </svg>
+                </span>
+                <span th:attr="aria-label=#{category.related.less} + ' ' + #{facet.categories.header.related}"
+                    class="text-less">
+                    [[#{category.related.less}]]
+                    <svg width="9" height="6">
+                        <use href="#shape-up-arrow" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </div>
+</th:block>

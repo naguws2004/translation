@@ -1,0 +1,88 @@
+<th:block layout:decorator="layout/account-layout" th:with="currentPageTitle=#{account.statements.title}">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div class="view-statement-wrap">
+
+            <th:block th:if="${noStmtResponse eq false}">
+                <div class="past-statement_account-number" th:attr="data-account=${accountNumber}"></div>
+                <div class="statement-sum_info-wrap">
+                    <div class="col-md-6">
+                        <div class="view-statement-section-wrap cust-info">
+                            <h4 class="view-statement-title">
+                                <span th:text="#{account.statements.custInfo}">not the Customer Information</span>
+                            </h4>
+                            <div class="statement-address-wrap">
+                                <div th:text="${address.name}">name</div>
+                                <div th:text="${address.addr2}">address</div>
+                                <div th:text="${address.city + ', ' + address.state + ' ' + address.zip}">city state zip</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="view-statement-section-wrap"><!-- statement summary-->
+                            <h4 class="view-statement-title">
+                                <span th:text="#{account.statements.summary}">summary of the statements</span>
+                            </h4>
+                            <div class="statement_acount-date">
+                                <div class="">
+                                    Customer Number <strong th:text="${statement.accountNumber}" class="statement-info-val"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <p class="statement-note">
+                            NOTE: You will need Adobe Acrobat Reader to view the PDF versions.
+                        </p>
+                    </div>
+                </div>
+                <p class="mobile-table-note">
+                    * The full tables can be viewed by scrolling left and right.
+                </p>
+
+                <h4 class="view-statement-title">
+                    <span th:text="#{account.statements.stmtDetails}"></span>
+                </h4>
+                <div class="table-responsive">
+                    <table class="statement-table table">
+                        <tr>
+                            <th>Date</th>
+                            <th>Trans #</th>
+                            <th>PO #</th>
+                            <th>Inv Amount</th>
+                        </tr>
+                        <th:block th:each="i : ${statement.invoices}">
+                            <tr>
+                                <td>
+                                    <span th:text="${i.invoiceDate}"></span>
+                                </td>
+                                <td>
+                                    <th:block th:if="${#oap.isValidInvoiceNumber(i.invoiceNumber, statement.type)}">
+                                        <a th:href="@{${'/account/statements/pdfInvoice/' + statement.accountNumber + '/' + i.invoiceNumber + '/' + #dates.format(i.invoiceDate, 'yyyy-MM-dd') + '/false'}}"
+                                           target="_blank" class="green statement-link">
+                                            <span th:text="${i.invoiceNumber}"></span>
+                                        </a>
+                                    </th:block>
+                                    <th:block th:unless="${#oap.isValidInvoiceNumber(i.invoiceNumber, statement.type)}">
+                                            <span th:text="${i.invoiceNumber}"></span>
+                                    </th:block>
+
+                                </td>
+                                <td>
+                                    <span th:text="${i.customerOrderNumber}"></span>
+                                </td>
+                                <td>
+                                    $ <th:block th:if="${i.creditMemo}">-</th:block><span th:text="${#numbers.formatDecimal(i.invoiceTotal, 0, 2)}"></span>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+            </th:block>
+            <th:block th:if="${noStmtResponse}">
+                <div>
+                    There are no invoices to view
+                </div>
+            </th:block>
+        </div>
+    </th:block>
+</th:block>

@@ -1,0 +1,38 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <title th:text="#{createAccount.title}"></title>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="container">
+            <!-- prettier-ignore -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                /*[+
+                window._accountOwner = [[${account}]];
+                +]*/
+                /*]]>*/
+            </script>
+            <div class="row">
+                <section class="col-sm-12 auth-wrap--mid">
+                    <div class="create-account-title">
+                        <h1 class="section-title" th:text="#{createAccount.createAccount}">
+                            Create an Account
+                        </h1>
+                        <p class="section-subtitle">
+                            Already have an account?
+                            <a
+                                href="/signin"
+                                data-qa="signin-link"
+                                class="create-account_sign-in orly-createaccount-signin-link"
+                            >
+                                Sign In
+                            </a>
+                        </p>
+                        <privacy-links></privacy-links>
+                    </div>
+                    <div id="create-an-account"></div>
+                </section>
+            </div>
+        </div>
+    </fragment>
+</th:block>

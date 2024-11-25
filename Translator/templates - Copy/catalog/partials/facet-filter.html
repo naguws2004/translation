@@ -1,0 +1,80 @@
+<div th:remove="tag">
+
+    <!-- Active facets -->
+    <div th:each="searchFacetDto : ${facets}" th:if="${searchFacetDto.active}" class="plp-refine plp-refine--bordered">
+        <h2 th:if="${searchFacetDto.facet.label}" class="plp-refine-heading1" th:text="${searchFacetDto.facet.label}"></h2>
+        <h2 th:unless="${searchFacetDto.facet.label}" class="plp-refine-heading1" th:text="${searchFacetDto.facet.fieldType.indexField.field.friendlyName}"></h2>
+        <div class="plp-refine_wrapper">
+            <ul class="plp-refine_list plp-refine_list--removable">
+                <li th:each="facetValue : ${searchFacetDto.facetValues}" th:if="${facetValue.active}">
+                    <!-- Facet Value display fragment -->
+                    <span th:remove="tag" th:fragment="facet-value-display">
+                        <span th:if="${facetValue.value != null}" th:remove="tag" th:text="#{${facetValue.value}}"></span>
+                        <span th:unless="${facetValue.value != null}" th:remove="tag">
+                            <span blc:price="${facetValue.minValue}" th:remove="tag"></span>
+                            <span th:text="${facetValue.maxValue == null ? ' __#{facet.orMore}__ ' : ' - '}" th:remove="tag"></span>
+                            <span th:if="${facetValue.maxValue != null}" blc:price="${facetValue.maxValue}" th:remove="tag"></span>
+                        </span>
+                    </span>
+                    <a th:if="${searchFacetDto.facet.canMultiselect}"
+                       href="javascript:void(0);"
+                       class="remove_facet_values facet-multi-select">
+                        [ <span th:text="#{facet.edit}">Edit</span> ]
+
+                        <input type="hidden" th:value="${searchFacetDto.abbreviation}"/>
+                    </a>
+                    <a blc:removefacetvalueslink="${searchFacetDto}" class="remove_facet_values">[&nbsp;[[#{cart.clear}]]&nbsp;]</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Inactive facets -->
+    <div th:each="searchFacetDto : ${facets}" th:unless="${searchFacetDto.active or searchFacetDto.facetValues.isEmpty()}" class="plp-refine">
+
+        <div>
+            <h2 th:if="${searchFacetDto.facet.label}" class="plp-refine-heading1" th:text="${searchFacetDto.facet.label}"></h2>
+            <h2 th:unless="${searchFacetDto.facet.label}" class="plp-refine-heading1" th:text="${searchFacetDto.facet.fieldType.indexField.field.friendlyName}"></h2>
+        </div>
+        <div class="plp-refine_wrapper">
+            <ul class="plp-refine_list" style="position:relative;margin-bottom: 30px;">
+                <li th:each="facetValue, iterator : ${searchFacetDto.facetValues}" style="position:relative" th:class="${facetValue.active}? 'active'" th:if="${!searchFacetDto.showQuantity or facetValue.quantity > 0}">
+                    <a th:if="${iterator.index lt 10}" class="facet-less maker"  blc:togglefacetlink="${facetValue}">
+
+                        <span th:substituteby="catalog/partials/facet-filter :: facet-value-display" />
+
+                        <span class="facetCount" style="position:absolute;right:0;" th:if="${searchFacetDto.showQuantity and !searchFacetDto.active}" th:text="${'(' + facetValue.quantity + ')'}"></span>
+                        <i th:if="${facetValue.active}" class="icon-remove"></i>
+                    </a>
+                    <a th:unless="${iterator.index lt 10}" class="facet-more maker" style="display:none" blc:togglefacetlink="${facetValue}">
+
+                        <span th:substituteby="catalog/partials/facet-filter :: facet-value-display" />
+
+                        <span class="facetCount" style="position:absolute;right:0;" th:if="${searchFacetDto.showQuantity and !searchFacetDto.active}" th:text="${'(' + facetValue.quantity + ')'}"></span>
+                        <i th:if="${facetValue.active}" class="icon-remove"></i>
+                    </a>
+                </li>
+                <li th:unless="${searchFacetDto.facetValues.size() lt 10 }">
+                    <a class="facet-show-more" style="font-size:18px;" href="javascript:void(0)" th:text="#{facet.showMore}">Show More...</a>
+                </li>
+                <li th:unless="${searchFacetDto.facetValues.size() lt 10}">
+                    <a class="facet-show-less" style="font-size:18px;display:none" href="javascript:void(0)" th:text="#{facet.showLess}">Show Less...</a>
+                </li>
+                <li>
+                    <a th:if="${searchFacetDto.facet.canMultiselect}"
+                       href="javascript:void(0);" style="color:#009d57;text-decoration:none;position:absolute;left:0;"
+                       class="maker multiple facet-multi-select">
+                        <span th:text="#{facet.chooseMultiple}">Choose Multiple...</span>
+                        <input type="hidden" th:value="${searchFacetDto.abbreviation}"/>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <!-- Multiselect facets -->
+    <div th:each="searchFacetDto : ${facets}" th:if="${searchFacetDto.facet.canMultiselect}" class="plp-refine">
+        <th:block th:object="${searchFacetDto}" th:include="catalog/partials/multi-select-modal" />
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="candidate-original-address">
+    <div class="row">
+        <div class="candidate-address-header">
+            <button class="button button--large modal__close" data-dismiss="modal">
+                <svg class="button__icon" aria-labelledby="candidate-address-close-button">
+                    <title th:text="#{checkout.candidate.modal.close}" id="candidate-address-close-button">Close Modal</title>
+                    <use href="#shape-remove"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="col-sm-12">
+            <th:block th:if="${errorType eq '2' or errorType eq '4'}">
+                <span th:if="${errorMessage}" th:text="${errorMessage}"></span>
+            </th:block>
+            <h3 class="js-modal-label" th:text="#{account.profile.cantFind}">Oops, we couldn't find the shipping
+                address:</h3>
+            <div class="js-original-input">
+                <th:block th:replace="partials/address :: address(isLabel=false,address=${originalAddress})"/>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <button type="button" class="candidate-address-gray-button js-use-anyway"
+                    th:text="#{account.profile.useAnyway}">Use Anyway
+            </button>
+            <button type="button" class="candidate-address-gray-button js-use-original hidden"
+                    th:text="#{account.profile.understand}">I Understand, Use Anyway
+            </button>
+            <button th:if="${#lists.isEmpty(candidateAddresses)}" type="button"
+                    class="candidate-address-green-button js-modify"
+                    th:text="#{account.profile.modify}">Modify Address
+            </button>
+        </div>
+        <div class="col-sm-12 hidden js-use-original-text use-original-text">
+            <div class="col-sm-1">
+                <span th:text="#{account.profile.note}">Note:</span>
+            </div>
+            <div class="col-sm-11">
+                <p th:text="#{account.profile.understandNote}">
+                    Since we could not validate the address you entered using it may delay your
+                    order and/or result in O&#8217;Reilly Auto Parts contacting you to validate the
+                    address.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:if="${not #lists.isEmpty(candidateAddresses)}" class="candidate-address-suggestions">
+    <div class="row">
+        <div class="col-sm-12"><h3 th:text="#{checkout.candidate.modal.however}">However, we did find:</h3></div>
+        <th:block th:each="address, addressStat : ${candidateAddresses}">
+            <div class="col-sm-12 col-md-6">
+                <input type="radio"
+                       name="address"
+                       th:checked="${addressStat.index eq 0}"
+                       th:id="${'candidateAddress' + addressStat.index}"
+                       th:value="${addressStat.index}"/>
+                <th:block th:replace="partials/address :: address(isLabel=true,address=${address})"/>
+            </div>
+        </th:block>
+        <div class="col-sm-12">
+            <button type="button" class="candidate-address-green-button js-use-new" th:text="#{checkout.candidate.modal.useSuggest}">Use Suggested</button>
+        </div>
+    </div>
+</div>

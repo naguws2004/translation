@@ -1,0 +1,53 @@
+<th:block layout:decorator="layout/account-layout" th:with="currentPageTitle=#{account.statements.title}">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div class="my-past-stmt-wrap">
+            <div class="past-statements-back-btn">
+                <a href="/account/statements" class="statements-back">
+                    <svg>
+                        <use href="#shape-left-arrow"></use>
+                    </svg>
+                    <span th:text="#{account.statements.back}">Back to Statements</span>
+                </a>
+            </div>
+            <div>
+                <h4 class="online-statements-header">
+                    <span class="online-statements-header" th:text="#{account.statements.statementsFor}">
+                        Statements For
+                    </span>
+                    "<span th:text="${nickname}">Nickname</span>"
+                </h4>
+                <h5 class="online-statements-account">
+                    <span class="account-text">Customer Account</span>
+                    <span class="account-number" th:attr="data-account=${accountNumber}" th:text="${accountNumber}"></span>
+                </h5>
+                <p th:text="#{account.statements.viewAndAccess}"></p>
+            </div>
+
+            <table class="statements-table">
+                <tr class="table-header">
+                    <th>Statement Date</th>
+                    <th>Current</th>
+                    <th>Total Amount</th>
+                    <th>Access Statement</th>
+                </tr>
+                <th:block th:each="statement : ${statements}">
+                    <tr>
+                        <td>
+                            <span class="date" th:text="${statement.statementJUDate}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${'$' + #numbers.formatDecimal(statement.currentAmountDue, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${'$' + #numbers.formatDecimal(statement.totalBalance, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+                        </td>
+                        <td>
+                            <a class="green js-view-print-statements" th:text="#{account.statements.viewPrint}" th:href="@{${'/account/statements/view/' + accountNumber + '/' + statement.statementJUDate}}">View / Print Statement
+                            </a>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+    </th:block>
+</th:block>

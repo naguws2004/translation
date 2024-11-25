@@ -1,0 +1,33 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head
+        th:with="vehicleText=${customer.selectedGarageItem != null ? #oap.createBaseGarageVehicleName(customer.selectedGarageItem) : ''}"
+    >
+        <th:block th:include="layout/partials/bazaarvoice" th:with="parent='search'"></th:block>
+        <!-- prettier-ignore -->
+        <script th:inline="javascript" th:if="*{products}">
+            /*<![CDATA[*/
+            var requiredBase = /*[[${requiredBase}]]*/ false;
+            var requiredEngine = /*[[${requiredEngine}]]*/ false;
+            var uriDescriptorDTO = JSON.parse(/*[[${uriDescriptorDTO}]]*/ '{}');
+            /*]]>*/
+        </script>
+    </head>
+    <th:block layout:fragment="content">
+        <div class="site-breadcrumb js-site-breadcrumb">
+            <div class="site-breadcrumb_wrapper js-site-breadcrumb_wrapper">
+                <div th:if="${breadcrumbs}" style="display: block"></div>
+                <div
+                    class="site-breadcrumb_slider js-site-breadcrumb_slider"
+                    th:include="catalog/partials/breadcrumbs"
+                ></div>
+            </div>
+        </div>
+        <th:block th:include="layout/partials/page-vs" />
+        <th:block th:include="catalog/partials/product-list" />
+        <div th:if="*{#lists.isEmpty(products)}">
+            <div>
+                <th:block th:include="catalog/partials/empty-product-list" />
+            </div>
+        </div>
+    </th:block>
+</th:block>

@@ -1,0 +1,77 @@
+﻿Building a Simple Chatbot with React and Grok API
+
+Nageshkumar Y
+4 min read
+Just now
+
+This article explores a React application that utilizes the Grok API to create a basic chatbot interface. The application allows users to enter questions, which are then sent to Grok’s AI model for processing and generating a response.
+
+Code
+
+Understanding the Code
+The code utilizes several key components:
+
+Libraries:
+
+React: Provides a framework for building user interfaces.
+useState: A React hook for managing component state.
+axios: A library for making HTTP requests to APIs.
+State Variables:
+
+question: Stores the user's entered question.
+answer: Stores the response received from the Grok API.
+isLoading: Indicates if the application is fetching a response.
+Functions:
+
+getAnswerFromAPI: Makes a POST request to the Grok API endpoint, sending the user question and retrieving the AI-generated response.
+handleSubmit: Handles the form submission, triggering the API call and displaying loading and error messages as needed.
+handleReset: Resets the question and answer fields.
+handleQuestionChange: Updates the state with the user's entered question as they type.
+API Interaction:
+
+The application interacts with the Grok API using axios, sending the user question and model configuration details.
+The configuration specifies the “grok-beta” model for text generation and sets the “temperature” parameter to 0 for a more factual response.
+User Interface:
+
+The application renders a simple interface consisting of:
+A header displaying “Simple Chatbot”.
+A large, read-only text area showcasing the AI response.
+A smaller text area for users to enter their questions.
+“Submit Question” and “Reset” buttons to interact with the chatbot.
+Functionality Breakdown
+When the user starts typing a question, the handleQuestionChange function updates the question state variable with the current text.
+
+Clicking “Submit Question” triggers the handleSubmit function.
+
+It checks if the question field is empty or contains only whitespace. If so, it exits without processing.
+Otherwise, it sets isLoading to true and displays "Loading..." in the answer field.
+It calls getAnswerFromAPI to send the question to Grok and retrieve the response.
+Upon receiving a response from Grok:
+On success:
+It extracts the generated answer from the response and updates the answer state with the formatted (trimmed) text.
+On failure:
+It updates the answer state with an error message.
+Finally, it sets isLoading back to false, indicating the request completion.
+
+Clicking “Reset” triggers the handleReset function, clearing both the question and answer fields.
+
+Running the Application
+Prerequisites:
+
+Node.js and npm (or yarn) installed on your system.
+A Grok API account with a valid access token stored in the environment variable REACT_APP_GROK_API_TOKEN.
+Installation:
+
+Clone or download the project code.
+Run npm install or yarn install to install the required dependencies.
+Running the App:
+
+Run npm start or yarn start to start the development server.
+The application should be accessible at http://localhost:3000/ in your browser.
+Conclusion
+This React application demonstrates a simple approach to integrating with an AI API for chatbot functionality. You can further enhance this application by:
+
+Adding visual feedback for loading and error states.
+Styling the UI for a more polished look and feel.
+Exploring user experience improvements like question history or context retention.
+This is a basic example, and integrating more advanced AI features or a different API would require further code modifications. However, it serves as a valuable starting point for building interactive chatbots with React and AI services.

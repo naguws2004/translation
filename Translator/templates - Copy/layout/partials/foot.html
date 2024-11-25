@@ -1,0 +1,5 @@
+<!-- build:process -->
+<div th:if="${#brc.sandboxMode}" th:remove="tag">
+  <a id="adminDeepLink" th:unless="${#strings.isEmpty(adminDeepLink?.fullUrl)}" th:href="@{${adminDeepLink.fullUrl}}" />
+</div>
+<!-- /build -->

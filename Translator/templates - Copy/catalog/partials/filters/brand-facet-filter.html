@@ -1,0 +1,28 @@
+<th:block th:fragment="ajax">
+    <div th:if="${brandFacet} and ${brandFacet.facetValues.size() gt 1}" class="plp-refine js-facet_container">
+        <h3 class="plp-refine-heading1 js-facet_mobile" th:inline="text">
+            [[#{product.refine.brands}]]
+            <svg class="facet_arrow" width="13" height="13">
+                <use href="#shape-down-arrow"></use>
+            </svg>
+        </h3>
+        <ul th:class="${brandFacet.facetValues.size() gt 8} ? 'plp-refine_list js-expand-list' : 'plp-refine_list'"
+            th:include="/catalog/partials/filters/list-facet-values" th:classappend="js-facet_list"
+            th:object="${brandFacet}" th:attr="aria-label='Filter by ' + #{product.refine.brands}"></ul>
+        <button th:if="${brandFacet.facetValues.size() gt 8}" class="js-expand-list-toggle toggle-expand is-see-more"
+            aria-expanded="false" th:inline="text">
+            <span th:attr="aria-label=#{category.related.more} + ' ' + #{product.refine.brands}" class="text-more">
+                [[#{category.related.more}]]
+                <svg width="9" height="6">
+                    <use href="#shape-down-arrow" />
+                </svg>
+            </span>
+            <span th:attr="aria-label=#{category.related.less} + ' ' + #{product.refine.brands}" class="text-less">
+                [[#{category.related.less}]]
+                <svg width="9" height="6">
+                    <use href="#shape-up-arrow" />
+                </svg>
+            </span>
+        </button>
+    </div>
+</th:block>

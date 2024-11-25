@@ -1,0 +1,7 @@
+<th:block layout:decorator="layout/account-layout" th:with="currentPageTitle=#{account.shoppingLists.title}">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div class="row">
+            <shopping-lists></shopping-lists>
+        </div>
+    </th:block>
+</th:block>

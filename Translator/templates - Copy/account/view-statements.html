@@ -1,0 +1,179 @@
+<th:block layout:decorator="layout/account-layout" th:with="currentPageTitle=#{account.statements.title}">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div class="view-statement-wrap">
+            <div class="past-statement_account-number" th:attr="data-account=${accountNumber}"></div>
+            <div class="statement-sum_info-wrap">
+                <div class="col-md-6">
+                    <div class="view-statement-section-wrap cust-info">
+                        <h4 class="view-statement-title">
+                            <span th:text="#{account.statements.custInfo}">not the Customer Information</span>
+                        </h4>
+                        <div class="statement-address-wrap">
+                            <div th:text="${address.name}">name</div>
+                            <div th:text="${address.addr2}">address</div>
+                            <div th:text="${address.city + ', ' + address.state + ' ' + address.zip}">city state zip</div>
+                        </div>
+                    </div>
+                    <div class="view-statement-section-wrap"><!-- statement view options-->
+                        <h4 class="view-statement-title">
+                            <span th:text="#{account.statements.viewOptions}">not the right Statement View Options</span>
+                        </h4>
+                        <div class="statement-options-wrap">
+                            <th:block th:if="${statement.type eq 'Retail'}">
+                                <p>Please select how many invoices per page you want to display on your statement</p>
+                                <form class="statement-options">
+                                    <input type="radio" name="inv" value="0" checked="checked" /><span>0</span>
+                                    <input type="radio" name="inv" value="1" /><span>1</span>
+                                    <input type="radio" name="inv" value="2" /><span>2</span>
+                                    <input type="radio" name="inv" value="4" /><span>4</span>
+                                </form>
+                            </th:block>
+                            <th:block th:if="${statement.type eq 'Jobber'}">
+                                <p>Please select if you want invoices to display with your statement</p>
+                                <form class="statement-options">
+                                    <input type="radio" name="inv" value="0" checked="checked" /><span>No</span>
+                                    <input type="radio" name="inv" value="1" /><span>Yes</span>
+                                </form>
+                            </th:block>
+                        </div>
+                        <div>
+                            <a th:href="@{${'/account/statements/pdfOStatement/' + statement.accountNumber + '/' + statement.statementJUDate + '/true/'}}"
+                               class="button button--green js-view-statement-option view-statement-option">
+                                <strong>View / Print Statement</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="view-statement-section-wrap"><!-- statement summary-->
+                        <h4 class="view-statement-title">
+                            <span th:text="#{account.statements.summary}">summary of the statements</span>
+                        </h4>
+                        <div class="statement_acount-date">
+                            <div class="">
+                                Customer Number <strong th:text="${statement.accountNumber}" class="statement-info-val"></strong>
+                            </div>
+                            <div class="">
+                                Statement Date <strong th:text="${statement.statementJUDate}" class="statement-info-val"></strong>
+                            </div>
+                        </div>
+                        <div class="statement-sum row">
+                            <div class="col-xs-6">
+                                <div class="statment-sum-title">
+                                    Beginning Balance
+                                </div>
+                                <div class="statment-sum-title">
+                                    Payments
+                                </div>
+                                <div class="statment-sum-title">
+                                    Discounts Allowed
+                                </div>
+                                <div class="statment-sum-title">
+                                    Purch. / Cr. / Adj.
+                                </div>
+                                <div class="statment-sum-title statement-end-balance">
+                                    End Balance
+                                </div>
+                            </div>
+                            <div class="col-xs-6 statement-values">
+                                <div class="statement-sum-val">
+                                    <strong th:text="'$ ' + ${statement.beginBalance}"></strong>
+                                </div>
+                                <div class="statement-sum-val">
+                                    <strong th:text="'$ ' + ${statement.paymentsApplied}"></strong>
+                                </div>
+                                <div class="statement-sum-val">
+                                    <strong th:text="'$ ' + ${statement.discount}"></strong>
+                                </div>
+                                <div class="statement-sum-val">
+                                    <strong th:text="'$ ' + ${statement.currentActivity}"></strong>
+                                </div>
+                                <div class="statement-sum-val statement-end-balance">
+                                    <strong th:text="'$ ' + ${#numbers.formatDecimal(statement.endingBalance, 0, 'COMMA', 2, 'POINT')}"></strong>
+                                </div>
+                            </div>
+                            <div th:if="${billTrustLinkEnabled}" class="billTrust-payment-vs-wrap" th:inline="text" >
+                                <a target="_blank" th:href="${billTrustUrls.get(__${'statement.accountNumber'}__)}" class="button button--green js-billTrust-payment-btn view-statement-billtrust">
+                                    Make a Payment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p class="statement-note">
+                        NOTE: You will need Adobe Acrobat Reader to view the PDF versions. Be patient, large statements and large numbers of invoices could be very slow to open.
+                    </p>
+                </div>
+            </div>
+            <p class="mobile-table-note">
+                * The full tables can be viewed by scrolling left and right.
+            </p>
+            <div class="table-responsive">
+                <table class="statement-table table">
+                    <tr>
+                        <th>Current</th>
+                        <th>1-30 Days</th>
+                        <th>31-60 Days</th>
+                        <th>61-90 Days</th>
+                        <th>91 Days or More</th>
+                        <th>Total Amount Due</th>
+                    </tr>
+                    <tr>
+                        <td><span th:text="${statement.currentAmountDue}"></span></td>
+                        <td><span th:text="${statement.aging1}"></span></td>
+                        <td><span th:text="${statement.aging2}"></span></td>
+                        <td><span th:text="${statement.aging3}"></span></td>
+                        <td><span th:text="${statement.aging4}"></span></td>
+                        <td><span th:text="${statement.statementTotal}"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <h4 class="view-statement-title">
+                <span th:text="#{account.statements.stmtDetails}"></span>
+            </h4>
+            <div class="table-responsive">
+                <table class="statement-table table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Trans #</th>
+                        <th>PO #</th>
+                        <th>Description</th>
+                        <th>Inv Amount</th>
+                        <th>Open Amount</th>
+                    </tr>
+                    <th:block th:each="sli : ${statement.statementLineItems}">
+                        <tr>
+                            <td>
+                                <span th:text="${sli.transDate}"></span>
+                            </td>
+                            <td>
+                                <th:block th:if="${#oap.isValidInvoiceNumber(sli.transNumber, statement.type)}">
+                                    <a th:href="@{${'/account/statements/pdfInvoice/' + statement.accountNumber + '/' + sli.transNumber + '/' + sli.transDate + '/false'}}" target="_blank" class="green statement-link">
+                                        <span th:text="${sli.transNumber}"></span>
+                                    </a>
+                                </th:block>
+                                <th:block th:unless="${#oap.isValidInvoiceNumber(sli.transNumber, statement.type)}">
+
+                                    <span th:text="${sli.transNumber}"></span>
+                                </th:block>
+                            </td>
+                            <td>
+                                <span th:text="${sli.po}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${sli.description}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${sli.invoiceAmount}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${sli.openAmount}"></span>
+                            </td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+    </th:block>
+</th:block>

@@ -1,0 +1,160 @@
+<th:block layout:decorator="layout/account-layout">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div
+            class="js-order-data ordernumber"
+            th:with="orderNumber=${order.orderNumber},
+            rmaNumber=${rmaNumber}"
+            th:attr="data-orderNumber=${orderNumber}"
+        ></div>
+        <div class="return-complete_wrap" th:object="${rmaForm}">
+            <div class="row order-header-info non-print_section" th:inline="text">
+                <div class="return-order-numbers pull-left">
+                    <span class="order-uppercase">Order#</span>
+                    <strong class="order-bold">[[${order.orderNumber}]]</strong>
+                </div>
+                <div class="return-order-numbers pull-left">
+                    <span class="order-uppercase">Return Code -</span>
+                    <strong class="order-bold">[[${rmaNumber}]]</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-12 returns-section">
+                        <th:block th:if="${returnDetails != null}">
+                            <a
+                                href="#"
+                                class="js-show-return-instructions show-return-instructions"
+                            >
+                                Show Return Instructions
+                                <svg>
+                                    <use href="#shape-down-arrow"></use>
+                                </svg>
+                            </a>
+                        </th:block>
+                        <div class="return-instructions">
+                            <div class="return-header-wrap">
+                                <h4>Complete the following steps to return your item</h4>
+                            </div>
+                            <div class="return-steps-section">
+                                <div class="col-md-2">
+                                    <div class="return-complete return-icon">
+                                        <svg>
+                                            <use href="#shape-pack-box"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <h4 class="return-steps-section_title">Pack your return</h4>
+                                    <p th:text="#{account.purchaseHistory.orderReturnComplete.pack}"></p>
+                                    <p
+                                        th:text="#{account.purchaseHistory.orderReturnComplete.pack.bottom}"
+                                    ></p>
+                                </div>
+                            </div>
+                            <div class="return-steps-section">
+                                <div class="col-md-2">
+                                    <div class="return-complete return-icon">
+                                        <svg>
+                                            <use href="#shape-printer"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <h4 class="return-steps-section_title">Print return label</h4>
+                                    <p th:text="#{account.purchaseHistory.orderReturnComplete.label}"></p>
+                                    <div class="return-label-address" th:inline="text">
+                                        OReilly Auto Parts Returns
+                                        <br />
+                                        Return Code: [[${rmaNumber}]]
+                                        <br />
+                                        [[${returnShippingAddress.street1}]]
+                                        <p class="returnLabelAddress" th:if="${returnShippingAddress.street2}">[[${returnShippingAddress.street2}]]</p>
+                                        <br th:unless="${returnShippingAddress.street2}" />
+                                        [[${returnShippingAddress.city}]], [[${returnShippingAddress.state}]] [[${returnShippingAddress.zipcode}]]
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        class="btn-green-lg rma-print js-rma-print"
+                                    >
+                                        Print Return Information
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="return-steps-section">
+                                <div class="col-md-2">
+                                    <div class="return-complete return-icon">
+                                        <svg>
+                                            <use href="#shape-return-ship"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <h4 class="return-steps-section_title">Ship the package</h4>
+                                    <p th:text="#{account.purchaseHistory.orderReturnComplete.ship}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="return-label_print">
+                <div class="return_print-heading">
+                    Place this label on your return box.
+                </div>
+                <div class="return-label-address" th:inline="text">
+                    OREILLY AUTO PARTS RETURNS
+                    <br />
+                    Return Code: [[${rmaNumber}]]
+                    <br />
+                    [[${returnShippingAddress.street1}]]
+                    <p class="returnLabelAddress" th:if="${returnShippingAddress.street2}">[[${returnShippingAddress.street2}]]</p>
+                    <br th:unless="${returnShippingAddress.street2}" />
+                    [[${returnShippingAddress.city}]], [[${returnShippingAddress.state}]] [[${returnShippingAddress.zipcode}]]
+                </div>
+            </div>
+            <div class="row">
+                <div class="return_print-lower">
+                    <div class="return_print-heading top-margin">
+                        Put this portion of the page in your return box.
+                    </div>
+                    <div class="return_print-section_subheader">
+                        <div class="return-order-numbers pull-left" th:inline="text">
+                            <span>Order #:</span>
+                            <span>[[${order.orderNumber}]]</span>
+                        </div>
+                        <div class="return-order-numbers pull-left" th:inline="text">
+                            <span>Return Code:</span>
+                            <span>[[${rmaNumber}]]</span>
+                        </div>
+                    </div>
+                    <div class="return-items-complete">
+                        <div class="return-header-wrap">
+                            <h4>Items selected to return</h4>
+                        </div>
+                        <div class="return_print-section_header">
+                            Items selected to return
+                        </div>
+                        <div class="row return-order-row">
+                            <div class="col-xs-12 returns-section">
+                                <th:block
+                                    th:if="${rmaForm != null}"
+                                    th:include="account/partials/return-items-complete"
+                                    th:object="${rmaForm}"
+                                />
+                                <th:block
+                                    th:if="${returnDetails != null}"
+                                    th:include="account/partials/return-details"
+                                    th:object="${returnDetails}"
+                                />
+                            </div>
+                        </div>
+                        <p
+                            class="returns-note non-print_section"
+                            th:text="#{account.purchaseHistory.orderReturnComplete.note}"
+                        ></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>

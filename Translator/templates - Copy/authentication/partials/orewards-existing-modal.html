@@ -1,0 +1,16 @@
+<div class="modal-inner_container">
+    <div class="modal-inner_wrap">
+        <img class="orewards-logo_modal-small" src="/img/orewards-logo.png" alt="O'Rewards Logo"/>
+        <h2 class="rewards-existing_header" th:text="#{createAccount.oRewards.existing.link.header}">
+            Looks like you have an O'Rewards account, we'll go ahead and link it with the account you just created.
+        </h2>
+        <p th:text="#{createAccount.oRewards.existing.link.message}">
+            To complete your account set up, we have sent a verification email to you. Please check your email and click on the link included. Verification links expire in 48 hours.
+        </p>
+        <div class="existing-button_wrap">
+            <a href="#" class="btn-green-lg btn--lg col-xs-12 js-existing-continue" th:text="#{createAccount.oRewards.continue}">
+                Continue
+            </a>
+        </div>
+    </div>
+</div>

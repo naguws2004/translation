@@ -1,0 +1,77 @@
+Construire un Chatbot simple avec React et Grok API
+
+Nageshkumar Y
+4 min lire
+A l'heure actuelle
+
+Cet article explore une application React qui utilise l'API Grok pour créer une interface de chatbot basique. L'application permet aux utilisateurs de saisir des questions, qui sont ensuite envoyées au modèle d'IA de Grok pour être traitées et générer une réponse.
+
+Code
+
+Comprendre le code
+Le code utilise plusieurs éléments clés :
+
+Bibliothèques :
+
+React : Fournit un cadre pour la construction d'interfaces utilisateur.
+useState : Un crochet React pour gérer l'état des composants.
+axios : Une bibliothèque pour effectuer des requêtes HTTP vers des API.
+Variables d'état :
+
+question : Enregistre la question saisie par l'utilisateur.
+answer : Enregistre la réponse reçue de l'API Grok.
+isLoading : Indique si l'application est en train de récupérer une réponse.
+Fonctions :
+
+getAnswerFromAPI : Effectue une requête POST au point de terminaison de l'API Grok, en envoyant la question de l'utilisateur et en récupérant la réponse générée par l'IA.
+handleSubmit : Gère la soumission du formulaire, en déclenchant l'appel à l'API et en affichant les messages de chargement et d'erreur si nécessaire.
+handleReset : Réinitialise les champs de question et de réponse.
+handleQuestionChange : Met à jour l'état avec la question saisie par l'utilisateur au fur et à mesure qu'il la tape.
+Interaction API :
+
+L'application interagit avec l'API Grok à l'aide d'axios, en envoyant la question de l'utilisateur et les détails de la configuration du modèle.
+La configuration spécifie le modèle "grok-beta" pour la génération de texte et fixe le paramètre "température" à 0 pour une réponse plus factuelle.
+Interface utilisateur :
+
+L'application présente une interface simple composée des éléments suivants :
+Un en-tête affichant "Simple Chatbot".
+Une grande zone de texte en lecture seule présentant la réponse de l'IA.
+Une zone de texte plus petite pour que les utilisateurs puissent saisir leurs questions.
+Les boutons "Soumettre la question" et "Réinitialiser" permettent d'interagir avec le chatbot.
+Ventilation des fonctionnalités
+Lorsque l'utilisateur commence à taper une question, la fonction handleQuestionChange met à jour la variable d'état de la question avec le texte actuel.
+
+Le fait de cliquer sur "Soumettre la question" déclenche la fonction handleSubmit.
+
+Il vérifie si le champ de la question est vide ou s'il ne contient que des espaces. Si c'est le cas, il sort sans traitement.
+Dans le cas contraire, il fixe isLoading à true et affiche "Loading..." dans le champ de réponse.
+Il appelle getAnswerFromAPI pour envoyer la question à Grok et récupérer la réponse.
+Après avoir reçu une réponse de Grok :
+Sur la réussite :
+Il extrait la réponse générée de la réponse et met à jour l'état de la réponse avec le texte formaté (découpé).
+En cas d'échec :
+Il met à jour l'état de la réponse avec un message d'erreur.
+Enfin, il redonne à isLoading la valeur false, ce qui indique que la demande est terminée.
+
+Un clic sur "Reset" déclenche la fonction handleReset, qui efface les champs de la question et de la réponse.
+
+Exécution de l'application
+Prérequis :
+
+Node.js et npm (ou yarn) installés sur votre système.
+Un compte Grok API avec un jeton d'accès valide stocké dans la variable d'environnement REACT_APP_GROK_API_TOKEN.
+Installation :
+
+Cloner ou télécharger le code du projet.
+Exécutez npm install ou yarn install pour installer les dépendances nécessaires.
+Exécution de l'application :
+
+Exécutez npm start ou yarn start pour démarrer le serveur de développement.
+L'application devrait être accessible à l'adresse http://localhost:3000/ dans votre navigateur.
+Conclusion
+Cette application React présente une approche simple de l'intégration avec une API d'IA pour une fonctionnalité de chatbot. Vous pouvez améliorer cette application en :
+
+Ajout d'un retour visuel pour les états de chargement et d'erreur.
+Style de l'interface utilisateur pour un aspect et une sensation plus soignés.
+Explorer les améliorations de l'expérience utilisateur telles que l'historique des questions ou la conservation du contexte.
+Il s'agit d'un exemple de base, et l'intégration de fonctions d'IA plus avancées ou d'une API différente nécessiterait d'autres modifications du code. Cependant, il sert de point de départ précieux pour construire des chatbots interactifs avec React et des services d'IA.

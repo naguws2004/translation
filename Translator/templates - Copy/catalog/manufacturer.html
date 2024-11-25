@@ -1,0 +1,40 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <th:block
+            th:include="layout/partials/bazaarvoice"
+            th:with="parent='manufacturer'"
+        ></th:block>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="site-breadcrumb js-site-breadcrumb">
+            <!-- prettier-ignore -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                window._ost.plpLongDescription = /*[[${plpLongDescription}]]*/ '';
+                /*]]>*/
+            </script>
+            <div class="site-breadcrumb_wrapper js-site-breadcrumb_wrapper">
+                <div th:if="${breadcrumbs}" style="display: block"></div>
+                <div
+                    class="site-breadcrumb_slider js-site-breadcrumb_slider"
+                    th:include="catalog/partials/breadcrumbs"
+                ></div>
+            </div>
+        </div>
+        <h1
+            th:if="${manufacturerTitle}"
+            data-qa="plp-category-title"
+            class="category_title show-slim orly-plp-category-title"
+            th:inline="text"
+        >
+            [[${manufacturerTitle}]]
+        </h1>
+        <th:block th:include="layout/partials/page-vs" />
+        <th:block th:include="catalog/partials/product-list" />
+        <div th:if="*{#lists.isEmpty(products)}">
+            <div class="content-wrap">
+                <th:block th:include="catalog/partials/empty-product-list" />
+            </div>
+        </div>
+    </fragment>
+</th:block>

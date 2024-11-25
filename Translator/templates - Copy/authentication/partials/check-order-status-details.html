@@ -1,0 +1,94 @@
+<th:block th:if="${order != null and info != null}">
+    <div class="check-order-status_wrapper">
+        <h2 class="sr-only">Order Details</h2>
+        <div class="cos-controls_wrap">
+            <a href="#" class="close">
+                <svg>
+                    <use href="#shape-left-arrow"></use>
+                </svg>
+                Back
+            </a>
+            <a href="#" class="check-order-status_print js-check-order-status_print">Print</a>
+        </div>
+        <div th:inline="text" class="check-order-status_header">
+            <div class="cos_header-left">
+                <div class="order-placed">
+                    <span th:each="type : ${info.types}">
+                        [[#{account.my.orders.placed.__${type}__}]]
+                    </span>Order Placed
+                </div>
+                <div class="order-date">
+                    [[${#dates.format(order.submitDate, 'MMMM dd, YYYY')}]]
+                </div>
+            </div>
+            <div class="cos_header-right">
+                <div class="cos_right-wrapper">
+                    <div>
+                        <span class="order-number">
+                            Order# [[${order.orderNumber}]]
+                        </span>
+                    </div>
+                    <div class="invoice-number" th:if="${info.invoiceNumber != null}">
+                        <span>Invoice Number#
+                            <span>
+                                <b>[[${info.invoiceNumber}]]</b>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="order-total">
+                        Total <b blc:price="${order.total}"></b>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div th:if="${info.shippingAddress}" class="order-shipping">
+                <span>Ship To</span>&nbsp;<b>[[${info.shippingAddress.fullName}]]</b>
+            </div>
+            <div th:if="${info.storeAddress}" class="order-store">
+                <span>Store</span>&nbsp;<b>[[${info.storeAddress.addressLine1}]]</b>
+            </div>
+            <th:block th:each="type : ${info.types}">
+                <div>
+                    <th:block th:include="authentication/partials/check-order-status-group-status" th:object="${type}"/>
+                </div>
+            </th:block>
+        </div>
+        <div class="cos_group-items">
+            <th:block th:each="type : ${info.types}" th:inline="text">
+                <div class="row group-row">
+                    <div class="group-type" th:if="${#lists.size(info.types) gt 1}" th:inline="text">
+                        [[#{account.my.orders.placed.__${type}__}]]
+                    </div>
+                    <div class="cos_group-items">
+                        <div class="group-items-wrap">
+                            <th:block th:include="authentication/partials/check-order-status-group-items :: detailed" th:object="${type}"/>
+                            <th:block
+                                th:if="${info.shippingTrackingNumbers != null}"
+                                th:include="account/partials/tracking-numbers"
+                                th:object="${type}" />
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+        <div class="cos_order-summary">
+            <th:block th:include="authentication/partials/check-order-status-summary"/>
+        </div>
+        <div th:if="${order.customer.registered}" class="cos_new-account">
+            <p>There is an account registered with the given email address. You can log in to the account to see additional details.</p>
+                <a th:href="@{/signin(successUrl='/account/purchase-history/order-details/online/' + ${order.orderNumber})}" class="btn-white-md uppercase">Log in to see order details</a>
+        </div>
+        <div th:unless="${order.customer.registered}" class="cos_new-account">
+            <p>You can create an account and save this order to it</p>
+            <form id="create-account-for-order" action="/create-account/fromOrder" method="post">
+                <input type="hidden" name="emailAddress" th:value="${order.emailAddress}" />
+                <input type="submit" class="btn--lg btn-go" name="Save this order to a new account" value="Save this order to a new account" />
+            </form>
+        </div>
+    </div>
+</th:block>
+<th:block th:if="${error != null}">
+    <div class="cos-error" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+</th:block>

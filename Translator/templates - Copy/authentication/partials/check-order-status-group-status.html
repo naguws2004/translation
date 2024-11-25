@@ -1,0 +1,52 @@
+<div class="group-status-wrap" th:with="status=${info.orderStatus}">
+        <th:block th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_PICKUP.type}">
+           <span th:inline="text">[[#{checkOrderStatus.pickupOrderStatus}]]
+	            <th:block th:if="${status eq 'OPEN'}">
+	                <span class="status"><b>Open</b></span>
+	            </th:block>
+	            <th:block th:if="${status eq 'WAITING_FOR_DELIVERY'}">
+	                <span class="status"><b>Waiting For Delivery</b></span>
+	            </th:block>
+	            <th:block th:if="${status eq 'READY_FOR_PICKUP'}">
+	                <span class="status"><b>Ready for Pickup</b></span>
+	            </th:block>
+	            <th:block th:if="${status eq 'PICKED_UP'}">
+	                <span class="status"><b>Picked Up</b></span>
+	            </th:block>
+        	</span>
+        </th:block>
+        <th:block th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).PHYSICAL_SHIP.type}">
+        	<span th:inline="text">[[#{checkOrderStatus.shipOrderStatus}]]
+        		<th:block th:if="${info.pastExpectedDeliveryDate}">
+		            <th:block th:if="${status eq 'DELIVERED'}">
+		                <span class="status"><b>Delivered</b></span>
+		            </th:block>
+	            </th:block>
+	            <th:block th:unless="${info.pastExpectedDeliveryDate}">
+					<th:block th:if="${status eq 'OPEN'}">
+					    <span class="status"><b>Open</b></span>
+					</th:block>
+					<th:block th:if="${status eq 'FULFILLED'}">
+					    <span class="status"><b>Shipped</b></span>
+					</th:block>
+            	</th:block>
+        	</span>
+        </th:block>
+        <th:block th:if="${type eq T(org.broadleafcommerce.core.order.service.type.FulfillmentType).GIFT_CARD.type}">
+			<span th:inline="text">[[#{checkOrderStatus.gcOrderStatus}]]
+        		<th:block th:if="${info.pastExpectedDeliveryDate}">
+		            <th:block th:if="${status eq 'DELIVERED'}">
+		                <span class="status"><b>Delivered</b></span>
+		            </th:block>
+	            </th:block>
+	            <th:block th:unless="${info.pastExpectedDeliveryDate}">
+					<th:block th:if="${status eq 'OPEN'}">
+					    <span class="status"><b>Open</b></span>
+					</th:block>
+					<th:block th:if="${status eq 'FULFILLED'}">
+					    <span class="status"><b>Shipped</b></span>
+					</th:block>
+            	</th:block>
+        	</span>
+	</th:block>
+</div>

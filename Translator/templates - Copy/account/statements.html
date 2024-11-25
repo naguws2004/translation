@@ -1,0 +1,280 @@
+<th:block
+    layout:decorator="layout/account-layout"
+    th:with="currentPageTitle=#{account.statements.title}"
+>
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <h4 class="statement-page-title">
+            Online Statements
+        </h4>
+        <p class="statement-header">
+            View and access your statements with ease. Your statements are saved as PDFs, which you
+            can access, save and print as needed. Choosing to view or pay a statement will take you
+            to a secure portal.
+        </p>
+        <div class="statements-wrap row">
+            <th:block th:if="true">
+                <div class="col-xs-12 col-md-6 pull-left statements-view-wrap">
+                    <h4 class="statement-title">
+                        Active Statements
+                    </h4>
+                    <th:block th:if="${accounts != null}">
+                        <!-- if you have registered for statements && there is statement data -->
+                        <th:block th:each="account : ${accounts}">
+                            <div class="statement-account-wrap">
+                                <div class="statement-info-wrap">
+                                    <span>
+                                        Account Nickname:
+                                    </span>
+                                    <span class="statement-view-info" th:text="${account.nickName}">
+                                        Nickname
+                                    </span>
+                                </div>
+                                <div class="statement-info-wrap">
+                                    <span id="statement-customer-num">
+                                        Customer Number:
+                                    </span>
+                                    <span
+                                        class="statement-view-info"
+                                        th:text="${account.accountNumber}"
+                                    >
+                                        Account Number
+                                    </span>
+                                </div>
+                                <div class="statement-links-wrap">
+                                    <div
+                                        th:if="${account.paperlessActive eq false or account.paperlessActive eq null}"
+                                    >
+                                        <a
+                                            class="green-link"
+                                            th:href="@{${'/account/statements/paperless/' + account.accountNumber}}"
+                                        >
+                                            Sign Up for Paperless Statements
+                                        </a>
+                                    </div>
+                                    <div th:if="${account.paperlessActive eq true}">
+                                        <a
+                                            class="green-link"
+                                            th:href="@{${'/account/statements/paperless/' + account.accountNumber}}"
+                                            th:text="#{account.statements.editPaperless}"
+                                        >
+                                            Edit Paperless Statements and Notification Options
+                                        </a>
+                                    </div>
+                                    <a
+                                        class="statements-link"
+                                        th:href="${'/account/statements/sso?accountNumber=' + account.accountNumber}"
+                                    >
+                                        <button
+                                            class="button button--white button--large statement-button js-view-statements"
+                                            aria-haspopup="true"
+                                        >
+                                            View Invoices &amp; Statements
+                                        </button>
+                                    </a>
+                                    <div
+                                        th:if="${billTrustLinkEnabled}"
+                                        class="billTrust-payment-wrap statements-link"
+                                        th:inline="text"
+                                    >
+                                        <a
+                                            th:href="${billTrustUrls.get(__${'account.accountNumber'}__)}"
+                                            target="_blank"
+                                        >
+                                            <button
+                                                class="button button--green button--large js-view-statements"
+                                                aria-haspopup="true"
+                                            >
+                                                Make a Payment
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:if="${!accountStat.last}" class="accountDivide"></div>
+                        </th:block>
+                    </th:block>
+                </div>
+                <div class="col-xs-12 col-md-6 pull-right">
+                    <h4 class="statement-title statements-header">
+                        Register Another Account
+                    </h4>
+                    <p>
+                        To register, provide the customer number and statement information for that
+                        account. The detailed information that is required can all be found on any
+                        paper statement that you have received in the past 5 months.
+                    </p>
+                    <a
+                        class="green-link js-register-account"
+                        th:with="register=${true}"
+                        aria-haspopup="true"
+                    >
+                        Register an Account
+                    </a>
+                    <span class="italic">
+                        Adobe
+                        <span class="copyright">&copy;</span>
+                        READER
+                        <span class="copyright">&copy;</span>
+                        is needed to view your statements.
+                        <br />
+                        <a
+                            class="link adobe-link"
+                            href="https://get.adobe.com/reader/"
+                            target="_blank"
+                        >
+                            Download READER now for free.
+                        </a>
+                    </span>
+                </div>
+                <div class="statement-register_wrap js-statement-register hidden">
+                    <h3 class="statement-title" th:text="#{account.statements.RegisterOnline}">
+                        REGISTER FOR ONLINE STATEMENTS
+                    </h3>
+                    <svg class="btn-icon close" width="14" height="14">
+                        <title th:text="#{shapes.remove}"></title>
+                        <use href="#shape-remove" />
+                    </svg>
+                    <p>
+                        Please provide the following information found on any statement received in
+                        the past five months.
+                        <span class="statements_mobile-hide">
+                            Your account nickname for this account is customizable so you can
+                            associate the account number to something that makes sense to you.
+                        </span>
+                    </p>
+                    <p>
+                        Please provide the following statement information to confirm that you are
+                        the correct person(s)
+                        <span class="statements_mobile-hide">
+                            handling statements for that specific customer number. This prevents
+                            others from accessing your statements online.
+                        </span>
+                    </p>
+                    <p class="required-text">
+                        <em class="req-text">*</em>
+                        Required Fields
+                    </p>
+                    <blc:form class="js-register-wrap register-wrap row">
+                        <div class="register-input form-group col-xs-12 col-sm-6">
+                            <label for="nickname" th:text="#{account.statements.nickname}">
+                                Account Nickname
+                            </label>
+                            <em class="req">*</em>
+                            <span class="italic">(a name you determine)</span>
+                            <input
+                                type="text"
+                                name="nickname"
+                                class="form-control"
+                                maxlength="255"
+                                aria-required="true"
+                            />
+                        </div>
+                        <div class="register-input form-group col-xs-12 col-sm-6">
+                            <label
+                                for="customerNumber"
+                                th:text="#{account.statements.accountNumber}"
+                            >
+                                Customer Number
+                            </label>
+                            <em class="req">*</em>
+                            <input
+                                type="text"
+                                name="customer-number"
+                                class="form-control js-customer-number"
+                                maxlength="255"
+                                aria-required="true"
+                            />
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="register-input form-group col-xs-12 col-sm-6">
+                            <label for="stmtMonth" th:text="#{account.statements.stmtMonth}">
+                                Statement Month
+                            </label>
+                            <em class="req">*</em>
+                            <div class="o-select_wrap">
+                                <select
+                                    class="o-select"
+                                    name="statement-month"
+                                    id="stmt-date"
+                                    th:inline="text"
+                                >
+                                    <option selected="selected" value="">Select Month</option>
+                                    <th:block th:if="${months}" th:each="month : ${months}">
+                                        <option th:value="${month}" th:text="${month}"></option>
+                                    </th:block>
+                                </select>
+                                <b class="dropdown" role="presentation"></b>
+                            </div>
+                        </div>
+                        <div class="register-input form-group col-xs-12 col-sm-6">
+                            <label for="endBal" th:text="#{account.statements.endBalance}">
+                                End Balance
+                            </label>
+                            <em class="req">*</em>
+                            <span class="italic">(for your selected month)</span>
+                            <div class="balance-inputs">
+                                <span class="balance-symbol">$</span>
+                                <input
+                                    type="text"
+                                    name="ending-balance-dollar"
+                                    class="form-control js-ending-balance"
+                                    id="balance-dollar"
+                                    aria-required="true"
+                                />
+                                <span class="balance-symbol">.</span>
+                                <input
+                                    type="text"
+                                    name="ending-balance-cent"
+                                    aria-required="true"
+                                    id="balance-cent"
+                                    class="form-control js-ending-balance"
+                                />
+                            </div>
+                            <div class="balance-error"></div>
+                        </div>
+                        <div class="register-lower-wrap">
+                            <div class="col-xs-12 col-sm-8 col-md-9">
+                                <p class="statements-help-info">
+                                    For help or assistance, please call (417) 829-5869.
+                                    <br />
+                                    <span>
+                                        Adobe
+                                        <span class="copyright">&copy;</span>
+                                        READER
+                                        <span class="copyright">&copy;</span>
+                                        is needed to view your statements.
+                                        <a
+                                            class="link"
+                                            href="https://get.adobe.com/reader/"
+                                            target="_blank"
+                                        >
+                                            Download READER now for free.
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                            <button
+                                type="submit"
+                                class="button button--green button--large statement-validate-account js-validate-account"
+                            >
+                                Validate Account
+                            </button>
+                        </div>
+                        <div class="statements-error hidden">
+                            <span id="statement-error-red"></span>
+                            <span id="statement-error"></span>
+                        </div>
+                    </blc:form>
+                </div>
+            </th:block>
+        </div>
+        <div class="register-success-modal">
+            <h4 class="register-title">Success. Your Statement Account is Now Linked</h4>
+            <p class="register-subtitle">
+                You can now view statements for
+                <span id="account-nickname"></span>
+                <span id="account-number"></span>
+            </p>
+        </div>
+    </th:block>
+</th:block>

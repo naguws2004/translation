@@ -1,0 +1,14 @@
+<blc:breadcrumbs />
+<script th:inline="javascript">
+    window._ost.breadcrumbs = []
+</script>
+<script th:inline="javascript" th:each="breadcrumb, iterStatus : ${breadcrumbs}">
+    /*[- */
+    // Unless we have a better way to serialize the breadcrumbs list, this is the best idea I could come up with.
+    // When ${breadcrumbs} is serialized, it returns null. This is unlike any other variable we use in thymeleaf.
+    // It is only serializable as single entities when iterated over. Super weird.
+    /* -]*/
+    window._ost.breadcrumbs.push(/*[[${breadcrumb}]]*/ {})
+</script>
+<a th:if="${SOLR_QUERY != null}" target="_blank" th:href="${SOLR_QUERY}">SOLR_DEBUG_QUERY</a>
+<breadcrumbs></breadcrumbs>

@@ -1,0 +1,93 @@
+<th:block layout:decorator="layout/account-layout">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div
+            class="js-order-data ordernumber"
+            th:with="orderNumber=${order.orderNumber}"
+            th:attr="data-orderNumber=${orderNumber}"
+        ></div>
+        <div class="order-details-wrap" th:object="${order}">
+            <div class="row order-header-info" th:inline="text">
+                <div class="pull-left">
+                    <span class="order-uppercase">Order#</span>
+                    <b>[[${order.orderNumber}]]</b>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Returning Item(s) by Mail</h4>
+                <div class="row">
+                    <div class="col-md-6 returns-section">
+                        <p>
+                            Items purchased on OReillyAuto.com can be returned by mail. Credit will
+                            be issued at the time the merchandise is received in our warehouse. We,
+                            in our discretion, will inspect it prior to refunding your money or
+                            credit being issued.
+                        </p>
+                        <ul class="returns-list">
+                            <li class="returns-list__item">
+                                You, the customer, are responsible for the cost of return shipping.
+                                Shipping charges are non-refundable.
+                            </li>
+                            <li class="returns-list__item">
+                                The item must be in its original packaging
+                            </li>
+                            <li class="returns-list__item">
+                                The item must include all original materials supplied with the
+                                product
+                            </li>
+                            <li class="returns-list__item">
+                                The item must be unopened and uninstalled
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 returns-section">
+                        <p>
+                            If it is approved for a refund, the amount of the item will be credited
+                            back to the gift/credit/debit card originally used to purchase the
+                            product (usually within 1 to 3 business days after the product is
+                            received by the online store). We recommend shipping with a carrier that
+                            offers tracking, insurance and delivery confirmation (such as UPS or
+                            FedEx). If you use USPS mail, we require that you request USPS to obtain
+                            a signature at delivery time.
+                        </p>
+                        <p>
+                            If you send us an item for refund that we don’t approve as a return, you
+                            will be required to pay shipping on that item in order to receive it
+                            back.
+                        </p>
+                        <p>
+                            For your convenience, all purchases can also be
+                            <button
+                                class="js-order-find-store-button order-find-store-button button--link"
+                            >
+                                <span>returned to your local O'Reilly Auto Parts store.</span>
+                            </button>
+                        </p>
+                        <p class="font-italic">Start a return by filling out the form below.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="return-items" class="return-item-container">
+                    <div class="return-header-wrap">
+                        <h4 class="return-header-wrap">
+                            Select the items you wish to return by mail
+                        </h4>
+                    </div>
+                    <th:block
+                        th:with="groupsPerType=${info.typeGroupMap.get('PHYSICAL_SHIP')}"
+                        th:inline="text"
+                    >
+                        <div class="row return-order-row">
+                            <div class="col-xs-12 returns-section">
+                                <th:block
+                                    th:include="account/partials/return-items"
+                                    th:object="${info}"
+                                />
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>

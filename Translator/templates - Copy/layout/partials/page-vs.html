@@ -1,0 +1,34 @@
+<th:block th:fragment="page-vs">
+    <div class="container--vehicle-select">
+        <th:block th:unless="${interchangeSearch}">
+            <th:block th:if="${originalQuery == null} and ${partType != null}">
+                <div
+                    id="vs-page-extra"
+                    class="vs-page-skeleton-loader"
+                    th:include="utility/loading-animation"
+                ></div>
+            </th:block>
+            <th:block th:if="${originalQuery != null} and ${partType != null}">
+                <div
+                    id="vs-page"
+                    class="vs-page-skeleton-loader"
+                    th:include="utility/loading-animation"
+                ></div>
+            </th:block>
+            <th:block th:if="${originalQuery != null} and not ${partType != null}">
+                <div
+                    id="vs-page"
+                    class="vs-page-skeleton-loader"
+                    th:include="utility/loading-animation"
+                ></div>
+            </th:block>
+        </th:block>
+        <th:block th:if="${interchangeSearch}">
+            <div
+                id="vs-page"
+                class="vs-page-skeleton-loader"
+                th:include="utility/loading-animation"
+            ></div>
+        </th:block>
+    </div>
+</th:block>

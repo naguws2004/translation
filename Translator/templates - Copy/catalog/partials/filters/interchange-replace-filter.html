@@ -1,0 +1,27 @@
+<th:block th:fragment="ajax">
+    <div class="plp-refine js-facet_container">
+        <h3 th:if="${manufacturersReplace}" class="plp-refine-heading1 js-facet_mobile" th:inline="text">
+            [[#{product.refine.brands.replace}]]
+            <svg class="facet_arrow" width="13" height="13">
+                <use href="#shape-down-arrow"></use>
+            </svg>
+        </h3>
+        <h4 th:unless="${manufacturersReplace}" class="plp-refine-heading1 js-facet_mobile" th:inline="text">
+            [[#{product.refine.part.types.replace}]]
+            <svg class="facet_arrow" width="13" height="13">
+                <use href="#shape-down-arrow"></use>
+            </svg>
+        </h4>
+        <div class="plp-refine_wrapper">
+            <ul class="plp-refine_list js-facet_list"
+                th:with="interchangeReplaceItems=${manufacturersReplace ? interchangeReplaceManufacturers : interchangeReplacePartTypes }"
+                th:attr="aria-label=#{${manufacturersReplace} ? product.refine.brands.replace : product.refine.part.types.replace }">
+                <li th:each="replacedItem : ${interchangeReplaceItems}">
+                    <a th:href="@{${replacedItem.url}}" th:attr="aria-label=${replacedItem.name}">
+                        <span th:text=" ${replacedItem.name}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</th:block>

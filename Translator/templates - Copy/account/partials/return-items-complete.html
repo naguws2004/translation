@@ -1,0 +1,87 @@
+<div class="group-items-wrap js-expand-list" xmlns:th="http://www.w3.org/1999/xhtml" th:with="rma=${rmaForm}, coreItems=${productsWithCoreCharges}">
+
+    <div class="return-wrap">
+		<div class="return-mail-header">
+			<div class="col-sm-4">
+				Product
+			</div>
+			<div class="col-sm-3">
+				Item #
+			</div>
+			<div class="col-sm-3">
+				Price
+			</div>
+			<div class="col-sm-2">
+				Qty
+			</div>
+     	</div>
+        <div class="return-row-item"
+			th:each="rmaItem : ${rma.items}"
+			th:with="rmaItem=${rmaItem},
+           		quantity=${rmaItem.qty}, lineItemKey=${rmaItem.line + rmaItem.item}">
+            <div class="col-xs-12" th:inline="text">
+                <div class="row return-item" th:attr="data-line=${rmaItem.line},
+                		data-part=${rmaItem.item}, data-name=${rmaItem.name}, data-price=${rmaItem.price}">
+                	<div class="return-item-section" th:unless="${#strings.contains(rmaItem.name, 'Core Return')}">
+	                 	<div class="col-sm-4 return-single">
+							<span class="return-item-title_mobile">Product: </span>
+							[[${rmaItem.name}]]
+						</div>
+						<div class="col-sm-3 return-single">
+							<span class="return-item-title_mobile">Item #: </span>
+							[[${rmaItem.line}]] [[${rmaItem.item}]]
+						</div>
+						<div class="col-sm-3 return-single">
+							<span class="return-item-title_mobile" >Price: </span>
+							$[[${rmaItem.price}]]
+							<div th:if="${productsWithCoreCharges.get(lineItemKey)}">
+								<span class="return-sm-core" th:with="product=${productsWithCoreCharges.get(lineItemKey)}" th:inline="text">
+									(+ $[[${#corePrice.getCorePrice(product)}]] core)
+								</span>
+							</div>
+						</div>
+						<div class="col-sm-3 return-single" th:if="${#strings.equalsIgnoreCase(rmaItem.returnType, 'core')}">
+							<span class="return-item-title_mobile" >Core Price: </span>
+							[[${rmaItem.price}]]
+						</div>
+						<div class="col-sm-2 return-single">
+						<span class="return-item-title_mobile">Qty: </span>
+		                	<span>[[${rmaItem.qty}]]</span>
+	                	</div>
+					</div>
+					<div th:if="${#strings.contains(rmaItem.name, 'Core Return')}" class="return-core-section" th:attr="data-core-available=${quantity}">
+						<div class="col-sm-4 return-single">
+                			Core Return
+                			<span class="js-core-hover">
+								<svg class="q-mark">
+									<use href="#info-q-mark"></use>
+								</svg>
+                			</span>
+                			<div class="return_core-info" th:inline="text">
+								[[#{account.purchaseHistory.orderReturn.coreInfo}]]
+                			</div>
+            			</div>
+            			<div class="col-sm-3 return-single">[[#{returns.type.core}]]</div>
+						<div class="col-sm-3 return-single" th:with="product=${productsWithCoreCharges.get(lineItemKey)}">
+							<span th:inline="text">$[[${#corePrice.getCorePrice(product)}]]</span>
+						</div>
+						<div class="col-sm-2 return-single">
+							<span>[[${rmaItem.qty}]]</span>
+						</div>
+					</div>
+				</div>
+				<div class="row return-reasons-complete" th:unless="${#strings.isEmpty('__${rmaItem.returnType}__')}">
+					<div class="col-xs-12 col-sm-8 pull-right return-reason-complete">
+						<span>Return Reason: </span>
+						<th:block th:if="${#strings.equalsIgnoreCase(rmaItem.returnType, 'new')}">[[#{returns.type.new}]]</th:block>
+						<th:block th:if="${#strings.equalsIgnoreCase(rmaItem.returnType, 'doa')}">[[#{returns.type.doa}]]</th:block>
+						<th:block th:if="${#strings.equalsIgnoreCase(rmaItem.returnType, 'wrong item')}">[[#{returns.type.wrongItem}]]</th:block>
+						<th:block th:if="${#strings.equalsIgnoreCase(rmaItem.returnType, 'warranty')}">[[#{returns.type.warranty}]]</th:block>
+						<th:block th:if="${#strings.equalsIgnoreCase(rmaItem.returnType, 'other')}">[[#{returns.type.other}]]</th:block>
+						<th:block th:if="${#strings.equalsIgnoreCase(rmaItem.returnType, 'core')}">[[#{returns.type.core}]]</th:block>
+					</div>
+				</div>
+			</div>
+        </div>
+   	</div>
+</div>

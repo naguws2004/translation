@@ -1,0 +1,82 @@
+<div class="mini-cart__wrap js-mini-cart__wrap" th:classappend="${#Cart.getItemCount() == 0 ? ' mc_cart-empty' : ''}">
+    <input type="hidden" class="js-mini-cart_qty" th:value="${#Cart.getItemCount()}" />
+    <div class="mc_cart-items container-fluid js-mc_items">
+        <div class="js-mc-non-error">
+            <p class="mc-added" th:text="#{header.cart.inCart}">This item has been added to your cart</p>
+            <th:block th:unless="${#Cart.getItemCount() == 0}">
+                <th:block th:each="item, iterStat : ${cart.orderItems}" th:object="${item}"
+                    th:inline="text" th:with="startIndex=${#lists.size(cart.orderItems) gt 1 ? #lists.size(cart.orderItems) - 1 : 0}">
+                    <div th:if="${iterStat.index ge startIndex}" th:with="isDiscrete=${#Cart.isDiscrete(item)}">
+                        <div class="mc_item">
+                            <if th:if="${isDiscrete}" th:remove="tag">
+                                <div class="mc_cart-product_img" th:with="productImageUrl=${#media.getProductPrimaryImageUrl('medium', item.product)}">
+                                    <img th:src="@{${productImageUrl ne null ? productImageUrl : '/img/image-coming-soon.png'}}"
+                                         onerror="if (this.src != '/img/image-coming-soon.png') this.src = '/img/image-coming-soon.png';"
+                                         th:alt="*{name}" />
+                                </div>
+                                <div class="mc_cart-product_info">
+                                    <span class="mc_product_name" th:inline="text">
+                                        [[*{sku.name}]]
+                                    </span>
+                                    <div class="mc_product_part-info">
+                                        <span th:text="#{product.partNumberHeader}">Part# </span>
+                                        <strong><span th:text="*{product.itemNumber}"></span></strong>
+                                        <span class="mc_space"></span>
+                                        <span th:text="#{product.lineCodeHeader}">Line </span>
+                                        <strong><span th:text="*{product.lineCode}"></span></strong>
+                                    </div>
+                                </div>
+                            </if>
+                            <unless th:unless="${isDiscrete}" th:remove="tag">
+                                <div class="mc_cart-product_img">
+                                    <img th:src="@{/img/gift-card.png}" th:alt="*{name}" />
+                                </div>
+                                <div class="mc_cart-product_info">
+                                    <span class="mc_product_name" itemprop="name" th:inline="text">
+                                        [[*{name}]]
+                                    </span>
+                                </div>
+                            </unless>
+                        </div>
+                        <div class="mc_item-pc_container">
+                            <div class="mc_item-quantity">
+                                <span>[[#{header.cart.quantity}]]: <strong>[[*{quantity}]]</strong></span>
+                            </div>
+                            <div class="mc_item-price">
+                                <p>
+                                    <span blc:price="*{price}" th:remove="tag"></span>
+                                    <th:block th:if="${isDiscrete}">
+                                        <small th:if="*{corePrice?.amount > 0}" blc:price="*{corePrice}"></small>
+                                    </th:block>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                <div class="mc_subtotal row" th:inline="text">
+                    <div class="row">
+                        <div class="mini_sub-left col-xs-6">
+                            [[#{header.cart.itemsInCart}]]
+                        </div>
+                        <div class="mini_sub-right col-xs-6">
+                            <strong><span th:text="${#Cart.getItemCount()}"></span></strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mini_sub-left col-xs-6">
+                            [[#{header.cart.subTotal}]]
+                        </div>
+                        <div class="mini_sub-right col-xs-6">
+                            <strong blc:price="${cart.subTotal?.subtract(cart.orderAdjustmentsValue)}"></strong>
+                        </div>
+                    </div>
+                </div>
+                <a th:href="@{/cart}" class="button button--green button--large button--full-width" th:text="#{header.cart.checkout}">
+                    View Cart &amp; Check Out
+                </a>
+            </th:block>
+        </div>
+        <div class="js-mc-error mc-message">
+        </div>
+    </div>
+</div>

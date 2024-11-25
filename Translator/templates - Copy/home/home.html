@@ -1,0 +1,90 @@
+<th:block layout:decorator="layout/full-page-layout" th:with="homePage = true">
+    <fragment layout:fragment="feature" th:remove="tag">
+        <h1 class="sr-only">O'Reilly Auto Parts Home Page</h1>
+        <blc:content-zone
+            name="Homepage Top Hero Full-Width Banner Content Zone - Top"
+            addl-container-classes="text-banner-zone text-banner-zone--top"
+        ></blc:content-zone>
+        <blc:content-zone
+            name="Homepage 2Col Mini Banner Top Zone"
+            addl-container-classes="mini-banner-zone mini-banner-zone--top o-container"
+        ></blc:content-zone>
+        <section
+            class="hero-carousel js-hero-carousel active"
+            aria-labelledby="heroCarouselHeading"
+        >
+            <h2 id="heroCarouselHeading" class="sr-only">Home Page Featured Carousel</h2>
+            <div class="hero-carousel-skeleton js-hero-carousel-skeleton hero-carousel__container container" th:include="utility/loading-animation"></div>
+            <div class="hero-carousel__container container" >
+                <blc:content-zone name="Homepage Hero Image Content Zone" deepLinks="deepLinks" ></blc:content-zone>
+            </div>
+            <div class="hero-carousel__controls-wrap">
+                <ul class="hero-carousel__slide-controls js-hero-carousel-slide-controls"></ul>
+            </div>
+        </section>
+        <blc:content-zone
+            name="Homepage 2Col Mini Banner Bottom Zone"
+            addl-container-classes="mini-banner-zone mini-banner-zone--bottom o-container"
+        ></blc:content-zone>
+        <blc:content-zone
+            name="Homepage Top Hero Full-Width Banner Content Zone - Bottom"
+            addl-container-classes="text-banner-zone text-banner-zone--bottom"
+        ></blc:content-zone>
+        <div class="container container--vehicle-select">
+            <div
+                id="vs-page"
+                class="vs-page-skeleton-loader"
+                th:include="utility/loading-animation"
+            ></div>
+        </div>
+    </fragment>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="o-container">
+            <div th:replace="layout/partials/featured-categories"></div>
+            <div class="hp-value-props js-hp-value-props">
+                <div class="hp-value-props__wrapper swiper-wrapper">
+                    <blc:content-zone
+                        name="HomePageValuePropsContentZone1"
+                        addl-container-classes="swiper-slide value-prop"
+                    />
+                    <blc:content-zone
+                        name="HomePageValuePropsContentZone2"
+                        addl-container-classes="swiper-slide value-prop"
+                    />
+                    <blc:content-zone
+                        name="HomePageValuePropsContentZone3"
+                        addl-container-classes="swiper-slide value-prop"
+                    />
+                </div>
+                <div class="hp-value-props__pagination js-hp-value-props-pagination"></div>
+            </div>
+        </div>
+        <div class="o-container">
+            <blc:content-zone
+                name="Homepage Specials Content Blocks Zone - Top"
+                addl-container-classes="hp-content-blocks"
+                deepLinks="deepLinks"
+            />
+            <blc:content-zone
+                name="Homepage Specials Content Blocks Zone - Bottom"
+                addl-container-classes="hp-content-blocks"
+                deepLinks="deepLinks"
+            />
+            <blc:content-zone name="Homepage Bottom Content"></blc:content-zone>
+        </div>
+        <div class="container hp-featured-container js-hp-featured-container">
+            <div class="hp-featured-prods js-hp-featured" style="display: block;">
+                <div class="product-list product-list--horizontal slider">
+                    <h2
+                        class="product-list_title-featured"
+                        th:utext="#{home.featuredProducts}"
+                    ></h2>
+                    <blc:content-zone
+                        name="Homepage Featured Products Zone"
+                        deepLinks="deepLinks"
+                    />
+                </div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

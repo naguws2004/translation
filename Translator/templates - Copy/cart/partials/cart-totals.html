@@ -1,0 +1,146 @@
+<div class="cart-totals_header">
+    <div class="cart-show_mobile">
+        <div class="cart-totals_label">
+            <h2 class="cart-totals_title">CART SUMMARY</h2>
+        </div>
+        <div
+            class="cart-totals_amount js-mobile-total-amt"
+            blc:price="${cart?.estimatedCartTotal}"
+        ></div>
+    </div>
+    <div class="cart-show_desktop">
+        <h2 class="cart-totals_title">Cart Summary</h2>
+    </div>
+</div>
+<div class="cart-totals_wrap js-cart-totals_wrap">
+    <cart-charges class="cart-charges-container"></cart-charges>
+    <cart-shipping class="cart-shipping-container"></cart-shipping>
+    <div
+        class="cart-totals_row cart-totals_est-total js-total-row"
+        th:attr="data-currency=${currencyCode}"
+    >
+        <span class="cart-totals_label cart-totals_label--total" th:inline="text">
+            [[#{cart.estTotal}]]
+        </span>
+        <span class="cart-totals_amount cart-totals_amount--total js-total-amt" th:inline="text">
+            $[[${cart?.estimatedCartTotal} ?: '0.00']]
+        </span>
+    </div>
+    <div class="cart-totals_row">
+        <cart-summary-orewards-help></cart-summary-orewards-help>
+    </div>
+    <div
+        class="loading-overlay loading-overlay--white loading-overlay--large js-loading-overlay"
+        style="display: none;"
+        role="alert"
+        aria-label="Loading"
+    ></div>
+    <div class="cart-summary__promo js-cart-summary__promo">
+        <div class="cart-totals_row cart-totals_promo js-promo-code">
+            <div
+                class="cart-totals_promo_form js-cart-totals_promo_form"
+                th:style="${!#lists.isEmpty(cart?.addedOfferCodes) OR !#lists.isEmpty(cart?.coupons)}? 'display:none'"
+            >
+                <label
+                    for="cart-totals-promo-code-input"
+                    class="js-show-promo-code"
+                    th:text="#{cart.discountBox}"
+                >
+                    Apply Promo Code / O'Rewards Reward
+                </label>
+                <div class="js-enter-promo-wrap enter-promo-wrap">
+                    <blc:form role="validate-promo" class="js-promo-form">
+                        <div class="input-btn-group">
+                            <input
+                                id="cart-totals-promo-code-input"
+                                type="text"
+                                class="form-control input--md js-promo-code-input"
+                                title="Reward or Promo Code"
+                                th:attr="aria-label=#{aria.cart.discountCode}"
+                                placeholder="Code"
+                                name="promo-code"
+                                autocomplete="off"
+                            />
+                            <div class="btn-wrap">
+                                <button
+                                    type="button"
+                                    class="button button--white button--small button--flat-left apply-promo js-apply-promo"
+                                    th:text="#{cart.giftCard.apply}"
+                                >
+                                    Apply
+                                </button>
+                            </div>
+                        </div>
+                    </blc:form>
+                </div>
+            </div>
+            <th:block th:if="*{not #maps.isEmpty(offerCodeMap)}">
+                <div class="js-promo-accept-wrap promo-accept-wrap">
+                    <th:block th:each="entry : *{offerCodeMap}">
+                        <p th:text="#{cart.promo.applied}">Promo Code or O'Rewards Reward:</p>
+                        <p>
+                            <strong th:inline="text">
+                                "
+                                <span class="promo-accepted js-promo-accepted">
+                                    [[${entry?.key?.offerCode}]]
+                                </span>
+                                "
+                            </strong>
+                            Applied
+                            <a
+                                class="js-remove-promo cart-totals_text-btn"
+                                th:attr="data-offerCodeId=${entry?.key?.id}"
+                            >
+                                Remove
+                            </a>
+                        </p>
+                        <a
+                            class="js-fancy-promo-static cart-totals_text-btn"
+                            th:attr="data-content=${entry?.key?.offer?.description},data-msgtitle=${entry?.key?.offer?.name},
+                                    data-legal=#{cart.offer.legal}, aria-label=#{aria.cart.seeDetails}"
+                            th:text="#{cart.seeDetails}"
+                        ></a>
+                    </th:block>
+                </div>
+            </th:block>
+            <th:block th:if="*{not #lists.isEmpty(cart?.coupons)}">
+                <div class="js-promo-accept-wrap promo-accept-wrap">
+                    <th:block th:each="coupon : *{cart?.coupons}">
+                        <p th:text="#{cart.promo.applied}">Promo Code or O'Rewards Reward:</p>
+                        <p>
+                            <strong th:inline="text">
+                                "
+                                <span class="promo-accepted js-promo-accepted">
+                                    [[${coupon?.barcode}]]
+                                </span>
+                                "
+                            </strong>
+                            Applied
+                            <a
+                                class="js-remove-promo cart-totals_text-btn font-size-10"
+                                th:attr="data-offerCodeId=${coupon?.id}"
+                            >
+                                Remove
+                            </a>
+                        </p>
+                        <th:block th:each="offer : ${coupon?.offers}">
+                            <th:block th:if="${offer?.applied}">
+                                <p>
+                                    <span th:text="#{cart.offer.reward(${offer?.discountAmount})}">
+                                        $ OFF Reward
+                                    </span>
+                                    <a
+                                        class="js-fancy-promo-static cart-totals_text-btn font-size-10"
+                                        th:attr="data-legal=#{cart.offer.legal}, data-msgtitle=#{cart.title.__${coupon?.type}__},
+                                            data-content=#{cart.content.__${coupon?.type}__}, aria-label=#{aria.cart.seeDetails}"
+                                        th:text="#{cart.seeDetails}"
+                                    ></a>
+                                </p>
+                            </th:block>
+                        </th:block>
+                    </th:block>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</div>

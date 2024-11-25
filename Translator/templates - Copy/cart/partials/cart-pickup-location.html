@@ -1,0 +1,28 @@
+<th:block th:fragment="ajax">
+    <div class="content-wrap" th:if="${hasPickUpItems}">
+        <div class="store-info">
+            <a th:href="${#oap.buildStoreMapsUrl('https://google.com/maps/dir//OReilly+Auto+Parts+', selectedStore?.id)}"
+               class="map-img-sm map-img-sm--cart"
+               th:attr="data-currentstore=${selectedStore?.id}"
+               target="_blank"
+               rel="noopener noreferrer">
+                <span class="sr-only">Pickup Location</span>
+            </a>
+            <h4 th:text="#{cart.pickupParts}">Pickup Parts at:</h4>
+            <p class="address" th:if="${selectedStore}" th:object="${selectedStore}">
+                <address th:inline="text">
+                    [[*{address.addressLine1}]]<br/>
+                    [[*{address.addressLine2 == null ? '' : address.addressLine2}]]<br th:if="!*{#strings.isEmpty(address.addressLine2)}"/>
+                    [[*{address.city}]],&nbsp;[[*{address.stateProvinceRegion}]]&nbsp;[[*{address.postalCode}]]<br/>
+                </address>
+                <button class="button button--white btn-change-store js-change-store_btn" th:attr="data-currentstore=${selectedStore?.id}">
+                    <svg class="button__icon button__icon--l" role="img" aria-labelledby="storeTitle">
+                        <title id="storeTitle" th:text="#{shapes.store}"></title>
+                        <use href="#shape-store" />
+                    </svg>
+                    <th:block th:text="#{cart.changeStore}">Change Store</th:block>
+                </button>
+            </p>
+        </div>
+    </div>
+</th:block>

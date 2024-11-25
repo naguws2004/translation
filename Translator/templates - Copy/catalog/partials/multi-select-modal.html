@@ -1,0 +1,86 @@
+<div
+    th:id="${'facet-' + searchFacetDto.abbreviation}"
+    class="modal fade"
+    role="form"
+    th:fragment="modal"
+>
+    <h1 th:text="${searchFacetDto.abbreviation}"></h1>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 th:text="#{facet.multi}">Multi-Select</h1>
+                <!--<input type="button" th:id="${'facet-' + searchFacetDto.abbreviation + '-close'}" class="close" value="X"/>-->
+                <a
+                    href="javascript:void(0)"
+                    th:id="${'facet-' + searchFacetDto.abbreviation + '-close'}"
+                    class="btn-clear-md btn-remove-item js-remove-item"
+                    tabindex="-1"
+                >
+                    <svg
+                        class="btn-icon"
+                        role="img"
+                        aria-labelledby="multi-select-modal-remove-title"
+                        width="14"
+                        height="14"
+                    >
+                        <title
+                            th:text="#{shapes.remove}"
+                            id="multi-select-modal-remove-title"
+                        ></title>
+                        <use href="#shape-remove" />
+                    </svg>
+                    <span class="btn-text" th:text="#{facet.close}">Close</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <blc:form
+                    id="${'facet-' + searchFacetDto.abbreviation + '-form'}"
+                    method="GET"
+                    action=""
+                >
+                    <div class="row">
+                        <h2
+                            th:if="${searchFacetDto.facet.label}"
+                            class="plp-refine-heading1"
+                            th:text="${searchFacetDto.facet.label}"
+                        ></h2>
+                        <h2
+                            th:unless="${searchFacetDto.facet.label}"
+                            class="plp-refine-heading1"
+                            th:text="${searchFacetDto.facet.fieldType.indexField.field.friendlyName}"
+                        ></h2>
+                        <ul>
+                            <li
+                                th:each="facetValue : ${searchFacetDto.facetValues}"
+                                th:if="${searchFacetDto.active or (!searchFacetDto.showQuantity or facetValue.quantity > 0)}"
+                            >
+                                <input
+                                    type="checkbox"
+                                    th:name="${searchFacetDto.abbreviation + '-' + facetValue.valueKey}"
+                                    th:id="${searchFacetDto.abbreviation + '-' + facetValue.valueKey}"
+                                    th:checked="${facetValue.active}"
+                                />
+
+                                <label
+                                    th:for="${searchFacetDto.abbreviation + '-' + facetValue.valueKey}"
+                                >
+                                    <span
+                                        th:substituteby="catalog/partials/facet-filter :: facet-value-display"
+                                    />
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </blc:form>
+            </div>
+            <div class="modal-footer">
+                <input
+                    type="submit"
+                    class="btn-green-lg"
+                    th:id="${'facet-' + searchFacetDto.abbreviation + '-submit'}"
+                    value="Submit"
+                />
+            </div>
+        </div>
+    </div>
+</div>

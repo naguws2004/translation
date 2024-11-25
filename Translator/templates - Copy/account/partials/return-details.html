@@ -1,0 +1,73 @@
+<fragment th:remove="tag" th:fragment="ajax">
+	<div class="group-items-wrap">
+	    <div class="return-wrap">
+			<div class="return-mail-header">
+				<div class="col-sm-4">
+					Product
+				</div>
+				<div class="col-sm-3">
+					Item #
+				</div>
+				<div class="col-sm-3">
+					Price
+				</div>
+				<div class="col-sm-2">
+					Qty
+				</div>
+	     	</div>
+			<div class="order-details-wrap return-row-item">
+				<th:block th:each="returnDetail : ${returnDetails}">
+		            <div class="col-xs-12" th:inline="text">
+		                <div class="row return-item">
+		                	<div class="return-item-section">
+			                 	<div class="col-sm-4 return-single">
+									<span class="return-item-title_mobile">Product: </span>
+									[[${returnDetail.description}]]
+								</div>
+								<div class="col-sm-3 return-single">
+									<span class="return-item-title_mobile">Item #: </span>
+									[[${returnDetail.line}]] [[${returnDetail.number}]]
+								</div>
+								<th:block th:unless="${#strings.contains('__${returnDetail.returnType}__','Core')}">
+									<div class="col-sm-3 return-single">
+										<span class="return-item-title_mobile">Price: </span>
+										$[[${returnDetail.listPrice}]]
+										<div th:if="${returnDetail.coreCharge?.toString() > '0.00'}">
+											<span class="return-sm-core" th:inline="text">
+												(+ $[[${returnDetail.coreCharge}]] core)
+											</span>
+										</div>
+									</div>
+									<div class="col-sm-2 return-single">
+										<span class="return-item-title_mobile">Qty: </span>
+					                	<span>[[${returnDetail.quantity}]]</span>
+				                	</div>
+			                	</th:block>
+							</div>
+							<div th:if="${#strings.contains('__${returnDetail.returnType}__','Core')}" class="return-core-section">
+								<div class="col-sm-4 return-single">
+		                			Core Return
+		                			<span class="js-core-hover">
+										<svg class="q-mark">
+											<use href="#info-q-mark"></use>
+										</svg>
+		                			</span>
+		                			<div class="return_core-info" th:inline="text">
+										[[#{account.purchaseHistory.orderReturn.coreInfo}]]
+		                			</div>
+		            			</div>
+		            			<div class="col-sm-3 return-single"></div>
+								<div class="col-sm-3 return-single">
+									<span th:inline="text">$[[${returnDetail.coreCharge}]]</span>
+								</div>
+								<div class="col-sm-2 return-single">
+									<span>[[${returnDetail.quantity}]]</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</th:block>
+			</div>
+	    </div>
+    </div>
+</fragment>

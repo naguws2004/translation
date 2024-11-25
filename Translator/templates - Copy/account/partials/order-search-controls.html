@@ -1,0 +1,56 @@
+<div class="order-search-controls row">
+    <div class="select2--lg col-xs-12 col-sm-6 col-md-3">
+        <select title="All Orders"
+                th:name="${filters.get('fulfillmentType').name}"
+                th:id="${filters.get('fulfillmentType').name}"
+                class="js-select2"
+                data-placeholder="All Orders">
+            <option value="DEFAULT">All Orders</option>
+            <option th:each="option : ${filters.get('fulfillmentType').options}"
+                    th:value="${option.value}"
+                    th:attr="selected=${option.selected}"
+                    th:text="${option.label}"></option>
+        </select>
+    </div>
+    <div class="select2--lg col-xs-12 col-sm-6 col-md-3">
+        <select title="Time Filter"
+                th:name="${filters.get('time').name}"
+                th:id="${filters.get('time').name}"
+                class="js-select2"
+                data-placeholder="All Time">
+            <option value="DEFAULT">All Time</option>
+            <option th:each="option : ${filters.get('time').options}"
+                    th:value="${option.value}"
+                    th:attr="selected=${option.selected}"
+                    th:text="${option.label}"></option>
+        </select>
+    </div>
+    <div class="select2--lg col-xs-12 col-sm-6 col-md-3">
+        <select title="Vehicle"
+                th:name="${filters.get('vehicle').name}"
+                th:id="${filters.get('vehicle').name}"
+                class="js-select2"
+                data-placeholder="Vehicle">
+            <option value="DEFAULT">All Vehicles</option>
+            <option th:each="option : ${filters.get('vehicle').options}"
+                    th:value="${option.value}"
+                    th:attr="selected=${option.selected}"
+                    th:text="${option.label}"></option>
+        </select>
+    </div>
+    <div class="select2--lg col-xs-12 col-sm-6 col-md-3 order-search-controls-search_wrap">
+        <input class="form-control order-search-controls-search search-orders-query"
+               type="search"
+               name="query"
+               id="query"
+               th:value="${query}"
+               aria-label="search orders"
+               placeholder="Search"/>
+        <button type="button" class="site-search_btn button button--green search-orders js-search-orders">
+            <svg class="button__icon" aria-hidden="true">
+                <title th:text="#{shapes.search}"></title>
+                <use href="#shape-search" />
+            </svg>
+        </button>
+    </div>
+</div>

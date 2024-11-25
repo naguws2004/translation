@@ -1,0 +1,8 @@
+<th:block
+    layout:decorator="layout/account-layout"
+    th:with="currentPageTitle=#{account.purchaseHistory.title}"
+>
+    <th:block layout:fragment="account-content" th:remove="tag" th:fragment="ajax">
+        <order-details-container></order-details-container>
+    </th:block>
+</th:block>

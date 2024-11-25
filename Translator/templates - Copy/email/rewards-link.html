@@ -1,0 +1,68 @@
+<th:block layout:decorator="layout/account-layout" layout:fragment="content">
+    <div class="rewards-link_outer-wrap">
+        <div class="rewards-link_inner-wrap">
+            <th:block th:if="${invalidToken}">
+                <h1 class="rewards-link-invalid" th:text="#{oRewards.error.invalidToken}">
+                    This Link Is Invalid. Please Check Your Email And Try Again
+                </h1>
+            </th:block>
+            <th:block th:unless="${invalidToken}">
+                <th:block th:if="${expired}">
+                    <div class="rewards-link-expired-wrap">
+                        <img
+                            src="/img/orewards-logo.png"
+                            alt="O'Rewards Logo"
+                            class="oreward-logo"
+                        />
+                        <h1
+                            class="rewards-link-expired h3"
+                            th:text="#{oRewards.verifyEmail.expiredHeader}"
+                        >
+                            We are sorry, it looks like the link expired
+                        </h1>
+                        <p
+                            class="rewards-expired_message"
+                            th:text="#{oRewards.verifyEmail.expiredMessage}"
+                        >
+                            Account verification link expires within 48 hours. Resend a new validation
+                            email and follow the link to finish set up of your account.
+                        </p>
+                        <div class="validation-resend_wrap" th:inline="text">
+                            <div
+                                class="js-resend-message resend-email_message"
+                                th:text="#{oRewards.verifyEmail.resend.message}"
+                            >
+                                O'Rewards validation email successfully sent.
+                            </div>
+                            <button
+                                type="submit"
+                                class="js-resend-validation rewards-button button button--green"
+                                th:attr="data-token=${token}"
+                            >
+                                [[#{oRewards.verifyEmail.resend}]]
+                            </button>
+                        </div>
+                    </div>
+                </th:block>
+                <th:block th:unless="${expired}">
+                    <th:block th:if="${isLoggedIn}">
+                        <h1 class="rewards-link-success" th:text="#{oRewards.verifyEmail.success}">
+                            Your O'Rewards Account Has Been Successfully Linked
+                        </h1>
+                        <a
+                            th:href="@{${'/account/orewards'}}"
+                            class="rewards-button button button--green"
+                        >
+                            <span th:text="#{oRewards.verifyEmail.button.goToRewards}">
+                                Go To My O'Rewards
+                            </span>
+                        </a>
+                    </th:block>
+                    <th:block th:unless="${isLoggedIn}">
+                        <div id="successful-rewards-join"></div>
+                    </th:block>
+                </th:block>
+            </th:block>
+        </div>
+    </div>
+</th:block>

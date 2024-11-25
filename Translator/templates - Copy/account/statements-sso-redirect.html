@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Statements Redirect</title>
+</head>
+<body>
+    <p>... redirecting to the statements application ...</p>
+
+    <form id="statementsForm" th:attr="action=${statementsSsoPayload.url}" method="post">
+        <input type="hidden" name="token" th:attr="value=${statementsSsoPayload.token}"/>
+        <input type="hidden" name="key" th:attr="value=${statementsSsoPayload.key}"/>
+        <input type="hidden" name="initializationVector" th:attr="value=${statementsSsoPayload.initializationVector}"/>
+    </form>
+
+    <script>
+        document.getElementById("statementsForm").submit()
+    </script>
+</body>
+</html>

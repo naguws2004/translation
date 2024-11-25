@@ -1,0 +1,54 @@
+<th:block layout:decorator="layout/checkout-layout" layout:fragment="content">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- prettier-ignore -->
+        <th:block th:include="/layout/partials/aurus-js"></th:block>
+    </head>
+    <!-- prettier-ignore -->
+    <script th:inline="javascript">
+        window._ost.ccpaEnabled = /*[[${#oap.getCcpaEnabled()}]]*/ false; 
+        window._ost.signedIn = /*[[${customer.isLoggedIn()}]]*/ ''; 
+        window._ost.oRewardsID = /*[[${customer.oRewardsId}]]*/ null;
+        window._ost.paymentProcessingError = /*[[${PAYMENT_PROCESSING_ERROR}]]*/ false;
+        window._ost.email = /*[[${customer?.emailAddress}]]*/ '';
+        window._ost.fullName = /*[[${customer?.firstName + ' ' + customer?.lastName}]]*/ '';
+        window._ost.paymentYears = /*[[${#oap.checkoutPaymentYears()}]]*/ '[]';
+        window._ost.cartId = /*[[${cart.id}]]*/ ''
+    </script>
+    <!-- prettier-ignore -->
+    <script th:inline="javascript">
+        window._ost.aurus = {}
+        window._ost.aurus.merchantId = /*[[${#aurus.getMerchantId()}]]*/ '';
+        window._ost.aurus.storeId = /*[[${#aurus.getStoreId()}]]*/ '';
+        window._ost.aurus.terminalId = /*[[${#aurus.getTerminalId()}]]*/ '';
+        window._ost.aurus.tokenParam = /*[[${@blExploitProtectionService.getCsrfTokenParameter()}]]*/ '';
+        window._ost.aurus.token = /*[[${@blExploitProtectionService.getCSRFToken()}]]*/ '';
+    </script>
+    <th:block th:if="${#oap.isFBTrackingEnabled()}">
+        <!-- prettier-ignore -->
+        <script th:inline="javascript">
+            window._ost.facebookTrackingEnabled = true;
+        </script>
+    </th:block>
+    <!-- prettier-ignore -->
+    <script th:if="${customer.isLoggedIn()} and ${session.changeEmailPrompt ne null}" th:inline="javascript">
+        window._ost.customerEmailChange = /*[[${session.changeEmailPrompt}]]*/ null;
+        window._ost.currentEmail = /*[[${customer.emailAddress}]]*/ '';
+    </script>
+    <header-checkout></header-checkout>
+    <div class="checkout-body">
+        <div th:if="${checkoutErrorMessages}" class="row">
+            <div th:each="message : ${checkoutErrorMessages}" class="col-md-9">
+                <div class="checkout-error">
+                    <img class="checkout-error__img" src="img/warning_triangle_red.svg" />
+                    <p class="checkout-error__msg" th:utext="${message}"></p>
+                </div>
+            </div>
+        </div>
+        <checkout></checkout>
+    </div>
+    <checkout-footer
+        id="checkout-footer"
+        th:attr="data=${@oapVersionUtil.resolveVersion()}"
+    ></checkout-footer>
+</th:block>

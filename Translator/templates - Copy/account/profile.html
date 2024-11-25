@@ -1,0 +1,64 @@
+<th:block layout:decorator="layout/account-layout" th:with="currentPageTitle=#{account.profile.title}">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <!-- prettier-ignore -->
+        <script th:inline="javascript">
+            window._ost.rewardsVerified = /*[[${#oap.isOrewardsVerified(customer)}]]*/ false;
+            window._ost.defaultPhone = /*[[${defaultPhone}]]*/ '';
+            window._ost.mobilePhone = /*[[${mobilePhone}]]*/ '';
+            window._ost.commPreferences = /*[[${communicationPrefs}]]*/ null;
+        </script>
+        <!-- prettier-ignore -->
+        <script th:inline="javascript">
+            window._ost.accountSettings = {}
+            window._ost.accountSettings.firstName = /*[[${customer.firstName}]]*/ '';
+            window._ost.accountSettings.lastName = /*[[${customer.lastName}]]*/ '';
+            window._ost.accountSettings.email = /*[[${customer.emailAddress}]]*/ '';
+        </script>
+        <div class="profile-wrap">
+            <h1 class="sr-only">Profile &amp; Settings</h1>
+            <h2 class="account-dashboard-heading" th:text="#{account.profile.accountSettings}">
+                ACCOUNT SETTINGS
+            </h2>
+            <div class="account-settings__wrap">
+                <div id="account-settings" th:inline="text">
+                    <div class="account-settings__container flex-inline align-center">
+                        <p class="account-settings__text ellipsis">
+                            Name:
+                            <strong>[[${customer.firstName}]] [[${customer.lastName}]]</strong>
+                        </p>
+                    </div>
+                    <div class="account-settings__container flex-inline align-center">
+                        <p class="account-settings__text ellipsis">
+                            Email &amp; Username:
+                            <strong>[[${customer.emailAddress}]]</strong>
+                        </p>
+                    </div>
+                    <div class="account-settings__container flex-inline align-center">
+                        <p class="account-settings__text">
+                            Password:
+                            <strong>********</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <profile-personalization></profile-personalization>
+        <hr />
+        <h2 class="account-dashboard-heading" th:text="#{account.profile.shippingAddresses}"></h2>
+        <div class="js-addresses-section">
+            <th:block th:replace="account/partials/addresses-section" />
+        </div>
+        <hr />
+        <profile-contact-info></profile-contact-info>
+        <hr />
+        <h2 id="my-comm-preferences" class="account-dashboard-heading" th:text="#{account.profile.myCommPref}"></h2>
+        <p th:text="#{account.profile.controlHowConnected}"></p>
+        <profile-communications></profile-communications>
+        <hr />
+        <p class="account-dashboard-privacy-links">
+            View our
+            <a href="/privacy-policy" class="account-dashboard-privacy-link"
+                aria-label="View our Privacy Policy (Opens a new window)">Privacy Policy</a>
+        </p>
+    </th:block>
+</th:block>

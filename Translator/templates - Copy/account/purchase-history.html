@@ -1,0 +1,11 @@
+<th:block
+    layout:decorator="layout/account-layout"
+    th:with="currentPageTitle=#{account.purchaseHistory.title}"
+>
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <script th:inline="javascript">
+            window._ost.orderNumbersList = /*[[${orderNumbersList}]]*/ [];
+        </script>
+        <purchase-history-container></purchase-history-container>
+    </th:block>
+</th:block>

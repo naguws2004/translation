@@ -1,0 +1,218 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="site-content o-container">
+            <div class="row rebate-wrap">
+                <div class="main-primary col-sm-12">
+                    <div class="content-wrap">
+                        <div class="site-breadcrumb js-site-breadcrumb">
+                            <div
+                                class="site-breadcrumb_wrapper site-breadcrumb_wrapper-rebate js-site-breadcrumb_wrapper"
+                            >
+                                <div th:if="${breadcrumbs}" style="display: block"></div>
+                                <div
+                                    class="site-breadcrumb_slider js-site-breadcrumb_slider"
+                                    th:include="catalog/partials/breadcrumbs"
+                                ></div>
+                            </div>
+                        </div>
+                        <div class="rebate-center-container">
+                            <div class="rebate-center-header">
+                                <blc:content-zone
+                                    name="Rebates Page Heading Zone"
+                                ></blc:content-zone>
+                            </div>
+                            <div class="rebate-container">
+                                <div class="row">
+                                    <div class="rebate-container-filter">
+                                        <div class="rebate-filter-categories">
+                                            <div class="select2--lg">
+                                                <select class="js-rebate-categories__select">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="rebate-search">
+                                            <div class="rebate-search__wrap">
+                                                <label for="rebate-search" class="sr-only">
+                                                    Search for Rebates
+                                                </label>
+                                                <input
+                                                    id="rebate-search"
+                                                    class="rebate-search__input form-control js-rebate-search__input"
+                                                    type="text"
+                                                    placeholder="Search Rebates"
+                                                />
+                                                <button
+                                                    class="rebate-search__clear js-rebate-search__clear button button--white"
+                                                    aria-label="Clear Search"
+                                                >
+                                                    <svg class="button__icon">
+                                                        <use href="#shape-remove" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rebate-head">
+                                    <div class="rebate-head__download" th:text="#{rebate.download}">
+                                        Download
+                                    </div>
+                                    <div class="rebate-head__details" th:text="#{rebate.details}">
+                                        Details
+                                    </div>
+                                    <div class="rebate-head__valid" th:text="#{rebate.validDate}">
+                                        Valid Date
+                                    </div>
+                                </div>
+                                <div class="rebate-body" aria-live="polite">
+                                    <div class="rebate-body__no-results js-rebate-body__no-results">
+                                        There are no results for your search.
+                                    </div>
+                                    <div class="rebate-announcement sr-only"></div>
+                                    <th:block
+                                        th:if="${rebates != null}"
+                                        th:with="categoryList=${#oap.getRebateCategories(rebates)},categories=${categoryList[0]},categoriesForRebates=${categoryList[1]}"
+                                    >
+                                        <th:block th:each="rebate : ${rebates}">
+                                            <article
+                                                th:if="${rebate !=null}"
+                                                th:id="${rebate.anchor != null}? ${rebate.anchor}"
+                                                class="rebate"
+                                                th:classappend="${categoriesForRebates['__${rebate.id}__']}"
+                                                th:attr="data-keywords=${rebate.keywords},data-categories=${rebate.categories}"
+                                            >
+                                                <figure
+                                                    class="rebate-image"
+                                                    th:if="${rebate.rebateImageUrl != null}"
+                                                >
+                                                    <img
+                                                        th:src="@{${rebate.rebateImageUrl}}"
+                                                        th:alt="#{rebate.rebate}"
+                                                    />
+                                                    <br />
+                                                </figure>
+                                                <div class="rebate-details">
+                                                    <h3
+                                                        th:if="${rebate.rebateHeading != null}"
+                                                        class="rebate-title"
+                                                        th:utext="${rebate.rebateHeading}"
+                                                    ></h3>
+                                                    <p>
+                                                        <a
+                                                            href="#"
+                                                            class="js-rebate_show-details toggle-expand visible-xs"
+                                                        >
+                                                            <strong>Show Details</strong>
+                                                        </a>
+                                                    </p>
+                                                    <div
+                                                        th:if="${rebate.rebateDescription != null}"
+                                                        th:utext="${rebate.rebateDescription}"
+                                                        class="rebate_hidden js-rebate_hidden"
+                                                    ></div>
+                                                    <th:block th:if="${rebate.rebateTerms != null}">
+                                                        <p>
+                                                            <a
+                                                                target="_blank"
+                                                                rel="rebateTerms"
+                                                                th:href="@{${rebate.rebateTerms}}"
+                                                            >
+                                                                Terms and Conditions
+                                                            </a>
+                                                        </p>
+                                                    </th:block>
+                                                    <th:block
+                                                        th:if="${rebate.vendorLink2 != null or rebate.vendorPhoneNumber != null}"
+                                                    >
+                                                        <p
+                                                            class="rebate-track rebate_hidden js-rebate_hidden"
+                                                        >
+                                                            Track Your Rebate:
+                                                            <span
+                                                                th:if="${rebate.vendorLink2 != null}"
+                                                            >
+                                                                <a
+                                                                    th:href="@{${rebate.vendorLink2}}"
+                                                                    th:utext="${#strings.replace(#strings.replace(rebate.vendorLink2, 'http://', ''), 'https://', '')}"
+                                                                ></a>
+                                                            </span>
+                                                            <span
+                                                                th:if="${rebate.vendorPhoneNumber != null}"
+                                                                th:utext="${rebate.vendorPhoneNumber}"
+                                                            ></span>
+                                                        </p>
+                                                    </th:block>
+                                                </div>
+                                                <div class="rebate-valid">
+                                                    <div
+                                                        class="rebate_dates rebate_hidden js-rebate_hidden"
+                                                    >
+                                                        <p
+                                                            class="rebate-valid-date"
+                                                            th:inline="text"
+                                                        >
+                                                            <span class="rebate-valid-text">
+                                                                Valid
+                                                            </span>
+                                                            [[${#oap.getValidRebateDates(rebate)}]]
+                                                        </p>
+                                                        <p
+                                                            th:if="${rebate.postmarkedByDate != null}"
+                                                        >
+                                                            must be postmarked by
+                                                            <br />
+                                                            <strong
+                                                                th:utext="${#oap.getFormattedRebateDate(rebate.postmarkedByDate)}"
+                                                            ></strong>
+                                                        </p>
+                                                        <p th:if="${rebate.receivedByDate != null}">
+                                                            must be received by
+                                                            <br />
+                                                            <strong
+                                                                th:utext="${#oap.getFormattedRebateDate(rebate.receivedByDate)}"
+                                                            ></strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="rebate-btns">
+                                                    <div class="rebate-btn">
+                                                        <a
+                                                            th:if="${rebate.vendorLink1 != null}"
+                                                            th:href="@{${rebate.vendorLink1}}"
+                                                            class="rebate-get-form"
+                                                            th:inline="text"
+                                                            th:attr="aria-label=${rebate.rebateHeading != null} ? #{aria.rebate.getFormWithItem(${rebate.rebateHeading})} : #{aria.rebate.getForm}"
+                                                        >
+                                                            GET FORM
+                                                        </a>
+                                                    </div>
+                                                    <div class="rebate-btn">
+                                                        <a
+                                                            th:if="${rebate.vendorLink3 != null}"
+                                                            th:href="@{${rebate.vendorLink3}}"
+                                                            class="rebate-redeem-online"
+                                                            th:inline="text"
+                                                        >
+                                                            REDEEM ONLINE
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </th:block>
+                                        <!-- prettier-ignore -->
+                                        <script th:inline="javascript">
+                                            /*<![CDATA[*/ 
+                                            window.categories = /*[[${categories}]]*/ {};
+                                            /*]]>*/
+                                        </script>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

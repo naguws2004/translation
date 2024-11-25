@@ -1,0 +1,1975 @@
+#404
+404.404=404
+404.pageNotFound=Page Not Found
+404.pageNotOpened=The page you requested could not be opened or has moved.
+404.weApologizeInconvenience=We apologize for any inconvenience. Either your session has timed out or the page does not exist.
+404.ifInProcess=If you were in the process of checking out, your order was not submitted. You will need to start the checkout process over again.
+404.backToHome=Back to Homepage
+404.goToCart=Go to my shopping cart
+
+#500
+500.500=500
+500.internalServerError=Internal Server Error
+500.currentlyUnavailable=Page is currently unavailable.
+500.notifiedTeam=Our team has been notified of the error and is looking into the issue. In the meantime, try refreshing the page or visiting one of our stores nationwide.
+
+#Account
+account.email=Email Address:
+account.firstName=First Name:
+account.lastName=LastName:
+account.locked.errorMessage.part1=Your account is temporarily locked after too many attempts to log in. Please
+account.locked.errorMessage.part3=customer service at <span class="no-break">1-888-327-7153</span> for assistance.
+account.options=Account Options
+account.order.totalDiscounts=TOTAL DISCOUNTS
+
+    # gift card
+    account.giftCard=Gift Card
+    account.giftCard.title=Enter your Gift Card Number:
+    account.giftCard.number=Number
+    account.giftCard.balance=Remaining Balance
+    account.giftCard.amountApplied=Amount Applied
+    account.giftCard.status=Status
+    account.giftCard.invalid.number=The Gift Card Number entered was not found. Please Try again.
+    account.giftCard.already.redeemed=Gift Card already redeemed
+    account.giftCard.giftcard.number=Gift Card Number
+    account.giftCard.date=Date
+
+    #menu
+    account.menu.info=Account Information
+    account.menu.garage=Garage
+    account.menu.viewOrders=View Orders
+    account.menu.changePassword=Change Password
+    account.menu.manageAddresses=Manage Addresses
+    account.menu.manageWishlist=Manage Wishlist
+    account.menu.credit=Manage Account Credit
+    account.menu.giftCard=Redeem Gift Cardaccount.orderHistory.orderDetails.promoCodeCaps
+    account.menu.contact=Contact Us
+
+    # my.orders placed
+    account.my.orders.placed.PHYSICAL_PICKUP=Pick Up In-Store
+    account.my.orders.placed.PHYSICAL_SHIP=Ship-To-Home
+    account.my.orders.placed.GIFT_CARD=Gift-Card
+
+    # my.orders group
+    account.my.orders.group.PHYSICAL_PICKUP=Pick Up
+    account.my.orders.group.PHYSICAL_SHIP=Ship to Home
+    account.my.orders.group.GIFT_CARD=Gift Card
+
+    # accountDashboard
+    account.title=Dashboard | O'Reilly Auto Parts
+    account.accountDashboard.welcome=Welcome
+    account.accountDashboard.itemQuantityOnOrder.item=On Order: {0} Item
+    account.accountDashboard.itemQuantityOnOrder.items=On Order: {0} Items
+    account.accountDashboard.itemQuantityOnOrder.null=Purchase History
+    account.accountDashboard.checkStatus=Check your order status, tracking information, and online order history.
+    account.accountDashboard.recentOrders=See Your Recent Orders
+    account.accountDashboard.mySelectedStore=My Selected Store
+    account.accountDashboard.changeMyStore=Change My Store
+    account.accountDashboard.findProductAvailability=Find product availability, pricing and store services at a store near you.
+    account.accountDashboard.selectStore=Select A Store
+    account.accountDashboard.saveVehicles=Save Multiple Vehicles
+    account.accountDashboard.manageVehicles=Manage and find the right parts to fit all your vehicles.
+    account.accountDashboard.addNewManage=Add New or Manage Existing Vehicles
+    account.accountDashboard.settings=Account Settings
+    account.accountDashboard.name=Name
+    account.accountDashboard.email=Email Address
+    account.accountDashboard.password=Password
+    account.accountDashboard.phone=Phone Number
+    account.accountDashboard.na=N/A
+    account.accountDashboard.updateSettings=Update Account Settings
+    account.accountDashboard.defaultShipping=Default Shipping Address
+    account.accountDashboard.noDefault=No Default Address
+    account.accountDashboard.managedAddresses=Manage Addresses
+    account.accountDashboard.emailPreferences=Email Preferences
+    account.accountDashboard.you=You
+    account.accountDashboard.areSubscribed=are subscribed
+    account.accountDashboard.areNotSubscribed=are not subscribed
+    account.accountDashboard.toReceiveEmails=to receive emails
+    account.accountDashboard.getLatest=Get the latest sales and product offers.
+    account.accountDashboard.changeEmailSettings=Change Email Settings
+
+    # purchaseHistory
+    account.purchaseHistory.title=Purchase History | O'Reilly Auto Parts
+    account.purchaseHistory.orderDetails.billingAddress=Billing Address
+    account.purchaseHistory.orderDetails.paymentMethod=Payment Method
+    account.purchaseHistory.orderDetails.orderSummary=Order Summary
+    account.purchaseHistory.orderDetails.itemsSubtotal=Item(s) Subtotal
+    account.purchaseHistory.orderDetails.promos=Promos
+    account.purchaseHistory.orderDetails.shipping=Shipping
+    account.purchaseHistory.orderDetails.free=FREE
+    account.purchaseHistory.orderDetails.tax=Tax
+    account.purchaseHistory.orderDetails.stateTax=State Tax
+    account.purchaseHistory.orderDetails.municipalTax=Municipal Tax
+    account.purchaseHistory.orderDetails.retailDeliveryFee=Retail Delivery Fees
+    account.purchaseHistory.orderDetails.tip=Delivery Tip
+    account.purchaseHistory.orderDetails.noTip=$0.00
+    account.purchaseHistory.orderDetails.deliveryInstructions=Delivery Instructions
+    account.purchaseHistory.orderDetails.tracking=track my order
+    account.purchaseHistory.orderDetails.orderTotal=Order Total
+    account.purchaseHistory.orderDetails.core=Core
+    account.purchaseHistory.orderDetails.oilDeposit=Oil Deposit(s)
+    account.purchaseHistory.orderDetails.importFee=Total Import Fees
+    account.purchaseHistory.orderReturn.info=If you are not completely satisfied with your purchase, simply return the merchandise to any O'Reilly Auto Parts store by mail. We, in our discretion, will inspect it prior to refunding your money or credit being issued.
+    account.purchaseHistory.orderReturn.coreInfo=This part you purchased contains a component that is recycleable. The Core Charge deposit was charged at the time of purchase. By returning the recyclable component from your old part to us, the charge is refunded to you.
+    account.purchaseHistory.orderReturn.local=For your convenience, items purchased on oreillyauto.com can be returned to any of our retail stores nationwide. Credit can be issued at time of return and no return shipping charges will be incurred. Please bring with you a copy of your packing slip or shipping confirmation email and the credit card used it make the purchase.
+    account.purchaseHistory.orderReturn.mail=Items purchased on oreillyauto.com can be returned by mail. Credit will be issued at the time the merchandise is received in our warehouse. For most orders, the cost of return shipping is non-refundable.
+    account.purchaseHistory.orderReturn.questions=If you have any questions, please review our <a href="/online-orders#returns-exchanges" class="green-link inline">Return Policy</a>, or you can <a href="/contact-us" class="green-link inline">Contact Us</a></span>.
+    account.purchaseHistory.orderReturn.noItemsError=Please select at least 1 item to return.
+    account.purchaseHistory.orderReturn.submissionError=There was an error submitting the form, please refresh the page and try again.
+    account.purchaseHistory.orderReturn.otherReasonError=Please provide a reason for your return.
+    account.purchaseHistory.orderReturnComplete.pack=If at all possible, use the original box and packaging material you received from O'Reilly Auto Parts to return your items. Please make sure you cover or remove the original shipping label from the box.
+    account.purchaseHistory.orderReturnComplete.pack.bottom=Include all instructions and materials supplied with the item.
+    account.purchaseHistory.orderReturnComplete.label=Print return information. Attach the label to the box, and put the rest of the box with your returned items.
+    account.purchaseHistory.orderReturnComplete.ship=We suggest shipping with a carrier that provides tracking, insurance and delivery confirmation, such as UPS or Fed-Ex. NOTE: If you use USPS, we require that you request USPS to obtain a signature at delivery time. Return shipping cost is the responsibility of the customer and is non-refundable.
+    account.purchaseHistory.orderDetails.batteryFee=Fees
+    account.purchaseHistory.orderReturnComplete.note=Note: Returned items received and accepted by O'Reilly Auto Parts will continue to show on your order.
+
+    # profile
+    account.profile.title=Profile & Settings | O'Reilly Auto Parts
+    account.profile.accountSettings=Account Settings
+    account.profile.cantFind=Oops, we couldn't find that shipping address:
+    account.profile.useAnyway=Use Anyway
+    account.profile.useSuggested=Use Suggested
+    account.profile.didFind=However, we did find:
+    account.profile.understand=I understand, use it anyway
+    account.profile.note=Note:
+    account.profile.understandNote=Since we could not validate the address you entered, using it may delay your order and/or result in O'Reilly Auto contacting you to validate the address.
+    account.profile.modify=Modify Address
+    account.profile.close=Close Modal
+
+    # statements
+    account.statements.title=Statements | O'Reilly Auto Parts
+    account.statements.accessStmt=Access Statement
+    account.statements.accountNumber=Customer Number
+    account.statements.back=Back to Statements
+    account.statements.current=Current
+    account.statements.custInfo=Customer Information
+    account.statements.date=Date
+    account.statements.desc=Description
+    account.statements.editPaperless=Edit Paperless Statements & Notification Options
+    account.statements.endBalance=End Balance
+    account.statements.invAmt=Inv Amount
+    account.statements.nickname=Account Nickname
+    account.statements.onlineStatements=ONLINE STATEMENTS
+    account.statements.open=Open Amount
+    account.statements.po=PO#
+    account.statements.register=REGISTER AN ACCOUNT
+    account.statements.RegisterOnline=REGISTER FOR ONLINE STATEMENTS
+    account.statements.RegisterOnlineSuccess=YOU ARE NOW REGISTERED TO VIEW ONLINE STATEMENTS
+    account.statements.signUp=Sign Up for Paperless Statements & Email Notification
+    account.statements.statementsFor=STATEMENTS FOR
+    account.statements.statementsToView=STATEMENTS TO VIEW
+    account.statements.stmtDate=Statement Date
+    account.statements.stmtDetails=Statement Details
+    account.statements.stmtMonth=Statement Month
+    account.statements.summary=Statement Summary
+    account.statements.total=Total Amount
+    account.statements.trans=Trans #
+    account.statements.validate=Validate Account
+    account.statements.viewAndAccess=View and access the past 12 months of statements.
+    account.statements.viewOptions=Statement View Options
+    account.statements.viewPrint=View / Print Statement
+    account.statements.viewStmtInv=View Statements & Invoices
+    account.statements.viewlastStmtInv=View Invoices Since Last Statement
+
+    # nav
+    account.nav.account=Dashboard
+    account.nav.profile=Profile & Settings
+    account.nav.orders=Purchase History
+    account.nav.garage=Garage
+    account.nav.rewards=O'Rewards
+    account.nav.shoppingLists=Shopping Lists
+    account.nav.statements=Statements
+
+    # orderHistory
+    account.orderHistory.orderNumber=Order Number
+    account.orderHistory.orderNumberCaps=ORDER NUMBER
+    account.orderHistory.date=Date
+    account.orderHistory.orderDateCaps=ORDER DATE
+    account.orderHistory.shipPickUpCaps=SHIP/PICKUP
+    account.orderHistory.Status=Status
+    account.orderHistory.Total=Total
+    account.orderHistory.totalCaps=TOTAL
+    account.orderHistory.placedOrdersCaps=PLACED ORDERS
+    account.orderHistory.noCurrentOrders=No Current Orders Found
+    account.orderHistory.noPreviousOrders=No Previous Orders Found
+    account.orderHistory.notShippedNotPickedUp=Not yet shipped. Not yet picked up.
+    account.orderHistory.noOrders=You have not placed any orders.
+    account.orderHistory.shippedOrdersAndReturnsCaps=SHIPPED ORDERS & RETURNS
+
+        # orderDetails
+        account.orderHistory.orderDetals=Order Details
+        account.orderHistory.orderDetails.summary=Order Summary
+        account.orderHistory.orderDetails.items=Items
+        account.orderHistory.orderDetails.price=Price
+        account.orderHistory.orderDetails.merchandiseTotal=Merchandise Total:
+        account.orderHistory.orderDetails.shippingTotal=Shipping Total:
+        account.orderHistory.orderDetails.taxes=Taxes:
+        account.orderHistory.orderDetails.grandTotal=Grand Total:
+        account.orderHistory.orderDetails.shipment=Shipment
+        account.orderHistory.orderDetails.shippingAddress=Shipping Address
+        account.orderHistory.orderDetails.shippingSpeed=Shipping Speed
+        account.orderHistory.orderDetails.shippingSubTotal=Shipping SubTotal:
+        account.orderHistory.orderDetails.paymentInfo=Payment Information
+        account.orderHistory.orderDetails.paymentMethod=Payment Method
+        account.orderHistory.orderDetails.paymentType=Payment type:
+        account.orderHistory.orderDetails.amountPaid=Amount paid:
+        account.orderHistory.orderDetails.subtotal=Subtotal:
+        account.orderHistory.orderDetails.promotions=Promotions:
+        account.orderHistory.orderDetails.shipping=Shipping:
+        account.orderHistory.orderDetails.returnItems=Return Item(s)
+        account.orderHistory.orderDetails.orderNumber=Order #:
+        account.orderHistory.orderDetails.invoice=Invoice #:
+        account.orderHistory.orderDetails.noInvoiceNumber=No Invoice # on Order
+        account.orderHistory.orderDetails.purchaseDate=Purchase Date:
+        account.orderHistory.orderDetails.orderStatus=Order Status:
+        account.orderHistory.orderDetails.shippedDate=Shipped Date:
+        account.orderHistory.orderDetails.noShippedDate=No Shipped Date on Order
+        account.orderHistory.orderDetails.storeAddress=Store Address:
+        account.orderHistory.orderDetails.name=Name:
+        account.orderHistory.orderDetails.billingAddress=Billing Address:
+        account.orderHistory.orderDetails.phoneNumber=Phone #:
+        account.orderHistory.orderDetails.email=Email:
+        account.orderHistory.orderDetails.payment=Payment:
+        account.orderHistory.orderDetails.payment.lastDigits=Last Digits
+        account.orderHistory.orderDetails.yourOrderCaps=YOUR ORDER
+        account.orderHistory.orderDetails.descriptionCaps=DESCRIPTION
+        account.orderHistory.orderDetails.itemNumberCaps=ITEM #
+        account.orderHistory.orderDetails.quantityCaps=QTY.
+        account.orderHistory.orderDetails.statusCaps=STATUS
+        account.orderHistory.orderDetails.shipPickUpCaps=SHIP&#8203;/&#8203;PICKUP
+        account.orderHistory.orderDetails.orderSubtotalCaps=ORDER SUBTOTAL
+        account.orderHistory.orderDetails.coreChargesCaps=CORE CHARGES
+        account.orderHistory.orderDetails.promoCodeCaps=PROMO CODE:
+        account.orderHistory.orderDetails.taxCaps=TAX
+        account.orderHistory.orderDetails.giftCardPaymentCaps=GIFT CARD PAYMENT
+        account.orderHistory.orderDetails.orderTotalCaps=ORDER TOTAL
+        account.orderHistory.orderDetails.tracking=Tracking:
+        account.orderHistory.orderDetails.creditedItemsCaps=CREDITED ITEMS
+        account.orderHistory.orderDetails.coreReturn=Core Return
+
+        # purchaseHistory
+        account.orderHistory.purchaseHistory.shippedViaFedex=Shipped via FedEx:
+        account.orderHistory.purchaseHistory.shippedViaUps=Shipped via UPS:
+        account.orderHistory.purchaseHistory.shippedViaUsps=Shipped via USPS:
+        account.orderHistory.purchaseHistory.shippedViaDoordash=Shipped via DoorDash:
+
+    # End of order history
+
+
+    # profile
+    account.profile.name=Name
+    account.profile.edit=Edit
+    account.profile.add=Add
+    account.profile.save=Save
+    account.profile.cancel=Cancel
+    account.profile.emailAddress=Email Address
+    account.profile.password=Password
+    account.profile.oldPassword=Old Password
+    account.profile.currentPassword=Current Password
+    account.profile.newPassword=New Password
+    account.profile.confirmNewPassword=Confirm New Password
+    account.profile.emailSubscriptions=Email Subscriptions
+    account.profile.emailSignUp=I want to receive contest and promotional e&#8209;mails.
+    account.profile.manageSubscriptions=Manage Subscriptions
+    account.profile.shippingAddresses=Shipping Addresses
+    account.profile.removeAddress=Remove
+    account.profile.yesRemoveAddress=Yes, Remove
+    account.profile.defaultAddress=Default Address
+    account.profile.makeDefault=Make Default
+    account.profile.showAll=Show All
+    account.profile.hide=Hide
+    account.profile.addAddress=Add Shipping Address
+    account.profile.contactInfo=Contact Information
+    account.profile.phone.info=We use this number in the event we need to contact you about an order and to look up your O'Rewards account when you shop in O'Reilly Auto Parts stores.
+    account.profile.phoneNumber=Phone Number
+    account.profile.mobilePhone=Mobile Phone Number
+    account.profile.myCommPref=My Communication Preferences
+    account.profile.myCommPref.sub=O'Reilly Marketing Emails
+    account.profile.controlHowConnected=Control how you stay connected with us.
+    account.profile.subscribeEmail=Yes, I'd like to receive exclusive <strong>email</strong> offers and special promotions.
+    account.profile.subscribeEmail.category=Category Specific <small>(Brakes, Oil, Truck &amp; Towing, etc)</small>
+    account.profile.subscribeEmail.offers=Special Offers
+    account.profile.subscribeEmail.ad=New Sale Ad
+    account.profile.subscribeText=Yes, please send me news and offers via <strong>text message</strong> to the mobile number I provided. <small>(Message &amp; data rates may apply)</small>
+    account.profile.subscribeEmail.oRewards=Yes, I'd like to receive <strong>O'Rewards exclusive email</strong> bonus offers and special promotions.
+    account.profile.oReillyAutoPartsSpecific=O'Reilly Auto Parts Specific
+    account.profile.oRewardsSpecific=O'Rewards Specific
+    account.profile.subscribeText.oRewards=Yes, please send me O'Rewards specific news and offers via <strong>text message</strong> to the mobile number I provided. <small>(Message &amp; data rates may apply)</small>
+    account.profile.emailDisclaimer=My Communication Preferences will not affect account and order related emails, as well as O'Rewards Rewards. Any changes can take up to 6-10 days to take effect.
+
+    #update
+    account.update.updateInfo=Update Account Information
+    account.update.email=Email Address:
+    account.update.firstName=First Name:
+    account.update.lastName=Last Name:
+
+    #wishlist
+    account.wishlist.noItems=You do not have any items in your wishlist
+    account.wishlist.item=Item
+    account.wishlist.quantity=Quantity
+    account.wishlist.price=Price
+    account.wishlist.total=Total
+    account.wishlist.remove=Remove
+
+# End of Account
+
+#Add Promo - BLC Offers
+add_promo.error.offer.ineligible_for_shipping_promo=Cannot apply shipping offer.
+add_promo.error.offer.order_has_free_shipping=Order already qualifies for free shipping.
+add_promo.error.offer.promo_used=Offer has already been used.
+add_promo.error.offer.promo_expired=Offer code has expired.
+add_promo.error.offer.promo_applied=Offer is already applied to order.
+
+#Add Promo - General
+add_promo.error.other_promos_already_added=Only one discount allowed per order.
+add_promo.error.min_purchase_req_not_met=Minimum purchase requirements not met.
+add_promo.error.invalid_code=Invalid code.
+add_promo.error=An unknown error has occurred.
+
+#Add Promo - O'Rewards coupons
+add_promo.error.reward.promo_has_invalid_status=Reward is not active.
+add_promo.error.reward.promo_used=Reward has already been used.
+add_promo.error.reward.promo_expired=Reward has expired.
+add_promo.error.reward.promo_applied=Reward is already applied to order.
+
+#Add Promo - Promotional coupons
+add_promo.error.promotional.promo_has_invalid_status=Coupon is not active.
+add_promo.error.promotional.promo_used=Coupon has already been used.
+add_promo.error.promotional.promo_expired=Coupon has expired.
+add_promo.error.promotional.promo_early=Coupon is not active.
+add_promo.error.promotional.promo_applied=Coupon is already applied to order.
+
+#addresses
+addresses.addressBook=Address Book
+addresses.noAddresses=You have not yet added any addresses to your account.  Start by adding one.
+addresses.options=Options:
+addresses.chooseAddress=Choose an address to update...
+addresses.or=or
+addresses.newAddress=create a new address
+addresses.addNewAddress=Add a new address
+addresses.newAddressBelow=create a new address here
+addresses.country=Please Select a Country
+addresses.default=Make Default
+addressName.required=Please enter a name for your address
+addressLine1.required=Please enter the actual address.
+city.required=Please enter the city.
+state.required=Please enter the state.
+postalCode.required=Please enter the postal code.
+postalCode.invalid=Please enter a valid postal code.
+phonePrimary.required=Please enter a primary phone number.
+phoneSecondary.required=Please enter a secondary phone number.
+phoneFax.required=Please enter a fax number.
+phoneNumber.valid=Please enter a valid phone number.
+phoneNumber.required=A phone number is required.
+phoneNumber.tenDigits=Please enter a valid ten digit phone number.
+
+# ARIA labels
+aria.footer.exploreJobs=Explore Jobs (opens in new tab)
+aria.footer.order.status=Check the status of your order (opens in new tab)
+aria.footer.loyalty.program=Learn more about our loyalty program (opens in new tab)
+aria.footer.near.you=Find an Automotive Service Professional near you (opens in new tab)
+aria.footer.signUp=Sign Up with Email for News and Special Offers
+aria.facet.remove=Remove Filter
+aria.ship.to.home=Ship to Home
+aria.pickup.in.store=Pick Up in Store
+aria.giftcard=Gift Card
+aria.close=Close Dialog
+aria.giftCard.message=Optional Message
+aria.checkfit=Check Vehicle Fit (opens modal)
+aria.footer.nav.about.title=About Us, grouping label
+aria.footer.nav.about.careers=About Us grouping, Careers (opens in new tab)
+aria.footer.nav.about.community=About Us grouping, Community Relations
+aria.footer.nav.about.company=About Us grouping, Company Overview (opens in new tab)
+aria.footer.nav.about.investor=About Us grouping, Investor Relations (opens in new tab)
+aria.footer.nav.about.news=About Us grouping, Newsroom (opens in new tab)
+aria.footer.nav.about.legal=About Us grouping, Legal Policies
+aria.footer.nav.about.directory=About Us grouping, Site Directory
+aria.footer.nav.about.sustainability=About Us grouping, Sustainability
+aria.footer.nav.about.oreillyautoMx=About Us grouping, Oreillyauto Mx web site
+aria.footer.nav.resources.title=Resources, grouping label
+aria.footer.nav.resources.fas=Resources grouping, Find a Store
+aria.footer.nav.resources.currentAd=Resources grouping, Current Ad
+aria.footer.nav.resources.services=Resources grouping, Store Services
+aria.footer.nav.resources.brands=Resources grouping, List of Brands
+aria.footer.nav.resources.pro=Resources grouping, For the Professional
+aria.footer.nav.resources.jobber=Resources grouping, Jobber Program
+aria.footer.nav.resources.repairShop=Resources grouping, Find a Repair Shop (opens in new tab)
+aria.footer.nav.resources.cap=Resources grouping, Coupons & Promotions
+aria.footer.nav.resources.videos=Resources grouping, Videos (opens in new tab)
+aria.footer.nav.resources.howTo=Resources grouping, How To Hub
+aria.footer.nav.customerService.title=Customer Service, grouping label
+aria.footer.nav.customerService.contact=Customer Service grouping, Contact Us
+aria.footer.nav.customerService.faqs=Customer Service grouping, FAQ's
+aria.footer.nav.customerService.account=Customer Service grouping, Account Dashboard
+aria.footer.nav.customerService.giftCard=Customer Service grouping, Gift Cards
+aria.footer.nav.customerService.rebateCenter=Customer Service grouping, Rebates
+aria.footer.nav.customerService.returns=Customer Service grouping, Returns & Exchanges
+aria.footer.nav.customerService.so=Customer Service grouping, Special Orders
+aria.footer.nav.customerService.shipping=Customer Service grouping, Shipping & Delivery
+aria.footer.nav.customerService.warranties=Customer Service grouping, Warranties
+aria.footer.nav.customerService.sds=Customer Service grouping, SDS (opens in new tab)
+aria.footer.nav.customerService.profCats=Customer Service grouping, Professional Catalogs
+aria.cart.faq.liveChat=Live Chat (opens in new tab)
+aria.cart.increaseQuantity=Increase Quantity
+aria.cart.decreaseQuantity=Decrease Quantity
+aria.cart.group.quantity=Quantity Controls for {0}
+aria.cart.group.availability=Availability Controls for {0}
+aria.cart.discountCode=Enter a Promo Code or O'Rewards Reward
+aria.cart.whyTaxes=Why Is There Tax on my Order? (opens modal)
+aria.cart.add=Add to Cart (opens modal)
+aria.cart.added=In Your Cart
+aria.cart.goTo=Go To Cart
+aria.cart.outOfStock=Out of Stock
+aria.cart.shippingOptions=Shipping Options
+aria.cart.seeDetails=See Details (opens modal)
+aria.createAccount.privacyPolicy=Privacy Policy (opens in new tab)
+aria.plp.group.quantity=Quantity Controls for {0}
+aria.plp.group.availability=Availability Controls for {0}
+aria.plp.addToCart=Add to Cart button for {0}
+aria.plp.seeMoreAttributes=See More Attributes for {0} {1}
+aria.plp.seeLessAttributes=See Less Attributes for {0} {1}
+aria.checkout.group.shippingMethods=Shipping Methods, grouping label
+aria.checkout.additionalPickupPerson.help=Additional Pickup Person Help (opens modal)
+aria.checkout.additionalPickupPerson.helpLink=Privacy Policy (opens in new tab)
+aria.header.search=Search by product, category, brand, or part number
+aria.header.search.button=Search
+aria.header.searchInfo=Search Help Tooltip
+aria.header.shopButton=Shop Categories
+aria.fas.input=Search by city, state, or zip code
+aria.fas.input.differentLocation=Search for a different location by city, state, or zip code
+aria.footer.social.facebook=O'Reilly Auto Parts Facebook page (opens in new tab)
+aria.footer.social.twitter=O'Reilly Auto Parts Twitter page (opens in new tab)
+aria.footer.social.instagram=O'Reilly Auto Parts Instagram page (opens in new tab)
+aria.footer.social.youtube=O'Reilly Auto Parts YouTube page (opens in new tab)
+aria.footer.social.pinterest=O'Reilly Auto Parts Pinterest page (opens in new tab)
+aria.loading=Loading
+aria.pagination.previousPage=Previous Page
+aria.pagination.nextPage=Next Page
+aria.payment.creditCard=We accept Visa, MasterCard, Discover, American Express, and JCB
+aria.header.repairShop=Find a Repair Shop (opens in new tab)
+aria.header.shoppingList=Open Your Shopping List
+aria.header.currentAd=Current Ad
+aria.header.fas.directions=Directions for {0} in {1}, {2}
+aria.header.fas.details=Details for {0} in {1}, {2} (opens in new tab)
+aria.header.fas.setAsMyStore= Make {0} in {1}, {2} My Store
+aria.header.vehicleSelect.licensePlateNumber=License Plate Number
+aria.header.vehicleSelect.vinNumber=Enter VIN Number
+aria.profile.editName=Edit Name on Account
+aria.profile.editEmail=Edit Account Email Address
+aria.profile.editPassword=Edit Account Password
+aria.profile.editDefaultAddress=Edit Default Shipping Address for {0}
+aria.profile.editAlternateAddress=Edit Alternate Shipping Address for {0}
+aria.summary.orewardsHelp=O'Rewards Points Disclaimer
+aria.rebate.getFormWithItem=Get Rebate Form for {0} (opens PDF)
+aria.rebate.getForm=Get Rebate Form (opens PDF)
+aria.product.warranty={0} Information (opens in new tab)
+aria.product.restrictedToGroundShipping=Item restricted to ship Ground only. (opens Online Orders page in new tab)
+aria.product.notEligibleForFreeShipping=Not eligible for Free Shipping. (opens Online Orders page in new tab)
+aria.product.listItem.compare=Add {0} to Compare
+aria.cart.changeZip=Change Zip Code
+aria.nav.shop.mobile.more=Show More
+aria.nav.shop.back=Return to Main Menu
+aria.nav.shop.close.submenu=Close Submenu
+aria.nav.shop.section.featured=Featured Categories
+aria.nav.shop.section.all=All Categories
+aria.nav.shop.section.quick=Quick Links
+aria.nav.shop.section.additional=Additional Resources
+aria.nav.shop.close.menu=Close Menu
+aria.compare.removeItem=Remove {0} from Compare
+aria.footer.termsAndConditions=Terms and Conditions (opens in new tab)
+aria.ccpa.disclaimer.linkText=Read about how your information is used (opens in new tab)
+
+#Brand
+brand.noResults=No results for this brand
+brand.description.more=Show More
+brand.description.less=Show Less
+
+#Cart
+cart.cart=Cart | O'Reilly Auto Parts
+cart.myCart=My Cart
+cart.item.singular=item
+cart.item.plural=items
+cart.currentSubtotal=Your Current Subtotal
+cart.orderDiscount=Order Discount
+cart.subtotalDisclaimer=Subtotal does not yet include applicable tax or shipping and handling charges
+cart.update=Update
+cart.updateAll=Update All
+cart.remove=Remove
+cart.removeAll=Remove All
+cart.yesRemoveAll=Yes, remove all
+cart.no=No
+cart.englarge=Enlarge
+cart.checkout=Checkout
+cart.continueToCheckout=Continue To Checkout
+cart.continueShopping=Continue Shopping
+cart.promoCode=Promo Code
+cart.promoCodeAccepted=Promo Code Accepted
+cart.applyDiscount=Apply Discount
+cart.item=Item
+cart.quantity=Quantity
+cart.price=Price
+cart.discount=Discount
+cart.totalSavings=Total Savings
+cart.total=Total
+cart.estTotal=Est. Total
+cart.excludingTax=excluding tax
+cart.each=(each)
+cart.empty=Your cart is empty
+cart.cantFind=Can't find what you need?
+cart.callYour=Call your
+cart.title.PROMOTIONAL=O'Rewards Promotional Coupon
+cart.title.OREWARDS=O'Rewards Reward
+cart.content.PROMOTIONAL=COUPON TERMS AND CONDITIONS: Coupon is good for a single receipt purchase of regularly priced merchandise. Purchase must be equal to or greater than the value of this coupon. Coupon is not redeemable for cash, is non-transferable and cannot be replaced if lost or stolen. Not valid for previous purchases or gift cards, and cannot be used to make payments on a charge account. Coupon may not be shared or distributed via the Internet. Void if altered, defaced, transferred, copied, used fraudulently or without authorization, or where prohibited by law. Coupon valid for one use only. Customer pays sales tax. Cannot be combined with any other coupons. Retail customers only. On qualifying redemptions, a discount for the coupon's value will be applied to your total purchase.
+cart.content.OREWARDS=COUPON TERMS AND CONDITIONS: Coupon is good for a single receipt purchase of qualifying merchandise. Purchase must be equal to or greater than the value of this coupon. Coupon is not redeemable for cash, is non-transferable and cannot be replaced if lost or stolen. Not valid for previous purchases or gift cards, and cannot be used to make payments on a charge account. Coupon may not be shared or distributed via the Internet. Void if altered, defaced, transferred, copied, used fraudulently or without authorization, or where prohibited by law. Coupon valid for one use only. Customer pays sales tax. Cannot be combined with any other coupons. Retail customers only. On qualifying redemptions, a discount for the coupon's value will be applied to your total purchase.
+cart.seeDetails=See Details
+cart.offer.legal=<p class="legal-terms">*Restrictions may apply to oversized items, or items requiring special handling.</p>
+cart.noLongerAvailable=Some items in your cart have changed or are no longer available and have been removed.
+cart.doubleCheck=Please double check your product quantities before placing your order.
+cart.error=There was an error.
+cart.unspecifiedVehicle=Unspecified Vehicle
+cart.discountBox=Promo Code or O'Rewards Reward:
+cart.localStore=Local Store
+cart.gladToHelp=and we will be glad to help!
+cart.currentlyEmpty=Your Shopping Cart Is Empty
+cart.orderSummary=Order Summary
+cart.edit=Edit
+cart.step1=Step 1
+cart.step2=Step 2
+cart.step3=Step 3
+cart.step4=Step 4
+cart.step5=Step 5
+cart.pickupParts=Pick Up Parts at:
+cart.orderInformation=Contact Information
+cart.billingInformation=Billing Information
+cart.shippingInformation=Shipping Information
+cart.fillOutBasicOrder=Please fill out your contact information to complete purchase
+cart.orderTotal=Order Total
+cart.orderSubTotal=Subtotal
+cart.promotions=Promotions
+cart.taxes=Taxes
+cart.shipping=Shipping
+cart.privacyPolicy=Privacy Policy
+cart.totals.basedOn=Based on
+cart.totals.change=Change
+cart.promo.applied=Promo Code or O'Rewards Reward:
+cart.offer.reward=${0} OFF Reward
+
+cart.congratulations=Congratulations
+cart.yourOrderQualifies=your order qualifies for FREE SHIPPING
+cart.getFreeShipping=Get Free Shipping
+cart.onOrderOver=on most orders over {0}
+cart.byAddingAmountToOrder=Add {0} to your cart &
+
+cart.fillOutBillingAddress=Please fill out a billing address to complete purchase
+cart.fillOutShippingAddress=Please fill out a shipping address and pick a shipping method to complete purchase
+cart.addNewAddress=Add new address...
+cart.paymentProcessingError=There was an error processing your payment. Please try again.
+cart.payment.expiration.invalid=The expiration date is invalid. Please use (MM/YY)
+cart.payment.card.invalid=The card number you entered is invalid.
+cart.payment.invalid=There was a problem processing your request. Invalid Arguments.
+cart.print=Print
+cart.core=Core
+cart.fee=Fee
+cart.coreCharges=Core Charges
+cart.discounts=Discount
+cart.changeStore=Change Store
+cart.salesAreFinal=All sales are final
+cart.faq.haveQuestions=Have Questions or Need Help?
+cart.orderAndShipping=Order and Shipping
+cart.faq=FAQs
+cart.faq.callUs=Give us a call:
+cart.faq.callUs.number=1-888-327-7153
+cart.faq.liveChat=Live Chat
+cart.item.promoApplied=Promo Applied
+cart.submitForm=Submit Form
+cart.ship.loading=Loading
+cart.giftcard.no.message=N/A
+cart.giftcard.message.preface=Message:
+
+#Cart - Order Info
+cart.checkoutByFillingInEmail=Checkout as guest by filling in an email or
+cart.logIntoYourAccount=log in to your account
+cart.youCanAlso=You can also
+cart.registerNewAccount=register a new account
+cart.emailAddress=Email Address
+cart.checkoutAsGuest=Checkout as Guest
+
+#Cart - Shipping Info / Billing Info
+cart.useShppingInfo=Use Shipping Information
+cart.useBillingInfo=Use Billing Information
+cart.fullName=Full Name
+cart.firstName=First Name
+cart.lastName=Last Name
+cart.country=Country
+cart.phone=Phone
+cart.address2=Address 2
+cart.city=City
+cart.state=State
+cart.province=Province
+cart.cityState=City / State
+cart.postalCode =Postal Code
+cart.shppingMethod=Shipping Method
+cart.selectShipping=Select Shipping
+cart.shipToMultipleAddresses=Ship to Multiple Addresses
+cart.shippingAddress=Shipping Address
+cart.shppingTotal=Shipping Total
+cart.estimatedShipping=Estimated Shipping
+cart.estimatingShipping=Estimating Shipping
+cart.reEstimate=Re-estimate
+cart.estimate=Estimate
+cart.billingAddress=Billing Address
+cart.paymentMethod=Payment Method
+cart.creditCard=Credit Card
+cart.cardNumber=Card Number
+cart.cvv=CVV
+cart.cardType=Card Type
+cart.nameOnCard=Name on the Card
+cart.experationDate=Expiration Date
+cart.payPal=PayPal
+cart.collectOnDelivery=Collect On Delivery
+cart.giftCard=Gift Card
+cart.giftCard.applied=Applied Gift Cards
+cart.giftCard.number=Number
+cart.giftCard.balance=Balance
+cart.giftCard.email=Email
+cart.giftCardNumber=Gift Card Number
+cart.giftCard.apply=Apply
+cart.completeOrder=Complete Order
+cart.payment.options=Payment Options
+cart.payment.accountCredit=Gift Cards and Customer Credit
+cart.payment.promo=Promo Code
+cart.customer.credit=Customer Credit
+
+#Cart Summary and Checkout Totals
+summary.orewards=<strong>O'Rewards</strong> members earn points on this purchase.
+
+#Cart - Multiship
+cart.address=Address
+cart.method=Method
+cart.addAddress=Add New Address
+cart.cancel=Cancel
+
+#Cart - Account Credit
+cart.accountCredit.accounts=Customer Credit
+cart.accountCredit.applied=Accounts Applied
+cart.accountCredit.accountNumber=Account Number
+cart.accountCredit.balance=Balance
+cart.accountCredit.noCredit=You currently do not have any credit.
+cart.accountCredit.redeem=Redeem your gift cards
+cart.accountCredit.andApply=and apply it to your account!
+
+#Cart - Add to cart
+cart.add=Add to Cart
+cart.added=In Your Cart
+cart.goTo=Go To Cart
+cart.outOfStock=Out of Stock
+cart.clear=Clear
+
+#Cart - Unavailable inventory
+cart.unavailableInventory.reduceOrSelect=Selected quantity is not available for {0}. Please reduce quantity or select {1} to continue.
+cart.unavailableInventory.select=Selected quantity is not available. Please select {0} to continue.
+cart.unavailableInventory.reduce=Selected quantity is not available. Please reduce quantity to continue.
+cart.unavailableInventory.remove=Selected quantity is not available. Please remove item.
+
+#Catalog
+catalog.requiredAttributes=Required Attributes
+catalog.close=Close
+catalog.notSure=Not Sure?
+
+#Category
+category.filterResults=Filter your results
+category.featuredProducts=Featured Products
+category.viewing=Viewing
+category.of=of
+category.resultsFor=results for
+category.noResults=No results for this category
+category.required.facets.choose=Choose required attributes
+category.required.facets.continue=to continue
+category.category=Category:
+category.categories=Categories:
+category.related.see=See
+category.related.less=Show less
+category.related.more=Show more
+category.search.searchWithin=Search Within Results
+category.search.go=Go
+category.mobile.categories=Categories
+
+    #Subcategories
+    category.subcategory.ac=Air Conditioning
+    category.subcategory.batteryAcc=Battery & Accessories
+    category.subcategory.beltsHoses=Belts & Hoses
+    category.subcategory.bodyTrimMirrors=Body, Trim & Mirrors
+    category.subcategory.brakes=Brakes
+    category.subcategory.chargingStarting=Charging & Starting
+    category.subcategory.coolingHeating=Cooling & Heating
+    category.subcategory.enginePartsMounts=Engine Parts & Mounts
+    category.subcategory.exhaust=Exhaust
+    category.subcategory.filtersValves=Filters & PCV Valves
+    category.subcategory.fuelEmissions=Fuel & Emissions
+    category.subcategory.hardwareFasteners=Hardware & Fasteners
+    category.subcategory.ignitionTuneUp=Ignition & Tune-Up
+    category.subcategory.lightingElectrical=Lighting & Electrical
+    category.subcategory.suspensionSteering=Suspension & Steering
+    category.subcategory.tireWheel=Tire & Wheel
+    category.subcategory.transmissionTransaxle=Transmission & Transaxle
+    category.subcategory.wipers=Wipers
+    category.subcategory.bodyStyling=Body Styling Components
+    category.subcategory.chassisSuspension=Chassis & Suspension
+    category.subcategory.drivetrain=Drivetrain
+    category.subcategory.engine=Engine
+    category.subcategory.gasketsSeals=Gaskets & Seals
+    category.subcategory.gaugesComponents=Gauges & Components
+    category.subcategory.oilSealers=Oil, Sealers & Additives
+    category.subcategory.safetyEquipment=Safety Equipment
+    category.subcategory.tunersAnalyzers=Tuners & Analyzers
+    category.subcategory.chromeDressUp=Chrome & Dress Up
+    category.subcategory.exterior=Exterior
+    category.subcategory.interior=Interior
+    category.subcategory.keysKeyless=Keys & Keyless Entry
+    category.subcategory.mobileAudio=Mobile Audio
+    category.subcategory.truck=Truck
+    category.subcategory.bodyRepair=Body Repair Tools
+    category.subcategory.booksRepair=Books & Repair Manuals
+    category.subcategory.diagnosticTools=Diagnostic Tools
+    category.subcategory.electrical=Electrical
+    category.subcategory.liftEquipment=Lift Equipment
+    category.subcategory.shopGarage=Shop/Garage
+    category.subcategory.tapes=Tapes
+    category.subcategory.tools=Tools
+    category.subcategory.toolBoxes=Tool Boxes & Chests
+    category.subcategory.workWearGloves=Work Wear & Gloves
+    category.subcategory.acChemicals=Air Conditioning Chemicals
+    category.subcategory.antifreeze=Antifreeze
+    category.subcategory.batteryChemicals=Battery Chemicals
+    category.subcategory.cleaners=Cleaners
+    category.subcategory.deicers=De-Icers
+    category.subcategory.dieselExhaustFluid=Diesel Exhaust Fluid
+    category.subcategory.fuelSystem=Fuel System
+    category.subcategory.gasketMakersRemoversSealers=Gasket Makers, Removers & Sealers
+    category.subcategory.gluesAdhesivesSealants=Glues, Adhesives & Sealants
+    category.subcategory.greaseLube=Grease & Lube
+    category.subcategory.leakDetectors=Leak Detectors & Sealers
+    category.subcategory.maintenanceChemicals=Maintenance Chemicals
+    category.subcategory.oil=Oil
+    category.subcategory.paintBody=Paint & Body Repair
+    category.subcategory.tireSealant=Tire Sealant
+    category.subcategory.transmission=Transmission
+    category.subcategory.washWax=Wash, Wax & Clean
+    category.subcategory.windshieldWash=Windshield Wash
+    category.subcategory.refrigerantOil=Refrigerant Oil
+    category.subcategory.additionalProducts=Additional Products
+    category.subcategory.apparel=Apparel
+    category.subcategory.hdAgrinculture=HD/Agriculture Parts & Accessories
+    category.subcategory.lawnGarden=Lawn & Garden - Small Engine
+    category.subcategory.licensePlates=License Plates & Frames
+    category.subcategory.marineParts=Marine Parts & Accessories
+    category.subcategory.powerSports=Power Sports
+    category.subcategory.shopEquipment=Shop Equipment
+    category.subcategory.winterAccessories=Winter Accessories
+
+#CCPA/MDM
+ccpa.disclaimer.californiaConsumers=California Consumers:
+ccpa.disclaimer.linkText=See how we use your information.
+
+#createAccount
+createAccount.title=Create an Account | O'Reilly Auto Parts
+createAccount.createAccount=Create an Account
+createAccount.button.modal.mobile=Create an Account & Continue
+createAccount.button.modal.desktop=Create an Account & Continue Checkout
+createAccount.emailAddress=Email Address
+createAccount.emailAddressIsUsername=(This will be your username.)
+createAccount.firstName=First Name
+createAccount.lastName=Last Name
+createAccount.password=Password
+createAccount.confirmPassword=Confirm Password
+createAccount.confirmEmail=Confirm Email Address
+createAccount.zipCode=Zip Code
+createAccount.phoneNumber=Phone Number
+createAccount.receiveInfo=Yes, I would like to receive <strong>O'Reilly specific email</strong> offers and special promotions.
+createAccount.receiveTexts=Yes, please send me O'Reilly specific news and offers via <strong>text message</strong> to the mobile number I provided. <small class="label-subtitle">(Messages and data rates may apply. U.S. phone numbers only.)</small>
+createAccount.orewardsSignUp=I would like to sign up.
+createAccount.existingOrewardsAccount=I already have an O'Rewards account.
+createAccount.orewardsEmailOptIn=Email me O'Rewards exclusive offers.
+createAccount.orewardsTextOptIn=Text me O'Rewards offers.
+
+#credit card
+creditCardName.required= Credit card name is required.
+creditCardNumber.required= Credit card number is required.
+creditCardCvvCode.required= CVV code is required.
+creditCardExpMonth.required= Credit card expiration month is required.
+creditCardExpYear.required= Credit card expiration year is required.
+
+#Check Order Status
+checkOrderStatus.title=Sign In/Check Order Status | O'Reilly Auto Parts
+checkOrderStatus.checkOrderStatus=Check Order Status
+checkOrderStatus.emailAddress=Email Address
+checkOrderStatus.orderNumber=Confirmation or Order Number
+checkOrderStatus.findPurchase=Find and View Purchase
+checkOrderStatus.shipOrderStatus=Ship-To-Home Status
+checkOrderStatus.pickupOrderStatus=Pick Up In-Store Status
+checkOrderStatus.gcOrderStatus=Gift Card Status
+checkOrderStatus.orderSummary=Order Summary
+checkOrderStatus.subtotal=Item(s) Subtotal
+checkOrderStatus.promos=Promos
+checkOrderStatus.shipping=Shipping
+checkOrderStatus.tax=Tax
+checkOrderStatus.giftCard=Gift Card
+checkOrderStatus.orderTotal=Order Total
+checkOrderStatus.tip=Delivery Tip
+
+#Checkfit
+checkfit.product.checkVehicleFit=Check Vehicle Fit
+checkfit.product.fits=Fits {0}
+checkfit.product.doesNotFit=Does NOT fit {0}
+
+#Confirmation
+confirmation.success=Success!
+confirmation.orderNum=Order Confirmation #
+confirmation.confirmEmail.toBeSent=A confirmation email will be sent to
+confirmation.orderSummary=Order Summary
+confirmation.orderTotal=Order Total
+confirmation.orderSubTotal=Subtotal
+confirmation.promotions=Promotions
+confirmation.taxes=Taxes
+confirmation.shipping=Shipping
+confirmation.shipping.info=Shipping Information
+confirmation.shipping.method=Shipping Method
+confirmation.billing.info=Billing Information
+confirmation.payment.info=Payment Information
+confirmation.payment.method=Payment Method
+confirmation.exp=exp.
+
+#Checkout
+checkout.error.payment=Error 4507: There was a problem processing your payment. Please try again. If the problem persists please call Customer Service: 1 (888) 327-7153
+checkout.error.submission=Error 4508: Unable to submit order at this time. Please try again. If the problem persists please call Customer Service: 1 (888) 327-7153
+checkout.error.generic=Error 4509: Unable to complete checkout at this time. Please try again. If the problem persists please call Customer Service: 1 (888) 327-7153
+checkout.error.phone.validation=Error 4510: Phone validation request failed/timed out
+checkout.error.phone.badResponse=Error 4511: Phone validation request completed but the response was unsuccessful
+checkout.error.billingForm.fail=Error 4512: Billing form submission failed/timed out
+checkout.error.billingForm.badResponse=Error 4513: Billing form submission completed but the response was unsuccessful
+checkout.error.aurus.fail=Error 4514: Aurus token request failed/timed out
+checkout.error.aurus.badResponse=Error 4515: Aurus token request completed but the response was unsuccessful
+checkout.error.aurus.sessionData=Error 4516: Request to get aurus session data, after an unsuccessful aurus token response, fails/timed out
+checkout.title=Checkout | O'Reilly Auto Parts
+checkout.breadcrumb.checkout=Checkout
+checkout.breadcrumb.address=Address, Delivery & Payment
+checkout.breadcrumb.submit=Review & Submit
+checkout.breadcrumb.completed=Order Completed
+checkout.processing=Processing your payment
+checkout.processing.advice=Please keep this page open
+checkout.customer.email=Email Address
+checkout.customer.email.confirm=Confirm Email Address
+checkout.customer.mailingList=Yes, I want to receive contest, newsletter, and promotional emails.
+
+    # billing
+    checkout.billing.title=Billing Address
+    checkout.billing.title.message=as it appears on your statement
+    checkout.billing.name.first=First Name
+    checkout.billing.name.last=Last Name
+    checkout.billing.address.line1=Address
+    checkout.billing.address.line2=Address Line 2
+    checkout.billing.address.city=City
+    checkout.billing.address.state=State
+    checkout.billing.address.zip=Zip
+    checkout.billing.phone=Phone Number
+    checkout.billing.cid=Visa, MasterCard, Discover card CID
+    checkout.billing.amex.cid=American Express card CID
+
+    # payment
+    checkout.payment.title=Payment
+    checkout.payment.creditCard=Credit Card #
+    checkout.payment.creditCardName=Name on Card
+    checkout.payment.outsideUS.modal=Can I ship my order to an international address? Can I pay with an international credit card?
+    checkout.payment.US=U.S. Cards Only
+    checkout.payment.exp=Expiration Date
+    checkout.payment.month=Month
+    checkout.payment.year=Year
+    checkout.payment.cid=CID
+    checkout.payment.cid.message=What is a CID?
+    checkout.payment.giftcard.pay=Gift Card
+    checkout.payment.add=Add a payment
+    checkout.payment.giftcard.pay.message=Will use full balance of giftcard(s), remainder will be charged to credit card
+    checkout.payment.giftcard.number=Gift Card Number
+    checkout.payment.giftcard.pin=Gift Card PIN
+    checkout.payment.apply=Apply
+    checkout.payment.applied=Applied -
+    checkout.payment.remove=Remove
+    checkout.payment.add.another=Add Another
+    checkout.payment.processing=Payment Processing
+
+        # month
+        checkout.payment.month.jan=January
+        checkout.payment.month.feb=February
+        checkout.payment.month.mar=March
+        checkout.payment.month.apr=April
+        checkout.payment.month.may=May
+        checkout.payment.month.jun=June
+        checkout.payment.month.jul=July
+        checkout.payment.month.aug=August
+        checkout.payment.month.sep=September
+        checkout.payment.month.oct=October
+        checkout.payment.month.nov=November
+        checkout.payment.month.dec=December
+
+    # pickup
+    checkout.pickup.whatToKnow=What to know:
+    checkout.pickup.whatToKnow.do=Do
+    checkout.pickup.whatToKnow.not=NOT
+    checkout.pickup.whatToKnow.line1=go to your store until you receive an email stating your order is ready for pickup.
+    checkout.pickup.whatToKnow.line2=Only the credit cardholder can pick up the order. If the cardholder is unable to personally go to the store or the order is in another state, the cardholder must call Internet Customer Service at
+    checkout.pickup.whatToKnow.option=Option #1
+    checkout.pickup.whatToKnow.line3=Bring a photo ID and the credit card you use.
+
+    # shipping
+    checkout.shipping.title=Shipping Address
+    checkout.shipping.name.first=First Name
+    checkout.shipping.name.last=Last Name
+    checkout.shipping.address.line1=Address
+    checkout.shipping.address.line2=Address Line 2 (optional)
+    checkout.shipping.address.city=City
+    checkout.shipping.address.state=State
+    checkout.shipping.address.zip=Zip
+    checkout.shipping.phone=Phone Number
+    checkout.shipping.method.title=Shipping Method
+    checkout.shipping.method.message=Orders placed in the afternoon usually ship the following day
+    checkout.shipping.option.estimation=Estimated {0}
+    checkout.shipping.option.unavailable=Not available outside the contiguous United States
+    checkout.shipping.add.new.address=Add New Address
+
+    # review and summary
+    checkout.review.policy=Please take a moment to review your order. By placing your order, you agree to our <a href="/legal-policies#privacy-policy" target="_blank" rel="noopener" aria-label="Privacy Policy (opens in new tab)">Privacy Policy</a> and <a href="/legal-policies#terms-and-conditions" target="_blank" rel="noopener" aria-label="Conditions Of Use (opens in new tab)">Conditions Of Use</a>.
+    checkout.review.do.not.pickup=Please wait to pick up your order until you receive an email with further instructions.
+    checkout.summary.questions=Have Questions or Need Help?
+    checkout.summary.faq=FAQ
+    checkout.summary.call.us=Give us a call: {0}
+    checkout.summary.live.chat=Live Chat
+
+    #candidate.modal
+    checkout.candidate.modal.close=Close Modal
+    checkout.candidate.modal.cantFind=Oops, we couldn't find the address:
+    checkout.candidate.modal.note=Note:
+    checkout.candidate.modal.confirmUse=Since we could not validate the address you entered using it may delay your order and/or result in O'Reilly Auto contacting you to validate the address.
+    checkout.candidate.modal.useAnyway=Use Anyway
+    checkout.candidate.modal.understandUse=I Understand, Use Anyway
+    checkout.candidate.modal.modify=Modify Address
+    checkout.candidate.modal.however=However, we did find:
+    checkout.candidate.modal.useSuggest=Use Suggested
+
+    # complete
+    checkout.complete.thank.you=Thank you for your order.
+    checkout.complete.title=Thank you for your order | O'Reilly Auto Parts
+    checkout.complete.order.placed.for=Your order for <strong>${0}</strong> has been placed.
+    checkout.complete.order.number.is=Your Order Number is: <strong>{0}</strong>
+    checkout.complete.email.confirmation=Please check your email inbox for a confirmation message.
+    checkout.complete.ship.to.home=Ship to Home Orders
+    checkout.complete.pick.up.store=Pick Up in Store Orders
+    checkout.complete.ship.to.home.description=To keep product cost down for our customers, items for this order may be shipped from different locations and arrive in separate packages on different days.
+    checkout.complete.pick.up.store.description=You will receive an "Order Confirmation" email upon placing your order and then a "Ready for Pickup" email once your item(s) is/are ready in store. Please read the email carefully for important instructions.
+    checkout.complete.create.password=Save your details for faster checkout
+    checkout.complete.easy.access=Easy access to your order status & history
+    checkout.complete.exclusive.offers=Get exclusive offers and promotions
+    checkout.complete.create.account=Create my account
+    checkout.complete.password.label=Choose a Password<em class="req">*</em>
+    checkout.complete.password.confirm.label=Confirm Password<em class="req">*</em>
+
+checkout.cart.title=My Cart
+checkout.cart.summary=Cart Summary
+checkout.cart.subtotal=Subtotal:
+checkout.cart.tax.message=*Tax & Shipping on next page
+checkout.back=Back
+checkout.review=Review Order
+checkout.complete=Complete Order
+checkout.login.email=Email Address
+checkout.login.password=Password
+checkout.login=Login
+
+    # shipping.address.error
+    checkout.shipping.address.error.message=Oops, we couldn't find the shipping address:
+    checkout.shipping.address.error.use.understand=I Understand, Use Anyway
+    checkout.shipping.address.error.use=Use Anyway
+    checkout.shipping.address.error.modify=Modify Address
+    checkout.shipping.address.error.note=Note:
+    checkout.shipping.address.error.note.message=Since we could not validate the address you entered using it may delay you order and/or result in O'Reilly Auto contacting you to validate the address
+    checkout.shipping.address.error.suggest.title=However, we did find:
+    checkout.shipping.address.error.use.suggested=Use Suggested
+
+checkout.thankYou=Thank You
+checkout.successfully=Your order was successfully completed. Please
+checkout.print=Print
+checkout.thisPage=this page for your records.
+checkout.completed=Completed Order
+checkout.orderNumber=Order #
+checkout.holdOn=Hold on, your items aren't ready yet!
+checkout.weWillEmail=We'll send an email when your items are ready to pickup.
+checkout.mustBring=What you must bring to the store
+checkout.copyOfEmail=A copy of the pickup confirmation e-mail
+checkout.creditCard=The credit card or gift card you used to complete the order
+checkout.validId=A valid photo ID, such as your driver's license
+checkout.important=Important
+checkout.onlyCardHolder=Only the credit cardholder can pick up the order. If the cardholder is unable to pick up the order, they must call the internet Customer Service at 1-888-327-7153 (Option #1)
+checkout.needMore=Need more
+checkout.pickUp=pick up in store
+checkout.information=information
+checkout.quantity=QTY
+checkout.description=Description
+checkout.pickUpShip=Pick Up or Ship
+checkout.total=Total
+checkout.tax=Tax
+checkout.plusCoreCharge=+Core Charge
+checkout.subtotal=Order Subtotal
+checkout.coreCharges=Core Charges
+checkout.groundShipping=Ground Shipping
+checkout.giftCardPayment=Gift card Payment
+checkout.pickUpInStore=Pick up in store location:
+checkout.home=Home
+checkout.expires=Expires
+checkout.creditCardFraud=Credit card fraud costs companies and consumers millions of dollars annually and we take it very seriously. For your protection and ours, orders that appear fraudulent may be held for review. If necessary, a representative will call or email you to verify the order. If we are unable to verify the order, the order may be canceled. Fraud review may delay the shipment and delivery of your order. We reserve the right to cancel any order.
+checkout.password.create=Create
+checkout.ground=Ground
+checkout.estimated=Estimated
+checkout.day=Day
+
+    # storeDetails
+    checkout.storeDetails=Store Pickup Location
+    checkout.storeDetails.message.wait=Please wait to head to the store until you receive an email that your order is ready. Refer to your confirmation email for instructions.
+    checkout.storeDetails.message.3daysCancel=Orders not picked up after 3 days are subject to cancellation and refund.
+    checkout.storeDetails.important=Important
+    checkout.storeDetails.estimate=Estimated to be ready for pick up
+
+checkout.pickUpLocation=Pickup Location
+
+checkout.review.info=Review Your Information
+checkout.review.pleaseReview=Please review your order information. To edit your credit card, address, or shipping information,
+checkout.review.return=return to the previous page.
+checkout.review.orderInformation=Order Information
+checkout.review.youWillReceive=You will receive an order number and printable order summary on the next page
+checkout.review.tax=Tax
+checkout.review.committed=O'Reilly is committed to ensuring the security of your information. To prevent unauthorized access or disclosure, maintain data accuracy, and ensure the appropriate use of information, we have put in place appropriate physical, electronic, and managerial procedures to safeguard and secure the information we collect online. For more information, please consult our
+checkout.review.submitOrder=Submit Order
+checkout.review.willBeCharged=That will be charged
+checkout.multiShip.shipToSingleAddress=Ship to Single Address
+checkout.multiShip.editMultiple=Edit Multiple Address Shipping
+checkout.allDiscounts=Total Discounts
+checkout.fees=Fees
+checkout.checkout=Checkout
+checkout.disclaimer.ordersAfter4pm=Orders received after 4 p.m. EST may not be processed until the next business day.
+checkout.disclaimer.multiplePackages=Multiple item orders may ship in multiple packages and may arrive at different dates.
+
+    # additionalPerson
+    checkout.additionalPerson.firstName=First Name
+    checkout.additionalPerson.lastName=Last Name
+    checkout.additionalPerson.emailAddress=Email Address
+    checkout.additionalPerson.stillPickup=You can still pick up this order, even if you select an additional pickup person.
+    checkout.additionalPerson.heading=Additional Pickup Person
+    checkout.additionalPerson.inputEmail=<strong>Input an email above if you wish to have the additional pickup person receive an email confirmation when the order is ready.</strong> A valid photo ID is required for pickup.
+
+    # signin
+    checkout.signin.returning.customers=Returning Customers
+    checkout.signin.emailAddress=Email Address
+    checkout.signin.password=Password
+    checkout.signin.forgotPassword=Reset it
+    checkout.signin.signIn=Sign In
+    checkout.signin.new.customers=New Customers
+    checkout.signin.get.rewarded=Get rewarded and make shopping next time even easier by creating an account now during checkout.
+    checkout.signin.guest.message=Check out as a guest and you will have the option to create an account later.
+    checkout.signin.guest.continue=Continue as Guest
+    checkout.signin.message=Sign In for faster checkout.
+
+#Email
+email.unsubscribe.title=Unsubscribe | O'Reilly Auto Parts
+email.cartAbandonmentThankYou.title=Thank You | O'Reilly Auto Parts
+
+    # Signup
+    email.signup.stayConnected=Stay Connected. Sign up for email &amp; Text.
+    email.signup.getConnected=Sign up now to receive emails and/or text messages for exclusive offers, special promotions and event notifications.
+    email.signup.requiredFields=All fields are required.
+    email.signup.firstName=First Name
+    email.signup.lastName=Last Name
+    email.signup.emailAddress=Email Address
+    email.signup.confirmEmailAddress=Confirm Email Address
+    email.signup.zipCode=Zip Code
+    email.signup.phoneNumber=Phone Number
+    email.signup.infoUsed=How your information is used
+    email.signup.submitButton=Submit
+
+#Facet Filter
+facet.chooseMultiple=Choose Multiple...
+facet.edit=Edit
+facet.orMore=or more
+facet.multi=Multi-Select
+facet.close=Close
+facet.showMore=Show More...
+facet.showLess=Show Less...
+facet.vehicleSpecific=Vehicle Specific
+facet.universal=Universal
+facet.youSelected=You've Selected
+facet.categories.header=Categories
+facet.categories.header.related=Related Categories
+
+# Facet Filter Overrides
+HOME_DELIVERY=Available To Ship
+STORE_PICKUP=Pick Up in Store
+
+#Footer
+footer.joinTeam=JOIN OUR TEAM
+footer.employee.count=60,000 Employees & Counting!
+footer.employee.start=Start your career today!
+footer.apply=Apply Now
+footer.exploreJobs=Explore Jobs
+footer.connect=CONNECT
+footer.connect.withOAP=with O'Reilly
+
+    # mailList
+    footer.mailList=Enhance your email experience by providing your zip code for area specific offers.
+    footer.mailList.zip.placeholder=Zip Code (optional)
+    footer.mailList.zip.button.enter=Enter
+    footer.mailList.zip.button.skip=Skip
+    footer.mailList.zip.or=or
+    footer.mailList.thanks=Thank you for signing up. You should expect to start receiving emails shortly.
+    footer.mailList.email.placeholder=Enter email
+    footer.mailList.signup.placeholder=Sign Up for News & Special Offers
+    footer.maillist.button.signup=Sign Up
+    footer.mailList.email.button=GO
+    footer.mailList.enterEmail.placeholder=Enter email
+    footer.mailList.thankYou=Thank you for
+    footer.mailList.signingUp=signing up!
+
+footer.ppp=Professional Parts People <sup class="registered-trademark">&#0174;</sup>
+footer.enEspanol=En Espa&#241;ol
+
+    # nav
+    footer.nav.store=store
+    footer.nav.loyalty.program=loyalty program
+    footer.nav.near.you=near you
+    footer.nav.myOAP.contact=Contact Your Local Store
+    footer.nav.myOAP.check=Check Order Status
+    footer.nav.myOAP.check.link=order
+    footer.nav.myOAP.rewards=O'Rewards
+    footer.nav.about.title=About Us
+    footer.nav.about.careers=Careers
+    footer.nav.about.community=Community Relations
+    footer.nav.about.company=Company Overview
+    footer.nav.about.news=Newsroom
+    footer.nav.about.investor=Investor Relations
+    footer.nav.about.legal=Legal Policies
+    footer.nav.about.directory=Site Directory
+    footer.nav.about.sustainability=Sustainability
+    footer.nav.about.oreillyautoMx=O'Reilly MX
+    footer.nav.resources.title=Resources
+    footer.nav.resources.fas=Find a Store
+    footer.nav.resources.currentAd=Current Ad
+    footer.nav.resources.services=Store Services
+    footer.nav.resources.brands=List of Brands
+    footer.nav.resources.pro=For the Professional
+    footer.nav.resources.jobber=Jobber Program
+    footer.nav.resources.repairShop=Find a Repair Shop
+    footer.nav.resources.cap=Coupons & Promotions
+    footer.nav.resources.videos=Videos
+    footer.nav.resources.howTo=How To Hub
+    footer.nav.customerService.title=Customer Service
+    footer.nav.customerService.contact=Contact Us
+    footer.nav.customerService.faqs=FAQs
+    footer.nav.customerService.account=Account Dashboard
+    footer.nav.customerService.giftCard=Gift Cards
+    footer.nav.customerService.rebateCenter=Rebates
+    footer.nav.customerService.returns=Returns & Exchanges
+    footer.nav.customerService.so=Special Orders
+    footer.nav.customerService.shipping=Shipping & Delivery
+    footer.nav.customerService.warranties=Warranties
+    footer.nav.customerService.profCats=Professional Catalogs
+    footer.nav.customerService.sds=SDS
+
+footer.californiaTransparency=California Transparency in Supply Chain Act
+footer.californiaPrivacy=California Consumer Privacy Act Notice
+footer.privacy=Privacy
+
+#Forgot Password
+forgotPassword.password=Password
+forgotPassword.resetPassword=Reset Password
+
+#fulfillment
+fulfillmentOptionId.required=Please select a shipping method.
+payment.exception=There was a problem processing your payment. Please review your information.
+
+#Fulfillment type friendly names
+fulfillmentType.friendlyName.PHYSICAL_PICKUP=Pick Up in Store
+fulfillmentType.friendlyName.PHYSICAL_SHIP=Ship to Home
+
+#Garage
+garage.title=Garage | O'Reilly Auto Parts
+
+#gift card
+giftCard.title=Gift Card/Check Your Gift Card Balance | O'Reilly Auto Parts
+giftCardNumber.required=Gift Card Number is required.
+giftCardEmailAddress.required=Email is required.
+giftCardEmailAddress.invalid=Email address is invalid
+giftCard.giftCards=Gift Cards
+giftCard.buy=Buy a Gift Card
+giftCard.quantity=Quantity
+giftCard.amount=Amount
+giftCard.purchase=Purchase A Gift Card
+giftCard.addToCart=Add to Cart
+giftCard.freeShipping=Free Standard Shipping is available on all O'Reilly Auto Parts gift card orders.
+giftCard.viewFAQS=View FAQS
+giftCard.seeTerms=See Terms & Conditions
+giftCard.contactUs=Contact Us
+giftCard.securityInfo=Security Information
+giftCard.guidelines=for our guidelines on handling any personal information you enter on our website.
+giftCard.checkYour=Check Your
+giftCard.cards=Gift Card's
+giftCard.balance=Balance
+giftCard.pin=Card PIN
+giftCard.getBalance=Get Balance
+giftCard.giftCard=Gift Card
+giftCard.wherePin=Where is my PIN?
+giftCard.giftCardPin=Your gift card's secure, four digit Personal Identification Number, as well as the card number, are located on the back of the card. You may have to scratch off the silver strip in order to see your PIN. You will be required to enter your card's PIN on all online gift card transactions.
+giftCard.pinNumber=PIN#
+giftCard.cardNumber=CARD#
+giftCard.checkBalance=Check Balance
+giftCard.checkYourGcBalance=Check Your Gift Card Balance
+giftCard.checkYourBalance=Check Your Balance
+giftCard.verifyBalance=Verify your current balance.
+giftCard.termsAndConditions=Terms and Conditions
+
+#Header
+header.oreillyLogo=O'Reilly Auto Parts
+header.findAStore.hoverText=Find a Store
+header.findAVehicle.hoverText=Select a Vehicle
+header.signIn=Sign In
+header.createAccount=Create Account
+header.signinCreateAccount=Sign In &#124; Create Account
+header.welcome=Hello,
+header.signOut=Sign Out
+header.currentAd=Current Ad
+header.repairShop=Find a Repair Shop
+header.shoppingList=Shopping List
+header.accountDashboard=Account Dashboard
+header.account.welcome=Welcome
+
+    # cart
+    header.cart=Cart |
+    header.cart.hoverText=Shopping Cart
+    header.cart.empty=Your Shopping Cart is Empty!
+    header.cart.quantity=Quantity
+    header.cart.subTotal=Subtotal
+    header.cart.print=Print List
+    header.cart.edit=Edit Cart
+    header.cart.checkout=View Cart & Check Out
+    header.cart.inCart=This item has been added to your cart
+    header.cart.itemsInCart=Items In Cart
+
+    # nav
+    header.nav.title=Shop By
+    header.nav.clearance=Clearance
+    header.nav.profile=Profile
+    header.nav.learn=Learn
+    header.nav.blog=Blog
+    header.nav.videos=Videos
+    header.nav.categories=Categories
+    header.nav.deals=Deals
+    header.nav.store=Store
+    header.nav.services=Services
+    header.nav.diyHelp=DIY Help
+    header.nav.brands=Brands
+    header.nav.selectedStore=Selected Store
+    header.nav.garage=Garage
+    header.nav.findOneNearYou=Find One Near You
+    header.nav.selectOrEnterNew=Select or Enter New
+    header.nav.selectOrAddNew=Select or Add New
+    header.nav.selectAStore=Select a Store
+
+header.findA=Find a
+header.findA.part=Part
+header.findA.store=Store
+header.selectA=Select a
+header.selectA.vehicle=Vehicle
+header.search.go=GO
+header.search.hoverText=Search
+header.enEspanol=En Espa&#241;ol
+header.inEnglish=In English
+header.freeShippingAndPickupWithThreshold=<strong>FREE SHIPPING</strong> on most orders of ${0}+ &amp; <strong>FREE PICKUP IN STORE</strong>
+header.freeShippingAndPickupWithoutThreshold=<strong>FREE SHIPPING</strong> on most orders of $75+ &amp; <strong>FREE PICKUP IN STORE</strong>
+header.oRewards=O'Rewards
+header.shop=Shop
+header.cart.promo.added=Promos
+header.ptv.plate.error=Sorry, no results could be found for that search. Please try again.
+header.ptv.vin.error=Sorry, no results could be found for that search. Please try again.
+header.accountPopover.earnPoints=Earn points on every purchase.
+header.accountPopover.joinOrewards=Join O'Rewards
+
+#Home
+home.findAStore=Find A Store
+home.shopCurrentAd=Shop Current Ad
+home.blog.browse=Browse Our Blog
+home.videos=Videos
+home.oRewards=O'Rewards
+home.signIn=Sign In | Create Account
+
+    # emailSignUp
+    home.emailSignUp=Email Signup
+    home.emailSignUp.placeholder=Enter email
+    home.emailSignUp.button=Sign Up
+    home.emailSignUp.zip=Want emails that apply specifically to your location? Enter your zip here:
+    home.emailSignUp.zip.placeholder=Zip
+    home.emailSignUp.zip.enter=Enter
+    home.emailSignUp.zip.skip=Skip
+    home.emailSignUp.zip.or=or
+    home.emailSignUp.thanks.prebreak=Thank you for
+    home.emailSignUp.thanks.postbreak=signing up!
+
+    # categories
+    home.categories.featured.brakes=Brakes & Accessories
+    home.categories.featured.suspension=Suspension & Steering
+    home.categories.featured.batteries=Batteries & Accessories
+    home.categories.featured.cooling=Cooling & Heating
+    home.categories.featured.fuel=Fuel & Emissions
+    home.categories.featured.ignition=Ignition & Tuneup
+    home.categories.featured.lighting=Lighting & Electrical
+    home.categories.featured.engine=Engine Parts & Mounts
+    home.categories.featured.transmission=Transmission & Transaxle
+    home.categories.shopByCategory=Shop By Category
+    home.categories.replacement=Replacement Parts
+    home.categories.accessories.chrome=Chrome & Dress Up
+    home.categories.accessories.exterior=Accessories - Exterior
+    home.categories.accessories.interior=Accessories - Interior
+    home.categories.accessories.truck=Truck & Towing
+    home.categories.accessories=Accessories
+    home.categories.toolsAndShop=Tools & Shop
+    home.categories.chemicals=Fluids & Chemicals
+    home.categories.performance=Performance
+    home.categories.specialty=Specialty
+    home.categories.clearance=Clearance
+    home.categories.allCategories=All Categories
+
+    # videos
+    home.tipsFromPros=Tips from the Pros
+    home.blog.all=All Blog Posts
+    home.blog.all.header=From Our Blog
+    home.videos.featured.bosch=Bosch: Installing New Wiper Blades
+    home.videos.featured.gates=Gates: Alternator Decoupler Pulley
+    home.videos.featured.howTo=How To: Recharging A/C Systems
+    home.videos.trending=Trending Videos
+    home.videos.trending.cabin=Cabin Air Filter Replacement
+    home.videos.trending.keyless=Dorman Keyless Remote
+    home.videos.trending.nufinish=NuFinish - Scratch Dr.
+    home.videos.trending.all=View All
+
+    #services
+    home.services.selectedStore=Selected Store:
+    home.services.openUntil=Open until
+    home.services.memberNumber=Member Number:
+    home.services.pointBalance=Point Balance:
+    home.services.activeRewards=Active Rewards:
+    home.services.joinOrewards=Join O'Rewards or Sign In
+    home.services.orewardsServiceUnavailable=The O'Rewards service is unavailable. Please try accessing again later.
+
+home.featuredProducts=Featured Products You Might Like
+
+#How To Hub
+howToHub.title=How To Hub | O'Reilly Auto Parts
+
+#Invalid Token
+invalidToken.registrationError=Registration Error
+invalidToken.expiredLink=The requested link has expired.
+invalidToken.clickBelow=In order to create an account, please click "Create New Account" and complete the registration form.
+invalidToken.createAccount=Create New Account
+
+#Inventory
+inventory.notification.email=Email:
+
+#Manufacturer
+manufacturer.noResults=No results for this manufacturer
+manufacturer.allBrands=All Brands
+manufacturer.noBrand=No brand contains this text.
+manufacturer.filterResults=Filter Your Results
+manufacturer.search=Search All Brands
+
+#multiship
+address.required=Please select an address
+option.required=Please select an option
+
+#O'Rewards
+oRewards.earnHeader=Earn Points Every Time You Shop
+oRewards.incentive=O'Rewards members earn points on all qualifying purchases and get $5 for every 150 points earned.
+oRewards.accountNumber=Account Number:
+oRewards.memberSince=Member Since:
+oRewards.points.error=--
+oRewards.pointsBalance=Points Balance
+oRewards.pointsInfo=Allow 24-48 hours for your points balance to reflect your recent qualifying purchases.
+createAccount.oRewards.existing.link.header=Looks like you have an O'Rewards account, we'll go ahead and link it with the account you just created.
+createAccount.oRewards.existing.link.message=To complete your account set up, we have sent a verification email to you. Please check your email and click on the link included. Verification links expire in 48 hours.
+createAccount.oRewards.continue=Continue
+account.accountDashboard.oRewards=O'Rewards
+account.accountDashboard.oRewards.programBenefits=Program Benefits
+account.accountDashboard.oRewards.findAccount=Find My O'Rewards Account
+account.accountDashboard.oRewards.recentActivity=View Recent Activity
+account.accountDashboard.oRewards.redeemAwards=Redeem Awards
+account.accountDashboard.oRewards.joinNow=Join Now
+account.oRewards.title=O'Rewards | O'Reilly Auto Parts
+account.oRewards.verifyEmail.headerFirst=Please Verify Your Email
+account.oRewards.verifyEmail.messageFirst.rowOne=Your O'Rewards account set up is almost complete.
+account.oRewards.verifyEmail.messageFirst.rowTwo=An email will be sent to you shortly. Click on the link included in the email to complete your sign up. <em>Links will expire after 48 hours.</em>
+account.oRewards.verifyEmail.headerSecond=Looks like that email address is pending verification
+account.oRewards.verifyEmail.messageSecond.rowOne=The email address you entered is already linked to an account that is pending verification.
+account.oRewards.verifyEmail.messageSecond.rowTwo=To complete your account sign up with this email address, please check your email and click on the link included.
+oRewards.verifyEmail.expiredHeader=Link Has Expired
+oRewards.verifyEmail.expiredMessage=We are sorry, looks like the link expired.  Account verification links expire within 48 hours. Resend a new validation email and follow the link to finish set up of your account.
+oRewards.verifyEmail.resend=Resend Validation Email
+oRewards.verifyEmail.resend.message=O'Rewards validation email successfully sent.
+oRewards.verifyEmail.success=Your O'Rewards Account Has Been Successfully Linked
+oRewards.verifyEmail.button.goToRewards=Go To My O'Rewards
+oRewards.verifyEmail.button.signIn=Sign Into Your Account
+oRewards.error.invalidToken=This Link Is Invalid. Please Check Your Email And Try Again
+
+#password change
+currentPassword.required=Please enter your current password.
+currentPassword.invalid=Current password is invalid.
+newPassword.required=Please enter your new password.
+newPassword.invalid=Please enter a password with at least 5 characters.
+newPasswordConfirm.required=Please confirm your new password.
+newPasswordConfirm.invalid=Passwords don't match.
+password.change=Change Your Password
+password.current=Current password:
+password.new=New Password:
+password.confirm=Confirm New Password:
+password.req.header=Your password must contain:
+password.req.info=At least 6 characters, and 2 of the following
+password.req.length=At least 6 characters
+password.req.options=And 2 of the following:
+password.req.option1=At least 1 lowercase letter
+password.req.option2=At least 1 uppercase letter
+password.req.option3=At least 1 number (0-9)
+password.req.option4=At least 1 special character (!,?,#, etc.)
+password.req.disclaimer=Changing your password will require you to sign in again.
+
+#payment
+payment.exception.review= Please review your information.
+payment.transaction.error=There was a problem processing your payment. Please review your information.
+payment.exception.giftCard.invalid=The gift card you entered is invalid.
+payment.exception.giftCard.expired=The gift card entered has expired.
+payment.option.exception=There was a problem processing your payment options.
+payment.exception.warning=There was a problem processing your payment.
+payment.payPal=PayPal
+payment.americanExpress=American Express
+payment.masterCard=MasterCard
+payment.visa=Visa
+payment.discover=Discover
+
+#phones
+phone.invalid=A phone number is required, and it must be valid.
+phone.required=A phone number is required.
+phoneName.required=A Phone Name is required.
+phoneName.duplicate=A Phone with that Name already exists.
+phoneNumber.duplicate=A Phone with that Number already exists.
+phone.ten_digits_required=Please enter a valid ten digit phone number.
+phone.invalid_id=An ID was passed in that does not belong to the logged in user.
+phone.validation.reject.badAreaCode=Please enter a valid phone number
+phone.validation.reject.badExchangeCode=Please enter a valid phone number
+phone.validation.reject.badCountryCode=Please enter a valid country code number
+
+#Product
+product.partNumberHeader=Part #
+product.limit=Limit of
+product.lineCodeHeader=Line
+product.line=Line
+product.buyNow=Buy Now!
+product.inCart=In Cart!
+product.vehicleSpecific=Vehicle Specific
+product.universal=Universal
+product.refine=Filter/Refine
+product.refine.shopFilters=Shop Filters
+product.refine.youSelected=You've Selected
+product.refine.searchWithinResults=Search Within Results
+product.search.contact=Contact Us
+product.search.go=Go
+product.refine.brands=Brands
+product.refine.brands.replace=Brands You're Replacing
+product.refine.part.types.replace=Part Types You're Replacing
+product.refine.relatedCategories=Related Categories
+product.refine.relatedCategories.brand=Find your brand
+product.brand.replaces=Replaces:
+product.compare=Compare
+product.endOfResults=Refine your search for more focused results.
+
+    # checkFit
+    product.checkFit=Check Vehicle Fit
+    product.checkFit.findProducts=to find products that fit your vehicle.
+    product.checkFit.close=Close
+    product.checkFit.next=Next
+    product.checkFit.complete=Complete Your Vehicle
+    product.checkFit.part=Part
+    product.checkFit.your=your:
+    product.checkFit.checkFit=Check Fit
+    product.checkFit.doesFit=This part does fit your vehicle!
+    product.checkFit.doesNotFit=This part does not fit your vehicle.
+    product.checkFit.yourVehicle=Your Vehicle
+    product.checkFit.checkFitPart=Check Fit Part
+    product.checkFit.newVehicle=New Vehicle
+    product.checkFit.year=Year
+    product.checkFit.make=Make
+    product.checkFit.model=Model
+    product.checkFit.subModel=SubModel
+    product.checkFit.engine=Engine
+    product.checkFit.yourVehicles=Your Vehicles
+    product.checkFit.select=Make My Vehicle
+    product.checkFit.selected=Selected
+    product.checkFit.manageVehicles=Manage My Vehicles
+    product.checkFit.message.no.vehicle=Select a vehicle to see if this part fits your vehicle.
+    product.checkFit.processing=Processing
+    product.checkFit.equals=Equals
+    product.checkFit.notEqual=Not Equal
+
+product.part.fits=Part Fits
+product.part.fits.not=Part Doesn't Fit
+product.part.universal=Part Fits All Vehicles
+product.price.unavailable=See Pricing and Availability
+product.price.each=Each
+product.price.sale=ON SALE
+product.price.clearance=CLEARANCE
+product.price.plusCore=Plus Core:
+product.price.plusFee=+ Fee
+product.pickup=Pick Up in Store
+product.listItem.readyForPickup=Ready for pickup
+product.interchange.header=Don't see the part you searched for?
+product.interchange.text=Search your part number using our part interchange & find interchangeable parts for your application.
+product.available=In Stock
+product.available.noFreeShipping=Not eligible for free shipping
+product.avail.availableInStore.free=FREE
+product.avail.availableToShip.free=Free
+product.avail.ship.unavailable.flight=Available to Ground Ship
+product.avail.availableToShip=Available to Ship
+product.avail.unavailable=Out of Stock
+product.avail.fulfillmentUnselected=Please select your preferred delivery method.
+product.pickup.restrictions=Not Available due to state or local regulations & restrictions
+product.specialOrder=Special Order
+product.ship=Ship to Home
+product.shipToStore=Ship to Store
+product.callStore=Call Store to Order
+product.callStore.specialOrder=Special Order &#8212;
+product.callStoreForDetails=Call For Details
+product.callStoreForAvailability=Call For Availability
+product.findLocal=Find it locally now!
+product.availableNearby=Check Other Stores
+product.ship.free=Free!
+product.ship.freeCaps=FREE
+product.information=Product Information
+product.details.show=Show
+product.details.show.all=All
+product.details.show.fewer=Fewer
+product.details.show.details=Details
+product.details.show.compatibility=Compatibility
+product.details.warranty.restrictionText=This product has restrictions regarding its warranty
+product.vehicleApplications.singular=Application for Your Vehicle
+product.vehicleApplications.plural=Applications for Your Vehicle
+product.vehicleApplications.none=No applications for your vehicle.
+product.applications=Applications for this Product
+product.productDocuments=Product Documents
+product.related.products=Related Products
+product.related.categories=Related Categories
+product.recent.viewed=Recently Viewed
+product.listItem.compare=Compare
+product.listItem.enlarge=Enlarge
+product.listItem.checkfit=Check Vehicle Fit
+product.listItem.part=Part #:
+product.listItem.line=Line:
+product.listItem.sale=ON SALE
+product.listItem.clearance=CLEARANCE
+product.listItem.plusCore=Plus Core:
+product.listItem.each=each
+product.listItem.shipToHome=Ship to Home
+product.see.price.availability=Select a store to see pricing & availability
+product.search.cityStateOrZip=or search by City & State or Zip:
+product.no.store.pricing=Call Store for Pricing
+product.listItem.availableInStore=In Stock
+product.listItem.availableToShip=In Stock
+product.listItem.avail.freePickup=Free
+product.listItem.avail.specialOrder=Call Store for Availability
+product.listItem.avail.callOrder=Call store for availability
+product.listItem.avail.pickupInStore=Pick Up in Store
+product.listItem.avail.deliver=Deliver
+product.listItem.avail.inStock=In Stock
+product.listItem.avail.outOfStock=Out of Stock
+product.listItem.avail.callStore=Call Store to Order
+product.listItem.avail.inStockGround=In Stock &#8212; Ground Only
+product.listItem.avail.unavailableShip=Not Available to Ship
+product.listItem.avail.unavailablePickupAll=Not Available In Stores
+product.listItem.avail.unavailablePickupSelected=Not Available in Selected Store &#8212;
+product.noAdditionalInfo=No additional information
+product.product=Product
+product.remove=Remove
+product.enlarge=Enlarge
+product.attributes=Attributes
+product.attribute.unavailable=Unavailable
+product.compare.highlightDifferences=Highlight Differences
+product.quantityPerVehicle=Quantity Per Vehicle:
+product.documents=Documents:
+product.documents.na=N/A
+product.universalProduct=This product is universal and applies to all vehicles.
+product.selectVehicleForApplications=Select a vehicle to see vehicle applications.
+product.noCompatibleForUniversal=This product is universal and is compatible with all vehicles.
+product.noCompatibleVehicles=No compatible vehicles found for this product.
+product.paging.first=First
+product.paging.last=Last
+product.sort.relevance=Relevance
+product.sort.priceHighToLow=Price: High to Low
+product.sort.priceLowToHigh=Price: Low to High
+product.sort.brand=Brand
+product.compatibleVehicles=Compatible Vehicles
+product.allVehiclesAreCompatible=No Compatibility Information Exists
+product.vehicle.singular=vehicle
+product.vehicle.plural=vehicles
+product.vehicle.hover=Hover over the year range to see exact years
+product.compare.title=| O'Reilly Auto Parts
+product.heroImage.alt.primary={0} Primary Image
+product.heroImage.alt.secondary=Alternate View {1} for {0}
+product.carouselImage.alt.primary={0} Primary Thumbnail View
+product.carouselImage.alt.secondary=Alternate Thumbnail View {1} for {0}
+product.removedCoupon=Coupon code {0} is not valid.
+product.restrictedToGroundShipping=Item restricted to ship Ground only.
+product.notEligibleForFreeShipping=Not eligible for Free Shipping.
+
+#Product Options
+product.allOptionsRequired=All options are required
+product.productOptionValidationError=Product option validation failed
+
+plp.noResultsHeader.vehicle=We're sorry, no results were found for your selected vehicle
+plp.noResultsHeader.noVehicle=We're sorry, no results were found
+plp.noResultsBody=Please try a different search term, check/clear your selected vehicle or check out our suggestions below.
+plp.noResultsSuggestHeader=Still can't find what you are looking for?
+plp.noResultsSuggestBody=Contact one of our professional parts people to help locate the item.
+
+#Product Sort Options
+productSortOptions.sortBy=Sort by:
+productSortOptions.price=Price
+productSortOptions.name=Name
+
+#Product Paging options
+productPagingOptions.page= Page
+
+#Prop 65
+prop65.alt=Warning
+prop65.cancer=<strong>WARNING</strong>: This product can expose you to chemicals known to the State of California to cause cancer. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+prop65.cancer.withChemical=<strong>WARNING</strong>: This product can expose you to chemicals known to the State of California to cause cancer, including: {0}. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+prop65.reproductive=<strong>WARNING</strong>: This product can expose you to chemicals known to the State of California to cause birth defects or other reproductive harm. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+prop65.reproductive.withChemical=<strong>WARNING</strong>: This product can expose you to chemicals known to the State of California to cause birth defects or other reproductive harm, including: {0}. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+prop65.cancerAndReproductive=<strong>WARNING</strong>: This product can expose you to chemicals known to the State of California to cause cancer, birth defects, or other reproductive harm. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+prop65.cancerAndReproductive.withCancerChemical=<strong>WARNING</strong>: This product can expose you to chemicals including {0}, which is/are known to the State of California to cause cancer, and chemicals which are known to the State of California to cause birth defects or other reproductive harm. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+prop65.cancerAndReproductive.withReproductiveChemical=<strong>WARNING</strong>: This product can expose you to chemicals which are known to the State of California to cause cancer, and chemicals including {0}, which is/are known to the State of California to cause birth defects or other reproductive harm. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+prop65.cancerAndReproductive.withBothChemicals=<strong>WARNING</strong>: This product can expose you to chemicals including {0}, which is/are known to the State of California to cause cancer, and {1}, which is/are known to the State of California to cause birth defects or other reproductive harm. For more information, go to <a class="cart-item-warning-message-link" target="_blank" href="https://www.p65warnings.ca.gov">www.P65Warnings.ca.gov</a>.
+
+#Quickview
+product.quickView=Quick View
+
+#Rebate
+rebate.rebateCenter=Rebate Center | O'Reilly Auto Parts
+rebate.startSaving=Let's Start Saving Together!
+rebate.proud=O'Reilly is proud to pass along great savings to its loyal customers. Here are our currently available rebates.
+rebate.track=Track My Rebate
+rebate.download=Download
+rebate.savings=Savings
+rebate.details=Details
+rebate.validDate=Valid Date
+rebate.restrictions=Restrictions
+rebate.getForm=Get Form
+rebate.rebate=Rebate
+
+#registration
+birthMonth.invalid=Please enter a valid birth month.
+fullName.required=Name is invalid. Name should have a space OR First Name / Last Name should be no more than 33 characters.
+firstName.required=Please enter your first name.
+firstName.invalid=Please enter a valid First Name
+lastName.required=Please enter your last name.
+lastName.invalid=Please enter a valid Last Name
+username.required=Please provide a value for the "User Name" field of this form.
+username.used=A user already exists with that username.
+password.required=Password is required.
+confirmPassword.required=Confirm password is required.
+password.alphanumericRequired=An alphanumeric password is required
+password.length=Password must be at least 6 characters and no more than 20 characters
+password.invalid=Enter a valid Password.
+passwordConfirm.required=Password is required.
+passwordConfirm.invalid=Passwords do not match.
+emailAddress.required=Please enter your email address.
+emailAddress.used=That email address is already in use.
+emailAddress.failBecauseLegacy=The account associated with this email predates the current O'Reilly website. Please use a different email or contact Customer Service at 1-888-327-7153.
+emailAddress.invalid=Email address is invalid.
+emailAddress.length=Email address cannot be more than 50 characters.
+emailAddress.used.createPassword=That email address has already been used to complete an order.  Click "Have Orders, but don't have a password?".
+orderNumber.invalid=Invalid Order Number Format
+zipCode.required=Please enter a valid zip code.
+
+#Remove Promo - General
+remove_promo.error.invalid_code=Invalid code.
+remove_promo.error=An unknown error has occurred.
+
+#Reset Password
+resetPassword.resetPassword=Reset Password
+resetPassword.newPassword=Enter your email address and new password information to update your password.
+resetPassword.email=Email
+resetPassword.password=Password
+resetPassword.confirmPassword=Confirm Password
+resetPassword.error=Reset Password Error
+resetPassword.resetUrlUsed=The password reset URL has already been used.   To request another password reset URL, click the Forgot Password link.
+resetPassword.urlExpired=The password reset URL has expired.  To request another password reset URL, click the Forgot Password link.
+resetPassword.urlInvalid=The password reset URL is invalid.
+resetPassword.forgotPassword=Forgot Password
+resetPassword.login=Login
+resetPassword.register=Register
+
+#REST API Messages
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.unknownError=An unknown or unexpected error occurred.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.notFound=The URL you requested does not exist for this API.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.productNotFound=Product with Id {0} could not be found.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.categoryNotFound=Category with Id or name {0} could not be found.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.skuNotFound=Sku with Id {0} could not be found.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.errorExecutingSearch=An unexpected error occurred executing a search.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.searchQueryEmpty=Search query was empty. Set parameter 'q' to query for a product. (e.g. q=My Product Name).
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.searchQueryMalformed=The search query: {0} was incorrect or malformed.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.invalidCategoryId=Category Id was null or invalid: {0}.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.cartNotFound=Cart could not be found. Ensure that you are passing the customer Id and that it is valid.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.cartItemNotFound=Cart item {0} could not be found.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.cartPricingError=An unexpected error occurred pricing the cart.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.updateCartError=An unexpected error occurred updating the cart.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.promoCodeMaxUsages=The offer (promo) code {0} has exceeded its max usages.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.promoCodeInvalid=The offer (promo) code {0} was invalid or was not associated with an offer.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.fulfillmentGroupNotFound=Could not find a fulfillment group with id {0}.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.fulfillmentOptionNotFound=Fulfillment option with Id {0} could not be found.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.customerNotFound=Could not find customer associated with request. Ensure that customer Id is passed in the request as header or request parameter : customerId.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.checkoutProcessingError=There was an error completing Checkout. Ensure that the order and payments are finalized and is ready for checkout. See log for details.
+org.broadleafcommerce.core.web.api.BroadleafWebServicesException.contentTypeNotSupported=The Content-Type header {0} is not supported. Please switch the Content-Type of your request to one of the following: 'application/json' or 'application/xml'
+
+#Returns
+returns.type.new=No Longer Needed
+returns.type.doa=Received Damaged
+returns.type.wrongItem=Wrong Item
+returns.type.warranty=Warranty
+returns.type.other=Other
+returns.type.core=Core
+
+# Sandbox
+sandBoxModuleTitle=SandBox
+SandBoxImpl_Go_Live_Date=Go Live
+SandBoxImpl_Go_Live_Date_Unspecified=Unspecified
+SandBoxImpl_SandBox_Type=SandBox Type
+demoDisclaimer=This site is for demonstration purposes only. No orders will be fulfilled and no payment information is saved
+
+#Search
+search.filterSearch=Filter your search
+search.featuredProducts=Featured Products
+search.results=Search Results
+search.results.brandName=Brand Name
+search.of=of
+search.resultsFor=results for
+
+# SEO titles and descriptions
+seo.homePage.title=O'Reilly Auto Parts | Auto Parts, Accessories, Repair Advice, & More
+seo.homePage.description=Find auto parts, tools, and more at O'Reilly Auto Parts. Shop online for FREE Next Day shipping or pick up your order at one of more than 6,000 stores.
+seo.emailSubscribePage.title=Subscribe to Our Emails for Great Deals | O'Reilly Auto Parts
+seo.emailSubscribePage.description=Sign up for promotional emails to get the latest offers and event notifications sent straight to your inbox. Subscribe today to get the latest O'Reilly offers.
+seo.couponsAndPromotionsPage.title=View Our Coupons, Sales, & Promos | O'Reilly Auto Parts
+seo.couponsAndPromotionsPage.description=Shop online to see our current coupons, promotions, flyers, and rebates to help you save. Order online and save, and even get free in-store pick up.
+seo.categoryPlp.title.withVehicle=${categoryName} - ${vehicleName} | O'Reilly Auto Parts
+seo.categoryPlp.title.withoutVehicle=${categoryName} | O'Reilly Auto Parts
+seo.categoryPlp.description.rootCategory=O'Reilly Auto Parts has the parts and accessories, tools, and the knowledge you may need to repair your vehicle the right way. Shop O'Reilly Auto Parts online.
+seo.categoryPlp.description.nonRootCategory=Shop for the best ${categoryName} for your ${vehicleName}, and you can place your order online and pick up for free at your local O'Reilly Auto Parts.
+seo.manufacturerPlp.title=${manufacturerTitle} Products | O'Reilly Auto Parts
+seo.manufacturerPlp.description=O'Reilly Auto Parts carries ${manufacturerName} products. Choose an item or category to find the specific products you know and trust.
+seo.brandPlp.title=${brandName} Products | O'Reilly Auto Parts
+seo.brandPlp.description=O'Reilly Auto Parts carries products from ${brandName}. Browse our selection of options to find the right products for your vehicle.
+seo.productPage.title=${productName} ${productPartNumber} | O'Reilly Auto Parts
+seo.productPage.description=Find the right ${productName} for your ${vehicleName} at O'Reilly Auto Parts. Place your order online and pick it up at your local store for free.
+seo.giftCardPage.title=Buy Gift Cards or Check a Balance | O'Reilly Auto Parts
+seo.giftCardPage.description=Visit our website to purchase a gift card or easily check a remaining gift card balance. Redeem your gift card online or at your nearest O'Reilly Auto Parts.
+seo.allBrandsPage.title=Shop Products By Brand | O'Reilly Auto Parts
+seo.allBrandsPage.description=Browse trusted brands, including BrakeBest, Super Start, Syntec, Microgard, Master Pro, and many more. Visit O'Reilly Auto Parts online to shop by brand.
+seo.productComparePage.title.category=Product Comparison: ${partTypeName} | O'Reilly Auto Parts
+seo.productComparePage.title.noCategory=${numProducts}-Product Comparison | O'Reilly Auto Parts
+seo.productComparePage.description.category=Here is your product comparison for ${partTypeName}.
+seo.productComparePage.description.noCategory=Here is your ${numProducts}-product comparison.
+seo.searchPlp.title.withVehicle=Search for ${searchQuery} - ${vehicleName} | O'Reilly Auto Parts
+seo.searchPlp.title.withoutVehicle=Search for ${searchQuery} | O'Reilly Auto Parts
+seo.searchPlp.description=Order the best ${searchQuery} for your ${vehicleName} and pick it up in store today. Free shipping is available on most online orders.
+seo.rebatePage.title=Visit Our Online Rebate Center | O'Reilly Auto Parts
+seo.rebatePage.description=Browse our available rebates or check your vendor rebate status at the O'Reilly Auto Parts Rebate Center. Visit our website for more details.
+seo.ccpaRequestPage.title=California Consumer Privacy Act Info | O'Reilly Auto Parts
+seo.ccpaRequestPage.description=Request information or delete your data per the California Consumer Privacy Act. O'Reilly Auto Parts values your online privacy and protecting your usage data.
+seo.ccpaVerificationPage.title=California Consumer Privacy Act Identity Verification | O'Reilly Auto Parts
+seo.ccpaVerificationPage.description=Please verify your information so O'Reilly can confirm your identity before releasing or deleting your information under the California Consumer Privacy Act.
+seo.siteDirectoryPage.title=Site Directory | O'Reilly Auto Parts
+seo.siteDirectoryPage.description=Use the O'Reilly Auto Parts site directory to shop all of our parts on one page. Find the right parts from a list of categories and click the link to see more.
+seo.videoPage.title=Videos on Maintenance, Repairs, & More | O'Reilly Auto Parts
+seo.videoPage.description=Discover step-by-step video procedures to complete DIY repairs and maintenance on your vehicle, and learn more about new products with our helpful video series!
+seo.cmsPage.title.titleSet=${cmsPageTitle} | O'Reilly Auto Parts
+seo.cmsPage.title.titleNotSet=O'Reilly Auto Parts
+seo.cmsPage.description.descriptionSet=${cmsPageDescription}
+seo.cmsPage.description.descriptionNotSet=O'Reilly Auto Parts
+seo.shoppingListPage.description=Easily plan your next automotive project with your O'Reilly Auto Parts Shopping List. Create, manage, and build your shopping list in your O'Reilly account today.
+seo.howToHubPage.description=Explore step-by-step tutorials, gift guides, and how-to videos in the O'Reilly How-To Hub. Enhance your automotive DIY skills and tackle projects with confidence.
+
+#Shapes
+shapes.remove=Remove
+shapes.checkmark=Done
+shapes.cancel=Cancel
+shapes.info=Info
+shapes.car=Car
+shapes.refresh=Refresh
+shapes.store=Store
+shapes.ship=Ship
+shapes.print=Print
+shapes.left=Left
+shapes.right=Right
+shapes.open=Open
+shapes.down=Down Arrow
+shapes.menu=Menu
+shapes.close=Close
+shapes.cart=Cart
+shapes.search=Search
+shapes.grid=Grid
+shapes.list=List
+shapes.compare=Compare
+shapes.add=Add
+shapes.connect=Connect
+shapes.o=O
+shapes.youTube=YouTube
+shapes.instagram=Instagram
+shapes.twitter=Twitter
+shapes.facebook=Facebook
+shapes.oreilly=O'Reilly Auto Parts
+shapes.pin=Pin
+shapes.edit=Edit
+shapes.currentAd=Current Ad
+shapes.oRewards=O'Rewards
+shapes.signIn=Sign In | Create Account
+
+#Shopping Lists
+shoppingLists.title=Shopping Lists | O'Reilly Auto Parts
+
+#signIn
+signIn.noMatchTryAgain=The e-mail address and/or password entered do not match our records.  Please try again
+signIn.noMatchInvalid=Email/Password combination is invalid. If you recently updated your email address in a store or with Customer Service, please try again using your previous email address.
+signIn.emailAddress=Email Address
+signIn.enterEmail= Enter email
+signIn.password=Password
+signIn.rememberMe=Remember me.
+signIn.signIn=Sign In
+signIn.signInCreateAccount=Sign In/Create Account | O'Reilly Auto Parts
+signIn.reset=Reset
+signIn.resetPassword=Reset Password
+signIn.forgotPasswordPrompt=I forgot my password.
+signIn.forgotPw.enterEmail=Enter your email address to receive an email with a link that will let you change your password.
+signIn.example=example@example.com
+signIn.sendEmail=Send Email
+signIn.createPassword=Create Password
+signIn.eceeError=An error has occurred. Please try again later.
+
+#Store Select
+storeSelect.enterLocation=Enter a location
+storeSelect.enterLocation.or=or
+storeSelect.zip.placeholder=Zip code
+storeSelect.city.placeholder=City
+storeSelect.state.placeholder=State
+storeSelect.button.find=Find Stores
+storeSelect.storeManual.enter=Enter Your Location
+storeSelect.storeManual.findStores=Find Stores
+storeSelect.noResults.singular=No results were found within {0} mile of your location.
+storeSelect.noResults.plural=No results were found within {0} miles of your location.
+storeSelect.selectNearest=Select nearest O'Reilly store
+storeSelect.repairShop=Find a Repair Shop
+
+#Store Results
+storeResults.usedOilBattery=Used Oil & Battery Recycling
+storeResults.batteryTesting=Battery Testing
+storeResults.wiperBlade=Wiper Blade Installation
+storeResults.drumRotor=Drum & Rotor Resurfacing
+storeResults.loanerTool=Loaner Tool Program
+storeResults.checkEngine=Check Engine / Light Testing
+storeResults.hydraulicHose=Hydraulic Hose Servicing
+storeResults.paintMixing=Paint Mixing Services
+
+#Store Details
+storeDetails.getDirections=Get Directions
+storeDetails.hours=Hours
+storeDetails.mostStores=Most Stores Have:
+storeDetails.usedOilBattery=Used Oil & Battery Recycling
+storeDetails.batteryTesting=Battery Testing
+storeDetails.electricalModuleTesting=Electrical & Module Testing
+storeDetails.loanerTool=Loaner Tool Program
+storeDetails.drumRotor=Drum & Rotor Resurfacing
+storeDetails.thisStore=This Store Also Has:
+storeDetails.hydraulicHose=Hydraulic Hose Servicing
+storeDetails.paintMixing=Paint Mixing Services
+storeDetails.machineShop=Machine Shop
+storeDetails.wiperBlade=Wiper Blade Installation
+storeDetails.checkEngine=Check Engine / Light Testing
+storeDetails.back=Back To Search Results
+storeDetails.makeMystore=Make My Store
+
+store.not.selected.message=Select a store
+store.not.selected.get.prices=to get pricing for your store.
+
+# Tooltip
+tooltip.phoneRequired=We use this number in the event we need to contact you about an order and look up your O'Rewards account when you shop in O'Reilly Auto Parts stores.
+
+#utility
+messages.appendColon={0}:
+
+#Vehicle
+vehicle.current=Currently Selected:
+vehicle.your=Your
+vehicle.remove=Delete Vehicle
+vehicle.vehicle=Vehicle
+vehicle.editVehicle=Edit vehicle
+vehicle.addSubmodel=to add a submodel
+vehicle.saveChanges=Save Changes
+vehicle.cancel=Cancel
+vehicle.forcedVehicle.add=Add a Vehicle to Filter Your Results
+vehicle.forcedVehicle.or=or
+vehicle.forcedVehicle.skip=Skip and Show all Parts
+
+    #Vehicle Select
+    vehicle.noGarage.message.selectVehicle=Select your vehicle
+    vehicle.noGarage.message.narrow=to narrow your results
+    vehicle.garage.my=My Saved Vehicles:
+    vehicle.garage.new=Add New Vehicle
+    vehicle.garage.newVehicle=Add New Vehicle
+    vehicle.garage.complete=Complete this Vehicle
+    vehicle.garage.make=Set As Vehicle
+    vehicle.garage.selected=Selected
+    vehicle.garage.manage=Manage Vehicles
+    vehicle.yourvehicle=Your Vehicle
+    vehicle.edit=Update Vehicle Info
+    vehicle.selection.recommended=Vehicle Selection Recommended
+
+# End of Vehicle
+
+#Vehicle Select
+vehicleSelect.new=Enter a Vehicle
+vehicleSelect.edit=Edit Vehicle
+vehicleSelect.year=Year
+vehicleSelect.make=Make
+vehicleSelect.model=Model
+vehicleSelect.submodel=SubModel
+vehicleSelect.engine=Engine
+
+    # button
+    vehicleSelect.button.viewList=Vehicles
+    vehicleSelect.button.select=Finish and Update
+    vehicleSelect.button.finishUpdate=Finish & Update
+    vehicleSelect.button.AddVehicle=Add Vehicle
+    vehicleSelect.button.close=Close
+    vehicleSelect.button.skip.vehicle=Skip Vehicle Selection
+
+    # garage
+    vehicleSelect.garage.header=View Garage
+    vehicleSelect.garage.empty.message.title=Select a vehicle to see the parts that fit
+    vehicleSelect.garage.empty.message=When you select a vehicle, we filter your search results to ensure you can find the parts that fit your vehicle.
+    vehicleSelect.garage.empty.message.arrow=Add Your Vehicle
+
+vehicleSelect.message.select=Select a vehicle to see the parts that fit
+vehicleSelect.message.filterResults=When you select a vehicle, we filter your search results to ensure you can find the parts that fit your vehicle
+vehicleSelect.message.add=Add Your Vehicle
+vehicleSelect.editVehicle=Edit
+
+# Browser
+browser.unsupported = Sorry, you're using a web browser that is no longer supported. For the best experience please upgrade or visit the site on another browser.

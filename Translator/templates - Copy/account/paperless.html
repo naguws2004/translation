@@ -1,0 +1,316 @@
+<th:block layout:decorator="layout/account-layout">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div class="paperless-wrap row">
+            <!-- your information -->
+            <div class="col-xs-12 col-md-6">
+                <div class="paperless-information-wrap">
+                    <div class="paperless-statements-back-btn">
+                        <a href="/account/statements" class="statements-back">
+                            <svg>
+                                <use href="#shape-left-arrow"></use>
+                            </svg>
+                            <span th:text="#{account.statements.back}">
+                                Back to Statements
+                            </span>
+                        </a>
+                    </div>
+                    <h3 class="paperless-title bold">Paperless Statements</h3>
+                    <div id="paperless-active" th:value="${account.paperlessActive}"></div>
+                    <h3 class="uppercase bold paperless-subtitle">Your Information</h3>
+                    <div class="paperless-account_wrap">
+                        <label>Account Nickname:</label>
+                        <strong th:text="${account.nickName}"></strong>
+                    </div>
+                    <div class="paperless-account_wrap">
+                        <label>Customer Number:</label>
+                        <strong th:text="${accountNumber}"></strong>
+                    </div>
+                    <div class="paperless-account_wrap email">
+                        <label class="notification-label">
+                            Notifications will be sent to your account email address:
+                        </label>
+                        <strong class="email-text" th:text="${customer.username}"></strong>
+                        <a
+                            href="/account/profile"
+                            class="green-link p_change-email js-paperless-profile"
+                        >
+                            Change Account Email Address
+                        </a>
+                    </div>
+                    <th:block
+                        th:if="${account.paperlessActive eq false or account.paperlessActive eq null}"
+                    >
+                        <!-- Sign up -->
+                        <div class="col-xs-12 pull-left">
+                            <blc:form
+                                class="enroll-form js-enroll-form"
+                                data-account-num="${accountNumber}"
+                            >
+                                <div class="row">
+                                    <div class="required-tag">
+                                        <em class="req">*</em>
+                                        Required Fields
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="contactName">
+                                                Contact Name
+                                                <em class="req">*</em>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="contactName"
+                                                class="form-control"
+                                                maxlength="255"
+                                                aria-required="true"
+                                            />
+                                        </div>
+                                        <div class="form-group col-xs-12">
+                                            <label for="contactPhoneNumber">
+                                                Contact Phone Number
+                                                <em class="req">*</em>
+                                            </label>
+                                            <div>
+                                                <field-phone-with-dropdown
+                                                    aria-required="true"
+                                                    max-length="14"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input
+                                    type="hidden"
+                                    name="action"
+                                    class="form-control"
+                                    value="authorize"
+                                    aria-required="true"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="accountNumber"
+                                    th:value="${accountNumber}"
+                                    aria-required="true"
+                                />
+                            </blc:form>
+                        </div>
+                        <div th:if="${error}" class="paperless-error error">
+                            There was an error with your inputs. Please try again.
+                        </div>
+                    </th:block>
+                    <th:block th:if="${account.paperlessActive}">
+                        <!-- Edit -->
+                        <div class="row">
+                            <div class="col-xs-12 paperless-contacts">
+                                <div class="row">
+                                    <div class="form-group col-xs-12 p_edit-form-field">
+                                        <p class="js-profile-msg profile-msg">
+                                            Contact Name Updated
+                                        </p>
+                                        <label class="paperlessLabel" for="contactName">
+                                            Contact Name:
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="contactName"
+                                            class="form-control not-editable"
+                                            th:value="${account.contactName}"
+                                            disabled="disabled"
+                                            maxlength="255"
+                                            aria-required="true"
+                                        />
+                                        <a href="#" class="green-link p_edit-link">Edit</a>
+                                        <div class="name-error"></div>
+                                    </div>
+                                    <div class="form-group col-xs-12 p_edit-form-field">
+                                        <p class="js-profile-msg profile-msg">
+                                            Contact Phone Updated
+                                        </p>
+                                        <label class="paperlessLabel" for="contactPhoneNumber">
+                                            Contact Phone Number:
+                                        </label>
+                                        <strong class="updatePhoneValue">
+                                            <span id="countryCode"></span>
+                                            <span
+                                                id="updatePhoneNumber"
+                                                th:text="${account.contactPhoneNumber}"
+                                            ></span>
+                                        </strong>
+                                        <edit-phone-with-dropdown
+                                            aria-required="true"
+                                            max-length="14"
+                                            th:value="${account.contactPhoneNumber}"
+                                        />
+                                        <a href="#" class="green-link p_edit-link">Edit</a>
+                                    </div>
+                                </div>
+                                <div class="p_submit-error"></div>
+                            </div>
+                        </div>
+                        <blc:form class="update-form js-update-form">
+                            <input type="hidden" name="accountNumber" th:value="${accountNumber}" />
+                            <input
+                                type="hidden"
+                                name="action"
+                                class="form-control"
+                                value="deactivate"
+                                aria-required="true"
+                            />
+                            <div class="paperless-remove">
+                                <input
+                                    type="checkbox"
+                                    id="update"
+                                    name="update"
+                                    aria-required="true"
+                                />
+                                <label for="update" class="p_remove-label">
+                                    I no longer wish to receive paperless statements and
+                                    notifications and would like to return to statements issued via
+                                    US mail.
+                                </label>
+                            </div>
+                            <div class="update-submit_wrap">
+                                <button
+                                    type="submit"
+                                    class="uppercase btn-green-lg update-btn js-update-btn"
+                                >
+                                    update preferences
+                                </button>
+                                <a
+                                    href="/account/statements"
+                                    class="paperless-cancel js-paperless-cancel"
+                                >
+                                    Cancel
+                                </a>
+                            </div>
+                        </blc:form>
+                        <div class="paperless-mobile-divide"></div>
+                    </th:block>
+                    <p
+                        class="italic"
+                        th:if="${account.paperlessActive eq false or account.paperlessActive eq null}"
+                    >
+                        To enroll in Paperless statements please read and agree to the following
+                        Terms of Service.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="col-xs-12 col-md-6 paperless-info_wrap pull-right"
+                th:classappend="${!account.paperlessActive ? 'statements_mobile-hide' : ''}"
+            >
+                <h4 class="uppercase paperless-info-header">
+                    Paperless Statements Makes Things Convenient &amp; Easy:
+                </h4>
+                <ul class="paperless-info">
+                    <li>
+                        <svg>
+                            <use href="#shape-circle-checkmark"></use>
+                        </svg>
+                        Receive an email notification when your statement is ready to view
+                    </li>
+                    <li>
+                        <svg>
+                            <use href="#shape-circle-checkmark"></use>
+                        </svg>
+                        Avoid losing paper statements in the clutter
+                    </li>
+                    <li>
+                        <svg>
+                            <use href="#shape-circle-checkmark"></use>
+                        </svg>
+                        24/7 Access - Access your statements and invoices when it is convenient
+                    </li>
+                </ul>
+            </div>
+            <th:block
+                th:if="${account.paperlessActive eq false or account.paperlessActive eq null}"
+            >
+                <!-- Information -->
+                <div class="col-xs-12 paperless-terms">
+                    <h3 class="uppercase bold">Paperless Statements Terms of Service Agreement</h3>
+                    <div>
+                        <p>
+                            This terms of service agreement is made between O'Reilly Auto Parts and
+                            any person who completes the registration process to receive electronic
+                            notifications for paperless statements.
+                        </p>
+                        <p>
+                            <strong class="uppercase">
+                                Customer has read, understands and agrees to the terms and
+                                conditions of this agreement.
+                            </strong>
+                        </p>
+                        <p>
+                            By enrolling in paperless statements, you understand and agree that you
+                            will
+                            <span class="uppercase">
+                                no longer receive statement via us postal mail
+                            </span>
+                            , and that retrieving your account statement will be your
+                            responsibility. You may return to paper statements at any time by
+                            updating your preferences online or by making a written election to do
+                            so. You may submit a written request to PO Box 9496, Springfield MO
+                            65801.
+                        </p>
+                        <p>
+                            Statements up to the past 12 months will be stored in your online
+                            account. Online Statements require Adobe
+                            <sup>&reg;</sup>
+                            Acrobat Reader
+                            <sup>&reg;</sup>
+                            4.05 version or greater.
+                            <a
+                                href="https://get.adobe.com/reader/"
+                                class="underline"
+                                target="_blank"
+                            >
+                                Download Adobe Reader for Free
+                            </a>
+                        </p>
+                        <p>
+                            Failure to access the available online statement will not relieve you of
+                            any obligations under the terms of the account agreement. In the event
+                            that the email address you provided should change, or become invalid, it
+                            is your responsibility to update the email address online or you may
+                            notify us of such change and provide an update.
+                        </p>
+                    </div>
+                    <div class="paperless-submit_wrap">
+                        <div class="agree-wrapper">
+                            <input
+                                type="checkbox"
+                                name="agree"
+                                id="agree"
+                                class="paperless-agree"
+                                aria-required="true"
+                            />
+                            <label for="agree" class="paperless-agree_label bold">
+                                I Agree
+                            </label>
+                        </div>
+                        <button
+                            type="submit"
+                            class="button button--green button--large enroll-btn js-enroll-btn"
+                            disabled="disabled"
+                        >
+                            Enroll
+                        </button>
+                        <div class="enroll-error"></div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+        <div class="paperless-enroll_success">
+            <h4 class="enroll-title">You Are Now Signed Up for Paperless Statements</h4>
+            <p class="enroll-subtitle">You will receive an email confirmation shortly.</p>
+        </div>
+        <div class="paperless-remove_success">
+            <h4 class="enroll-title">You are No Longer Signed Up for Paperless Statements</h4>
+            <p class="enroll-subtitle">
+                You may sign up for paperless statements again at any time.
+            </p>
+        </div>
+    </th:block>
+</th:block>

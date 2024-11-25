@@ -1,0 +1,24 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="site-content o-container">
+            <div class="row promo-container-wrap">
+                <div class="main-primary col-sm-12">
+                    <div class="content-wrap">
+                        <div class="site-breadcrumb js-site-breadcrumb">
+                            <div class="site-breadcrumb_wrapper site-breadcrumb_wrapper-rebate js-site-breadcrumb_wrapper">
+                                <div th:if="${breadcrumbs}" style="display: block"></div>
+                                <div class="site-breadcrumb_slider js-site-breadcrumb_slider" th:include="catalog/partials/breadcrumbs"></div>
+                            </div>
+                        </div>
+                        <div class="promo-container">
+                            <div class="promo-header">
+                                <blc:content-zone name="Promotions Page Heading Zone" deepLinks="deepLinks" />
+                            </div>
+                            <blc:content-zone name="Promotions Content Zone" deepLinks="deepLinks" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

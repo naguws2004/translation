@@ -1,0 +1,35 @@
+<div class="js-video-search_input-wrap">
+    <blc:form id="video--search__form">
+        <div class="input-append">
+            <label for="video-search-input" class="sr-only">Search Videos</label>
+            <input
+                id="video-search-input"
+                class="js-video-search_input form-control"
+                autocomplete="on"
+                placeholder="Search Videos by Category, Product, or Job"
+                type="text"
+                th:value="${searchTerm}"
+                th:classappend="${searchTerm != null ? 'extra--pad' : ''}"
+            />
+            <span>
+                <button
+                    type="submit"
+                    class="video-search_btn site-search_btn button button--green button--search button--flat-left"
+                >
+                    <svg class="button__icon">
+                        <title th:text="#{shapes.search}"></title>
+                        <use href="#shape-search" />
+                    </svg>
+                </button>
+            </span>
+            <button
+                th:if="${searchTerm != null}"
+                class="video--search__clear js-video--search__clear button button--white"
+            >
+                <svg class="button__icon">
+                    <use href="#shape-remove"></use>
+                </svg>
+            </button>
+        </div>
+    </blc:form>
+</div>

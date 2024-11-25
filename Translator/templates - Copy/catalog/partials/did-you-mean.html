@@ -1,0 +1,5 @@
+<th:block th:remove="tag" th:fragment="ajax">
+    <div th:if="${not #lists.isEmpty(didYouMeanDTOs)}" class="plp-banner-vs" th:inline="text">
+        Did you mean <a th:each="dto, dtoStat : ${didYouMeanDTOs}" th:href="${dto.url}">[[${dtoStat.index > 0 ? '&nbsp;or&nbsp;' : ''}]][[${dto.text}]]</a>?
+    </div>
+</th:block>

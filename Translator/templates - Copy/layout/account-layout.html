@@ -1,0 +1,122 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <title th:text="${currentPageTitle}"></title>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div
+            id="candidateShippingModal"
+            class="modal fade"
+            tabindex="-1"
+            role="dialog"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content"></div>
+            </div>
+        </div>
+        <div class="row account-wrap">
+            <div class="site-breadcrumb">
+                <div class="site-breadcrumb_wrapper">
+                    <div class="site-breadcrumb_slider" style="left: 15px;">
+                        <ul class="site-breadcrumb_list" style="display: none;"></ul>
+                        <p class="mobile-account-breadcrumb" style="display: none;"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="main-primary col-md-12 account">
+                <div role="tablist" class="account-nav">
+                    <div>
+                        <a
+                            role="tab"
+                            th:href="@{/account}"
+                            id="account-dashboard-nav"
+                            class="account-nav"
+                            th:text="#{account.nav.account}"
+                        >
+                            <strong>Dashboard</strong>
+                        </a>
+                    </div>
+                    <div>
+                        <a
+                            role="tab"
+                            th:href="@{/account/profile}"
+                            id="profile-nav"
+                            class="account-nav"
+                            th:text="#{account.nav.profile}"
+                        >
+                            <strong>Profile&nbsp;&amp;&nbsp;Settings</strong>
+                        </a>
+                    </div>
+                    <div>
+                        <a
+                            role="tab"
+                            th:href="@{/account/purchase-history}"
+                            id="purchase-history-nav"
+                            class="account-nav"
+                            th:text="#{account.nav.orders}"
+                        >
+                            <strong>Purchace&nbsp;History</strong>
+                        </a>
+                    </div>
+                    <div>
+                        <a
+                            role="tab"
+                            th:href="@{/account/orewards}"
+                            id="orewards-nav"
+                            class="account-nav"
+                            th:text="#{account.nav.rewards}"
+                        >
+                            <strong>O'Rewards</strong>
+                        </a>
+                    </div>
+                    <div>
+                        <a
+                            role="tab"
+                            th:href="@{/account/garage}"
+                            id="garage-nav"
+                            class="account-nav"
+                            th:text="#{account.nav.garage}"
+                        >
+                            <strong>Garage</strong>
+                        </a>
+                    </div>
+                    <div>
+                        <a
+                            role="tab"
+                            th:href="@{/account/shopping-lists}"
+                            id="shopping-lists-nav"
+                            class="account-nav"
+                            th:text="#{account.nav.shoppingLists}"
+                        >
+                            <strong>Shopping&nbsp;Lists</strong>
+                        </a>
+                    </div>
+                    <div th:if="${accountCustomer}">
+                        <a
+                            role="tab"
+                            th:href="@{/account/statements}"
+                            id="statements-nav"
+                            class="account-nav"
+                            th:text="#{account.nav.statements}"
+                        >
+                            <strong>Statements</strong>
+                        </a>
+                    </div>
+                </div>
+                <div class="account-content">
+                    <div class="account-content_wrap">
+                        <div
+                            class="overlay-spinner"
+                            id="overlay-spinner"
+                            role="alert"
+                            th:attr="aria-label=#{aria.loading}"
+                        ></div>
+                        <div id="account-content" class="js-account-content">
+                            <div layout:fragment="account-content" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

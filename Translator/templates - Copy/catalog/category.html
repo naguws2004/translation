@@ -1,0 +1,78 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head
+        th:with="vehicleText=${customer.selectedGarageItem != null ? #oap.createBaseGarageVehicleName(customer.selectedGarageItem) : ''}"
+    >
+        <th:block th:include="layout/partials/bazaarvoice" th:with="parent='category'"></th:block>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div
+            class="category-wrap"
+            th:with="selectedVehicle=${customer.selectedGarageItem != null ? #oap.createBaseGarageVehicleName(customer.selectedGarageItem) : ''}"
+        >
+            <!-- prettier-ignore -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                window._ost.partTypeId = /*[[${partType?.partTypeId}]]*/ '';
+                window._ost.plpLongDescription = /*[[${plpLongDescription}]]*/ '';
+                window._ost.partTypeName = /*[[${partTypeName}]]*/ '';
+                /*]]>*/
+            </script>
+            <div class="site-breadcrumb js-site-breadcrumb">
+                <div class="site-breadcrumb_wrapper js-site-breadcrumb_wrapper">
+                    <div th:if="${breadcrumbs}" style="display: block"></div>
+                    <div
+                        class="site-breadcrumb_slider js-site-breadcrumb_slider"
+                        th:include="catalog/partials/breadcrumbs"
+                    ></div>
+                </div>
+            </div>
+            <h1
+                data-qa="plp-category-title"
+                class="category_title orly-plp-category-title"
+                th:classappend="${#lists.isEmpty(products)}? 'centered'"
+            >
+                <!--/* Part type name will be null/empty when it's the root part type. */-->
+                <th:block th:if="${#strings.isEmpty(partTypeName)}">
+                    <th:block th:if="${customer.selectedGarageItem != null}" th:inline="text">
+                        [[${selectedVehicle}]] -
+                    </th:block>
+                    Shop by Category
+                </th:block>
+                <th:block th:unless="${#strings.isEmpty(partTypeName)}" th:inline="text">
+                    <th:block
+                        th:if="${customer.selectedGarageItem != null and partType.isVehicleRequired()}"
+                        th:inline="text"
+                    >
+                        [[${selectedVehicle}]] -
+                    </th:block>
+                    <th:block th:inline="text">
+                        [[${partTypeName}]]
+                    </th:block>
+                </th:block>
+            </h1>
+            <!-- Only display the vehicle selector banner if the partType requires a vehicle -->
+            <th:block th:if="${partType.isVehicleRequired()}">
+                <th:block th:include="layout/partials/page-vs" />
+            </th:block>
+            <th:block th:include="catalog/partials/product-list" />
+            <div th:if="*{#lists.isEmpty(products)}">
+                <div class="col-xs-12">
+                    <div class="plp-container" th:unless="${#lists.isEmpty(childCategories)}">
+                        <!-- prettier-ignore -->
+                        <script th:inline="javascript">
+                            window._ost.childCategories = /*[[${childCategories}]]*/ [];
+                            window._ost.pageRequiresLegend = /*[[${pageRequiresLegend}]]*/ false;
+                        </script>
+                        <div
+                            class="featured-category-banner-skeleton"
+                            th:include="utility/loading-animation"
+                        ></div>
+                        <category-page-child-categories></category-page-child-categories>
+                    </div>
+                </div>
+                <th:block th:include="catalog/partials/empty-product-list" />
+            </div>
+            <product-type-long-description></product-type-long-description>
+        </div>
+    </fragment>
+</th:block>

@@ -1,0 +1,215 @@
+<blc:form method="POST" th:class="js-rma-form">
+    <div
+        class="group-items-wrap js-expand-list"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        th:with="info=${info},
+    		 orderReturnItems=${info.orderReturnItems},
+    		 newReturnableItems=${info.returnableItems.get('newReturns')},
+    		 coreReturnableItems=${info.returnableItems.get('coreReturns')}"
+    >
+        <div class="return-wrap">
+            <div class="return-mail-header">
+                <div class="col-sm-4">
+                    Product
+                </div>
+                <div class="col-sm-3">
+                    Item #
+                </div>
+                <div class="col-sm-3">
+                    Price
+                </div>
+                <div class="col-sm-2">
+                    Qty
+                </div>
+            </div>
+            <th:block
+                th:each="fgItem : ${orderReturnItems}"
+                th:with="item=${fgItem.orderItem},
+         	          	 itemKey=${item.product.lineCode + item.product.itemNumber},
+         	             id=${item.product.id},
+         	             returnableItem=${newReturnableItems.get(itemKey)},
+         	             returnableCore=${coreReturnableItems.get(itemKey)}"
+            >
+                <div
+                    class="return-row-item"
+                    th:if="${returnableItem != null or returnableCore != null}"
+                >
+                    <div
+                        class="col-xs-12"
+                        th:inline="text"
+                        th:with="core=${#corePrice.hasCorePrice(item)}"
+                    >
+                        <div
+                            class="row return-item"
+                            th:attr="data-line=${item.product.lineCode},
+	                            data-part=${item.product.itemNumber}, data-name=${item.product.name},
+	                            data-price=${item.price}"
+                        >
+                            <div class="return-item-section">
+                                <div class="col-sm-4 return-single">
+                                    <span class="return-item-title_mobile">Product:</span>
+                                    [[${returnableItem.productDescription}]]
+                                </div>
+                                <div class="col-sm-3 return-single">
+                                    <span class="return-item-title_mobile">Item #:</span>
+                                    [[${returnableItem.itemNumber}]]
+                                </div>
+                                <div class="col-sm-3 return-single">
+                                    <span class="return-item-title_mobile">Price:</span>
+                                    <span blc:price="${item.averagePrice}" />
+                                    <div th:if="${core eq true}">
+                                        <span class="return-sm-core" th:inline="text">
+                                            (+ $[[${#corePrice.getCorePrice(item)}]] core)
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 return-single">
+                                    <span class="return-item-title_mobile">Qty:</span>
+                                    <div class="select2--lg">
+                                        <select
+                                            th:id="${id}+ '-quantity'"
+                                            class="js-select2-returns"
+                                        >
+                                            <option value=""></option>
+                                            <option
+                                                th:each="i : ${#numbers.sequence(1, __${returnableItem.qty}__)}"
+                                                th:text="${i}"
+                                                th:value="${i}"
+                                            />
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                th:if="${returnableCore != null}"
+                                class="return-core-section"
+                                th:attr="data-core-available=${returnableCore.qty}"
+                            >
+                                <div class="col-sm-7">
+                                    Core Return
+                                    <span class="js-core-hover">
+                                        <svg class="q-mark">
+                                            <use href="#info-q-mark"></use>
+                                        </svg>
+                                    </span>
+                                    <div class="return_core-info" th:inline="text">
+                                        [[#{account.purchaseHistory.orderReturn.coreInfo}]]
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <span th:inline="text">
+                                        $[[${#corePrice.getCorePrice(item)}]]
+                                    </span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="select2--lg">
+                                        <select
+                                            th:id="${id}+ '-quantity'"
+                                            class="js-select2-returns-core"
+                                        >
+                                            <option value=""></option>
+                                            <option
+                                                th:each="i : ${#numbers.sequence(1, __${returnableCore.qty}__)}"
+                                                th:text="${i}"
+                                                th:value="${i}"
+                                            />
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row return-reasons">
+                            <div class="col-xs-12 col-sm-4 pull-right return-reason">
+                                <div class="select2--lg">
+                                    <select
+                                        th:id="'returnType-' + ${id}"
+                                        class="js-select2-returns-reason"
+                                    >
+                                        <option value="" th:text="Reason"></option>
+                                        <option th:value="'new'" th:text="#{returns.type.new}">
+                                            No Longer Needed
+                                        </option>
+                                        <option th:value="'doa'" th:text="#{returns.type.doa}">
+                                            Received Damaged
+                                        </option>
+                                        <option
+                                            th:value="'wrong item'"
+                                            th:text="#{returns.type.wrongItem}"
+                                        >
+                                            Wrong Item
+                                        </option>
+                                        <option
+                                            th:value="'warranty'"
+                                            th:text="#{returns.type.warranty}"
+                                        >
+                                            Warranty
+                                        </option>
+                                        <option th:value="'other'" th:text="#{returns.type.other}">
+                                            Other
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div
+                                class="col-xs-12 col-sm-4 return-reason-other_wrap pull-right return-reason"
+                            >
+                                <input
+                                    type="text"
+                                    class="js-return-reason-other form-control"
+                                    placeholder="Please write your reason here"
+                                />
+                                <p
+                                    class="js-return-reason-other-error js-returns-error returns-error"
+                                    role="alert"
+                                    th:text="#{account.purchaseHistory.orderReturn.otherReasonError}"
+                                >
+                                    Please provide a reason for your return.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <div class="return-customer-notes">
+        <label>
+            Customer Notes
+            <span class="return-optional">(optional)</span>
+        </label>
+        <textarea class="js-customer-notes-text form-control" rows="4"></textarea>
+    </div>
+    <div class="returns-info-controls-wrap row">
+        <div class="xs-12">
+            <p
+                class="js-returns-quantity-error js-returns-error returns-error"
+                role="alert"
+                th:text="#{account.purchaseHistory.orderReturn.noItemsError}"
+            >
+                Please select at least 1 item to return.
+            </p>
+            <p
+                class="js-returns-submission-error js-returns-error returns-error"
+                role="alert"
+                th:text="#{account.purchaseHistory.orderReturn.submissionError}"
+            >
+                There was an error submitting the form, please refresh the page and try again.
+            </p>
+        </div>
+        <div class="col-sm-5 col-md-7">
+            <p class="returns-info" th:utext="#{account.purchaseHistory.orderReturn.questions}">
+                If you have any questions, please review our Return Policy, or you can Contact Us.
+            </p>
+        </div>
+        <div class="col-sm-7 col-md-5 pull-right">
+            <div class="return-controls">
+                <a th:href="@{/account/purchase-history}" class="btn-white-lg cancel-btn">
+                    <span class="return-cancel-txt font-sans-cond">Cancel</span>
+                </a>
+                <button type="submit" class="btn-green-lg js-rma-form-submit rma-form-submit">
+                    GENERATE RETURN CODE
+                </button>
+            </div>
+        </div>
+    </div>
+</blc:form>

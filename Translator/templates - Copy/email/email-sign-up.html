@@ -1,0 +1,197 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="site-content o-container">
+            <div id="fb-root"></div>
+            <script th:inline="javascript">
+                /*<![CDATA[*/ (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if
+                (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src =
+                'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0';
+                fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));
+                /*]]>*/
+            </script>
+            <div class="main-primary">
+                <div class="email-signup js-email-signup">
+                    <h2 class="email-signup_heading">
+                        <strong th:utext="#{email.signup.stayConnected}">
+                            Stay Connected. Sign up for email &amp; Text.
+                        </strong>
+                    </h2>
+                    <p class="get-connected" th:text="#{email.signup.getConnected}">
+                        Sign up now to receive emails and/or text messages for exclusive offers,
+                        special promotions and event notifications.
+                    </p>
+                    <div class="email-privacy-links">
+                        <privacy-links></privacy-links>
+                    </div>
+                    <div class="clearfix"></div>
+                    <blc:form class="js-email-signup-form" role="form">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label
+                                    for="email-address"
+                                    class="enter-email-address email-signup-label"
+                                    th:inline="text"
+                                >
+                                    [[#{email.signup.emailAddress}]]
+                                    <em class="req">*</em>
+                                </label>
+                                <input
+                                    id="email-address"
+                                    type="email"
+                                    class="form-control input--lg js-email-address"
+                                    name="email-address"
+                                    size="50"
+                                    maxlength="50"
+                                    aria-required="true"
+                                />
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label
+                                    for="email-address-confirm"
+                                    class="enter-email-address-confirm email-signup-label"
+                                    th:inline="text"
+                                >
+                                    [[#{email.signup.confirmEmailAddress}]]
+                                    <em class="req">*</em>
+                                </label>
+                                <input
+                                    id="email-address-confirm"
+                                    type="email"
+                                    class="form-control input--lg js-email-address-confirm"
+                                    name="email-address-confirm"
+                                    size="50"
+                                    maxlength="50"
+                                    aria-required="true"
+                                    autocomplete="email"
+                                />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3 form-group">
+                                <label
+                                    for="first-name"
+                                    class="enter-first-name email-signup-label"
+                                    th:inline="text"
+                                >
+                                    [[#{email.signup.firstName}]]
+                                    <em class="req">*</em>
+                                </label>
+                                <input
+                                    id="first-name"
+                                    class="form-control input--lg js-first-name"
+                                    name="first-name"
+                                    size="25"
+                                    maxlength="120"
+                                    aria-required="true"
+                                    autocomplete="given-name"
+                                />
+                            </div>
+                            <div class="col-sm-6 col-md-3 form-group">
+                                <label
+                                    for="last-name"
+                                    class="enter-last-name email-signup-label"
+                                    th:text="#{email.signup.lastName}"
+                                >
+                                    Last Name
+                                </label>
+                                <input
+                                    id="last-name"
+                                    class="form-control input--lg js-last-name"
+                                    name="last-name"
+                                    size="25"
+                                    maxlength="120"
+                                    aria-required="true"
+                                    autocomplete="family-name"
+                                />
+                            </div>
+                            <div class="clearfix hidden-md"></div>
+                            <div class="col-sm-6 col-md-3 form-group">
+                                <label
+                                    for="zip-code"
+                                    class="enter-zip-code email-signup-label"
+                                    th:text="#{email.signup.zipCode}"
+                                >
+                                    Zip Code
+                                </label>
+                                <input
+                                    id="zip-code"
+                                    type="text"
+                                    class="form-control input--lg js-zip-code"
+                                    name="zip-code"
+                                    maxlength="5"
+                                    size="25"
+                                    aria-required="true"
+                                    autocomplete="postal-code"
+                                />
+                            </div>
+                            <div class="col-sm-6 col-md-3 form-group">
+                                <label
+                                    for="phone-number"
+                                    class="enter-phone-number email-signup-label"
+                                    th:inline="text"
+                                >
+                                    [[#{email.signup.phoneNumber}]]
+                                    <em class="req req-phone">*</em>
+                                </label>
+                                <input
+                                    id="phone-number"
+                                    type="text"
+                                    class="form-control input--lg js-phone-number"
+                                    name="phone-number"
+                                    size="25"
+                                    aria-required="true"
+                                    autocomplete="tel"
+                                />
+                            </div>
+                        </div>
+                        <div class="row email-signup-agree">
+                            <div class="col-md-6 form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input
+                                            id="receive-texts"
+                                            type="checkbox"
+                                            name="receiveTexts"
+                                            class="js-receive-texts"
+                                        />
+                                        <span th:utext="#{createAccount.receiveTexts}"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-green-lg btn--lg js-email-signup-btn">
+                            <strong th:text="#{email.signup.submitButton}">Submit</strong>
+                        </button>
+                        <p class="email-signup-disclaimer">
+                            Message and data rates may apply. Text HELP for help to 64078. For
+                            support call 1-888-327-7153. Up to 2 msgs/week. O'Reilly Auto Parts
+                            respects your right to privacy. For more information, please read our
+                            <a
+                                th:href="@{/legal-policies#privacy-policy}"
+                                class="email-signup-disclaimer__link"
+                                target="_blank"
+                                th:attr="aria-label=#{aria.checkout.additionalPickupPerson.helpLink}"
+                            >
+                                Privacy Policy
+                            </a>
+                            and
+                            <a
+                                th:href="@{/legal-policies#terms-and-conditions}"
+                                class="email-signup-disclaimer__link"
+                                target="_blank"
+                                th:attr="aria-label=#{aria.footer.termsAndConditions}"
+                            >
+                                Terms and Conditions
+                            </a>
+                            .
+                        </p>
+                    </blc:form>
+                </div>
+                <div class="email-signup-success js-email-signup-success">
+                    <th:block th:replace="email/partials/email-sign-up-success" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </fragment>
+</th:block>

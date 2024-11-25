@@ -1,0 +1,12 @@
+<th:block>
+    <div class="ie-unsupported-banner">
+        <img src="/img/warning_triangle_simple.png" th:alt="#{prop65.alt}" />
+        <span th:text="#{browser.unsupported}"></span>
+    </div>
+
+    <script type="text/javascript">
+        /*<![CDATA[*/ if (navigator.userAgent.indexOf('MSIE') > -1 ||
+        navigator.userAgent.indexOf('Trident/7.0') > -1) {
+        document.querySelector('.ie-unsupported-banner').style = 'display: block;' } /*]]>*/
+    </script>
+</th:block>

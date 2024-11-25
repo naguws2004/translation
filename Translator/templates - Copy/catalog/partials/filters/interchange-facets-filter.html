@@ -1,0 +1,32 @@
+<th:block th:remove="tag" th:fragment="ajax">
+    <div th:if="${not #lists.isEmpty(interchangeFacets)}" class="plp-youve-selected">
+        <h4 class="plp-ys-heading" th:text="#{facet.youSelected}">You've Selected</h4>
+        <div class="plp-refine_wrapper">
+            <ul class="plp-refine_list--removable">
+                <li th:each="interchangeFacet : ${interchangeFacets}" th:inline="text">
+                    <a
+                        th:href="${interchangeFacet.removeUrl}"
+                        class="plp-refine_remove"
+                        th:attr="aria-label=#{aria.facet.remove}"
+                    >
+                        <svg>
+                            <use href="#shape-remove" />
+                        </svg>
+                    </a>
+                    <th:block th:if="${interchangeFacet.type.getType() == 'PART_TYPE'}">
+                        <span>
+                            <strong>Part Type Replacing</strong>
+                            - [[${interchangeFacet.name}]]
+                        </span>
+                    </th:block>
+                    <th:block th:unless="${interchangeFacet.type.getType() == 'PART_TYPE'}">
+                        <span>
+                            <strong>Brand Replacing</strong>
+                            - [[${interchangeFacet.name}]]
+                        </span>
+                    </th:block>
+                </li>
+            </ul>
+        </div>
+    </div>
+</th:block>

@@ -1,0 +1,173 @@
+<th:block th:if="${#brc.sandbox}">
+    <div id="sndbx-ribbon" th:if="${#brc.sandbox}"
+         th:classappend="${#color.isLightLuminance('__${#brc.sandbox.color} ? ${#brc.sandbox.color} : 'ffffff'__')
+            ? 'light-luminance' : 'dark-luminance'}"
+         th:style="${'background-color: ' + #brc.sandbox.color + ';'}">
+
+        <div class="width_setter">
+            <div class="sndbx-current" th:if="${#brc.sandbox}" th:object="${#brc.sandbox}">
+                <span class="sndbx-name" th:text="*{name}" />
+                <span class="sndbx-date" th:inline="text" th:if="*{goLiveDate}">
+                    [[#{SandBoxImpl_Go_Live_Date}]]: [[*{#dates.format(goLiveDate, 'MMMM dd, yyyy')}]]
+                </span>
+                <span class="sndbx-date" th:inline="text" th:unless="*{goLiveDate}">
+                    [[#{SandBoxImpl_Go_Live_Date}]]: [[#{SandBoxImpl_Go_Live_Date_Unspecified}]]
+                </span>
+            </div>
+
+            <div id="sndbx-date-selector" class="sndbx-selector-header" th:object="${#brc.sandbox}">
+                <span class="title">Viewing On:</span>
+                <div id="sndbx-datepicker-container">
+                    <input type="text" id="sndbx-datepicker-input" th:value="${#dates.format(#brc.currentTime, 'MM/dd/yyyy HH:mm')}" />
+                    <i class="blc-icon-calendar sndbx-calendar"></i>
+                </div>
+            </div>
+
+            <div id="sndbx-sandbox-selector" class="sndbx-selector-header" th:object="${#brc.sandbox}">
+                <div id="sndbx-sandboxpicker-container">
+                    <span class="title" th:text="#{SandBox_Change}" />
+                    <i class="icon-cogs"></i>
+
+                    <div id="sndbx-sandboxpicker-box" class="ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+                        <div class="ui-widget-header ui-widget-title ui-helper-clearfix ui-corner-all">
+                            Select a sandbox
+                        </div>
+
+                        <div id="include-my-changes-container">
+                            <input type="checkbox" id="include-my-changes" checked="checked" />
+                            <label for="include-my-changes">Include my changes</label>
+                        </div>
+
+                        <hr style="clear: both;" />
+
+                        <ul id="sandbox-list" style="display: none">
+                            <li th:each="sandbox : ${sandboxes}" th:object="${sandbox}" th:inline="text">
+                                <a th:href="@{/(blSandboxId=*{id})}" th:inline="text" th:style="'color:' + *{color}">
+                                    [[*{name}]]
+                                    <!--
+                                    (
+                                    <span th:remove="tag" th:if="*{goLiveDate}" th:text="*{#dates.format(goLiveDate, 'MM/dd/yy')}" />
+                                    <span th:remove="tag" th:unless="*{goLiveDate}" th:text="#{SandBoxImpl_Go_Live_Date_Unspecified}" />
+                                    )
+                                    -->
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/(blClearSandBox='true')}" th:inline="text" style="color: #000">
+                                    [[#{SandBoxImpl_Clear_SandBox}]]
+                                </a>
+                            </li>
+                        </ul>
+                        <ul id="sandbox-list-user">
+                            <li th:each="sandbox : ${userSandboxes}" th:object="${sandbox}" th:inline="text">
+                                <a th:href="@{/(blSandboxId=*{id})}" th:inline="text" th:style="'color:' + *{color}">
+                                    [[*{name}]]
+                                    <!--
+                                    (
+                                    <span th:remove="tag" th:if="*{goLiveDate}" th:text="*{#dates.format(goLiveDate, 'MM/dd/yy')}" />
+                                    <span th:remove="tag" th:unless="*{goLiveDate}" th:text="#{SandBoxImpl_Go_Live_Date_Unspecified}" />
+                                    )
+                                    -->
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/(blClearSandBox='true')}" th:inline="text" style="color: #000">
+                                    [[#{SandBoxImpl_Clear_SandBox}]]
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sndbx-catalog-selector" class="sndbx-selector-header">
+                <div id="sndbx-catalogpicker-container">
+                    <span class="title">Manage Schemas</span>
+                    <i class="icon-cogs"></i>
+
+                    <div id="sndbx-catalogpicker-box" class="ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+                        <div class="ui-widget-header ui-widget-title ui-helper-clearfix ui-corner-all">
+                            Manage Schemas
+                        </div>
+
+                        <ul id="catalog-list">
+                            <li>
+                                <a class="btn-clear-lg" th:href="@{/(oapSearchPath=CATALOG_MAIN)}">
+                                    View Live Catalog
+                                </a>
+                            </li>
+                            <li>
+                                <a class="btn-clear-lg" th:href="@{/(oapSearchPath=CATALOG_BAK)}">
+                                    View Pending Catalog
+                                </a>
+                            </li>
+                            <li>
+                                <button type="button"
+                                        class="btn-white-lg"
+                                        id="openSwapSchemaModal"
+                                        data-toggle="modal"
+                                        data-target="#swapSchemaModal">Swap Schemas</button>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="sndbx-selector-header" th:object="${#brc.sandbox}">
+                <span class="title">
+                    <a href="" id="selector-deep-link" target="_blank" style="display: none;">View In Admin</a>
+                </span>
+            </div>
+
+            <div class="sndbx-selector-header">
+                <span class="title">
+                    <label><input id="toggle-deep-links" type="checkbox" checked="checked"/>Show Deep Links</label>
+                </span>
+            </div>
+
+            <div class="sndbx-selector-header">
+                <span class="title">
+                    <label><input id="toggle-search-score" type="checkbox" th:checked="${#props.getAsBoolean('show.search.score.default')}"/>Show Search Score</label>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="swapSchemaModal" class="modal fade col-xs-12 col-sm-10 col-md-6 col-lg-4" tabindex="-1" role="dialog" aria-labelledby="swapSchemaModalLabel" aria-hidden="true"
+        style="
+            top: 40%;
+            outline: none;
+            display: none;
+            margin-left: auto;
+            margin-right: auto;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="col-xs-12" style="margin-top: 20px; margin-bottom: 20px;">
+                        <label for="understandPrompt" class="col-xs-12">
+                            <input type="checkbox" id="understandPrompt" name="understandPrompt"/>
+                            I understand I am swapping live production catalogs.
+                        </label>
+                    </div>
+                    <div class="col-xs-12" style="margin-top: 20px; margin-bottom: 20px;">
+                        <label for="scheduledSwap" class="col-xs-3">
+                            <input type="checkbox" id="scheduledSwap" name="scheduledSwap"/>
+                            Scheduled Job
+                        </label>
+
+                        <div id="catalog-datepicker-container" class="col-xs-9" style="display: none;">
+                            <input type="text" id="catalog-datepicker-input" th:value="${#dates.format(#brc.currentTime, 'MM/dd/yyyy HH:mm')}" />
+                            <i class="blc-icon-calendar sndbx-calendar"></i>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-white-lg" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn-white-lg" id="swapSchemaAction">Swap Schemas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

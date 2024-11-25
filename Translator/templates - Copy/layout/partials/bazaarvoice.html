@@ -1,0 +1,45 @@
+<th:block th:fragment="bazaarvoice" th:if="${#oap.getRatingsAndReviewsDisplay()}">
+    <script
+        th:attr="data-tip=#{${parent}}"
+        defer="defer"
+        type="text/javascript"
+        th:src="${#oap.getBazaarvoiceBvApi()}"
+    ></script>
+
+    <!-- Fire this script only if checkout was just completed. -->
+    <th:block th:if="${parent == 'checkout-complete'}">
+        <!--load Transaction event and parameters-->
+        <!-- prettier-ignore -->
+        <script type="text/javascript" th:inline="javascript">
+                window.bvCallback = function (BV) {
+                    BV.pixel.trackTransaction({
+                        "currency": "USD",
+                        "orderId": "[[${order.orderNumber}]]",
+                        "total": "[[${order.getSubTotal().getAmount()}]]",
+                        "items": [
+                        <th:block th:with="items=${order.discreteOrderItems}">
+                            <th:block th:each="item, iterationStatus : ${items}" th:inline="text">
+                            {
+                                "price": "[[${item.price}]]",
+                                "quantity": "[[${item.quantity}]]",
+                                "sku": "[[${item.product.brandCode}]]-[[${item.product.partNumber}]]"
+                            }<th:block th:if="${!iterationStatus.last}">,</th:block>
+                            </th:block>
+                        </th:block>
+                        ],
+                        "email": /*[[${order.emailAddress}]]*/ ''
+                    });
+                };
+                /*<![CDATA[*/
+                window._ost.hasShippableItems = /*[[${hasShippableItems}]]*/ false;
+                window._ost.hasPickupItems = /*[[${hasPickupItems}]]*/ false;
+                window._ost.orderNumber = /*[[${order.orderNumber}]]*/ '';
+                window._ost.orderTotal= /*[[${order.total}]]*/ '';
+                window._ost.firstName = /*[[${checkoutFirstName}]]*/ '';
+                window._ost.lastName = /*[[${checkoutLastName}]]*/ '';
+                window._ost.emailAddress = /*[[${checkoutEmailAddress}]]*/ '';
+                window._ost.phoneNumber = /*[[${checkoutPhoneNumber}]]*/ '';
+                /*]]>*/
+            </script>
+    </th:block>
+</th:block>

@@ -1,0 +1,83 @@
+<th:block layout:decorator="layout/account-layout">
+    <th:block layout:fragment="account-content" th:fragment="ajax">
+        <div class="row">
+            <div class="order-history_go-back">
+                <a href="/account/purchase-history" class="js-purchase-history_back">
+                    <svg>
+                        <use href="#shape-left-arrow"></use>
+                    </svg>
+                    <span>Back To Purchase History</span>
+                </a>
+            </div>
+        </div>
+        <div class="order-details-wrap">
+            <div id="order-history" th:unless="${#lists.isEmpty(legacyOrders)}">
+                <div
+                    class="row order-row"
+                    th:each="order : ${legacyOrders}"
+                    th:object="${order}"
+                    th:attr="data-order-number=*{transactionId}"
+                >
+                    <div class="col-xs-12 col-sm-4 left-section">
+                        <div class="order-placed">
+                            <span>Order Placed</span>
+                        </div>
+                        <div
+                            class="order-date"
+                            th:text="*{#dates.format(orderOpened, 'MMMM dd, yyyy')}"
+                        ></div>
+                        <div class="order-number">
+                            <span>Order#</span>
+                            <span th:text="*{transactionId}"></span>
+                        </div>
+                        <div class="order-total">
+                            <span>Total</span>
+                            <b blc:price="*{total}"></b>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 right-section">
+                        <div class="row group-row">
+                            <div class="group-items-wrap js-expand-list">
+                                <div class="type-group-items-wrap">
+                                    <div
+                                        class="col-xs-12 col-md-8 col-lg-9 order-history-item_wrap"
+                                        th:each="item : ${order.orderItems}"
+                                        th:with="item=${item}"
+                                        th:inline="text"
+                                    >
+                                        <div>
+                                            <b>[[${item.description}]]</b>
+                                        </div>
+                                        <div>
+                                            <span>Line: [[${item.line}]]</span>
+                                            <span>|</span>
+                                            <span>Part # [[${item.itemNumber}]]</span>
+                                        </div>
+                                        <div>
+                                            <span>$[[${item.priceChargedForEach}]]</span>
+                                        </div>
+                                        <div>
+                                            <span>Qty: [[${item.quantityOrdered}]]</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="col-xs-12 col-md-4 col-lg-3 order-status-wrap order-history-status"
+                                    >
+                                        <span class="order-status" th:text="*{orderStatus}">
+                                            Status
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" th:if="${#lists.isEmpty(legacyOrders)}">
+                <h3 class="no-order-history" th:text="#{account.orderHistory.noOrders}">
+                    You have not placed any orders
+                </h3>
+            </div>
+        </div>
+    </th:block>
+</th:block>

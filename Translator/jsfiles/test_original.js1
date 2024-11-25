@@ -1,0 +1,22 @@
+﻿// Using single quotes
+const greeting = 'Hello, World!';
+
+// Using double quotes
+const name = "Alice";
+
+// Using template literals for string interpolation
+const message = `Hello, ${name}!`;
+
+// Multi-line strings using template literals
+const poem = `Roses are red,
+Violets are blue,
+JavaScript is awesome,
+And so are you!`;
+
+// Escaping characters within strings
+const quote = "She said, \"JavaScript is fun!\"";
+
+console.log(greeting); // Outputs: Hello, World!
+console.log(message); // Outputs: Hello, Alice!
+console.log(poem);
+console.log(quote); // Outputs: She said, "JavaScript is fun!"

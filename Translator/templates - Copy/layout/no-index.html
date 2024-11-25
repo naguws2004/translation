@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class="no-js no-flexbox" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <th:block th:include="/analytics/partials/data-layer" />
+        <th:block th:replace="layout/partials/shapes"></th:block>
+        <th:block
+            th:unless="${#strings.isEmpty(viewName)}"
+            th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: styles"
+        />
+        <script>
+            window._ost = {}
+        </script>
+    </head>
+    <body
+        layout:fragment="body"
+        th:attr="data-page_status=${#oap.classifyViewName(viewName)}"
+        th:class="${'locale-' + session?.blLocale?.localeCode + ' page-' + #oap.classifyViewName(viewName) + ' orly-page-' + #oap.classifyViewName(viewName)}"
+    >
+        <th:block th:include="/analytics/partials/google-tag-manager" />
+        <blc:form id="justUsedForCsrf" role="form"></blc:form>
+        <div class="site-container">
+            <th:block layout:fragment="content" />
+        </div>
+    </body>
+    <th:block
+        th:unless="${#strings.isEmpty(viewName)}"
+        th:substituteby="${'dist/assets/' + #oap.classifyViewName(viewName)} :: scripts"
+    />
+</html>

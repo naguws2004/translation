@@ -1,0 +1,129 @@
+<div class="cos_summary-totals_wrapper">
+    <h4 th:text="#{checkOrderStatus.orderSummary}"></h4>
+    <div th:inline="text">
+        <div>
+            <span class="summary-title">[[#{checkOrderStatus.subtotal}]]</span>
+            <span class="cos-summary" blc:price="${order?.subTotal?.subtract(totalCore)}"></span>
+        </div>
+        <div>
+            <span
+                class="summary-title"
+                th:text="#{account.purchaseHistory.orderDetails.core}"
+            ></span>
+            <th:block th:if="${!#strings.equals(totalCore?.toString(), '0.00')}">
+                <span class="cos-summary" blc:price="${totalCore}"></span>
+            </th:block>
+            <th:block th:unless="${!#strings.equals(totalCore?.toString(), '0.00')}">
+                <span class="cos-summary">-</span>
+            </th:block>
+        </div>
+        <div>
+            <span class="summary-title">[[#{checkOrderStatus.promos}]]</span>
+            <span class="cos-summary">
+                -
+                <th:block
+                    th:if="${order?.getTotalAdjustmentsValue() != null and not order?.getTotalAdjustmentsValue().isZero()}"
+                >
+                    <span blc:price="${order?.getTotalAdjustmentsValue()}"></span>
+                </th:block>
+            </span>
+        </div>
+        <div>
+            <span
+                class="summary-title"
+                th:text="#{account.purchaseHistory.orderDetails.batteryFee}"
+            ></span>
+            <th:block
+                th:if="${order?.getTotalBatteryFee() != null and not order?.getTotalBatteryFee().isZero()}"
+            >
+                <span
+                    class="cos-summary battery-fee"
+                    blc:price="${order?.getTotalBatteryFee()}"
+                ></span>
+            </th:block>
+            <th:block
+                th:unless="${order?.getTotalBatteryFee() != null and not order?.getTotalBatteryFee().isZero()}"
+            >
+                <span class="cos-summary">-</span>
+            </th:block>
+        </div>
+        <div th:if="${deliveryTip != null and not deliveryTip.isZero()}">
+            <span class="summary-title">[[#{checkOrderStatus.tip}]]</span>
+            <span class="cos-summary battery-fee" blc:price="${deliveryTip}"></span>
+        </div>
+        <div
+            th:if="${order?.getTotalOilDeposit() != null and not order?.getTotalOilDeposit().isZero()}"
+        >
+            <span
+                class="summary-title"
+                th:text="#{account.purchaseHistory.orderDetails.oilDeposit}"
+            ></span>
+            <span class="cos-summary" blc:price="${order?.getTotalOilDeposit()}"></span>
+        </div>
+        <div th:if="${order?.getTotalOilFee() != null and not order?.getTotalOilFee().isZero()}">
+            <span
+                class="summary-title"
+                th:text="#{account.purchaseHistory.orderDetails.importFee}"
+            ></span>
+            <span class="cos-summary" blc:price="${order?.getTotalOilFee()}"></span>
+        </div>
+        <div th:if="${info.isThirdPartyDelivery}">
+            <span th:text="#{account.purchaseHistory.orderDetails.tip}"></span>
+            <th:block th:if="${deliveryTip != null and not deliveryTip.isZero()}">
+                <span class="order-summary-right" blc:price="${deliveryTip}"></span>
+            </th:block>
+            <th:block th:unless="${deliveryTip != null and not deliveryTip.isZero()}">
+                <span
+                    class="order-summary-right"
+                    th:text="#{account.purchaseHistory.orderDetails.noTip}"
+                ></span>
+            </th:block>
+        </div>
+        <div>
+            <span class="summary-title">[[#{checkOrderStatus.shipping}]]</span>
+            <span class="cos-summary" blc:price="${order?.totalShipping}"></span>
+        </div>
+        <div th:if="${order?.retailDeliveryFee}">
+            <span
+                class="summary-title"
+                th:text="#{account.purchaseHistory.orderDetails.retailDeliveryFee}"
+            ></span>
+            <span class="cos-summary" blc:price="${order?.retailDeliveryFee}"></span>
+        </div>
+        <div th:if="${orderTax != null}">
+            <span class="summary-title">[[#{checkOrderStatus.tax}]]</span>
+            <span class="cos-summary" blc:price="${orderTax}"></span>
+        </div>
+        <div>
+            <th:block th:if="${order?.getTerritoryTax()}">
+                <span
+                    class="summary-title"
+                    th:text="#{account.purchaseHistory.orderDetails.stateTax}"
+                ></span>
+                <span class="cos-summary" blc:price="${order?.getTerritoryTax()}"></span>
+            </th:block>
+        </div>
+        <div>
+            <th:block th:if="${order?.getCountyTax()}">
+                <span
+                    class="summary-title"
+                    th:text="#{account.purchaseHistory.orderDetails.municipalTax}"
+                ></span>
+                <span class="cos-summary" blc:price="${order?.getCountyTax()}"></span>
+            </th:block>
+        </div>
+        <div
+            th:if="${order?.getTotalGiftCardPaymentAmount() != null and not order?.getTotalGiftCardPaymentAmount().isZero()}"
+        >
+            <span class="summary-title">[[#{checkOrderStatus.giftCard}]]</span>
+            <span class="cos-summary">
+                -
+                <span blc:price="${order?.getTotalGiftCardPaymentAmount()}"></span>
+            </span>
+        </div>
+        <div class="orderTotal">
+            <span class="summary-title">[[#{checkOrderStatus.orderTotal}]]</span>
+            <span class="cos-summary" blc:price="${order?.getTotalMinusGiftCards()}"></span>
+        </div>
+    </div>
+</div>

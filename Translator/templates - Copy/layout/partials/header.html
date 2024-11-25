@@ -1,0 +1,432 @@
+<header class="site-header js-site-header" lang="en">
+    <!-- prettier-ignore -->
+    <script th:inline="javascript">
+        window._ost.originalSearchQuery = /*[[${originalQuery}]]*/ null;
+        window._ost.searchUrl = /*[[${#seoUrl.createSearchSeoUrl()}]]*/ '';
+        window._ost.isVehicleSelected = /*[[${customer.selectedGarageItem != null}]]*/ false;
+        window._ost.isGarageEmpty = /*[[${customer.getGarageCount() == 0}]]*/ true;
+        window._ost.garageCount = /*[[${customer.getGarageCount()}]]*/ null;
+        window._ost.ccpaEnabled = /*[[${#oap.getCcpaEnabled()}]]*/ false;
+        window._ost.accountCustomer = /*[[${customer.isAccountUser()}]]*/ false;
+    </script>
+    <!-- prettier-ignore -->
+    <script th:if="${customer.isLoggedIn()} and ${session.isMdmDownOnCreateAccount ne null}" th:inline="javascript">
+        window._ost.mdmDown = /*[[${session.isMdmDownOnCreateAccount}]]*/ false;
+    </script>
+    <!-- prettier-ignore -->
+    <script th:if="${customer.isLoggedIn()} and ${session.editCommPrefsPrompt ne null}" th:inline="javascript">
+        window._ost.editCommPrefs = /*[[${session.editCommPrefsPrompt}]]*/ null;
+    </script>
+    <!-- prettier-ignore -->
+    <script th:if="${customer.isLoggedIn()} and ${session.changeEmailPrompt ne null}" th:inline="javascript">
+        window._ost.customerEmailChange = /*[[${session.changeEmailPrompt}]]*/ null;
+        window._ost.currentEmail = /*[[${customer.emailAddress}]]*/ '';
+    </script>
+    <div class="header-banner-relative js-header-banner-relative">
+        <blc:content-zone name="Global Header Banner Content Zone"></blc:content-zone>
+    </div>
+    <div class="site-header__data">
+        <input
+            type="hidden"
+            id="js-free-shipping-threshold-value"
+            th:value="${#oap.getFreeShippingThreshold()}"
+        />
+        <input type="hidden" id="googleApiKey" th:value="${#oap.getGoogleAPIKey()}" />
+        <!-- garage -->
+        <th:block th:if="${customer.currentEpcGarageVehicle}">
+            <input id="fusionQueryId" type="hidden" th:value="${fusionQueryId}" />
+            <input id="fusionQueryStart" type="hidden" th:value="${fusionQueryStart}" />
+            <input id="userId" type="hidden" th:value="${customer.analyticsUserId}" />
+            <input
+                id="selectedVehicleTypeId"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.vehicleSelectionTypeId}"
+            />
+            <input
+                id="selectedBaseVehicleId"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.baseVehicle.baseVehicleId}"
+            />
+            <input
+                id="selectedYear"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.baseVehicle.yearId}"
+            />
+            <input
+                id="selectedMake"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.baseVehicle.makeName}"
+            />
+            <input
+                id="selectedMakeId"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.baseVehicle.makeId}"
+            />
+            <input
+                id="selectedModel"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.baseVehicle.modelName}"
+            />
+            <input
+                id="selectedModelId"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.baseVehicle.modelId}"
+            />
+            <input
+                id="selectedSubModel"
+                th:if="${customer.currentEpcGarageVehicle.searchVehicle.subModelName}"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.subModelName}"
+            />
+            <input
+                id="selectedSubModelId"
+                th:if="${customer.currentEpcGarageVehicle.searchVehicle.subModelId}"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.subModelId}"
+            />
+            <input
+                id="selectedEngine"
+                th:if="${customer.currentEpcGarageVehicle.searchVehicle.engineName}"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.engineName}"
+            />
+            <input
+                id="selectedEngineId"
+                th:if="${customer.currentEpcGarageVehicle.searchVehicle.engineId}"
+                type="hidden"
+                th:value="${customer.currentEpcGarageVehicle.searchVehicle.engineId}"
+            />
+            <input
+                id="selectedVehicleCxId"
+                th:if="${customer.selectedGarageItem.cxId}"
+                type="hidden"
+                th:value="${customer.selectedGarageItem.cxId}"
+            />
+            <input
+                id="selectedVehicleVehicleId"
+                th:if="${customer.selectedGarageItem.vehicleId}"
+                type="hidden"
+                th:value="${customer.selectedGarageItem.vehicleId}"
+            />
+        </th:block>
+        <!-- selected store -->
+        <th:block th:if="${selectedStore}">
+            <input type="hidden" id="selectedStoreLatitude" th:value="${selectedStore.latitude}" />
+            <input
+                type="hidden"
+                id="selectedStoreLongitude"
+                th:value="${selectedStore.longitude}"
+            />
+            <input type="hidden" id="selectedStoreId" th:value="${selectedStore.id}" />
+            <input
+                type="hidden"
+                id="selectedStoreAddress"
+                th:value="${selectedStore.address.addressLine1}"
+            />
+            <input type="hidden" id="selectedStoreCity" th:value="${selectedStore.address.city}" />
+            <input
+                type="hidden"
+                id="selectedStoreState"
+                th:value="${selectedStore.address.stateProvinceRegion}"
+            />
+            <input
+                type="hidden"
+                id="selectedStorePostalCode"
+                th:value="${selectedStore.address.postalCode}"
+            />
+            <input
+                type="hidden"
+                id="selectedStorePhoneNumber"
+                th:value="${selectedStore.address.phonePrimary.phoneNumber}"
+            />
+            <input
+                type="hidden"
+                id="selectedStoreClosingTime"
+                th:value="${#oap.getStoreClosingTime(selectedStore)}"
+            />
+            <input
+                type="hidden"
+                id="selectedStoreHoursMessage"
+                th:value="${#oap.getStoreHoursMsg(selectedStore)}"
+            />
+            <!-- prettier-ignore -->
+            <script th:inline="javascript">
+                window._ost.selectedStoreId = /*[[${selectedStore.id}]]*/ '';
+                window._ost.selectedStoreAddress = /*[[${selectedStore.address.addressLine1}]]*/ '';
+                window._ost.selectedStoreCity = /*[[${selectedStore.address.city}]]*/ '';
+                window._ost.selectedStoreState = /*[[${selectedStore.address.stateProvinceRegion}]]*/ '';
+                window._ost.selectedStorePhone = /*[[${selectedStore.address.phonePrimary.phoneNumber}]]*/ '';
+                window._ost.selectedStoreLat = /*[[${selectedStore.latitude}]]*/ '';
+                window._ost.selectedStoreLng = /*[[${selectedStore.longitude}]]*/ '';
+                window._ost.selectedStoreClosingTime = /*[[${#oap.getStoreClosingTime(selectedStore)}]]*/ '';
+                window._ost.selectedStoreHoursMsg = /*[[${#oap.getStoreHoursMsg(selectedStore)}]]*/ '';
+                window._ost.isNowBeforeTodayStoreBufferedCutoffTime = /*[[${#oap.isNowBeforeTodayStoreBufferedCutoffTime(selectedStore)}]]*/ '';
+                window._ost.isNowDuringStoreHoursBeforeCutoff = /*[[${#oap.isNowDuringStoreHoursBeforeCutoff(selectedStore)}]]*/ '';
+                window._ost.storeOpeningPickUpTime = /*[[${#oap.getStoreOpeningPickupTime(selectedStore)}]]*/ '';
+            </script>
+        </th:block>
+        <!-- o'rewards -->
+        <th:block th:if="${customer.isLoggedIn()}">
+            <input type="hidden" id="customerFirstName" th:value="${customer.firstName}" />
+            <th:block th:if="${#oap.isOrewardsVerified(customer)}">
+                <input
+                    type="hidden"
+                    id="oRewardsUnavailable"
+                    th:value="${#oap.isOrewardsUnavailable(customer)}"
+                />
+                <input
+                    type="hidden"
+                    id="oRewardsPointsEarned"
+                    th:value="${#oap.getOrewardsPointsEarned(customer)}"
+                />
+                <input
+                    type="hidden"
+                    id="oRewardsPointsToReward"
+                    th:value="${#oap.getOrewardsPointsToReward(customer)}"
+                />
+            </th:block>
+        </th:block>
+    </div>
+    <div data-qa="header" class="site-header__container js-site-header-container orly-header">
+        <div class="header-quick-links o-container">
+            <div class="header-quick-links__left">
+                <p
+                    class="header-quick-links__text"
+                    th:if="${#oap.getFreeShippingThreshold() == '0'}"
+                    th:utext="#{header.freeShippingAndPickupWithoutThreshold}"
+                ></p>
+                <p
+                    class="header-quick-links__text"
+                    th:unless="${#oap.getFreeShippingThreshold() == '0'}"
+                    th:utext="#{header.freeShippingAndPickupWithThreshold(${#oap.getFreeShippingThreshold()})}"
+                ></p>
+            </div>
+            <div class="header-quick-links__right">
+                <a
+                    href="https://findashop.oreillyauto.com/home"
+                    data-qa="desktop-header-repair-shop"
+                    class="header-quick-links__link orly-desktop-header-repair-shop"
+                    target="_blank"
+                    rel="noopener"
+                    th:text="#{header.repairShop}"
+                    th:attr="aria-label=#{aria.header.repairShop}"
+                >
+                    Find a Repair Shop
+                </a>
+                <a
+                    href="/currentad"
+                    data-qa="desktop-header-current-ad"
+                    class="header-quick-links__link orly-desktop-header-current-ad"
+                    th:text="#{header.currentAd}"
+                    th:attr="aria-label=#{aria.header.currentAd}"
+                >
+                    Current Ad
+                </a>
+                <a
+                    href="/shopping-list"
+                    data-qa="desktop-header-shopping-list"
+                    class="header-quick-links__link orly-desktop-header-shopping-list"
+                    th:text="#{header.shoppingList}"
+                    th:attr="aria-label=#{aria.header.shoppingList}"
+                >
+                    Shopping List
+                </a>
+            </div>
+        </div>
+        <div class="header-main js-header-main o-container">
+            <div class="header-banner__mobile js-header-banner-mobile">
+                <blc:content-zone name="Global Header Banner Content Zone"></blc:content-zone>
+            </div>
+            <div class="header-main__wrap">
+                <div class="header-main__left">
+                    <button
+                        data-qa="mobile-menu-button"
+                        class="header-menu-btn js-header-menu-btn orly-mobile-menu-button"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <svg class="header-menu-btn__menu-icon" width="32" height="16">
+                            <title th:text="#{shapes.menu}">Menu</title>
+                            <use href="#shape-menu" />
+                        </svg>
+                        <svg class="header-menu-btn__close-icon" width="32" height="16">
+                            <title th:text="#{shapes.close}">Close</title>
+                            <use href="#shape-remove" />
+                        </svg>
+                    </button>
+                    <a
+                        href="/"
+                        data-qa="header-logo"
+                        class="header-main__home-link orly-header-logo"
+                    >
+                        <svg
+                            class="header-main__logo header-main__logo--lg"
+                            width="275"
+                            height="68"
+                        >
+                            <title th:text="#{shapes.oreilly}"></title>
+                            <use href="#shape-logo-lg" />
+                        </svg>
+                        <svg
+                            class="header-main__logo header-main__logo--md"
+                            width="150"
+                            height="68"
+                        >
+                            <title th:text="#{shapes.oreilly}"></title>
+                            <use href="#shape-logo-md" />
+                        </svg>
+                        <svg
+                            class="header-main__logo header-main__logo--sm"
+                            width="110"
+                            height="50"
+                        >
+                            <title th:text="#{shapes.oreilly}"></title>
+                            <use href="#shape-logo-md" />
+                        </svg>
+                    </a>
+                    <div class="header-main__search">
+                        <div
+                            id="search-loading"
+                            class="search-loading"
+                            th:include="utility/loading-animation"
+                        ></div>
+                        <header-search></header-search>
+                    </div>
+                </div>
+                <div class="header-main__right">
+                    <div
+                        id="account-header-loading"
+                        class="account-header-loading"
+                        th:include="utility/loading-animation"
+                    ></div>
+                    <header-account></header-account>
+                    <div class="header-cart">
+                        <a
+                            href="/cart"
+                            th:classappend="${#Cart.getItemCount() > 0} ? has-items : ''"
+                            data-qa="header-cart-button"
+                            class="header-cart__link js-mc_header-cart-btn orly-header-cart-button"
+                        >
+                            <svg
+                                class="site-nav-btn__icon header-cart__cart-icon"
+                                width="21"
+                                height="14"
+                            >
+                                <title th:text="#{shapes.cart}"></title>
+                                <use href="#shape-cart" />
+                            </svg>
+                            <strong>
+                                <span class="header-cart__text" th:text="#{header.cart}">Cart</span>
+                                <span
+                                    th:if="${#Cart.getItemCount() ge 0 and #Cart.getItemCount() lt 100}"
+                                    class="header-cart__qty mc_header-qty js-header-cart-qty"
+                                    th:text="${#Cart.getItemCount()}"
+                                ></span>
+                                <span
+                                    th:unless="${#Cart.getItemCount() ge 0 and #Cart.getItemCount() lt 100}"
+                                    class="header-cart__qty mc_header-qty js-header-cart-qty"
+                                >
+                                    99+
+                                </span>
+                            </strong>
+                            <div
+                                th:style="${#Cart.getItemCount() eq 0} ? 'display: none;' : ''"
+                                class="header-cart__badge nav-badge js-header-cart-badge"
+                            >
+                                <span class="js-header-cart-badge-number header-cart__badge-number">
+                                    <strong
+                                        th:if="${#Cart.getItemCount() ge 0 and #Cart.getItemCount() lt 100}"
+                                        th:text="${#Cart.getItemCount()}"
+                                    ></strong>
+                                    <strong
+                                        th:unless="${#Cart.getItemCount() ge 0 and #Cart.getItemCount() lt 100}"
+                                    >
+                                        99+
+                                    </strong>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="header-close-search">
+                        <button
+                            data-qa="header-close-search-btn"
+                            class="header-close-search__btn js-header-close-search-btn orly-header-close-search-btn"
+                        >
+                            <span class="header-close-search__btn-text">Close</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-nav js-site-nav">
+            <div class="site-nav__overlay js-site-nav-overlay"></div>
+            <div class="site-nav__container js-site-nav-container o-container">
+                <div id="nav-loading" class="nav-loading">
+                    <div class="nav-loading__wrap">
+                        <div
+                            class="nav-loading__loader"
+                            th:include="utility/loading-animation"
+                        ></div>
+                        <div
+                            class="nav-loading__loader"
+                            th:include="utility/loading-animation"
+                        ></div>
+                        <div
+                            class="nav-loading__loader"
+                            th:include="utility/loading-animation"
+                        ></div>
+                        <div
+                            class="nav-loading__loader"
+                            th:include="utility/loading-animation"
+                        ></div>
+                        <div
+                            class="nav-loading__loader no-show-tablet"
+                            th:include="utility/loading-animation"
+                        ></div>
+                    </div>
+                    <div class="menu-items-loading__wrap">
+                        <div class="menu-items-loading__container">
+                            <div
+                                class="menu-items-loading__img"
+                                th:include="utility/loading-animation"
+                            ></div>
+                            <div class="menu-items-loading__text-wrap">
+                                <div
+                                    class="menu-items-loading__loader short"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                                <div
+                                    class="menu-items-loading__loader"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                            </div>
+                        </div>
+                        <div class="menu-items-loading__container">
+                            <div
+                                class="menu-items-loading__img"
+                                th:include="utility/loading-animation"
+                            ></div>
+                            <div class="menu-items-loading__text-wrap">
+                                <div
+                                    class="menu-items-loading__loader short"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                                <div
+                                    class="menu-items-loading__loader"
+                                    th:include="utility/loading-animation"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <header-menu></header-menu>
+            </div>
+        </div>
+    </div>
+</header>
+<header-mobile-buttons></header-mobile-buttons>
+<div
+    id="header-mobile-buttons"
+    class="header-mobile-buttons-skeleton-loader js-header-mobile-buttons-skeleton"
+    th:include="utility/loading-animation"
+></div>

@@ -1,0 +1,225 @@
+<th:block
+    th:with="
+        lcin=${listItem.epcProduct.lineCodeItemNumber},
+        lineCode=*{epcProduct.lineCodeItemNumber.lineCode},
+        itemNumber=*{epcProduct.lineCodeItemNumber.itemNumber},
+        concatLcin=${lineCode + '-' + itemNumber},
+        itemMaster=${itemMasterMap.get(lcin)},
+        productName=${productNameMap.get(listItem.epcProduct)}
+    "
+>
+    <!-- prettier-ignore -->
+    <script th:inline="javascript" th:with="broadleafProductId=*{broadleafProduct.id}">
+        // data for product-pricing and product-add-to-cart components
+        var broadleafProductId = /*[[${broadleafProductId}]]*/ '';
+        window[`_${broadleafProductId}_name`] = /*[[*{broadleafProduct.name}]]*/ '';
+        window[`_${broadleafProductId}_lineCodeItemNumber`] = /*[[${lcin}]]*/ {};
+        window[`_${broadleafProductId}_pricing`] = /*[[${pricingMap.get(lcin)}]]*/ {};
+        window[`_${broadleafProductId}_availPickup`] = /*[[${availPickupMap.get(broadleafProductId).getAvailPickup()}]]*/ false;
+        window[`_${broadleafProductId}_availShip`] = /*[[${availShipMap.get(broadleafProductId)}]]*/ false;
+        window[`_${broadleafProductId}_flightRestricted`] = /*[[${itemMaster?.flightRestricted}]]*/ false;
+        window[`_${broadleafProductId}_blockShipToHome`] = /*[[${itemMaster?.blockShipToHome}]]*/ false;
+        window[`_${broadleafProductId}_blockStorePickup`] = /*[[${itemMaster?.blockStorePickup}]]*/ false;
+        window[`_${broadleafProductId}_twoDayAvailability`] = /*[[${twoDayAvailabilityMap.get(broadleafProductId)}]]*/ false;
+        window[`_${broadleafProductId}_threeDayAvailability`] = /*[[${threeDayAvailabilityMap.get(broadleafProductId)}]]*/ false;
+        window[`_${broadleafProductId}_storeRestricted`] = /*[[${storeRestrictionsMap.get(broadleafProductId)}]]*/ false;
+        window[`_${broadleafProductId}_inStoreNow`] = /*[[${availPickupMap?.get(broadleafProductId)?.getInStoreNow()}]]*/ false;
+        window[`_${broadleafProductId}_pickupTime`] = /*[[${availPickupMap?.get(broadleafProductId)?.getPickupTime()}]]*/ '';
+        window[`_${broadleafProductId}_specialOrder`] = /*[[${specialOrderMap.get(broadleafProductId)}]]*/ false;
+        window[`_${broadleafProductId}_refrigerantMessage`] = /*[[${refrigerantMessageMap.get(lcin)}]]*/ '';
+        window[`_${broadleafProductId}_qualifiedForFreeShipping`] = /*[[${#Product.isQualifiedForFreeShippingMinusPrice(listItem.epcProduct, itemMaster)}]]*/ false;
+        window[`_${broadleafProductId}_itemInCart`] = /*[[${cart.containsSku(listItem.broadleafProduct.defaultSku)}]]*/ false;
+    </script>
+    <div
+        th:if="${not #maps.isEmpty(interchangeManufacturerReplacementMap)}"
+        th:with="manufacturerList=${interchangeManufacturerReplacementMap.get(listItem.epcProduct.lineCodeItemNumber)}"
+        class="manufacturer-replacement"
+    >
+        <span th:text="#{product.brand.replaces}">Replaces:&nbsp;</span>
+        <!-- prettier-ignore -->
+        <th:block th:each="manufacturer, iterStat : ${manufacturerList}">
+
+            <a th:href="@{${manufacturer.url}}">
+                <span th:text="${manufacturer.name}"></span>
+            </a>
+            <th:block th:if="${!iterStat.last}">,</th:block>
+        </th:block>
+    </div>
+    <div class="btn-product-compare-container" th:if="${result.totalResults > 1}">
+        <input
+            class="btn-product-compare_checkbox"
+            th:value="${concatLcin}"
+            type="checkbox"
+            th:name="${'compare' + concatLcin}"
+            th:id="${'compare' + concatLcin}"
+        />
+        <label
+            class="btn-product-compare_text"
+            th:text="#{product.listItem.compare}"
+            th:for="${'compare' + concatLcin}"
+            th:attr="aria-label=#{aria.product.listItem.compare(${concatLcin})}"
+        >
+            Compare
+        </label>
+    </div>
+    <a
+        th:if="*{broadleafProduct.url}"
+        class="js-product-link product__link"
+        th:href="${productUrlMap.get(listItem.broadleafProduct)}"
+        th:attr="data-id=*{broadleafProduct.id}"
+        th:with="productImage=${primaryImagesMap.get(lcin)}"
+    >
+        <div class="product__image-wrap">
+            <img
+                class="product__image"
+                onerror="if (this.src != '/img/image-coming-soon.png') this.src = '/img/image-coming-soon.png';"
+                th:src="@{${productImage ne null ? productImage['imgUrl'] : '/img/image-coming-soon.png'}}"
+                alt=""
+                th:attr="loading=${index > 2 ? 'lazy' : 'eager'}"
+            />
+            <orewards-points-image-badge></orewards-points-image-badge>
+            <span
+                th:if="${productImage ne null and productImage['isRepImg']}"
+                class="product__representative-image-text"
+            >
+                Representative Image
+            </span>
+        </div>
+        <h2
+            class="js-product-name js-ga-product-name product__name"
+            th:attr="data-line=${lineCode},data-item=${itemNumber}"
+            th:text="${productName} + ' - ' + ${itemNumber}"
+        ></h2>
+    </a>
+    <div class="product__info js-product-info">
+        <dl class="part-info">
+            <dt class="part-info__label" th:text="#{product.listItem.part}">Part #:</dt>
+            <dd class="part-info__code js-ga-product-line-number" th:text="${itemNumber}"></dd>
+            <dt class="part-info__label" th:text="#{product.listItem.line}">Line:</dt>
+            <dd class="part-info__code js-ga-product-line-code" th:text="${lineCode}"></dd>
+        </dl>
+        <span
+            class="product__category js-ga-product-category"
+            style="display: none"
+            th:inline="text"
+            th:text="${productName}"
+        ></span>
+        <div
+            class="js-plp-ratings-block product__ratings"
+            th:attr="data-ratings=*{epcProduct.brandCodePartNumber.brandCode + '-' + epcProduct.brandCodePartNumber.partNumber}"
+        >
+            <th:block th:if="${#oap.getRatingsAndReviewsDisplay()}">
+                <div
+                    data-bv-show="inline_rating"
+                    data-bv-seo="false"
+                    th:attr="data-bv-product-id=*{epcProduct.brandCodePartNumber.brandCode + '-' + epcProduct.brandCodePartNumber.partNumber},data-bv-redirect-url=${productUrlMap.get(listItem.broadleafProduct)+'#rr'}"
+                    th:id="'inline-rating-' + *{epcProduct.brandCodePartNumber.brandCode + '-' + epcProduct.brandCodePartNumber.partNumber}"
+                    class="inline-rating"
+                >
+                    <div class="pre-stars" th:include="utility/loading-animation"></div>
+                </div>
+            </th:block>
+        </div>
+        <checkfit-banner></checkfit-banner>
+        <div
+            class="product-pricing-skeleton"
+            th:id="${'product-pricing-skeleton_' + concatLcin}"
+            th:include="utility/loading-animation"
+        ></div>
+        <product-pricing
+            th:attr="data-unit-of-measure=${itemMaster?.unitOfMeasure}"
+        ></product-pricing>
+        <div
+            class="plp-product-add-to-cart-skeleton"
+            th:id="${'product-add-to-cart-skeleton_' + concatLcin}"
+        >
+            <div
+                class="plp-product-add-to-cart-skeleton__availability"
+                th:include="utility/loading-animation"
+            ></div>
+            <div
+                class="plp-product-add-to-cart-skeleton__add-to-cart-button"
+                th:include="utility/loading-animation"
+            ></div>
+            <div
+                class="plp-product-add-to-cart-skeleton__shopping-list"
+                th:include="utility/loading-animation"
+            ></div>
+        </div>
+        <product-add-to-cart></product-add-to-cart>
+        <th:block
+            th:if="${fitDescriptionMap}"
+            th:with="fitDescriptions=${fitDescriptionMap.get(lcin)}"
+        >
+            <th:block th:unless="${#sets.isEmpty(fitDescriptions)}">
+                <div class="applications">
+                    <th:block th:if="${#sets.size(fitDescriptions) gt 1}">
+                        <div th:if="${#sets.size(fitDescriptions) gt 1}" class="heading">
+                            <h5 style="font-size: 16px;">Multiple Applications</h5>
+                        </div>
+                        <div class="fit-descriptions app-link">
+                            <a
+                                class="js-view-all-applications"
+                                th:href="${productUrlMap.get(listItem.broadleafProduct)}"
+                                data-location="show_applications"
+                            >
+                                View All Applications
+                            </a>
+                        </div>
+                    </th:block>
+                    <th:block th:unless="${#sets.size(fitDescriptions) gt 1}">
+                        <div class="fit-descriptions" style="margin-top: 10px;">
+                            <div th:each="fitDescription : ${fitDescriptions}">
+                                <div th:object="${#oap.getFitApplicationTuple(fitDescription)}">
+                                    <strong th:inline="text">[[*{getFirst()}]]</strong>
+                                    &nbsp;
+                                    <span th:text="*{getSecond()}"></span>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </th:block>
+        </th:block>
+        <div class="attributes">
+            <div
+                th:if="${itemMaster != null and (itemMaster.warranty != null or itemMaster.warrantyRestricted)}"
+                class="product-attributes__warranty"
+            >
+                <a
+                    th:text="${itemMaster.warrantyRestricted} ? #{product.details.warranty.restrictionText} : ${itemMaster.warranty.shortDescription}"
+                    href="/warranty"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                ></a>
+            </div>
+            <th:block
+                th:if="${not #lists.isEmpty(listItem.epcProduct.attributes)}"
+                th:with="attributeTotal=${#lists.size(listItem.epcProduct.attributes)}"
+            >
+                <div th:each="attr, iterStat : ${listItem.epcProduct.attributes}" th:inline="text">
+                    <div
+                        class="attribute_wrap"
+                        th:classappend="${iterStat.count gt 3} ? 'attr-hide hidden'  : ''"
+                    >
+                        <span>[[${attr.attributeKey.description}]]:</span>
+                        &nbsp;
+                        <span><strong>[[${attr.attributeValue.description}]]</strong></span>
+                    </div>
+                </div>
+                <th:block th:if="${attributeTotal gt 3}">
+                    <button
+                        class="toggle-expand attribute-show-links show-more"
+                        th:attr="aria-label=|'Show attributes for ' ${lineCode} ${itemNumber}|, aria-expanded=false"
+                    >
+                        <span>Show More</span>
+                        <svg aria-hidden="true" width="9" height="6">
+                            <use href="#shape-up-arrow"></use>
+                        </svg>
+                    </button>
+                </th:block>
+            </th:block>
+        </div>
+    </div>
+</th:block>

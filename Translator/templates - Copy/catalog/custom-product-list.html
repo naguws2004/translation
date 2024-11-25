@@ -1,0 +1,25 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <th:block
+            th:include="layout/partials/bazaarvoice"
+            th:with="parent='custom-product-list'"
+        ></th:block>
+    </head>
+    <th:block layout:fragment="content">
+        <div class="site-breadcrumb js-site-breadcrumb">
+            <div class="site-breadcrumb_wrapper js-site-breadcrumb_wrapper">
+                <div th:if="${breadcrumbs}" style="display: block"></div>
+                <div
+                    class="site-breadcrumb_slider js-site-breadcrumb_slider"
+                    th:include="catalog/partials/breadcrumbs"
+                ></div>
+            </div>
+        </div>
+        <th:block th:include="catalog/partials/product-list" />
+        <div th:if="*{#lists.isEmpty(products)}">
+            <div class="content-wrap">
+                <th:block th:include="catalog/partials/empty-product-list" />
+            </div>
+        </div>
+    </th:block>
+</th:block>

@@ -1,0 +1,44 @@
+<div th:inline="text" th:attr="data-address-id=${id}">
+    <th:block th:if="*{fullName}">
+        <strong><span class="full-name">[[*{fullName}]]</span></strong>
+        <br />
+    </th:block>
+    <th:block th:if="*{fullName == null} and *{firstName} and *{lastName}">
+        <strong><span class="first-last-name">[[*{firstName}]] [[*{lastName}]]</span></strong>
+        <br />
+    </th:block>
+    <th:block th:if="*{companyName}">
+        <strong><span>[[*{companyName}]]</span></strong>
+        <br />
+    </th:block>
+    <span class="js-addr1">[[*{addressLine1}]]</span>
+    <br />
+    <span class="js-addr2" th:if="*{addressLine2} and *{addressLine2 != ''}">
+        [[*{addressLine2}]]
+        <br />
+    </span>
+    <!-- prettier-ignore -->
+    <span>
+        [[*{city}]],&nbsp;[[*{stateProvinceRegion}]]&nbsp;[[*{postalCode}]]<th:block th:if="*{zipFour} and *{zipFour != ''}">-[[*{zipFour}]]</th:block>
+    </span>
+    <div class="remove-address-modal">
+        Are you sure you want to remove this address?
+        <div class="remove-address-controls">
+            <a
+                href="#"
+                class="button button-small button--align-l js-remove-address-confirm"
+                th:text="#{account.profile.yesRemoveAddress}"
+            >
+                Yes, Remove
+            </a>
+            |
+            <a
+                href="#"
+                class="button button-small js-cancel-address-remove"
+                th:utext="#{account.profile.cancel}"
+            >
+                Cancel
+            </a>
+        </div>
+    </div>
+</div>

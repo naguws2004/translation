@@ -1,0 +1,6 @@
+<li th:fragment="ajax" th:each="facetValues : *{facetValues}" th:if="${not facetValues.active}"
+    th:classappend="${facetValuesStat.index gt 7 ? 'hidden' : ''}">
+    <a blc:togglefacetlink="${facetValues}" th:include="/catalog/partials/filters/facet-value-display"
+        th:object="${facetValues}" th:with="name=*{facetValue}"
+        th:attr="aria-label=${#oap.getFacetName(name)} + 'filter'"></a>
+</li>

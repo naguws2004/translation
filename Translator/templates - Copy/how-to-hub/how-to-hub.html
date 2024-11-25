@@ -1,0 +1,23 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <title th:text="#{howToHub.title}"></title>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="hth-breadcrumbs__skeleton-loader" th:include="utility/loading-animation"></div>
+        <how-to-hub-page-list-breadcrumbs></how-to-hub-page-list-breadcrumbs>
+        <div class="container how-to-hub">
+            <div class="how-to-hub__banner">
+                <blc:content-zone name="How To Hub Banner - Top" deepLinks="deepLinks" />
+                <blc:content-zone name="How To Hub Banner - Bottom" deepLinks="deepLinks" />
+            </div>
+            <div class="how-to-hub--header-wrap">
+                <div id="default-how-to-hub-category-header-js">
+                    <blc:content-zone name="How To Hub Header" deepLinks="deepLinks" />
+                </div>
+                <how-to-hub-header></how-to-hub-header>
+            </div>
+            <div class="how-to-hub-skeleton-loader" th:include="utility/loading-animation"></div>
+            <how-to-hub></how-to-hub>
+        </div>
+    </fragment>
+</th:block>

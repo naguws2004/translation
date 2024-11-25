@@ -1,0 +1,329 @@
+<th:block layout:decorator="layout/full-page-layout">
+    <head>
+        <title th:text="#{signIn.signInCreateAccount}"></title>
+        <!--/* Referrer limited on reset password page to avoid leaking - see OBLC-6176 */-->
+        <meta th:if="${resetPasswordModal}" name="referrer" content="origin" />
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <blc:content-zone name="Sign In Banner Content Zone" />
+        <div class="row signin">
+            <!--/* Do not remove this div; used for account-dashboard ajax check */-->
+            <div class="not-signed-in"></div>
+            <section class="col-sm-6 auth-wrap auth-wrap--sep">
+                <h1 class="section-title signin__header" th:text="#{signIn.signIn}">Sign In</h1>
+                <div class="section-body">
+                    <blc:form
+                        id="loginForm"
+                        th:action="@{/login_post.htm}"
+                        method="post"
+                        class="login-form js-login-form"
+                    >
+                        <input
+                            type="hidden"
+                            name="successUrl"
+                            th:if="${successUrl}"
+                            th:value="${successUrl}"
+                        />
+                        <div class="form-group">
+                            <label for="signInEmailAddress">
+                                <span th:text="#{signIn.emailAddress}">Email Address</span>
+                            </label>
+                            <div th:class="${param.error} ? 'fieldError' : ''">
+                                <th:block th:unless="${accountLocked}">
+                                    <span
+                                        class="has-error form-label"
+                                        th:if="${(param.error != null) and (param.error[0] == 'true')}"
+                                        role="alert"
+                                    >
+                                        <p>
+                                            <span
+                                                class="has-error form-label"
+                                                th:text="#{signIn.noMatchInvalid}"
+                                            >
+                                                Email/Password combination is invalid. If you
+                                                recently updated your email address in a store or
+                                                with Customer Service, please try again using your
+                                                previous email address.
+                                            </span>
+                                        </p>
+                                    </span>
+                                    <span
+                                        class="has-error form-label"
+                                        th:if="${(param.error != null) and (param.error[0] == 'ecee')}"
+                                        role="alert"
+                                    >
+                                        <p>
+                                            <span
+                                                class="has-error form-label"
+                                                th:text="#{signIn.eceeError}"
+                                            >
+                                                An error has occurred. Please try again later.
+                                            </span>
+                                        </p>
+                                    </span>
+                                </th:block>
+                                <input
+                                    type="email"
+                                    id="signInEmailAddress"
+                                    name="j_username"
+                                    class="form-control js-signin-email-address orly-signin-signin-email-input"
+                                    th:attr="placeholder=#{signIn.enterEmail}"
+                                    aria-required="true"
+                                    th:value="${previouslyLoggedInEmailAddress ?: ''}"
+                                    aria-labelledby="signInEmailAddress"
+                                    autocomplete="off"
+                                />
+                                <th:block th:if="${accountLocked}">
+                                    <div class="has-error form-label" role="alert">
+                                        <span
+                                            class="has-error form-label"
+                                            th:text="#{account.locked.errorMessage.part1}"
+                                        >
+                                            Your account is temporarily locked after too many
+                                            attempts to log in. Please
+                                        </span>
+                                        <a
+                                            class="has-error has-error-link"
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                            th:href="@{/contact-us}"
+                                        >
+                                            contact
+                                        </a>
+                                        <span th:utext="#{account.locked.errorMessage.part3}">
+                                            contact customer service at 1-888-327-7153 for
+                                            assistance.
+                                        </span>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signInPassword">
+                                <span th:text="#{signIn.password}">Password</span>
+                            </label>
+                            <div th:class="${param.error} ? 'fieldError' : ''">
+                                <input
+                                    type="password"
+                                    id="signInPassword"
+                                    name="j_password"
+                                    class="form-control js-signin-email-password orly-signin-signin-password-input"
+                                    th:attr="placeholder=#{signIn.password}"
+                                    autocomplete="off"
+                                    aria-required="true"
+                                    aria-labelledby="signInPassword"
+                                />
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" th:text="#{signIn.rememberMe}"></input>
+                            </label>
+                            <span>
+                                <a
+                                    class="forgot-pw-link account js-forgot-pw-link"
+                                    href="javascript:;"
+                                >
+                                    <span th:text="#{signIn.forgotPasswordPrompt}"></span>
+                                </a>
+                            </span>
+                        </div>
+                        <button
+                            type="submit"
+                            class="btn-green-lg btn--lg col-xs-12 login-btn js-login-btn orly-signin-signin-button"
+                            th:text="#{signIn.signIn}"
+                        ></button>
+                        <div class="clearfix"></div>
+                    </blc:form>
+                    <div class="login-help">
+                        <div class="forgot-pw">
+                            <svg class="btn-icon close" width="14" height="14">
+                                <title th:text="#{shapes.remove}"></title>
+                                <use href="#shape-remove" />
+                            </svg>
+                            <div class="forgot-pw-wrap">
+                                <blc:form
+                                    id="forgotPasswordForm"
+                                    th:action="@{/signin/forgotPassword}"
+                                    method="post"
+                                    class="clearfix js-forgot-pw"
+                                >
+                                    <h3 th:text="#{signIn.resetPassword}"></h3>
+                                    <span th:text="#{signIn.forgotPw.enterEmail}"></span>
+                                    <div class="form-group">
+                                        <label for="emailAddress"></label>
+                                        <input
+                                            type="email"
+                                            name="emailAddress"
+                                            th:attr="placeholder=#{signIn.emailAddress}"
+                                            class="form-control js-reset-email"
+                                            aria-required="true"
+                                            autocorrect="off"
+                                            autocapitalize="off"
+                                            autocomplete="email"
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        class="btn-green-lg btn--lg js-reset_password_btn pull-right"
+                                        th:text="#{signIn.reset}"
+                                    ></button>
+                                    <div class="clearfix"></div>
+                                </blc:form>
+                                <div class="forgot-pw-success js-forgot-pw-success">
+                                    <h3 class="text-upper">Check Your Email</h3>
+                                    <p>
+                                        We've emailed a link to you to let you update your password.
+                                        If you don't see the email, be sure to check your spam and
+                                        junk mail folders.
+                                    </p>
+                                    <button
+                                        type="submit"
+                                        class="btn-green-lg btn--lg js-reset_ok_btn pull-right col-sm-4"
+                                    >
+                                        Ok
+                                    </button>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <blc:form
+                            id="createPasswordForm"
+                            th:action="@{/create-account/createPasswordRequest}"
+                            method="post"
+                            role="create-pw"
+                            class="clearfix js-create-pw"
+                        >
+                            <section class="create-pw">
+                                <h3 th:text="#{signIn.createPassword}">Create Password</h3>
+                                <span class="close btn-clear-lg">
+                                    <svg class="btn-icon">
+                                        <title th:text="#{shapes.remove}"></title>
+                                        <use href="#shape-remove" />
+                                    </svg>
+                                </span>
+                                <div class="form-group">
+                                    <label for="emailAddress" th:text="#{signIn.emailAddress}">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="emailAddress"
+                                        th:attr="placeholder=#{signIn.example}"
+                                        class="form-control"
+                                        aria-required="true"
+                                        autocorrect="off"
+                                        autocapitalize="off"
+                                        autocomplete="email"
+                                    />
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="reset_password_button btn-action btn--lg"
+                                    th:text="#{signIn.sendEmail}"
+                                >
+                                    Send Email
+                                </button>
+                            </section>
+                        </blc:form>
+                    </div>
+                    <th:block th:if="${resetPasswordModal}">
+                        <div class="overlay js-overlay overlay--visible"></div>
+                        <div class="reset-pw-modal js-reset-pw-modal">
+                            <div class="reset-pw-modal__wrap">
+                                <h2 class="reset-pw-modal__heading">Reset Password</h2>
+                                <blc:form
+                                    id="resetPasswordForm"
+                                    th:object="${resetPasswordForm}"
+                                    th:action="@{/signin/resetPassword}"
+                                    method="post"
+                                    class="reset-pw-modal__form js-reset-pw-form clearfix"
+                                >
+                                    <input type="hidden" th:field="*{token}" />
+                                    <input type="hidden" th:field="*{username}" />
+                                    <div class="form-group pw__wrap">
+                                        <label for="password" th:text="#{forgotPassword.password}">
+                                            Password
+                                        </label>
+                                        <span
+                                            class="error"
+                                            th:if="${#fields.hasErrors('password')}"
+                                            th:errors="*{password}"
+                                            role="alert"
+                                        ></span>
+                                        <input
+                                            type="password"
+                                            th:field="*{password}"
+                                            class="form-control js-reset-pw-input"
+                                            th:classappend="${#fields.hasErrors('password')}? 'fieldError' : ''"
+                                            autocomplete="off"
+                                            maxlength="20"
+                                        />
+                                        <div id="reset-password-requirements"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label
+                                            for="passwordConfirm"
+                                            th:text="#{resetPassword.confirmPassword}"
+                                        >
+                                            Confirm Password
+                                        </label>
+                                        <span
+                                            class="error"
+                                            th:if="${#fields.hasErrors('passwordConfirm')}"
+                                            th:errors="*{passwordConfirm}"
+                                            role="alert"
+                                        ></span>
+                                        <input
+                                            type="password"
+                                            th:field="*{passwordConfirm}"
+                                            th:classappend="${#fields.hasErrors('passwordConfirm')}? ' fieldError' : ''"
+                                            class="form-control"
+                                            autocomplete="off"
+                                            maxlength="20"
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        class="button button--green reset-pw-modal__button"
+                                        th:text="#{forgotPassword.resetPassword}"
+                                    >
+                                        Reset Password
+                                    </button>
+                                </blc:form>
+                                <span class="reset-pw-modal__close js-reset-pw-modal__close">
+                                    <svg>
+                                        <use href="#shape-remove" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </section>
+            <section class="col-sm-6 auth-wrap">
+                <h2 class="section-title signin__header" th:text="#{createAccount.createAccount}">
+                    Create An Account
+                </h2>
+                <h3 class="h4">
+                    Create an OReillyAuto.com account to take advantage of these benefits and more:
+                </h3>
+                <div class="section-body">
+                    <th:block th:include="authentication/partials/create-account-card" />
+                    <a
+                        href="/create-account"
+                        class="button button--white button--large button--green-text"
+                    >
+                        Create an Account
+                    </a>
+                    <div class="clearfix"></div>
+                    <p class="create-account_text">
+                        I want to
+                        <a href="/check-order-status">check an order</a>
+                        , but don't have an account.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </fragment>
+</th:block>

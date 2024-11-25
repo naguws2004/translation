@@ -1,0 +1,67 @@
+<th:block layout:decorator="layout/full-page-layout" layout:fragment="content">
+    <head>
+        <title th:text="#{checkout.complete.title}"></title>
+        <th:block
+            th:include="layout/partials/bazaarvoice"
+            th:with="parent='checkout-complete'"
+        ></th:block>
+    </head>
+    <div class="checkout-complete" layout:fragment="content">
+        <div class="order-complete-wrap">
+            <checkout-complete></checkout-complete>
+        </div>
+        <th:block th:unless="${order.GAEventSent}">
+            <div id="analytics" style="display: none" th:with="order=${order}" th:inline="text">
+                <th:block th:with="offers=${order.getAddedOfferCodes()}">
+                    <div id="order" class="order">
+                        <p class="orderAttribute id">[[${order.id}]]</p>
+                        <p class="orderAttribute number">[[${order.orderNumber}]]</p>
+                        <p class="orderAttribute affiliation">[[${affiliationCode}]]</p>
+                        <p class="orderAttribute revenue">[[${order.getTotal()}]]</p>
+                        <p class="orderAttribute tax">[[${order.getTotalTax()}]]</p>
+                        <p class="orderAttribute shipping">[[${order.getTotalShipping()}]]</p>
+                        <p th:each="offer : ${offers}" class="orderAttribute coupon">
+                            [[${offer.offer.name}]]
+                        </p>
+                    </div>
+                </th:block>
+                <th:block th:with="items=${order.orderItems}">
+                    <div id="orderItems" class="orderItems">
+                        <th:block
+                            th:each="item : ${items}"
+                            th:with="fulfillmentType=${item.orderItemAttributes.get('FULFILLMENT_TYPE')}"
+                            th:inline="text"
+                        >
+                            <th:block th:if="${fulfillmentType.value != 'GIFT_CARD'}">
+                                <div class="orderItem">
+                                    <p class="orderItemAttribute name">[[${item.name}]]</p>
+                                    <p class="orderItemAttribute id">
+                                        [[${item.product.lineCode}]] [[${item.product.itemNumber}]]
+                                    </p>
+                                    <p class="orderItemAttribute price">[[${item.price}]]</p>
+                                    <p class="orderItemAttribute brand">
+                                        [[${item.product.lineCode}]]
+                                    </p>
+                                    <p class="orderItemAttribute category">
+                                        [[${item.category.description}]]
+                                    </p>
+                                    <p class="orderItemAttribute quantity">[[${item.quantity}]]</p>
+                                </div>
+                            </th:block>
+                            <th:block th:unless="${fulfillmentType.value != 'GIFT_CARD'}">
+                                <div class="orderItem">
+                                    <p class="orderItemAttribute name">[[${item.name}]]</p>
+                                    <p class="orderItemAttribute id">N/A</p>
+                                    <p class="orderItemAttribute price">[[${item.price}]]</p>
+                                    <p class="orderItemAttribute brand">N/A</p>
+                                    <p class="orderItemAttribute category">N/A</p>
+                                    <p class="orderItemAttribute quantity">[[${item.quantity}]]</p>
+                                </div>
+                            </th:block>
+                        </th:block>
+                    </div>
+                </th:block>
+            </div>
+        </th:block>
+    </div>
+</th:block>

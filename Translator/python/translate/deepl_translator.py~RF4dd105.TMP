@@ -1,0 +1,22 @@
+﻿import deepl
+from pathlib import Path
+
+class PropertiesTranslator:
+    def __init__(self, auth_key):
+        self.translator = deepl.Translator(auth_key)
+
+    def translate_properties_file(self, source_file, source_lang="en", target_lang="es"):
+        output_file = f"{source_file}_{target_lang}"
+        with open(source_file, 'r') as f, open(output_file, 'w') as out_f:
+            for line in f:
+                parts = line.strip().split('=')
+                if len(parts) == 2:
+                    translated_value = self.translate(parts[1], source_lang, target_lang)
+                    out_f.write(f"{parts[0]}={translated_value}\n")
+                else:
+                    out_f.write(line)
+
+    def translate(self, text, source_lang, target_lang):
+        result = self.translator.translate_text(text, source_lang=source_lang, target_lang=target_lang)
+        return result.text
+

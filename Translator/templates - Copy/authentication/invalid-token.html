@@ -1,0 +1,28 @@
+<div id="account" layout:decorator="layout/full-page-layout">
+    <head>
+        <title th:text="#{invalidToken.registrationError}">Registration Error</title>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div class="site-content o-container">
+            <div class="row">
+                <div class="main-primary">
+                    <div class="content-wrap invalid-token">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <h1 th:text="#{invalidToken.registrationError}">Registration Error</h1>
+                            <hr/>
+                            <p th:text="#{invalidToken.expiredLink}">
+                                The requested link has expired.
+                            </p>
+                            <p th:text="#{invalidToken.clickBelow}">
+                                In order to create an account, please click "Create New Account" and complete the registration form.
+                            </p>
+                            <div class="create-account-btn_wrap col-md-offset-5 col-md-2">
+                                <a th:href="@{/create-account}" th:text="#{invalidToken.createAccount}">Create New Account</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fragment>
+</div>

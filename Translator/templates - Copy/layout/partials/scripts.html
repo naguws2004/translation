@@ -1,0 +1,19 @@
+<% if (!process.env.DEV_SERVER) { %>
+<fragment th:fragment="styles" th:remove="tag">
+    <% for (var i = 0; i < htmlWebpackPlugin.files.css.length; i++) { %>
+        <link href="<%= htmlWebpackPlugin.files.css[i] %>" rel="stylesheet" />
+    <% } %>
+</fragment>
+<% } %>
+
+<fragment th:fragment="scripts" th:remove="tag">
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
+</fragment>
+
+<fragment th:fragment="preload-scripts" th:remove="tag">
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <link href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" rel="preload" as="script" />
+    <% } %>
+</fragment>

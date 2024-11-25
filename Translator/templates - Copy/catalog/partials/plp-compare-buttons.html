@@ -1,0 +1,15 @@
+<th:block th:fragment="ajax" th:remove="tag">
+    <li class="button button--white button--small button--compare-product  js-remove-compare-thumbnail"
+        th:each="product : ${epcProducts}"
+        th:attr="data-line=${product.lineCodeItemNumber.lineCode},data-item=${product.lineCodeItemNumber.itemNumber}"
+        th:with="primaryImageUrl=${#media.getProductDtoPrimaryImageUrl('small', product)},
+                productName=${productNameMap.get(product)}"
+    >
+        <img
+            th:if="${primaryImageUrl}"
+            th:src="@{${primaryImageUrl}}"
+            th:alt="${productName}"
+            th:title="${productName}"
+        />
+    </a>
+</th:block>

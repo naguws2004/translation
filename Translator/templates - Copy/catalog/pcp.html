@@ -1,0 +1,401 @@
+<th:block
+    layout:decorator="layout/full-page-layout"
+    th:with="replaceTitle=true, compare=${'Product Comparison: ' + partType?.name}, compareTitle=#{product.compare.title}"
+>
+    <head>
+        <th:block
+            th:include="/layout/partials/head-override"
+            th:with="titleName=${compare + ' ' + compareTitle}"
+        ></th:block>
+        <!-- prettier-ignore -->
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var requiredBase = /*[[${requiredBase}]]*/ false;
+            var requiredEngine = /*[[${requiredEngine}]]*/ false;
+            window._ost.partTypeId = /*[[${partType?.partTypeId}]]*/ '';
+            var uriDescriptorDTO = JSON.parse(/*[[${uriDescriptorDTO}]]*/ '{}');
+            /*]]>*/
+        </script>
+    </head>
+    <fragment layout:fragment="content" th:remove="tag">
+        <div id="pcp-content">
+            <fragment th:fragment="ajax" th:remove="tag">
+                <div class="site-content o-container">
+                    <div class="row">
+                        <div class="main-primary col-md-12">
+                            <div class="content-wrap">
+                                <div class="pcp-header">
+                                    <a
+                                        href="javascript:;"
+                                        class="continue-shopping__button pull-left js-continue-shopping"
+                                    >
+                                        <svg
+                                            class="btn-icon"
+                                            width="14"
+                                            height="14"
+                                            role="img"
+                                            aria-labelledby="leftTitle"
+                                        >
+                                            <title th:text="#{shapes.left}" id="leftTitle"></title>
+                                            <use href="#shape-left-arrow" />
+                                        </svg>
+                                        <span class="btn-text" th:text="#{cart.continueShopping}">
+                                            Continue Shopping
+                                        </span>
+                                    </a>
+                                    <a href="#" class="btn-clear-lg btn-print js-print pull-right">
+                                        <svg
+                                            class="btn-icon"
+                                            width="14"
+                                            height="14"
+                                            role="img"
+                                            aria-labelledby="printTitle"
+                                        >
+                                            <title
+                                                th:text="#{shapes.print}"
+                                                id="printTitle"
+                                            ></title>
+                                            <use href="#shape-print" />
+                                        </svg>
+                                        <span class="btn-text" th:text="#{cart.print}">Print</span>
+                                    </a>
+                                </div>
+                                <div
+                                    class="pcp-container"
+                                    th:classappend="'pcp-container--col-' + ${#lists.size(products)}"
+                                    role="grid"
+                                    aria-readonly="true"
+                                >
+                                    <div role="row">
+                                        <span
+                                            class="sr-only"
+                                            role="columnheader"
+                                            scope="column"
+                                        ></span>
+                                        <div
+                                            th:each="product : ${products}"
+                                            th:object="${product}"
+                                            role="columnheader"
+                                            scope="column"
+                                            class="sr-only"
+                                        >
+                                            <span
+                                                th:text="*{broadleafProduct.name} + ' - ' + *{epcProduct.lineCodeItemNumber.itemNumber}"
+                                            ></span>
+                                        </div>
+                                    </div>
+                                    <tbody class="compare-table-wrap">
+                                        <div
+                                            class="product-container product-container--view-grid product-container--pcp"
+                                            role="row"
+                                        >
+                                            <div class="product-col" role="rowheader" column="row">
+                                                <h4 th:text="#{product.product}">Product</h4>
+                                            </div>
+                                            <shipping-estimate-data-loader></shipping-estimate-data-loader>
+                                            <checkfit-data-loader></checkfit-data-loader>
+                                            <th:block
+                                                th:each="product : ${products}"
+                                                th:remove="tag"
+                                            >
+                                                <!-- prettier-ignore -->
+                                                <script th:inline="javascript" th:with="itemMaster=${itemMasterMap.get(product.epcProduct.lineCodeItemNumber)}">
+                                                    // data for product-add-to-cart component
+                                                    var broadleafProductId = /*[[${product.broadleafProduct.id}]]*/ '';
+                                                    window[`_${broadleafProductId}_name`] = /*[[${product.broadleafProduct.name}]]*/ '';
+                                                    window[`_${broadleafProductId}_lineCodeItemNumber`] = /*[[${product.epcProduct.lineCodeItemNumber}]]*/ {};
+                                                    window[`_${broadleafProductId}_pricing`] = /*[[${pricingMap.get(product.epcProduct.lineCodeItemNumber)}]]*/ {};
+                                                    window[`_${broadleafProductId}_availPickup`] = /*[[${availPickupMap.get(product.broadleafProduct.id).getAvailPickup()}]]*/ false;
+                                                    window[`_${broadleafProductId}_availShip`] = /*[[${availShipMap.get(product.broadleafProduct.id)}]]*/ false;
+                                                    window[`_${broadleafProductId}_flightRestricted`] = /*[[${itemMaster?.flightRestricted}]]*/ false;
+                                                    window[`_${broadleafProductId}_blockShipToHome`] = /*[[${itemMaster?.blockShipToHome}]]*/ false;
+                                                    window[`_${broadleafProductId}_blockStorePickup`] = /*[[${itemMaster?.blockStorePickup}]]*/ false;
+                                                    window[`_${broadleafProductId}_twoDayAvailability`] = /*[[${twoDayAvailabilityMap.get(product.broadleafProduct.id)}]]*/ false;
+                                                    window[`_${broadleafProductId}_threeDayAvailability`] = /*[[${threeDayAvailabilityMap.get(product.broadleafProduct.id)}]]*/ false;
+                                                    window[`_${broadleafProductId}_storeRestricted`] = /*[[${storeRestrictionsMap.get(product.broadleafProduct.id)}]]*/ false;
+                                                    window[`_${broadleafProductId}_inStoreNow`] = /*[[${availPickupMap?.get(product.broadleafProduct.id)?.getInStoreNow()}]]*/ false;
+                                                    window[`_${broadleafProductId}_pickupTime`] = /*[[${availPickupMap?.get(product.broadleafProduct.id)?.getPickupTime()}]]*/ '';
+                                                    window[`_${broadleafProductId}_specialOrder`] = /*[[${specialOrderMap.get(product.broadleafProduct.id)}]]*/ false;
+                                                    window[`_${broadleafProductId}_refrigerantMessage`] = /*[[${refrigerantMessageMap.get(product.epcProduct.lineCodeItemNumber)}]]*/ '';
+                                                    window[`_${broadleafProductId}_qualifiedForFreeShipping`] = /*[[${#Product.isQualifiedForFreeShippingMinusPrice(product.epcProduct, itemMaster)}]]*/ false;
+                                                    window[`_${broadleafProductId}_itemInCart`] = /*[[${cart.containsSku(product.broadleafProduct.defaultSku)}]]*/ false;
+                                                </script>
+                                                <article
+                                                    class="product js-product"
+                                                    th:classappend="${productStat.index == 0 ? 'pcp-first-product' : ''}"
+                                                    th:object="${product}"
+                                                    role="gridcell"
+                                                >
+                                                    <a
+                                                        href="javascript:void(0)"
+                                                        class="js-remove-compare-product remove-compare-product button button--red-text js-remove-item"
+                                                        th:attr="data-line=*{epcProduct.lineCodeItemNumber.lineCode},data-item=*{epcProduct.lineCodeItemNumber.itemNumber},aria-label=#{aria.compare.removeItem(*{broadleafProduct.name})}"
+                                                    >
+                                                        <svg
+                                                            class="button__icon"
+                                                            role="img"
+                                                            aria-labelledby="removeTitle"
+                                                        >
+                                                            <title
+                                                                id="removeTitle"
+                                                                th:text="#{shapes.remove}"
+                                                            ></title>
+                                                            <use href="#shape-remove" />
+                                                        </svg>
+                                                    </a>
+                                                    <div class="product_block1">
+                                                        <figure class="product_img">
+                                                            <a
+                                                                class="js-product-link"
+                                                                th:attr="data-id=*{broadleafProduct.id},data-line=*{epcProduct.lineCodeItemNumber.lineCode},data-item=*{epcProduct.lineCodeItemNumber.itemNumber}"
+                                                                th:href="@{${productUrlMap.get(epcProduct)}}"
+                                                                th:with="primaryImageUrl=${#media.getProductDtoPrimaryImageUrl('medium', product.epcProduct)},epcProduct=*{epcProduct}"
+                                                            >
+                                                                <img
+                                                                    th:src="@{${primaryImageUrl ne null ? primaryImageUrl : '/img/image-coming-soon.png'}}"
+                                                                    onerror="if (this.src != '/img/image-coming-soon.png') this.src = '/img/image-coming-soon.png';"
+                                                                    th:alt="*{broadleafProduct.name} + ' image'"
+                                                                />
+                                                            </a>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="product_block2">
+                                                        <h2 class="product_title">
+                                                            <a
+                                                                class="product_link js-product-link js-product-name"
+                                                                th:with="epcProduct=*{epcProduct}"
+                                                                th:attr="data-id=*{broadleafProduct.id},data-line=*{epcProduct.lineCodeItemNumber.lineCode},data-item=*{epcProduct.lineCodeItemNumber.itemNumber}"
+                                                                th:href="@{${productUrlMap.get(epcProduct)}}"
+                                                                th:text="${productNameMap.get(epcProduct)} + ' - ' + *{epcProduct.lineCodeItemNumber.itemNumber}"
+                                                            ></a>
+                                                        </h2>
+                                                        <dl
+                                                            class="product_part-info"
+                                                            th:if="*{epcProduct?.lineCodeItemNumber != null}"
+                                                        >
+                                                            <dt
+                                                                th:text="#{product.listItem.part}"
+                                                            ></dt>
+                                                            <dd
+                                                                th:text="*{epcProduct.lineCodeItemNumber.itemNumber}"
+                                                            ></dd>
+                                                            <span class="pcp-split-pn-ln">
+                                                                <br />
+                                                            </span>
+                                                            <dt
+                                                                th:text="#{product.listItem.line}"
+                                                            ></dt>
+                                                            <dd
+                                                                th:text="*{epcProduct.lineCodeItemNumber.lineCode}"
+                                                            ></dd>
+                                                        </dl>
+                                                        <checkfit-banner></checkfit-banner>
+                                                        <div
+                                                            class="product_block3"
+                                                            th:with="lcin=${product.epcProduct.lineCodeItemNumber}, pricing=${pricingMap.get(lcin)},
+                                                            concatLcin=${product.epcProduct.lineCodeItemNumber.lineCode + '-' + product.epcProduct.lineCodeItemNumber.itemNumber}"
+                                                        >
+                                                            <div
+                                                                class="pricing"
+                                                                th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}"
+                                                            >
+                                                                <del
+                                                                    class="pricing_price-was block"
+                                                                    blc:price="${pricing?.retailPrice}"
+                                                                ></del>
+                                                                <strong
+                                                                    class="pricing_price"
+                                                                    blc:price="${pricing?.retailPrice}"
+                                                                ></strong>
+                                                                <product-charges
+                                                                    th:attr='data-core-charge-data=|{"coreCharge":${pricing?.corePrice} }|,
+                                                                data-oil-deposit-data=|{"oilDeposit":${pricing?.oilDeposit}, "oilDepositRate":${pricing?.oilDepositRate} }|,
+                                                                data-import-fee-data=|{"importFee":${pricing?.oilFee}, "standardRate":${pricing?.oilFeeStandardRate}, "largeRate":${pricing?.oilFeeLargeRate} }|'
+                                                                    class="product-charges-container"
+                                                                ></product-charges>
+                                                            </div>
+                                                            <div
+                                                                class="pricing pricing--pcp"
+                                                                th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}"
+                                                                th:with="storeRestricted=${storeRestrictionsMap.get(product.broadleafProduct.id)}"
+                                                            >
+                                                                <th:block
+                                                                    th:if="${pricing != null}"
+                                                                >
+                                                                    <th:block
+                                                                        th:if="${(pricing.isOnSale() or pricing.isClearanceItem()) and pricing.salePrice != null}"
+                                                                    >
+                                                                        <strong
+                                                                            class="pricing_price sale_item"
+                                                                            blc:price="${pricing.salePrice}"
+                                                                        ></strong>
+                                                                    </th:block>
+                                                                    <th:block
+                                                                        th:unless="${(pricing.isOnSale() or pricing.isClearanceItem()) and pricing.salePrice != null}"
+                                                                    >
+                                                                        <strong
+                                                                            class="pricing_price"
+                                                                            blc:price="${pricing.retailPrice}"
+                                                                        ></strong>
+                                                                    </th:block>
+                                                                </th:block>
+                                                                <th:block
+                                                                    th:unless="${pricing != null}"
+                                                                >
+                                                                    <th:block
+                                                                        th:if="${#oap.store ne null} and not ${storeRestricted}"
+                                                                    >
+                                                                        <strong
+                                                                            class="pricing_price"
+                                                                            th:text="#{product.no.store.pricing}"
+                                                                        ></strong>
+                                                                    </th:block>
+                                                                    <th:block
+                                                                        th:unless="${#oap.store ne null}"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="price-avail-link js-price-avail-link"
+                                                                            th:attr="data-product-id=*{broadleafProduct.id}"
+                                                                            th:inline="text"
+                                                                        >
+                                                                            [[#{product.see.price.availability}]]
+                                                                        </a>
+                                                                    </th:block>
+                                                                </th:block>
+                                                                <span
+                                                                    class="pricing_unit"
+                                                                    th:classappend="${(pricing.isOnSale() or pricing.isClearanceItem()) ? 'sale_item' : ''}"
+                                                                    th:text="${itemMasterMap.get(product.epcProduct.lineCodeItemNumber).unitOfMeasure}"
+                                                                ></span>
+                                                                <span
+                                                                    th:if="${pricing != null and (pricing.isOnSale() or pricing.isClearanceItem())}"
+                                                                    class="pricing_price-was font-italic"
+                                                                >
+                                                                    <span>Reg.</span>
+                                                                    <span
+                                                                        blc:price="${pricing?.retailPrice}"
+                                                                    ></span>
+                                                                </span>
+                                                                <product-charges
+                                                                    th:attr='data-core-charge-data=|{"coreCharge":${pricing?.corePrice} }|,
+                                                                data-oil-deposit-data=|{"oilDeposit":${pricing?.oilDeposit}, "oilDepositRate":${pricing?.oilDepositRate} }|,
+                                                                data-import-fee-data=|{"importFee":${pricing?.oilFee}, "standardRate":${pricing?.oilFeeStandardRate}, "largeRate":${pricing?.oilFeeLargeRate} }|'
+                                                                    class="product-charges-container"
+                                                                ></product-charges>
+                                                            </div>
+                                                            <div
+                                                                class="product-add-to-cart-skeleton"
+                                                                th:id="${'product-add-to-cart-skeleton_' + concatLcin}"
+                                                            >
+                                                                <div
+                                                                    class="product-add-to-cart-skeleton__availability"
+                                                                    th:include="utility/loading-animation"
+                                                                ></div>
+                                                                <div
+                                                                    class="product-add-to-cart-skeleton__add-to-cart-button"
+                                                                    th:include="utility/loading-animation"
+                                                                ></div>
+                                                            </div>
+                                                            <product-add-to-cart></product-add-to-cart>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </th:block>
+                                            <div class="product-line1"></div>
+                                            <div class="product-line2"></div>
+                                            <div class="product-line3"></div>
+                                            <div class="product-line4"></div>
+                                        </div>
+                                        <!-- <tbody class="compare-table-wrap"> -->
+                                        <div class="title-row" role="row">
+                                            <div class="attr-descrip-container">
+                                                <div class="attr-descrip-title" role="rowheader">
+                                                    <h4 th:text="#{product.attributes}">
+                                                        Attributes
+                                                    </h4>
+                                                </div>
+                                                <button
+                                                    class="highlight-dif-btn js-show-diff"
+                                                    th:text="#{product.compare.highlightDifferences}"
+                                                    role="gridcell"
+                                                >
+                                                    Highlight Differences
+                                                </button>
+                                                <button
+                                                    class="highlight-dif-btn js-hide-diff is-selected hide"
+                                                    th:text="#{product.compare.highlightDifferences}"
+                                                >
+                                                    Highlight Differences
+                                                </button>
+                                                <div class="attr-line"></div>
+                                            </div>
+                                        </div>
+                                        <div class="compare-attrs">
+                                            <th:block th:if="${compareAttributes}">
+                                                <div class="attr-val-wrapper" role="row">
+                                                    <div
+                                                        class="attr-descrip"
+                                                        role="rowheader"
+                                                        scope="row"
+                                                    >
+                                                        <span>Warranty</span>
+                                                    </div>
+                                                    <div
+                                                        class="attr-values"
+                                                        role="gridcell"
+                                                        th:each="product : ${products}"
+                                                        th:with="itemMaster=${itemMasterMap.get(product.epcProduct.lineCodeItemNumber)}"
+                                                    >
+                                                        <span
+                                                            th:if="${itemMaster != null and (itemMaster.warranty != null or itemMaster.warrantyRestricted)}"
+                                                        >
+                                                            <a
+                                                                th:text="${itemMaster.warrantyRestricted} ? #{product.details.warranty.restrictionText} : ${itemMaster.warranty.shortDescription}"
+                                                                href="/warranty"
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                            ></a>
+                                                        </span>
+                                                        <span
+                                                            th:unless="${itemMaster != null and (itemMaster.warranty != null or itemMaster.warrantyRestricted)}"
+                                                        >
+                                                            ----
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    th:each="comparisonKey : ${compareAttributesKeys}"
+                                                    th:inline="text"
+                                                    class="attr-val-wrapper"
+                                                    role="row"
+                                                >
+                                                    <div class="attr-descrip" role="rowheader">
+                                                        <span>
+                                                            [[${comparisonKey.description}]]
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="attr-values"
+                                                        role="gridcell"
+                                                        th:each="value : ${compareAttributes.get(comparisonKey)}"
+                                                    >
+                                                        <span>[[${value}]]</span>
+                                                    </div>
+                                                </div>
+                                            </th:block>
+                                            <div class="compare-line compare-line1"></div>
+                                            <div class="compare-line compare-line2"></div>
+                                            <div class="compare-line compare-line3"></div>
+                                            <div class="compare-line compare-line4"></div>
+                                        </div>
+                                    </tbody>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fragment>
+        </div>
+    </fragment>
+</th:block>
