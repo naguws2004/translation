@@ -1,4 +1,4 @@
-﻿Building a Simple Chatbot with React and Grok API
+Building a Simple Chatbot with React and Grok API
 
 Nageshkumar Y
 4 min read

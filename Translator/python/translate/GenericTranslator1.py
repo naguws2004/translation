@@ -28,4 +28,4 @@ class GenericTranslator:
 # Usage example:
 if __name__ == "__main__":
     translator = GenericTranslator()
-    translator.translate_file("C:\\Users\\yerkala_n\\source\\repos\\Translator\\Translator\\python\\translate\\translations\\test.txt", "en", "hi")
+    translator.translate_file("C:\\Users\\yerkala_n\\source\\repos\\translation\\Translator\\python\\translate\\translations\\test.txt", "en", "fr")
